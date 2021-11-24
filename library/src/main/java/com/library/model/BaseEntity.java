@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.GenericGenerator;
 
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
 
 	@Id
 	@GeneratedValue(generator = "UUID")

@@ -24,9 +24,9 @@ public class ChangeProposal extends BaseEntity {
 	private String type;
 	private ChangeProposalStatus status;
 	@ManyToOne(fetch = FetchType.LAZY)
-	Book book;
+	private Book book;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	AppUser user;
+	private AppUser user;
 	
 }
