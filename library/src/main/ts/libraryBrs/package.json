@@ -19,7 +19,11 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@types/semantic-ui": "^2.2.7",
+    "angular-i18next": "^10.3.0",
     "fomantic-ui": "^2.8.8",
+    "i18next": "^21.5.4",
+    "i18next-browser-languagedetector": "^6.1.2",
+    "i18next-locize-backend": "^4.2.6",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
