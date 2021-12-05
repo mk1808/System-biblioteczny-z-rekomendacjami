@@ -18,7 +18,8 @@
     "importHelpers": true,
     "target": "es2017",
     "types": [
-      "semantic-ui"
+      "semantic-ui",
+      "jquery"
     ],
     "module": "es2020",
     "lib": [

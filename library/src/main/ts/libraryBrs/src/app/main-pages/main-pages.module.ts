@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main/main.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { CarouselComponent } from './main/carousel/carousel.component';
 
 
 
@@ -9,10 +11,12 @@ import { MainComponent } from './main/main.component';
   declarations: [
     
   
-    MainComponent
+    MainComponent,
+            CarouselComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IvyCarouselModule
   ],
   exports: [
     MainComponent

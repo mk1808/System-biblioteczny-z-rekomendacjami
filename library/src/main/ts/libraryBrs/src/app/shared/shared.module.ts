@@ -4,6 +4,7 @@ import { MainPagesModule } from '../main-pages/main-pages.module';
 import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 
 
@@ -15,10 +16,12 @@ import { FooterComponent } from './layout/footer/footer.component';
   ],
   imports: [
     CommonModule,
-    MainPagesModule
+    MainPagesModule,
+    IvyCarouselModule
   ],
   exports: [
-    LayoutComponent
+    LayoutComponent,
+    IvyCarouselModule
 
   ]
 })
