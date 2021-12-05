@@ -4,8 +4,8 @@ import { MainPagesModule } from '../main-pages/main-pages.module';
 import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { RouterModule } from '@angular/router';
+import { I18NextModule } from 'angular-i18next';
 
 
 
@@ -17,13 +17,13 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    MainPagesModule,
-    IvyCarouselModule,
-    RouterModule
+    //MainPagesModule,
+    RouterModule,
+    I18NextModule
   ],
   exports: [
     LayoutComponent,
-    IvyCarouselModule
+    I18NextModule
 
   ]
 })

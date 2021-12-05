@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { I18N_PROVIDERS } from './shared/i18n';
 import { I18NextModule } from 'angular-i18next';
+import { MainPagesModule } from './main-pages/main-pages.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { I18NextModule } from 'angular-i18next';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    I18NextModule.forRoot()
+    I18NextModule.forRoot(),
+    //MainPagesModule
   ],
   providers: [
     I18N_PROVIDERS
