@@ -1,6 +1,6 @@
 .single {
     height: 500px;
-    background-color: burlywood;
+    background-color: var(--mid-orange);
     padding: 10px;
     transition: 2s ease;
     img {
@@ -16,11 +16,11 @@
         font-weight: 600;
         margin-bottom: 8px;
     }
-    img:hover{
+    img:hover {
         cursor: pointer;
         -webkit-transform: scale(0.95);
--ms-transform: scale(0.95);
-transform: scale(0.95);
-transition: 2s ease;
+        -ms-transform: scale(0.95);
+        transform: scale(0.95);
+        transition: 2s ease;
     }
 }
