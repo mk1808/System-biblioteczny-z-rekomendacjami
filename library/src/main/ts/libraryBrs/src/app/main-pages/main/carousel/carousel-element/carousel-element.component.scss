@@ -1,0 +1,18 @@
+.single {
+    height: 500px;
+    background-color: burlywood;
+    padding: 10px;
+    img {
+        max-height: 80%;
+    }
+    div {
+        margin-left: 6px;
+        margin-top: 7px;
+        font-size: 18px;
+    }
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+}

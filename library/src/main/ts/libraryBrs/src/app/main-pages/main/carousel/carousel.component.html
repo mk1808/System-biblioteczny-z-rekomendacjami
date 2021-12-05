@@ -1,16 +1,8 @@
-<div style="width:80%">
-    <carousel [height]="me_height" [cellsToShow]="cells" [arrowsOutside]="areArrowsOutside">
-        <div class="carousel-cell">
-            <img src="https://picsum.photos/700/500">
-        </div>
-        <div class="carousel-cell">
-            <img src="https://picsum.photos/700/500">
-        </div>
-        <div class="carousel-cell">
-            <img src="https://picsum.photos/700/500">
-        </div>
-        <div class="carousel-cell">
-            <img src="https://picsum.photos/700/500">
+<div class="carousel-align">
+    <carousel [height]="properties.height" [cellsToShow]="properties.cells"
+        [arrowsOutside]="properties.areArrowsOutside">
+        <div *ngFor="let singleBook of books; index as i;" class="carousel-cell">
+            <app-carousel-element [bookProp]="singleBook"></app-carousel-element>
         </div>
     </carousel>
 </div>
