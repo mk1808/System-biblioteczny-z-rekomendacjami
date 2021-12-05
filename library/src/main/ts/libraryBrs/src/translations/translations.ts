@@ -3,12 +3,16 @@ const translations =
 {
     pl: {
         translation: {
-            "welcome": "Welcome to Your Anghrdfuertyular App"
+            "welcome": "Witaj w aplikacji",
+            "library": "Biblioteka",
+            "goToList":"Przejdź do katalogu",
+            "contact":"Kontakt",
+            "borrowingRules":"Zasady wypożyczeń"
         }
     },
     en: {
         translation: {
-            "welcome": "Willkommen zu Deiner Vue.js App"
+            "welcome": "Welcome to App"
         }
     }
 }

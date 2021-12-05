@@ -6,7 +6,7 @@ import translations from '../../translations/translations';
 
 const i18nextOptions = {
     debug: true,
-    fallbackLng: 'en',
+    fallbackLng: 'pl',
     resources: translations,
     interpolation: {
         format: I18NextModule.interpolationFormat(defaultInterpolationFormat)
