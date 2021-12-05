@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -17,7 +18,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
   imports: [
     CommonModule,
     MainPagesModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    RouterModule
   ],
   exports: [
     LayoutComponent,

@@ -20,6 +20,9 @@ import { I18NextModule } from 'angular-i18next';
   providers: [
     I18N_PROVIDERS
   ],
+  exports:[
+    AppRoutingModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
