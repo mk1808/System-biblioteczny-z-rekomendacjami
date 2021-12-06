@@ -6,6 +6,8 @@ import { CarouselElementComponent } from './main/carousel/carousel-element/carou
 import { SharedModule } from '../shared/shared.module';
 import { MainPagesRoutingModule } from './main-pages-routing.module';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { ContactComponent } from './contact/contact.component';
+import { RulesComponent } from './rules/rules.component';
 
 
 
@@ -14,7 +16,9 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
   declarations: [
     MainComponent,
     CarouselComponent,
-    CarouselElementComponent
+    CarouselElementComponent,
+    ContactComponent,
+    RulesComponent
   ],
   imports: [
     CommonModule,
