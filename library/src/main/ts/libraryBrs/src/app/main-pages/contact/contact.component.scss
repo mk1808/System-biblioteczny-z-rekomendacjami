@@ -1,12 +1,17 @@
+.background-title{
+    height: 120px; width: 100%; background-color:var(--mid-orange); position: absolute; top:85px; z-index: 1;
+}
 .content {
     width: 1127px;
-    background-color: burlywood;
-    height: 800px;
+    position: relative;z-index: 10;
+    height: 700px;
     margin: auto;
     padding: 20px;
+    border: 1px dashed black;
+    margin-top:25px;
 }
 .valign {
-    padding-top: 40px;
+
     padding-bottom: 40px;
 }
 
@@ -21,7 +26,7 @@ p {
     grid-template-rows: 1fr;
     grid-column-gap: 2px;
     grid-row-gap: 0px;
-    height: calc(100% - 100px);
+    height: calc(100% - 150px);
     .inside{
         display: grid;
         align-self: center;
@@ -46,7 +51,7 @@ p {
     align-items: center;
     display: flex;
     .line {
-        height: 80%;
+        height: 90%;
         background-color: var(--dark);
         width: 100%;
     }

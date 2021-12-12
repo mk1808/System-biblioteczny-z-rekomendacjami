@@ -8,6 +8,8 @@ import { MainPagesRoutingModule } from './main-pages-routing.module';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { ContactComponent } from './contact/contact.component';
 import { RulesComponent } from './rules/rules.component';
+import { MapComponent } from './contact/map/map.component';
+
 
 
 
@@ -18,7 +20,8 @@ import { RulesComponent } from './rules/rules.component';
     CarouselComponent,
     CarouselElementComponent,
     ContactComponent,
-    RulesComponent
+    RulesComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
