@@ -7,7 +7,8 @@ const translations =
             "library": "Biblioteka",
             "goToList":"Przejdź do katalogu",
             "contact":"Kontakt",
-            "borrowingRules":"Zasady wypożyczeń"
+            "borrowingRules":"Zasady wypożyczeń",
+            "booksSearch":"Wyszukiwanie książek"
         }
     },
     en: {
