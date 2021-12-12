@@ -1,13 +1,12 @@
 <div class="background-black">
     <div class="ui inverted large menu container">
-        <a class="item">
+        <a class="item" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>
             <img src="../../../../assets/photos/open-book.png" height="40" class="background">
-            {{ 'library' | i18next }}</a>
-
+            {{ 'library' | i18next }}
+        </a>
         <div class="right menu">
-            <a class="item">Submit</a>
-            <a class="item">Sign Up</a>
-            <a class="item">Help</a>
+            <a class="item" [routerLink]="['/home/terms']" routerLinkActive="active">{{ 'borrowingRules' | i18next }}</a>
+            <a class="item" [routerLink]="['/home/contact']" routerLinkActive="active">{{ 'contact' | i18next }}</a>
         </div>
     </div>
 </div>
