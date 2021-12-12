@@ -6,6 +6,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { I18NextModule } from 'angular-i18next';
+import { MainContentComponent } from './layout/main-content/main-content.component';
 
 
 
@@ -13,7 +14,8 @@ import { I18NextModule } from 'angular-i18next';
   declarations: [
     LayoutComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MainContentComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { I18NextModule } from 'angular-i18next';
   ],
   exports: [
     LayoutComponent,
+    MainContentComponent,
     I18NextModule
 
   ]

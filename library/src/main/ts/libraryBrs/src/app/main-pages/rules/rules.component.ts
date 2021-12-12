@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rules.component.scss']
 })
 export class RulesComponent implements OnInit {
-
+  title="borrowingRules";
   constructor() { }
 
   ngOnInit(): void {

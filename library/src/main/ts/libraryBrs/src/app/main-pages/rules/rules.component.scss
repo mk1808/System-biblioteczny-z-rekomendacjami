@@ -1,0 +1,36 @@
+.parent {
+    display: grid;
+    grid-template-columns: 1fr 5px 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 2px;
+    grid-row-gap: 0px;
+    height: calc(100% - 150px);
+    .inside{
+        display: grid;
+        align-self: center;
+        justify-self: center;
+        grid-gap: 30px;
+        div{
+            grid-gap: 0px;
+            .title1{
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+            span{
+                font-size: 18px;
+                line-height: 1.8;
+            }
+        }
+
+    }
+}
+.mid-line {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    .line {
+        height: 90%;
+        background-color: var(--dark);
+        width: 100%;
+    }
+}
