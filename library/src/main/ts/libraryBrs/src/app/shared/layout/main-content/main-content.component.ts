@@ -7,6 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MainContentComponent implements OnInit {
   @Input() title:any;
+  @Input() contentClass:any;
+  
+  activeClass="new";
   constructor() { }
 
   ngOnInit(): void {

@@ -1,15 +1,22 @@
 .parent {
     display: grid;
-    grid-template-columns: 1fr 5px 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     grid-column-gap: 2px;
     grid-row-gap: 0px;
-    height: calc(100% - 150px);
+    width: 800px;
+    margin: 40px auto 20px auto;
+    min-height: calc(100% - 150px);
+    font-size: 20px;
+    line-height: 1.1;
     .inside{
         display: grid;
         align-self: center;
         justify-self: center;
-        grid-gap: 30px;
+        grid-gap: 20px;
+        .number{
+            font-weight: 600;
+        }
         div{
             grid-gap: 0px;
             .title1{

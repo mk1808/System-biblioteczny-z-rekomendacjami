@@ -1,7 +1,7 @@
 <div class="background-title">
 </div>
 <div class="height valign">
-    <div class="content">
+    <div class="content" [ngClass]="contentClass">
         <p>{{ title | i18next }}</p>
         <ng-content></ng-content>
     </div>   

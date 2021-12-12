@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RulesComponent implements OnInit {
   title="borrowingRules";
+  rulesHeight="rulesHeight";
   constructor() { }
 
   ngOnInit(): void {

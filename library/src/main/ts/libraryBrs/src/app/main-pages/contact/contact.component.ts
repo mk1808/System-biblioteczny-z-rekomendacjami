@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
   title="contact";
+  contactHeight = "contactHeight";
   constructor() { }
 
   ngOnInit(): void {
