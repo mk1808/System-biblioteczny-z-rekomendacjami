@@ -1,0 +1,9 @@
+.align{
+    margin-top:20px;
+    margin-bottom: 20px;
+
+}
+
+.ui.input.focus>input{
+    border-color: var(--light-brown);
+}
