@@ -7,6 +7,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { I18NextModule } from 'angular-i18next';
 import { MainContentComponent } from './layout/main-content/main-content.component';
+import { InputComponent } from './elements/input/input.component';
+import { ButtonComponent } from './elements/button/button.component';
 
 
 
@@ -15,7 +17,9 @@ import { MainContentComponent } from './layout/main-content/main-content.compone
     LayoutComponent,
     HeaderComponent,
     FooterComponent,
-    MainContentComponent
+    MainContentComponent,
+    InputComponent,
+    ButtonComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +30,8 @@ import { MainContentComponent } from './layout/main-content/main-content.compone
   exports: [
     LayoutComponent,
     MainContentComponent,
+    InputComponent,
+    ButtonComponent,
     I18NextModule
 
   ]
