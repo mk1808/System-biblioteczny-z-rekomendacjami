@@ -10,6 +10,8 @@ import { MainContentComponent } from './layout/main-content/main-content.compone
 import { InputComponent } from './elements/input/input.component';
 import { ButtonComponent } from './elements/button/button.component';
 import { SelectComponent } from './elements/select/select.component';
+import { CheckboxComponent } from './elements/checkbox/checkbox.component';
+import { MultiSelectComponent } from './elements/multi-select/multi-select.component';
 
 
 
@@ -21,7 +23,9 @@ import { SelectComponent } from './elements/select/select.component';
     MainContentComponent,
     InputComponent,
     ButtonComponent,
-    SelectComponent
+    SelectComponent,
+    CheckboxComponent,
+    MultiSelectComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +39,8 @@ import { SelectComponent } from './elements/select/select.component';
     InputComponent,
     ButtonComponent,
     SelectComponent,
+    MultiSelectComponent,
+    CheckboxComponent,
     I18NextModule
 
   ]
