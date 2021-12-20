@@ -9,6 +9,7 @@ import { I18NextModule } from 'angular-i18next';
 import { MainContentComponent } from './layout/main-content/main-content.component';
 import { InputComponent } from './elements/input/input.component';
 import { ButtonComponent } from './elements/button/button.component';
+import { SelectComponent } from './elements/select/select.component';
 
 
 
@@ -19,7 +20,8 @@ import { ButtonComponent } from './elements/button/button.component';
     FooterComponent,
     MainContentComponent,
     InputComponent,
-    ButtonComponent
+    ButtonComponent,
+    SelectComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { ButtonComponent } from './elements/button/button.component';
     MainContentComponent,
     InputComponent,
     ButtonComponent,
+    SelectComponent,
     I18NextModule
 
   ]
