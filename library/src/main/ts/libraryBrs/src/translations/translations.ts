@@ -10,7 +10,10 @@ const translations =
             "borrowingRules":"Zasady wypożyczeń",
             "booksSearch":"Wyszukiwanie książek",
             "login":"Logowanie",
-            "register":"Rejestracja"
+            "register":"Rejestracja",
+            "loginInfo":"Po zalogowaniu na swoje konto możesz przeglądać wypożyczone ksiażki oraz otrzymywać rekomendacje.",
+            "loginInfo.more":"Nie posiadasz konta?",
+            "goToRegister":"Przejdź do rejestracji"
         }
     },
     en: {

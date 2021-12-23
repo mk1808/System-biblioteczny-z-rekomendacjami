@@ -1,8 +1,22 @@
-<app-main-content [title]="title" [contentClass]="rulesHeight">
-    <p>login works!</p>
-    <app-two-columns-content>
-        <div header >This should be rendered in header selection of ng-content</div>
-        <div body >This should be rendered in body selection of ng-content</div>
+<app-main-content [title]="title" [contentClass]="contactHeight">
+    <app-two-columns-content [rightClass]="rightClass">
+        <div header>
+            <div class="inputs">
+                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
+            </div>
+            <app-button [iconClass]="iconClass" [text]="textLogin" [btnClass]="btnClass"></app-button>
+        </div>
+        <div body class="info">
+            <div class="info-with-icon">
+                <i class="info circle icon"></i>
+                <div class="text">
+                    {{ 'loginInfo' | i18next }} <br>
+                    {{ 'loginInfo.more' | i18next }}</div>
+            </div>
+            <div class="button-align horizontal-middle">
+                <app-button [iconClass]="iconClass" [text]="textRegister" [btnClass]="btnClass"></app-button>
+            </div>
+        </div>
     </app-two-columns-content>
 </app-main-content>
-

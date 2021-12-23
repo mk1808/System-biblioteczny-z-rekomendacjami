@@ -7,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   title="login";
-  rulesHeight="rulesHeight";
+  contactHeight="contactHeight";
+  mailInput="mail"
+  passwordInput="password"
+  inputClass="log-reg";
+  iconClass="search"
+  text="search"
+  btnClass="full"
+  rightClass="info"
+  leftClass="info"
+            textLogin="login"
+            textRegister="goToRegister"
+  
   constructor() { }
 
   ngOnInit(): void {
