@@ -1,1 +1,8 @@
-<p>login works!</p>
+<app-main-content [title]="title" [contentClass]="rulesHeight">
+    <p>login works!</p>
+    <app-two-columns-content>
+        <div header >This should be rendered in header selection of ng-content</div>
+        <div body >This should be rendered in body selection of ng-content</div>
+    </app-two-columns-content>
+</app-main-content>
+
