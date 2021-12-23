@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-two-columns-content',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./two-columns-content.component.scss']
 })
 export class TwoColumnsContentComponent implements OnInit {
-
+  @Input() leftClass="";
+  @Input() rightClass="";
   constructor() { }
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 <div class="parent">
-    <div class="inside">
+    <div class="inside" [ngClass]="leftClass">
         <ng-content select="[header]"></ng-content>
     </div>
 
@@ -7,7 +7,7 @@
         <div class="line">
         </div>
     </div>
-    <div class="inside">
+    <div class="inside" [ngClass]="rightClass">
         <ng-content select="[body]"></ng-content>
     </div>
 </div>
