@@ -12,6 +12,7 @@ import { ButtonComponent } from './elements/button/button.component';
 import { SelectComponent } from './elements/select/select.component';
 import { CheckboxComponent } from './elements/checkbox/checkbox.component';
 import { MultiSelectComponent } from './elements/multi-select/multi-select.component';
+import { NotificationBarComponent } from './elements/notification-bar/notification-bar.component';
 
 
 
@@ -25,7 +26,8 @@ import { MultiSelectComponent } from './elements/multi-select/multi-select.compo
     ButtonComponent,
     SelectComponent,
     CheckboxComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
+    NotificationBarComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { MultiSelectComponent } from './elements/multi-select/multi-select.compo
     SelectComponent,
     MultiSelectComponent,
     CheckboxComponent,
+    NotificationBarComponent,
     I18NextModule
 
   ]
