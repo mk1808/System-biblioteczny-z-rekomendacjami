@@ -8,7 +8,9 @@ const translations =
             "goToList":"Przejdź do katalogu",
             "contact":"Kontakt",
             "borrowingRules":"Zasady wypożyczeń",
-            "booksSearch":"Wyszukiwanie książek"
+            "booksSearch":"Wyszukiwanie książek",
+            "login":"Logowanie",
+            "register":"Rejestracja"
         }
     },
     en: {
