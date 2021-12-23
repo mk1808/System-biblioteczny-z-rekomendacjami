@@ -11,7 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginDto {
-	private String mail;
-	private String password;
+public class TokenDto {
+
+	private String token;
+
 }
