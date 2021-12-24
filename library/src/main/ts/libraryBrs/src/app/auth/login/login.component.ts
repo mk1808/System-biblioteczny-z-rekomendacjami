@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   btnClass="full"
   rightClass="info"
   leftClass="info"
-            textLogin="login"
-            textRegister="goToRegister"
+  textLogin="login"
+  textRegister="goToRegister"
   
   constructor() { }
 
