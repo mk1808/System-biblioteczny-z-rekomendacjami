@@ -8,6 +8,29 @@ import { Component, OnInit } from '@angular/core';
 export class RegisterComponent implements OnInit {
   title="register";
   rulesHeight="rulesHeight";
+
+  inputClass="log-reg";
+  iconClass="search"
+  text="search"
+  btnClass="full"
+  rightClass="info"
+  leftClass="info"
+  textLogin="login"
+  textRegister="goToRegister"
+  
+  mailInput="mail"
+  passwordInput="password"
+  passwordRepeatInput="passwordRepeat"
+  nameInput="name"
+  surnameInput="surname"
+  phoneInput="phoneNo"
+  streetInput="street"
+  houseNoInput="houseNo"
+  flatNoInput="flatNo"
+  postalCodeInput="postalCode"
+  cityInput="city"
+
+  
   constructor() { }
 
   ngOnInit(): void {

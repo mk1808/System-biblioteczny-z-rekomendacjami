@@ -11,7 +11,7 @@ const translations =
             "booksSearch":"Wyszukiwanie książek",
             "login":"Logowanie",
             "register":"Rejestracja",
-            "loginInfo":"Po zalogowaniu na swoje konto możesz przeglądać wypożyczone ksiażki oraz otrzymywać rekomendacje.",
+            "loginInfo":"Po zalogowaniu na swoje konto możesz przeglądać wypożyczone i zarezerwowane ksiażki oraz otrzymywać rekomendacje.",
             "loginInfo.more":"Nie posiadasz konta?",
             "goToRegister":"Przejdź do rejestracji"
         }
