@@ -5,13 +5,15 @@ import { BookRoutingModule } from './book-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { CarouselElementComponent } from '../main-pages/main/carousel/carousel-element/carousel-element.component';
 import { BookSearchElementComponent } from './book-search/book-search-element/book-search-element.component';
+import { MyBooksComponent } from './my-books/my-books.component';
 
 
 
 @NgModule({
   declarations: [
     BookSearchComponent,
-    BookSearchElementComponent
+    BookSearchElementComponent,
+    MyBooksComponent
   ],
   imports: [
     CommonModule,
