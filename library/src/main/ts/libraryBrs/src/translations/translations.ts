@@ -16,7 +16,9 @@ const translations =
             "goToRegister":"Przejdź do rejestracji",
             "cardQRCode":"Kod QR",
             "cardNo":"Numer karty bibliotecznej",
-            "myAccount":"Moje konto"
+            "myAccount":"Moje konto",
+            "myBooks":"Moje książki",
+            
         }
     },
     en: {

@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-books.component.scss']
 })
 export class MyBooksComponent implements OnInit {
-
+  title="myBooks";
+  rulesHeight = "rulesHeight";
   constructor() { }
 
   ngOnInit(): void {
