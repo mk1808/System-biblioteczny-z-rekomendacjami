@@ -14,6 +14,7 @@ import { CheckboxComponent } from './elements/checkbox/checkbox.component';
 import { MultiSelectComponent } from './elements/multi-select/multi-select.component';
 import { NotificationBarComponent } from './elements/notification-bar/notification-bar.component';
 import { TwoColumnsContentComponent } from './layout/main-content/two-columns-content/two-columns-content.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -35,7 +36,8 @@ import { TwoColumnsContentComponent } from './layout/main-content/two-columns-co
     CommonModule,
     //MainPagesModule,
     RouterModule,
-    I18NextModule
+    I18NextModule,
+    NgbModule
   ],
   exports: [
     LayoutComponent,
