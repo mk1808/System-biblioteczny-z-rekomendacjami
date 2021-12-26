@@ -1,30 +1,27 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
   <div class="acc-container">
     <ngb-accordion activeIds="ngb-panel-0">
-      <ngb-panel [title]="tabHeaders.borrowed">
+      <ngb-panel [title]="accHeaders.borrowed">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
-              <tr><th>Name</th>
-              <th>Age</th>
-              <th>Job</th>
+              <tr><th>{{'booklist.table.no'|i18next}}</th>
+              <th>{{'booklist.table.title'|i18next}}</th>
+              <th>{{'booklist.table.author'|i18next}}</th>
+              <th>{{'booklist.table.borrowingDate'|i18next}}</th>
+                <th>{{'booklist.table.dueDate'|i18next}}</th>
+                <th></th>
             </tr></thead>
             <tbody>
               <tr>
-                <td data-label="Name">James</td>
-                <td data-label="Age">24</td>
-                <td data-label="Job">Engineer</td>
+                <td data-label="Name" class="one wide">1</td>
+                <td data-label="Age">Abcdef</td>
+                <td data-label="Job">Jan Kowalski</td>
+                <td data-label="Job">18-11-2021</td>
+                <td data-label="Job">18-12-2021</td>
+                <td class="three wide"><app-button [text]="text" [btnClass]="btnClass"></app-button></td>
               </tr>
-              <tr>
-                <td data-label="Name">Jill</td>
-                <td data-label="Age">26</td>
-                <td data-label="Job">Engineer</td>
-              </tr>
-              <tr>
-                <td data-label="Name">Elyse</td>
-                <td data-label="Age">24</td>
-                <td data-label="Job">Designer</td>
-              </tr>
+            
             </tbody>
           </table>
         </ng-template>
