@@ -1,7 +1,7 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
   <div class="acc-container">
-    <ngb-accordion activeIds="ngb-panel-0">
-      <ngb-panel [title]="accHeaders.borrowed">
+    <ngb-accordion activeIds="ngb-panel-0" >
+      <ngb-panel [title]="accHeaders.borrowed" cardClass="my-accordion">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
@@ -25,7 +25,7 @@
           </table>
         </ng-template>
       </ngb-panel>
-      <ngb-panel [title]="accHeaders.reserved">
+      <ngb-panel [title]="accHeaders.reserved" cardClass="my-accordion">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
@@ -51,7 +51,7 @@
           </table>
         </ng-template>
       </ngb-panel>
-      <ngb-panel [title]="accHeaders.borrowedInPast">
+      <ngb-panel [title]="accHeaders.borrowedInPast" cardClass="my-accordion">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
@@ -75,7 +75,7 @@
           </table>
         </ng-template>
       </ngb-panel>
-      <ngb-panel [title]="accHeaders.toReadList">
+      <ngb-panel [title]="accHeaders.toReadList" cardClass="my-accordion">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
@@ -95,7 +95,7 @@
           </table>
         </ng-template>
       </ngb-panel>
-      <ngb-panel [title]="accHeaders.favList">
+      <ngb-panel [title]="accHeaders.favList" cardClass="my-accordion">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
@@ -115,7 +115,7 @@
           </table>
         </ng-template>
       </ngb-panel>
-      <ngb-panel [title]="accHeaders.rated">
+      <ngb-panel [title]="accHeaders.rated" cardClass="my-accordion">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
