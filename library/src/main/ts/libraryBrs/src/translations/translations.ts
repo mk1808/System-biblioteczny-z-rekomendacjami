@@ -36,6 +36,9 @@ const translations =
             "booklist.table.returnDate":"Data zwrotu",
             "booklist.table.comment":"Treść komentarza",
             "booklist.table.rating":"Ocena",
+            "booklist.table.prolong":"Przedłuż",
+            "booklist.table.resign":"Zrezygnuj",
+            "booklist.table.delete":"Usuń"
 
 
 

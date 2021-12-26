@@ -12,16 +12,14 @@ export class MyBooksComponent implements OnInit {
   rulesHeight = "rulesHeight";
   accHeaders=this.getAccorditionHeaders();
   headers=this.getHeaders();
-  a = (i18next||"register");
-
-  text=this.getTranslation("booklist.table.prolong")
+  text=""
+  deleteText=this.getTranslation("booklist.table.delete")
+  prolongText=this.getTranslation("booklist.table.prolong")
+  resignText=this.getTranslation("booklist.table.resign")
   btnClass="full"
   constructor( @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService) { }
 
   ngOnInit(): void {
-    
-    this.a = this.getTranslation("register")
-    debugger;
   }
 
   getTranslation(key:String){
