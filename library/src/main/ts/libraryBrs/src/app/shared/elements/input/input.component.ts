@@ -9,11 +9,14 @@ export class InputComponent implements OnInit {
   @Input() label:any;
   @Input() inputClass:any;
   @Input() type:any;
+  @Input() disabled:any;
+  disabledClass='';
   
   constructor() { }
 
   ngOnInit(): void {
     this.type=this.type?this.type:'text';
+    this.disabledClass = this.disabled?'disabled':''
   }
 
 }
