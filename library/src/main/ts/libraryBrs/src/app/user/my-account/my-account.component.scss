@@ -1,0 +1,43 @@
+.button-align {
+    width: 200px;
+}
+
+.text {
+    margin-bottom: 30px;
+}
+
+.inputs {
+    margin-bottom: 30px;
+}
+
+.info-with-icon {
+    display: grid;
+    grid-template-columns: 0.13fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.info.circle.icon {
+    color: var(--orange);
+    font-size: 30px;
+}
+
+app-button {
+    margin-top: 30px;
+}
+
+.address-label{
+    font-size: 28px;
+    margin-bottom: 22px;
+    margin-top: 40px;
+}
+
+.qr-code{
+    margin-top:20px;
+    
+    text-align: center;
+    img{
+        border:1px solid black;
+    }
+}

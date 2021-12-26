@@ -13,7 +13,10 @@ const translations =
             "register":"Rejestracja",
             "loginInfo":"Po zalogowaniu na swoje konto możesz przeglądać wypożyczone i zarezerwowane ksiażki oraz otrzymywać rekomendacje.",
             "loginInfo.more":"Nie posiadasz konta?",
-            "goToRegister":"Przejdź do rejestracji"
+            "goToRegister":"Przejdź do rejestracji",
+            "cardQRCode":"Kod QR",
+            "cardNo":"Numer karty bibliotecznej",
+            "myAccount":"Moje konto"
         }
     },
     en: {
