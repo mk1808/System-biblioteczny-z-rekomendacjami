@@ -18,6 +18,28 @@ const translations =
             "cardNo":"Numer karty bibliotecznej",
             "myAccount":"Moje konto",
             "myBooks":"Moje książki",
+            "booklist.borrowed":"Książki aktualnie wypożyczone", 
+            "booklist.borrowedInPast":"Książki wypożyczone w przeszłości",
+            "booklist.reserved":"Książki zarezerwowane",
+            "booklist.toReadList":"Lista 'Do przeczytania' ",
+            "booklist.favList":"Lista ulubionych",
+            "booklist.rated":"Książki ocenione",
+            "booklist.table.no":"Lp.",
+            "booklist.table.title":"Tytuł",
+            "booklist.table.author":"Autorzy",
+            "booklist.table.borrowingDate":"Data wypożyczenia",
+            "booklist.table.dueDate":"Termin",
+            "booklist.table.reservedDate":"Data rezerwacji",
+            "booklist.table.noInQueue":"Numer w kolejce",
+            "booklist.table.expectedAvailabilityDate":"Oczekiwana data dostępności",
+            "booklist.table.expectedReturnDate":"Oczekiwana data zwrotu",
+            "booklist.table.returnDate":"Data zwrotu",
+            "booklist.table.comment":"Treść komentarza",
+            "booklist.table.rating":"Ocena",
+
+
+
+        
             
         }
     },
