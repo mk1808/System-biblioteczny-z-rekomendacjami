@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CarouselElementComponent } from '../main-pages/main/carousel/carousel-element/carousel-element.component';
 import { BookSearchElementComponent } from './book-search/book-search-element/book-search-element.component';
 import { MyBooksComponent } from './my-books/my-books.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -18,7 +19,8 @@ import { MyBooksComponent } from './my-books/my-books.component';
   imports: [
     CommonModule,
     BookRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ]
 })
 export class BookModule { }

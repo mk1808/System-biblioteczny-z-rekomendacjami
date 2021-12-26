@@ -1,0 +1,20 @@
+$accordion-button-bg:var(--light-brown);
+$card-bg:var(--light-brown);
+
+ngb-accordion .card .card-header{
+    background-color: var(--light-brown)!important;
+    color: white!important;;
+}
+
+.btn.btn-link{
+    color: var(--lightest);
+    text-decoration: none;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.acc-container{
+    padding:20px 30px;
+}
