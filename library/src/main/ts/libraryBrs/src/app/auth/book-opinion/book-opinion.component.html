@@ -1,14 +1,23 @@
 <app-modal [modalTitle]="title" [onCancel]="onCancel" [onConfirm]="onConfirm">
     <p>Możesz dodać opinię</p>
     <div class="additional-content">
-        Tytuł: <span>abcTytuł </span><br>
-        Autor: <span>abcAutor</span> <br>
-
-        <ngb-rating [(rate)]="currentRate">
-            <ng-template let-fill="fill" let-index="index">
-                <span class="star" [class.filled]="fill === 100">&hearts;</span>
-            </ng-template>
-        </ngb-rating>
+        <div class="rating ui form">
+            <div class="field">
+                <label>Ocena</label>
+                <ngb-rating [(rate)]="currentRate">
+                    <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&hearts;</span>
+                    </ng-template>
+                </ngb-rating>
+            </div>
+        </div>
+        <div class="ui form">
+            <div class="field align-input">
+                <label>Komentarz</label>
+                <textarea></textarea>
+            </div>
+        </div>
 
     </div>
+
 </app-modal>

@@ -9,6 +9,10 @@ span{
 .additional-content{
     padding: 13px;
     border-left: 2px solid black;
+   
+    ngb-rating{
+         text-align: center;
+    }
 }
 
 .star {
@@ -19,3 +23,7 @@ span{
     color: var(--orange)
   }
 
+
+  .ui.form textarea{
+    border-color: var(--light-brown);
+}
