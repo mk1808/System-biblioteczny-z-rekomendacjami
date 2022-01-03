@@ -8,6 +8,7 @@ import { BookSearchElementComponent } from './book-search/book-search-element/bo
 import { MyBooksComponent } from './my-books/my-books.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookDetailsComponent } from './book-details/book-details.component';
+//import { BookOpinionComponent } from '../auth/book-opinion/book-opinion.component';
 
 
 
@@ -16,7 +17,8 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     BookSearchComponent,
     BookSearchElementComponent,
     MyBooksComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+  //  BookOpinionComponent
   ],
   imports: [
     CommonModule,
