@@ -5,7 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { BookOpinionComponent } from './book-opinion/book-opinion.component';
-
+import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -17,7 +17,10 @@ import { BookOpinionComponent } from './book-opinion/book-opinion.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbModule,
+    NgbRatingModule
+    
   ],
   
 })

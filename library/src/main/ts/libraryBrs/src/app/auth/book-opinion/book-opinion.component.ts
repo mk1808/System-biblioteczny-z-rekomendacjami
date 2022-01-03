@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+declare let $ : any;
 @Component({
   selector: 'app-book-opinion',
   templateUrl: './book-opinion.component.html',
   styleUrls: ['./book-opinion.component.scss']
 })
-export class BookOpinionComponent implements OnInit {
+export class BookOpinionComponent implements OnInit{
 
   title = "My modal title"
+  currentRate = 6;
   constructor() { }
   ngOnInit(): void {
   }
@@ -19,5 +20,9 @@ export class BookOpinionComponent implements OnInit {
   onConfirm=()=>{
     console.log("confirm")
   }
-
 }
+
+ 
+
+
+
