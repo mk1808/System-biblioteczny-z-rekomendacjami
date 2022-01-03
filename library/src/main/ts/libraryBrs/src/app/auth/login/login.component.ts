@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from 'src/app/shared/elements/modal/modal.component';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ExampleModalComponent } from 'src/app/shared/elements/modal/example-modal/example-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   openModal=()=>{
     console.log("abc")
     debugger;
-    const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.name = 'World';
+    const modalRef = this.modalService.open(ExampleModalComponent);
+    modalRef.componentInstance.name = "Modal";
   }
 
 

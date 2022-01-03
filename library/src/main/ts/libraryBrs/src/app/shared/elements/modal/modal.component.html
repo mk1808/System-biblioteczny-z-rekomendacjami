@@ -1,15 +1,16 @@
 <div class="modal-header">
-    <h3 class="modal-title">Hi there!</h3>
+    <h3 class="modal-title">{{modalTitle}}</h3>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>Hello, abc</p>
+    <ng-content></ng-content>
+    <p>Hello, {{name}}</p>
   </div>
   <div class="modal-footer">
    <!--  (click)="activeModal.close('Close click')">Close-->
-   <app-button   [text]="cancelText" [btnClass]="cancelClass"></app-button>
-  <app-button   [text]="prolongText" [btnClass]="btnClass"></app-button>
+   <app-button [text]="cancelText" [btnClass]="cancelClass" [onClick]="onCancel"></app-button>
+  <app-button [text]="prolongText" [btnClass]="btnClass" [onClick]="onConfirm"></app-button>
 
   </div>

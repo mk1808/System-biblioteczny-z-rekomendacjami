@@ -17,6 +17,7 @@ import { TwoColumnsContentComponent } from './layout/main-content/two-columns-co
 import { NgbAccordion, NgbAccordionModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './elements/modal/modal.component';
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ExampleModalComponent } from './elements/modal/example-modal/example-modal.component';
 
 
 
@@ -33,7 +34,8 @@ import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     MultiSelectComponent,
     NotificationBarComponent,
     TwoColumnsContentComponent,
-    ModalComponent
+    ModalComponent,
+    ExampleModalComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     NotificationBarComponent,
     TwoColumnsContentComponent,
     ModalComponent,
+    ExampleModalComponent,
     NgbModalModule,
     NgbModule,
     I18NextModule
