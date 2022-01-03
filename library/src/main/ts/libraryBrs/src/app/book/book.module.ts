@@ -7,6 +7,7 @@ import { CarouselElementComponent } from '../main-pages/main/carousel/carousel-e
 import { BookSearchElementComponent } from './book-search/book-search-element/book-search-element.component';
 import { MyBooksComponent } from './my-books/my-books.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 
 
@@ -14,7 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     BookSearchComponent,
     BookSearchElementComponent,
-    MyBooksComponent
+    MyBooksComponent,
+    BookDetailsComponent
   ],
   imports: [
     CommonModule,
