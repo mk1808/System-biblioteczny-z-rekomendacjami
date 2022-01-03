@@ -6,13 +6,15 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { BookOpinionComponent } from './book-opinion/book-opinion.component';
 import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { SurveyComponent } from './survey/survey.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    BookOpinionComponent
+    BookOpinionComponent,
+    SurveyComponent
   ],
   imports: [
     CommonModule,

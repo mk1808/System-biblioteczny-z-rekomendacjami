@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ExampleModalComponent } from 'src/app/shared/elements/modal/example-modal/example-modal.component';
 import { BookOpinionComponent } from '../book-opinion/book-opinion.component';
+import { SurveyComponent } from '../survey/survey.component';
 
 @Component({
   selector: 'app-login',
@@ -43,6 +44,12 @@ export class LoginComponent implements OnInit {
     modalRef.componentInstance.name = "Modal1";
   }
     
-
+  openModal3=()=>{
+    console.log("abc")
+  //  debugger;
+    const modalRef = this.modalService.open(SurveyComponent, { size: 'lg' });
+    modalRef.componentInstance.name = "Modal1";
+    
+  }
 
 }
