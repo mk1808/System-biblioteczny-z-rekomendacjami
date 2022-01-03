@@ -8,6 +8,8 @@ declare let $ : any;
 export class BookOpinionComponent implements OnInit{
 
   title = "My modal title"
+  labelKeyword = "Słowa kluczowe"
+  labelSubject = "Tematyka"
   currentRate = 6;
   constructor() { }
   ngOnInit(): void {
