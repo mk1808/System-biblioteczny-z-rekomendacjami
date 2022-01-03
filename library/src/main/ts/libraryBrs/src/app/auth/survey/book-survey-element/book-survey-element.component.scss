@@ -1,0 +1,23 @@
+.single {
+    height: 350px;
+    width: 220px;
+    background-color: var(--mid-orange);
+    padding: 10px;
+    transition: 2s ease;
+    margin:0 auto;
+    img {
+        max-height: 80%;
+        width:200px;
+    }
+    div {
+        margin-left: 6px;
+        margin-top: 7px;
+        font-size: 18px;
+    }
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+}
+
