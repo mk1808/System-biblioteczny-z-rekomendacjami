@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-book-details',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent implements OnInit {
-
-  constructor() { }
+  id: any = 0;
+  ids: any;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getBookId();
+  }
+
+  getBookId() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id)
   }
 
 }
