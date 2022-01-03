@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   openModal=()=>{
     console.log("abc")
-    debugger;
+  //  debugger;
     const modalRef = this.modalService.open(ExampleModalComponent);
     modalRef.componentInstance.name = "Modal";
   }
