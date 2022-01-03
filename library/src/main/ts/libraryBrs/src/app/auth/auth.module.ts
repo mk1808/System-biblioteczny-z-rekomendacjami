@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { BookOpinionComponent } from './book-opinion/book-opinion.component';
 import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { SurveyComponent } from './survey/survey.component';
+import { BookSurveyElementComponent } from './survey/book-survey-element/book-survey-element.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SurveyComponent } from './survey/survey.component';
     LoginComponent,
     RegisterComponent,
     BookOpinionComponent,
-    SurveyComponent
+    SurveyComponent,
+    BookSurveyElementComponent
   ],
   imports: [
     CommonModule,
