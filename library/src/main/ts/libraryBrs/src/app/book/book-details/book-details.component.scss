@@ -53,6 +53,9 @@
     .info.circle.icon {
         color: var(--orange);
         font-size: 30px;
+        ~ div{
+            font-size: 17px;
+        }
     }
 
 }
