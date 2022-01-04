@@ -8,6 +8,7 @@ import { BookSearchElementComponent } from './book-search/book-search-element/bo
 import { MyBooksComponent } from './my-books/my-books.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { BookAvailabilityComponent } from './book-details/book-availability/book-availability.component';
 //import { BookOpinionComponent } from '../auth/book-opinion/book-opinion.component';
 
 
@@ -18,6 +19,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     BookSearchElementComponent,
     MyBooksComponent,
     BookDetailsComponent,
+    BookAvailabilityComponent,
   //  BookOpinionComponent
   ],
   imports: [
