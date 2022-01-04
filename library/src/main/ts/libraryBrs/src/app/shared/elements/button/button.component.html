@@ -1,4 +1,4 @@
 <button class="ui button" [ngClass]="btnClass" (click)="onClick()" >
    <i *ngIf="iconClass" class="icon" [ngClass]="iconClass" >
-    </i> {{text}} 
+    </i> {{ text | i18next }}
   </button>
