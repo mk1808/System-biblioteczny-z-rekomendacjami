@@ -39,7 +39,11 @@ const translations =
             "booklist.table.prolong":"Przedłuż",
             "booklist.table.resign":"Zrezygnuj",
             "booklist.table.delete":"Usuń",
-            "bookDetails":"Szczegóły książki"
+            "bookDetails":"Szczegóły książki",
+            "bookDetails.rate":"Oceń",
+            "bookDetails.addToFav":"Dodaj do ulubionych",
+            "bookDetails.addToToRead":"Dodaj do 'Do przeczytania'",
+            
 
 
 

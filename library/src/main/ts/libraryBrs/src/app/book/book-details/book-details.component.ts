@@ -12,6 +12,18 @@ export class BookDetailsComponent implements OnInit {
   ids: any;
   title="bookDetails";
   rulesHeight="rulesHeight";
+  iconClass="star"
+  addClass="add"
+  text="search"
+  btnClass="full"
+  orangeBtnClass="full orange"
+  rightClass="info"
+  leftClass="info"
+  textLogin="login"
+  textRate = "bookDetails.rate"
+  textFav = "bookDetails.addToFav"
+  textToRead = "bookDetails.addToToRead"
+            
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
