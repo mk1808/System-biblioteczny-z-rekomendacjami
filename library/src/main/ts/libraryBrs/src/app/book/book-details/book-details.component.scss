@@ -1,10 +1,12 @@
+.padding {
+    padding: 15px 0;
+}
 .parent {
     display: grid;
     grid-template-columns: 1.2fr 2fr 1.2fr;
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    padding: 15px 0;
 
     .inside {
         display: grid;
@@ -39,6 +41,20 @@
             }
         }
     }
+}
+
+.availability{
+    height: 80px;
+    border: 1px solid black;
+    align-items: center;
+    display: grid;
+    padding: 0 15px;
+    grid-template-columns: 0.1fr 2.2fr;
+    .info.circle.icon {
+        color: var(--orange);
+        font-size: 30px;
+    }
+
 }
 .mid-line {
     justify-content: center;
