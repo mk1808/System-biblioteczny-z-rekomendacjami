@@ -10,6 +10,8 @@ import { switchMap } from 'rxjs';
 export class BookDetailsComponent implements OnInit {
   id: any = 0;
   ids: any;
+  title="bookDetails";
+  rulesHeight="rulesHeight";
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {

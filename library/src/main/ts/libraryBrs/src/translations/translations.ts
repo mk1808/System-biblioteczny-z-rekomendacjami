@@ -38,7 +38,8 @@ const translations =
             "booklist.table.rating":"Ocena",
             "booklist.table.prolong":"Przedłuż",
             "booklist.table.resign":"Zrezygnuj",
-            "booklist.table.delete":"Usuń"
+            "booklist.table.delete":"Usuń",
+            "bookDetails":"Szczegóły książki"
 
 
 
