@@ -45,6 +45,10 @@ const translations =
             "bookDetails.addToToRead":"Dodaj do 'Do przeczytania'",
             "bookDetails.availability.available":"Książka dostępna do wypożyczenia! Dostępność: {{available}}/{{all}} egzemplarze.",
             "bookDetails.availability.notAvailable":"Książka obecnie nie jest dostępna do wypożyczenia. Dostępność: {{available}}/{{all}} egzemplarze.",
+            "bookDetails.availability.makeReservation":"Zarezerwuj",
+            "bookDetails.availability.notReserved":"Nikt jeszcze nie zarezerwował książki. Zarezerwuj teraz, aby być pierwszym w kolejce!",
+            "bookDetails.availability.reserved":"Na książkę oczekują {{peopleNo}} osoby. Zarezerwuj teraz, aby być następnym w kolejce!",
+            
             
             
 

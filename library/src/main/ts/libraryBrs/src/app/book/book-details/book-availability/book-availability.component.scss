@@ -2,19 +2,32 @@
     padding: 15px 0;
 }
 
-.availability{
-    height: 80px;
+.availability {
+    min-height: 80px;
     border: 1px solid black;
     align-items: center;
     display: grid;
-    padding: 0 15px;
-    grid-template-columns: 0.1fr 2.2fr;
+    padding: 15px;
+
     .info.circle.icon {
         color: var(--orange);
         font-size: 30px;
-        ~ div{
-            font-size: 17px;
-        }
+    }
+    .text {
+        font-size: 17px;
+    }
+    .parent1 {
+        display: grid;
+        grid-template-columns: 0.1fr 2.2fr;
+        align-items: center;
+        
     }
 
+    .parent2 {
+        display: grid;
+        grid-template-columns: 0.4fr 2.2fr;
+        grid-column-gap: 10px;
+        align-items: center;
+        margin-top: 10px;
+    }
 }

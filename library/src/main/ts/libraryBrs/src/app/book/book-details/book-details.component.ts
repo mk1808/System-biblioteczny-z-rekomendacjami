@@ -26,7 +26,7 @@ export class BookDetailsComponent implements OnInit {
   isAvailable:boolean=false;
   infoText=""
   fee="123"
-  availability={available:0, all:5};
+  availability={available:0, all:5, peopleWaiting:1};
 
 
   constructor(private route: ActivatedRoute) { }

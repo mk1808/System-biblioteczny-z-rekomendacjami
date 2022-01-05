@@ -1,8 +1,15 @@
 <div class="padding">
     <div class="availability">
-        <i class="info circle icon"></i>
-        <div >
-            {{text | i18next}}
+        <div class="parent1">
+            <i class="info circle icon"></i>
+            <div class="text">
+                {{text | i18next}}
+            </div>
+        </div>
+        <div class="parent2" *ngIf="availability.available<=0">
+            <app-button [text]="reserveText" [btnClass]="btnClass"></app-button>
+            <div class="text">{{extraInfoText | i18next}}</div>
         </div>
     </div>
+
 </div>
