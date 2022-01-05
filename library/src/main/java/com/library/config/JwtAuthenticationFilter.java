@@ -1,10 +1,13 @@
 package com.library.config;
 
 import java.io.IOException;
+import java.util.Objects;
+
 import io.jsonwebtoken.SignatureException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,7 +59,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String header = req.getHeader(HEADER_STRING);
         String username = null;
         String authToken = null;
-        if (header != null && header.startsWith(TOKEN_PREFIX)) {
+        Cookie[] cookies = req.getCookies();
+        if (Objects.nonNull(cookies)) {
+        	for (Cookie cookie:cookies) {
+        		if(cookie.getName().equals("Authorization")) {
+        			authToken = cookie.getValue().trim();
+                    username = jwtTokenUtil.getUsernameFromToken(authToken);
+        		}
+        	}
+        }
+        
+        if (username==null&&header != null && header.startsWith(TOKEN_PREFIX)) {
             authToken = header.replace(TOKEN_PREFIX,"");
             try {
                 username = jwtTokenUtil.getUsernameFromToken(authToken);
@@ -68,7 +81,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.error("Authentication Failed. Username or Password not valid.");
             }
         } else {
-            logger.warn("couldn't find bearer string, will ignore the header");
+            //logger.warn("couldn't find bearer string, will ignore the header");
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 

@@ -1,8 +1,13 @@
 package com.library.api.controller;
 
+import java.security.Principal;
+
 import javax.security.sasl.AuthenticationException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +27,7 @@ import com.library.dto.AppUserDto;
 import com.library.dto.LoginDto;
 import com.library.dto.TokenDto;
 import com.library.model.AppUser;
+import com.library.response.Response;
 import com.library.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -47,7 +53,7 @@ public class AuthController implements AuthResource {
     private UserService userService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> generateToken(@RequestBody LoginDto loginUser) throws AuthenticationException {
+    public ResponseEntity<?> generateToken(@RequestBody LoginDto loginUser, HttpServletResponse response) throws AuthenticationException {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -57,6 +63,11 @@ public class AuthController implements AuthResource {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
+        Cookie cookie = new Cookie("Authorization", token);
+        cookie.setMaxAge(7 * 24*60*60);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return ResponseEntity.ok(new TokenDto(token));
     }
 
@@ -75,4 +86,21 @@ public class AuthController implements AuthResource {
     public String userPing(){
         return "Any User Can Read This";
     }
+    
+    @RequestMapping(value="/whoami", method = RequestMethod.GET)
+    public Principal whoAmI(Principal principal){
+        return principal;
+    }
+    
+    @RequestMapping(value="/logout", method = RequestMethod.POST)
+    public ResponseEntity<Object> whoAmI(HttpServletResponse response){
+    	 Cookie cookie = new Cookie("Authorization", "");
+         cookie.setMaxAge(0);
+         cookie.setHttpOnly(true);
+         cookie.setPath("/");
+         response.addCookie(cookie);
+        return new ResponseEntity<Object> ("{\"message\":\"Logged out\"}", HttpStatus.OK);
+    }
+    
+    
 }
