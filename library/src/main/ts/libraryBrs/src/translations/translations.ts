@@ -43,6 +43,7 @@ const translations =
             "bookDetails.rate":"Oceń",
             "bookDetails.addToFav":"Dodaj do ulubionych",
             "bookDetails.addToToRead":"Dodaj do 'Do przeczytania'",
+            "bookDetails.availability.available":"Książka dostępna do wypożyczenia! Dostępne {{fee}} /2 egzemplarze.",
             
 
 

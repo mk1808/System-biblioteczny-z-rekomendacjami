@@ -23,6 +23,10 @@ export class BookDetailsComponent implements OnInit {
   textRate = "bookDetails.rate"
   textFav = "bookDetails.addToFav"
   textToRead = "bookDetails.addToToRead"
+  textAvailabilityInfo = ""
+  infoText=""
+  fee="123"
+
 
   constructor(private route: ActivatedRoute) { }
 
