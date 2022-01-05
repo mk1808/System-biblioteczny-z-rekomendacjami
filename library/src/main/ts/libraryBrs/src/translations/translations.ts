@@ -43,7 +43,9 @@ const translations =
             "bookDetails.rate":"Oceń",
             "bookDetails.addToFav":"Dodaj do ulubionych",
             "bookDetails.addToToRead":"Dodaj do 'Do przeczytania'",
-            "bookDetails.availability.available":"Książka dostępna do wypożyczenia! Dostępne {{fee}} /2 egzemplarze.",
+            "bookDetails.availability.available":"Książka dostępna do wypożyczenia! Dostępność: {{available}}/{{all}} egzemplarze.",
+            "bookDetails.availability.notAvailable":"Książka obecnie nie jest dostępna do wypożyczenia. Dostępność: {{available}}/{{all}} egzemplarze.",
+            
             
 
 
