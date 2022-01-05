@@ -54,22 +54,38 @@
     }
 }
 
-
-.description{
-    margin-top:20px;
+.description {
+    margin-top: 20px;
     .line {
         font-size: 22px;
         margin-bottom: 10px;
         &.rating {
             font-size: 25px;
-            
         }
         span {
             color: var(--bs-gray);
         }
     }
-    div{
+    div {
         font-size: 17px;
         line-height: 1.4;
-    } 
+    }
+}
+
+.comments {
+    margin-top: 20px;
+    .line {
+        font-size: 22px;
+        margin-bottom: 10px;
+        &.rating {
+            font-size: 25px;
+        }
+        span {
+            color: var(--bs-gray);
+        }
+    }
+    div {
+        font-size: 17px;
+        line-height: 1.4;
+    }
 }
