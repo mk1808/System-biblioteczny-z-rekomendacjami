@@ -9,6 +9,7 @@ import { MyBooksComponent } from './my-books/my-books.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookAvailabilityComponent } from './book-details/book-availability/book-availability.component';
+import { CoreModule } from '../core/core.module';
 //import { BookOpinionComponent } from '../auth/book-opinion/book-opinion.component';
 
 
@@ -26,7 +27,12 @@ import { BookAvailabilityComponent } from './book-details/book-availability/book
     CommonModule,
     BookRoutingModule,
     SharedModule,
+    CoreModule,
     NgbModule
-  ]
+  ],
+  providers:[
+    CoreModule
+  ],
+
 })
 export class BookModule { }
