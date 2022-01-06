@@ -18,6 +18,7 @@ import { NgbAccordion, NgbAccordionModule, NgbModule } from '@ng-bootstrap/ng-bo
 import { ModalComponent } from './elements/modal/modal.component';
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExampleModalComponent } from './elements/modal/example-modal/example-modal.component';
+import { DropdownComponent } from './elements/dropdown/dropdown.component';
 
 
 
@@ -35,7 +36,8 @@ import { ExampleModalComponent } from './elements/modal/example-modal/example-mo
     NotificationBarComponent,
     TwoColumnsContentComponent,
     ModalComponent,
-    ExampleModalComponent
+    ExampleModalComponent,
+    DropdownComponent
   ],
   imports: [
     CommonModule,
@@ -58,6 +60,7 @@ import { ExampleModalComponent } from './elements/modal/example-modal/example-mo
     TwoColumnsContentComponent,
     ModalComponent,
     ExampleModalComponent,
+    DropdownComponent,
     NgbModalModule,
     NgbModule,
     I18NextModule
