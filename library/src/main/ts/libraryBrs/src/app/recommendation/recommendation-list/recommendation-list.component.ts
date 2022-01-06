@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recommendation-list.component.scss']
 })
 export class RecommendationListComponent implements OnInit {
-
+  title="recommendations";
+  rulesHeight="rulesHeight";
+  textOpen="abc"
   constructor() { }
 
   ngOnInit(): void {

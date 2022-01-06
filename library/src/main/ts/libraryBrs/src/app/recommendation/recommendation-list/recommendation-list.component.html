@@ -1,1 +1,18 @@
-<p>recommendation-list works!</p>
+<app-main-content [title]="title" [contentClass]="rulesHeight">
+    <div body class="info">
+        <div class="info-with-icon">
+            <i class="info circle icon"></i>
+            <div class="text">
+                {{ 'recommendations.info' | i18next }} <br>
+           <!--
+               {{ 'loginInfo.more' | i18next }}
+           -->     
+            </div>
+        </div>
+    </div>
+<app-dropdown></app-dropdown>
+
+
+      <app-button  [text]="textOpen"  
+    ></app-button>
+</app-main-content>
