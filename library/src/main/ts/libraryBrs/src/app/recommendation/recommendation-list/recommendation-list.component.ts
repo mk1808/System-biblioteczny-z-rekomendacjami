@@ -9,6 +9,7 @@ export class RecommendationListComponent implements OnInit {
   title="recommendations";
   rulesHeight="rulesHeight";
   textOpen="abc"
+  textDropdown="options"
   constructor() { }
 
   ngOnInit(): void {

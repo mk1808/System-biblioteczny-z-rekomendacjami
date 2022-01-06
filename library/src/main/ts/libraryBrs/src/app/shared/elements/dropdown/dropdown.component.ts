@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 declare let $ : any;
 
 @Component({
@@ -7,7 +7,7 @@ declare let $ : any;
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent implements OnInit {
-
+  @Input() text="";
   constructor() { }
 
   ngOnInit(): void {
@@ -16,7 +16,6 @@ export class DropdownComponent implements OnInit {
   ngAfterViewInit() {
     this.loadJQuery();
   }
-
 
   loadJQuery() {
     $('.ui.dropdown').dropdown();

@@ -49,8 +49,8 @@ const translations =
             "bookDetails.availability.notReserved":"Nikt jeszcze nie zarezerwował książki. Zarezerwuj teraz, aby być pierwszym w kolejce!",
             "bookDetails.availability.reserved":"Na książkę oczekują {{peopleNo}} osoby. Zarezerwuj teraz, aby być następnym w kolejce!",
             "recommendations":"Rekomendacje",
-            "recommendations.info":"Poniższe książki zostały wybrane dla Ciebie na podstawie Twojej aktywności w aplikacji"
-            
+            "recommendations.info":"Poniższe książki zostały wybrane dla Ciebie na podstawie Twojej aktywności w aplikacji",
+            "options":"Opcje"
             
             
 
