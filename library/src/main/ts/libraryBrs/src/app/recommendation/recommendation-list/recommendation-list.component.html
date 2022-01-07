@@ -9,7 +9,7 @@
     </div>
 <app-dropdown [text]="textDropdown">
     <div class="item">New</div>
-    <div class="item">
+    <div class="item" (click)="test()">
       <span class="description">ctrl + o</span>
       Open...
     </div>
@@ -45,6 +45,13 @@
       </div>
     </div>
     <div class="item">E-mail Collaborators</div>
+    <div class="item">
+        <ngb-rating [(rate)]="currentRate">
+            <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100">&hearts;</span>
+            </ng-template>
+        </ngb-rating>
+    </div>
 </app-dropdown>
 
 

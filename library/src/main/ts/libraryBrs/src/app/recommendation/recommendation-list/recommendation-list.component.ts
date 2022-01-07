@@ -10,9 +10,12 @@ export class RecommendationListComponent implements OnInit {
   rulesHeight="rulesHeight";
   textOpen="abc"
   textDropdown="options"
+  currentRate = 6;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  test() {
+    console.log('tets')
+  }
 }

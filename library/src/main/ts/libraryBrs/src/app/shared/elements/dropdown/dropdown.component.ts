@@ -18,7 +18,14 @@ export class DropdownComponent implements OnInit {
   }
 
   loadJQuery() {
-    $('.ui.dropdown').dropdown();
+    $('.ui.dropdown').dropdown({
+      action: 'hide',
+      /*onChange: function(value:any, text:any, $selectedItem:any) {
+        console.log(value,)
+        console.log( text, )
+          console.log($selectedItem)
+      }*/
+    });
   }
 
 }
