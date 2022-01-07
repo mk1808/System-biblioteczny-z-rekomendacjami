@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'recommendation', loadChildren: () => import('./recommendation/recommendation.module').then(m => m.RecommendationModule) },
+  { path: 'librarian', loadChildren: () => import('./librarian/librarian.module').then(m => m.LibrarianModule) },
   { path: '**', redirectTo: '/home',}
 ];
 
