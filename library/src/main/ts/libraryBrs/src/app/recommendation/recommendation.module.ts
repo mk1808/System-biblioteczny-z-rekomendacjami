@@ -4,7 +4,6 @@ import { RecommendationListComponent } from './recommendation-list/recommendatio
 import { RecommendationElementComponent } from './recommendation-list/recommendation-element/recommendation-element.component';
 import { RecommendationRoutingModule } from './recommendation-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { NgbDropdownModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -16,9 +15,7 @@ import { NgbDropdownModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     RecommendationRoutingModule,
-    SharedModule,
-    NgbDropdownModule,
-    NgbRatingModule
+    SharedModule
   ]
 })
 export class RecommendationModule { }

@@ -4,11 +4,7 @@
         <div class="rating ui form">
             <div class="field">
                 <label>Ocena</label>
-                <ngb-rating [(rate)]="currentRate">
-                    <ng-template let-fill="fill" let-index="index">
-                        <span class="star" [class.filled]="fill === 100">&hearts;</span>
-                    </ng-template>
-                </ngb-rating>
+                <app-rating></app-rating>
             </div>
         </div>
         <div class="ui form">
