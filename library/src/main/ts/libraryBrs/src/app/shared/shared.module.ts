@@ -19,6 +19,7 @@ import { ModalComponent } from './elements/modal/modal.component';
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExampleModalComponent } from './elements/modal/example-modal/example-modal.component';
 import { DropdownComponent } from './elements/dropdown/dropdown.component';
+import { RatingComponent } from './elements/rating/rating.component';
 
 
 
@@ -37,7 +38,8 @@ import { DropdownComponent } from './elements/dropdown/dropdown.component';
     TwoColumnsContentComponent,
     ModalComponent,
     ExampleModalComponent,
-    DropdownComponent
+    DropdownComponent,
+    RatingComponent
   ],
   imports: [
     CommonModule,
@@ -61,6 +63,7 @@ import { DropdownComponent } from './elements/dropdown/dropdown.component';
     ModalComponent,
     ExampleModalComponent,
     DropdownComponent,
+    RatingComponent,
     NgbModalModule,
     NgbModule,
     I18NextModule
