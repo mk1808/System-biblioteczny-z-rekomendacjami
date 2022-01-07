@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LibLoginComponent } from './lib-auth/lib-login/lib-login.component';
+import { LibLoginComponent } from './lib-login/lib-login.component';
 
 const routes: Routes = [
 
-  { path: 'auth', loadChildren: () => import('./lib-auth/lib-auth.module').then(m => m.LibAuthModule) },
+  { path: 'login', component: LibLoginComponent },
+  { path: '**', component: LibLoginComponent },
 ];
 
 @NgModule({
@@ -15,4 +16,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class LibrarianRoutingModule { }
+export class LibAuthRoutingModule { }
