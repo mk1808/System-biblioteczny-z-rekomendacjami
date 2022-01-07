@@ -1,8 +1,8 @@
 .single {
-    height: 400px;
+    height: 495px;
     width: 300px;
     background-color: var(--mid-orange);
-    padding: 10px;
+
     transition: 2s ease;
     margin:0 auto;
     .photoContainer{
@@ -13,21 +13,69 @@
     }
    
     div {
+        
+    }
+    .description{
         margin-left: 6px;
         margin-top: 7px;
         font-size: 18px;
-    }
-    .title {
+        p{
+            margin-bottom: 2px;
+        }
+        .title {
         font-size: 24px;
         font-weight: 600;
         margin-bottom: 8px;
     }
+    }
+    
     img:hover {
         cursor: pointer;
         -webkit-transform: scale(0.95);
         -ms-transform: scale(0.95);
         transform: scale(0.95);
         transition: 2s ease;
+    }
+
+    .bar{
+        height: 33px;
+        background-color: var(--white);
+        margin-left: 0px;
+        margin-top: 0px;
+        border-bottom: 2px solid var(--light-brown);
+        &.parent{
+            display: grid;
+            grid-template-columns: 0.2fr 1fr 1fr;
+            grid-template-rows: 1fr;
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+            align-items: center;
+        }
+        i{
+            color:#EEE8AA;
+            text-shadow: 2px 2px 2px #999999;
+            font-size: 19px;
+        }
+        
+    
+        .title{
+            font-weight: 600;
+            font-size: 17px;
+        }
+        .options{
+            text-align: right;
+            margin-right: 7px;
+        }
+        label{
+            margin-bottom:6px
+        }
+    }
+
+    .content{
+        padding: 10px;
+        margin-left: 6px;
+        margin-top: 7px;
+        font-size: 18px;
     }
 
 }

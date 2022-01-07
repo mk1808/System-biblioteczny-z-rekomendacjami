@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recommendation-element.component.scss']
 })
 export class RecommendationElementComponent implements OnInit {
-
+  textDropdown="options"
   constructor() { }
 
   ngOnInit(): void {
+  }
+  test() {
+    console.log('tets')
   }
 
 }

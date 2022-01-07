@@ -1,12 +1,34 @@
 <div class="carousel-cell">
     <div class="single">
-        <div class="photoContainer"> 
-<img src = "https://picsum.photos/200/300"> 
+        <div class="bar parent">
+            <div><i class="star icon"></i></div>
+            <div class="title">Polecane</div>
+            <div class="options"> <app-dropdown [text]="textDropdown">
+                <div class="item">
+                    <div class="field">
+                        <label>Ocena</label><br>
+                    <app-rating></app-rating>
+                    </div>
+                </div>
+                <div class="item" (click)="test()">
+                    Nie interesuje mnie
+                </div>
+                <div class="item">
+                    Nie polecaj pozycji tego typu
+                </div>
+            </app-dropdown></div>
         </div>
-        
-        <div>
+        <div class="content">
+        <div class="photoContainer">
+            <img src="https://picsum.photos/200/300">
+        </div>
+
+        <div class="description">
             <p class="title">title</p>
             <p>author</p>
+            <p>Gatunek: fantastyka</p>
+            <p>Ocena: 8/10</p>
         </div>
+    </div>
     </div>
 </div>
