@@ -1,11 +1,23 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
-    <div body class="info">
+    <div class="info margin">
         <div class="info-with-icon">
             <i class="info circle icon"></i>
             <div class="text">
                 {{ 'recommendations.info' | i18next }} <br>
             </div>
         </div>
+    </div>
+
+    <div class="inside list">
+        <div *ngFor="let singleBook of books; index as i;" >
+            <app-recommendation-element></app-recommendation-element>
+        </div>
+        <app-recommendation-element></app-recommendation-element>
+        <app-recommendation-element></app-recommendation-element>
+        <app-recommendation-element></app-recommendation-element>
+        <app-recommendation-element></app-recommendation-element>
+        <app-recommendation-element></app-recommendation-element>
+        <app-recommendation-element></app-recommendation-element>
     </div>
     <app-dropdown [text]="textDropdown">
         <div class="item">New</div>
@@ -49,8 +61,4 @@
             <app-rating></app-rating>
         </div>
     </app-dropdown>
-
-
-    <app-button [text]="textOpen"></app-button>
-
 </app-main-content>

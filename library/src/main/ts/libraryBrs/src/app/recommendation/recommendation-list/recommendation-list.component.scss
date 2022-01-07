@@ -9,17 +9,32 @@
 }
 
 .info.circle.icon {
-     color: var(--orange);
+    color: var(--orange);
     font-size: 30px;
 }
 
 .info{
- 
     height: 60px;
-
     align-items: center;
     display: grid;
     &.circle.icon{
        
+    }
+    &.margin{
+        margin-bottom: 20px;
+    }
+}
+
+.inside{
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    grid-gap: 30px;
+    border: 1px dashed black;
+    width: 100%;
+    height: 100%;
+    padding:25px;
+    &.list{
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
