@@ -7,6 +7,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,15 @@ public interface BorrowingsResource {
 	@PreAuthorize("hasRole('USER')")
 	@PatchMapping("/{id}/prolong")
 	ResponseEntity<Response<String>> prolong(@PathVariable Long id);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping
+	ResponseEntity<Response<String>> create(@RequestBody List<BorrowingDto> borrowings);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PatchMapping("/return")
+	ResponseEntity<Response<String>> returnBorrowing(@RequestParam List<Long> bookCopiesIds);
+	
 	
 	
 }

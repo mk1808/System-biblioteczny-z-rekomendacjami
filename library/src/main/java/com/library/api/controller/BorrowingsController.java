@@ -30,4 +30,16 @@ public class BorrowingsController implements BorrowingsResource{
 		return null;
 	}
 
+	@Override
+	public ResponseEntity<Response<String>> create(List<BorrowingDto> borrowings) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<String>> returnBorrowing(List<Long> bookCopiesIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
