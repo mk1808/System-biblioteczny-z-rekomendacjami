@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookCopyDto;
 import com.library.dto.BookDto;
+import com.library.dto.BookFileColumnDto;
+import com.library.dto.CanBorrowBookDto;
 import com.library.dto.ChangeProposalDto;
 import com.library.dto.CreateBookCopiesDto;
+import com.library.dto.FileDto;
+import com.library.dto.ImportFileResultDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
 import com.library.response.Response;
@@ -110,7 +114,25 @@ public interface BooksResource {
 	@GetMapping("/changeProposal/new")
 	ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposal();
 	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/bookCopies/{bookCopyId}/users/{userId}/canBorrow")
+	ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(@PathVariable Long bookCopyId, @PathVariable Long userId);
 	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/bookCopies/{bookCopyId}")
+	ResponseEntity<Response<BookDto>> getBookByBookCopy(@PathVariable Long bookCopyId);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/import")
+	ResponseEntity<Response<List<BookFileColumnDto>>> getColumnsFromImport(@RequestBody FileDto file);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/import/mapping")
+	ResponseEntity<Response<List<BookFileColumnDto>>> createColumnsMapping(@RequestBody List<BookFileColumnDto> columns);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/import/result")
+	ResponseEntity<Response<ImportFileResultDto>> importBooks(@RequestBody List<BookFileColumnDto> columns);
 	
 	
 	//@PreAuthorize("hasRole('USER')")

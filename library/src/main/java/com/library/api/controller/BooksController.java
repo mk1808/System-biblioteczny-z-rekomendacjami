@@ -10,8 +10,12 @@ import com.library.api.resource.BooksResource;
 import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookCopyDto;
 import com.library.dto.BookDto;
+import com.library.dto.BookFileColumnDto;
+import com.library.dto.CanBorrowBookDto;
 import com.library.dto.ChangeProposalDto;
 import com.library.dto.CreateBookCopiesDto;
+import com.library.dto.FileDto;
+import com.library.dto.ImportFileResultDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
 import com.library.response.Response;
@@ -148,6 +152,36 @@ public class BooksController implements BooksResource{
 
 	@Override
 	public ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(Long bookCopyId, Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<BookDto>> getBookByBookCopy(Long bookCopyId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<BookFileColumnDto>>> getColumnsFromImport(FileDto file) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<BookFileColumnDto>>> createColumnsMapping(List<BookFileColumnDto> columns) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<ImportFileResultDto>> importBooks(List<BookFileColumnDto> columns) {
 		// TODO Auto-generated method stub
 		return null;
 	}
