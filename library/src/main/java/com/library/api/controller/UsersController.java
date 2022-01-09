@@ -30,4 +30,22 @@ public class UsersController implements UsersResource {
 		return null;
 	}
 
+	@Override
+	public ResponseEntity<Response<String>> create(AppUserDto user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<String>> updateByAdmin(AppUserDto user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<String>> deactivate(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
