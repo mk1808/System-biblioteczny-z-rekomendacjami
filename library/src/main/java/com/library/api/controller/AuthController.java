@@ -52,7 +52,7 @@ public class AuthController implements AuthResource {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @Override
     public ResponseEntity<?> generateToken(@RequestBody LoginDto loginUser, HttpServletResponse response) throws AuthenticationException {
 
         final Authentication authentication = authenticationManager.authenticate(
@@ -71,28 +71,22 @@ public class AuthController implements AuthResource {
         return ResponseEntity.ok(new TokenDto(token));
     }
 
- /*   @RequestMapping(value="/register", method = RequestMethod.POST)
-    public AppUser saveUser(@RequestBody AppUser user){
-        return new AppUser();//userService.save(user);
-    }*/
-
-    @RequestMapping(value="/register", method = RequestMethod.POST)
+    @Override
     public AppUser saveUser(@RequestBody AppUserDto user){
         return userService.save(user);
     }
 
-    @PreAuthorize("hasRole('USER')")
-    @RequestMapping(value="/userping", method = RequestMethod.GET)
+    @Override
     public String userPing(){
         return "Any User Can Read This";
     }
     
-    @RequestMapping(value="/whoami", method = RequestMethod.GET)
+    @Override
     public Principal whoAmI(Principal principal){
         return principal;
     }
     
-    @RequestMapping(value="/logout", method = RequestMethod.POST)
+    @Override
     public ResponseEntity<Object> whoAmI(HttpServletResponse response){
     	 Cookie cookie = new Cookie("Authorization", "");
          cookie.setMaxAge(0);
@@ -102,5 +96,11 @@ public class AuthController implements AuthResource {
         return new ResponseEntity<Object> ("{\"message\":\"Logged out\"}", HttpStatus.OK);
     }
     
-    
 }
+
+/*   
+ * @RequestMapping(value="/register", method = RequestMethod.POST)
+	public AppUser saveUser(@RequestBody AppUser user){
+    return new AppUser();//userService.save(user);
+}
+*/
