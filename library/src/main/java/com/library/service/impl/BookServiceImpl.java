@@ -28,7 +28,7 @@ private BookRepository repository;
 
 	@Override
 	public Book update(Book entity) {
-		return null;
+		return repository.save(entity);
 	}
 
 

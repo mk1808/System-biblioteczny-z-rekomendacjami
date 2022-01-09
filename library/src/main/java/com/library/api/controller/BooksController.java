@@ -1,8 +1,11 @@
 package com.library.api.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
@@ -18,15 +21,35 @@ import com.library.dto.FileDto;
 import com.library.dto.ImportFileResultDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
+import com.library.model.Book;
+import com.library.model.Opinion;
 import com.library.response.Response;
+import com.library.service.BookConverterService;
+import com.library.service.BookService;
+import com.library.service.OpinionConverterService;
 
 @Controller
 public class BooksController implements BooksResource{
 
+	private final BookConverterService bookConverter;
+	private final OpinionConverterService opinionConverter;
+	private final BookService bookService;
+	
+    @Autowired
+    public BooksController(BookConverterService bookConverter, OpinionConverterService opinionConverter, BookService bookService){
+        this.bookConverter = bookConverter;
+		this.opinionConverter = opinionConverter;
+		this.bookService = bookService;
+    }
+	
 	@Override
 	public ResponseEntity<Response<List<BookDto>>> getNewest(Long number) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Book> books = new ArrayList<>();
+		Response<List<BookDto>> response = Response.<List<BookDto>> builder()
+				.content(bookConverter.toDtoList(books))
+				.status(HttpStatus.OK)
+				.build();
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
@@ -43,8 +66,11 @@ public class BooksController implements BooksResource{
 
 	@Override
 	public ResponseEntity<Response<BookDto>> getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Response<BookDto> response = Response.<BookDto>builder()
+				.content(bookConverter.toDto(bookService.get(id)))
+				.status(HttpStatus.OK)
+				.build();
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
@@ -72,9 +98,14 @@ public class BooksController implements BooksResource{
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> createOpinion(OpinionDto opinion) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<Response<String>> createOpinion(OpinionDto opinionDto) {
+		Opinion opinion = opinionConverter.toModel(opinionDto);
+
+		Response<String> response = Response.<String> builder()
+				.content("")
+				.status(HttpStatus.OK)
+				.build();
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
