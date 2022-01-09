@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +20,7 @@ import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookCopyDto;
 import com.library.dto.BookDto;
 import com.library.dto.ChangeProposalDto;
+import com.library.dto.CreateBookCopiesDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
 import com.library.response.Response;
@@ -65,7 +68,49 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/userList")
-	ResponseEntity<Response<String>> createChangeProposal(@RequestBody UserListElementDto userListElement);
+	ResponseEntity<Response<String>> createUserListElement(@RequestBody UserListElementDto userListElement);
+	
+	@PreAuthorize("hasRole('USER')")
+	@GetMapping("/userList/user/{userId}")
+	ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(@PathVariable Long userId, @RequestParam String type);
+	
+	@PreAuthorize("hasRole('USER')")
+	@GetMapping("/user/{userId}/opinions")
+	ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(@PathVariable Long userId);
+	
+	@PreAuthorize("hasRole('USER')")
+	@DeleteMapping("/userList/{elementId}")
+	ResponseEntity<Response<String>> deleteUserListElement(@PathVariable Long elementId);
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping
+	ResponseEntity<Response<BookDto>> create(@RequestBody BookDto book);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/bookCopies")
+	ResponseEntity<Response<List<BookCopyDto>>> createBookCopies(@RequestBody CreateBookCopiesDto createBookCopies);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/bookCopies/file")
+	ResponseEntity<Response<List<OpinionDto>>> createQRFile(@RequestParam List<Long> bookCopiesIds);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/{id}/changeProposal")
+	ResponseEntity<Response<List<ChangeProposalDto>>> createChangeProposal(@PathVariable Long id);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PatchMapping("/changeProposal")
+	ResponseEntity<Response<String>> updateChangeProposal(@RequestBody ChangeProposalDto changeProposal);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping
+	ResponseEntity<Response<String>> update(@RequestBody BookDto book);
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/changeProposal/new")
+	ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposal();
+	
+	
 	
 	
 	//@PreAuthorize("hasRole('USER')")

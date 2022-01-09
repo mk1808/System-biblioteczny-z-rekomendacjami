@@ -11,6 +11,7 @@ import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookCopyDto;
 import com.library.dto.BookDto;
 import com.library.dto.ChangeProposalDto;
+import com.library.dto.CreateBookCopiesDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
 import com.library.response.Response;
@@ -85,7 +86,68 @@ public class BooksController implements BooksResource{
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> createChangeProposal(UserListElementDto userListElement) {
+	public ResponseEntity<Response<String>> createUserListElement(UserListElementDto userListElement) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(Long userId,
+			String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<String>> deleteUserListElement(Long elementId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<BookDto>> create(BookDto book) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<BookCopyDto>>> createBookCopies(CreateBookCopiesDto createBookCopies) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<OpinionDto>>> createQRFile(List<Long> bookCopiesIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<ChangeProposalDto>>> createChangeProposal(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<String>> updateChangeProposal(ChangeProposalDto changeProposal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<String>> update(BookDto book) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposal() {
 		// TODO Auto-generated method stub
 		return null;
 	}
