@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,37 @@ public class BooksController implements BooksResource{
 		this.bookService = bookService;
     }
 	
+    
+	@Override
+	public ResponseEntity<Response<BookDto>> create(BookDto bookDto) {
+		Book book = bookConverter.toModel(bookDto);
+		Response<BookDto> response = Response.<BookDto> builder()
+				.content(bookConverter.toDto(bookService.create(book)))
+				.status(HttpStatus.OK)
+				.build();
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<BookDto>> getById(Long id) {
+		Response<BookDto> response = Response.<BookDto>builder()
+				.content(bookConverter.toDto(bookService.get(id)))
+				.status(HttpStatus.OK)
+				.build();
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<String>> update(BookDto bookDto) {
+		Book book = bookConverter.toModel(bookDto);
+		bookService.update(book);
+		Response<String> response = Response.<String> builder()
+				.content("")
+				.status(HttpStatus.OK)
+				.build();
+		return ResponseEntity.ok(response);
+	}
+    
 	@Override
 	public ResponseEntity<Response<List<BookDto>>> getNewest(Long number) {
 		List<Book> books = new ArrayList<>();
@@ -54,24 +86,26 @@ public class BooksController implements BooksResource{
 
 	@Override
 	public ResponseEntity<Response<List<BookDto>>> getPopular(Long number) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<Response<Page<BookDto>>> getFiltered(Long pageNo, Long size) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<Response<BookDto>> getById(Long id) {
-		Response<BookDto> response = Response.<BookDto>builder()
-				.content(bookConverter.toDto(bookService.get(id)))
+		List<Book> books = new ArrayList<>();
+		Response<List<BookDto>> response = Response.<List<BookDto>> builder()
+				.content(bookConverter.toDtoList(books))
 				.status(HttpStatus.OK)
 				.build();
 		return ResponseEntity.ok(response);
 	}
+
+	@Override
+	public ResponseEntity<Response<Page<BookDto>>> getFiltered(Long pageNo, Long size) {
+		
+		/*Response<Page<BookDto>> response = Response.<Page<BookDto>> builder()
+				.content(bookConverter.toDtoPage(books))
+				.status(HttpStatus.OK)
+				.build();
+		return ResponseEntity.ok(response);*/
+		return null;
+	}
+
+
 
 	@Override
 	public ResponseEntity<Response<List<BookCopyDto>>> getBookCopiesByBookId(Long id) {
@@ -145,11 +179,7 @@ public class BooksController implements BooksResource{
 		return null;
 	}
 
-	@Override
-	public ResponseEntity<Response<BookDto>> create(BookDto book) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public ResponseEntity<Response<List<BookCopyDto>>> createBookCopies(CreateBookCopiesDto createBookCopies) {
@@ -175,11 +205,7 @@ public class BooksController implements BooksResource{
 		return null;
 	}
 
-	@Override
-	public ResponseEntity<Response<String>> update(BookDto book) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposal() {
