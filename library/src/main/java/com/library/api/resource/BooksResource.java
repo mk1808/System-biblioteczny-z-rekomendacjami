@@ -100,7 +100,7 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}/changeProposal")
-	ResponseEntity<Response<List<ChangeProposalDto>>> createChangeProposal(@PathVariable Long id);
+	ResponseEntity<Response<List<ChangeProposalDto>>> getChangeProposal(@PathVariable Long bookId);
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/changeProposal")
@@ -112,7 +112,7 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/changeProposal/new")
-	ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposal();
+	ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposals();
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/bookCopies/{bookCopyId}/users/{userId}/canBorrow")

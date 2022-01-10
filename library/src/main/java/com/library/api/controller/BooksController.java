@@ -23,23 +23,32 @@ import com.library.dto.ImportFileResultDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
 import com.library.model.Book;
+import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
 import com.library.response.Response;
 import com.library.service.BookConverterService;
+import com.library.service.BookCopyConverterService;
 import com.library.service.BookService;
+import com.library.service.ChangeProposalConverterService;
 import com.library.service.OpinionConverterService;
 
 @Controller
 public class BooksController extends BaseController implements BooksResource {
 
 	private final BookConverterService bookConverter;
+	private final BookCopyConverterService bookCopyConverter;
 	private final OpinionConverterService opinionConverter;
+	private final ChangeProposalConverterService changeProposalConverter;
 	private final BookService bookService;
 	
     @Autowired
-    public BooksController(BookConverterService bookConverter, OpinionConverterService opinionConverter, BookService bookService){
+    public BooksController(BookConverterService bookConverter, BookCopyConverterService bookCopyConverter,
+    		OpinionConverterService opinionConverter, BookService bookService, 
+    		ChangeProposalConverterService changeProposalConverter){
         this.bookConverter = bookConverter;
+        this.bookCopyConverter = bookCopyConverter;
 		this.opinionConverter = opinionConverter;
+		this.changeProposalConverter = changeProposalConverter;
 		this.bookService = bookService;
     }
 	
@@ -130,52 +139,74 @@ public class BooksController extends BaseController implements BooksResource {
 		return ResponseEntity.ok(response);
 	}
 	
-
+	@Override
+	public ResponseEntity<Response<List<BookCopyDto>>> createBookCopies(CreateBookCopiesDto createBookCopies) {
+		return null;
+	}
+	
 	@Override
 	public ResponseEntity<Response<List<BookCopyDto>>> getBookCopiesByBookId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Response<List<BookCopyDto>> response = createSuccessResponse(bookCopyConverter.toDtoList(bookService.getBookCopiesByBookId(id)));
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<String>> createChangeProposal(List<ChangeProposalDto> changeProposalsDto) {
+		List<ChangeProposal> changeProposals = changeProposalConverter.toModelList(changeProposalsDto);
+		bookService.createChangeProposals(changeProposals);
+		Response<String> response = createSuccessResponse("");
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<List<ChangeProposalDto>>> getChangeProposal(Long bookId) {
+		Response<List<ChangeProposalDto>> response = createSuccessResponse(changeProposalConverter.toDtoList(bookService.getChangeProposalsByBookId(bookId)));
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposals() {
+		Response<List<ChangeProposalDto>> response = createSuccessResponse(changeProposalConverter.toDtoList(bookService.getNewChangeProposals()));
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
-	public ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public ResponseEntity<Response<String>> createChangeProposal(List<ChangeProposalDto> changeProposals) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<Response<String>> updateChangeProposal(ChangeProposalDto changeProposal) {
+		Opinion opinion = opinionConverter.toModel(opinionDto);
+		bookService.updateOpinion(opinion);
+		Response<String> response = createSuccessResponse("");
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
 	public ResponseEntity<Response<String>> createUserListElement(UserListElementDto userListElement) {
-		// TODO Auto-generated method stub
-		return null;
+		Opinion opinion = opinionConverter.toModel(opinionDto);
+		bookService.updateOpinion(opinion);
+		Response<String> response = createSuccessResponse("");
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
 	public ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(Long userId,
 			String type) {
-		// TODO Auto-generated method stub
-		return null;
+		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
+		return ResponseEntity.ok(response);
 	}
-
-
 
 	@Override
 	public ResponseEntity<Response<String>> deleteUserListElement(Long elementId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
+	
+	@Override
+	public ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(Long id) {
+		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
+		return ResponseEntity.ok(response);
+	}
 
 	@Override
-	public ResponseEntity<Response<List<BookCopyDto>>> createBookCopies(CreateBookCopiesDto createBookCopies) {
+	public ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(Long bookCopyId, Long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -185,34 +216,6 @@ public class BooksController extends BaseController implements BooksResource {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public ResponseEntity<Response<List<ChangeProposalDto>>> createChangeProposal(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<Response<String>> updateChangeProposal(ChangeProposalDto changeProposal) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposal() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(Long bookCopyId, Long userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 	@Override
 	public ResponseEntity<Response<List<BookFileColumnDto>>> getColumnsFromImport(FileDto file) {
@@ -231,6 +234,9 @@ public class BooksController extends BaseController implements BooksResource {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 
 
