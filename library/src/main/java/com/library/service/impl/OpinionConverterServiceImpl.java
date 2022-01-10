@@ -3,11 +3,13 @@ package com.library.service.impl;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import com.library.dto.OpinionDto;
 import com.library.model.Opinion;
 import com.library.service.OpinionConverterService;
 
+@Service
 public class OpinionConverterServiceImpl implements OpinionConverterService {
 
 	@Override
