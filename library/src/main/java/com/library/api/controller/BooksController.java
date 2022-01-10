@@ -30,7 +30,7 @@ import com.library.service.BookService;
 import com.library.service.OpinionConverterService;
 
 @Controller
-public class BooksController implements BooksResource{
+public class BooksController extends BaseController implements BooksResource {
 
 	private final BookConverterService bookConverter;
 	private final OpinionConverterService opinionConverter;
@@ -47,19 +47,19 @@ public class BooksController implements BooksResource{
 	@Override
 	public ResponseEntity<Response<BookDto>> create(BookDto bookDto) {
 		Book book = bookConverter.toModel(bookDto);
-		Response<BookDto> response = Response.<BookDto> builder()
-				.content(bookConverter.toDto(bookService.create(book)))
-				.status(HttpStatus.OK)
-				.build();
+		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.create(book)));
+		return ResponseEntity.ok(response);
+	}
+
+	@Override
+	public ResponseEntity<Response<BookDto>> getById(Long id) {
+		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
 		return ResponseEntity.ok(response);
 	}
 	
 	@Override
-	public ResponseEntity<Response<BookDto>> getById(Long id) {
-		Response<BookDto> response = Response.<BookDto>builder()
-				.content(bookConverter.toDto(bookService.get(id)))
-				.status(HttpStatus.OK)
-				.build();
+	public ResponseEntity<Response<BookDto>> getBookByBookCopy(Long bookCopyId) {
+		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.getByBookCopy(bookCopyId)));
 		return ResponseEntity.ok(response);
 	}
 	
@@ -67,30 +67,21 @@ public class BooksController implements BooksResource{
 	public ResponseEntity<Response<String>> update(BookDto bookDto) {
 		Book book = bookConverter.toModel(bookDto);
 		bookService.update(book);
-		Response<String> response = Response.<String> builder()
-				.content("")
-				.status(HttpStatus.OK)
-				.build();
+		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);
 	}
     
 	@Override
 	public ResponseEntity<Response<List<BookDto>>> getNewest(Long number) {
 		List<Book> books = new ArrayList<>();
-		Response<List<BookDto>> response = Response.<List<BookDto>> builder()
-				.content(bookConverter.toDtoList(books))
-				.status(HttpStatus.OK)
-				.build();
+		Response<List<BookDto>> response = createSuccessResponse(bookConverter.toDtoList(books));
 		return ResponseEntity.ok(response);
 	}
 
 	@Override
 	public ResponseEntity<Response<List<BookDto>>> getPopular(Long number) {
 		List<Book> books = new ArrayList<>();
-		Response<List<BookDto>> response = Response.<List<BookDto>> builder()
-				.content(bookConverter.toDtoList(books))
-				.status(HttpStatus.OK)
-				.build();
+		Response<List<BookDto>> response = createSuccessResponse(bookConverter.toDtoList(books));
 		return ResponseEntity.ok(response);
 	}
 
@@ -105,7 +96,40 @@ public class BooksController implements BooksResource{
 		return null;
 	}
 
-
+	@Override
+	public ResponseEntity<Response<String>> createOpinion(OpinionDto opinionDto) {
+		Opinion opinion = opinionConverter.toModel(opinionDto);
+		bookService.createOpinion(opinion);
+		Response<String> response = createSuccessResponse("");
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByBookId(Long id) {
+		Response<List<OpinionDto>> response = createSuccessResponse(opinionConverter.toDtoList(bookService.getOpinionsByBookId(id)));
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<OpinionDto>> getOpinionsByBookIdAndUserId(Long userId, Long bookId) {
+		Response<OpinionDto> response = createSuccessResponse(opinionConverter.toDto(bookService.getOpinionByBookIdAndUserId(userId, bookId)));
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(Long userId) {
+		Response<List<OpinionDto>> response = createSuccessResponse(opinionConverter.toDtoList(bookService.getOpinionsByUser(userId)));
+		return ResponseEntity.ok(response);
+	}
+	
+	@Override
+	public ResponseEntity<Response<String>> updateOpinion(OpinionDto opinionDto) {	
+		Opinion opinion = opinionConverter.toModel(opinionDto);
+		bookService.updateOpinion(opinion);
+		Response<String> response = createSuccessResponse("");
+		return ResponseEntity.ok(response);
+	}
+	
 
 	@Override
 	public ResponseEntity<Response<List<BookCopyDto>>> getBookCopiesByBookId(Long id) {
@@ -119,34 +143,7 @@ public class BooksController implements BooksResource{
 		return null;
 	}
 
-	@Override
-	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByBookId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public ResponseEntity<Response<OpinionDto>> getOpinionsByBookId(Long userId, Long bookId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<Response<String>> createOpinion(OpinionDto opinionDto) {
-		Opinion opinion = opinionConverter.toModel(opinionDto);
-
-		Response<String> response = Response.<String> builder()
-				.content("")
-				.status(HttpStatus.OK)
-				.build();
-		return ResponseEntity.ok(response);
-	}
-
-	@Override
-	public ResponseEntity<Response<String>> updateOpinion(OpinionDto opinion) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public ResponseEntity<Response<String>> createChangeProposal(List<ChangeProposalDto> changeProposals) {
@@ -167,11 +164,7 @@ public class BooksController implements BooksResource{
 		return null;
 	}
 
-	@Override
-	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public ResponseEntity<Response<String>> deleteUserListElement(Long elementId) {
@@ -219,11 +212,7 @@ public class BooksController implements BooksResource{
 		return null;
 	}
 
-	@Override
-	public ResponseEntity<Response<BookDto>> getBookByBookCopy(Long bookCopyId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public ResponseEntity<Response<List<BookFileColumnDto>>> getColumnsFromImport(FileDto file) {
@@ -242,5 +231,8 @@ public class BooksController implements BooksResource{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 }

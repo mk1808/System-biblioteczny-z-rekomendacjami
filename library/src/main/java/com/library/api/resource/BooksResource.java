@@ -56,7 +56,7 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/{bookId}/user/{userId}/opinions")
-	ResponseEntity<Response<OpinionDto>> getOpinionsByBookId(@PathVariable Long userId, @PathVariable Long bookId);
+	ResponseEntity<Response<OpinionDto>> getOpinionsByBookIdAndUserId(@PathVariable Long userId, @PathVariable Long bookId);
 	
 	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/opinions")
