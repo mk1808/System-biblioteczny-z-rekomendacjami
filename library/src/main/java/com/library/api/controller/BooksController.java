@@ -25,12 +25,14 @@ import com.library.dto.UserListElementDto;
 import com.library.model.Book;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
+import com.library.model.UserListElement;
 import com.library.response.Response;
 import com.library.service.BookConverterService;
 import com.library.service.BookCopyConverterService;
 import com.library.service.BookService;
 import com.library.service.ChangeProposalConverterService;
 import com.library.service.OpinionConverterService;
+import com.library.service.UserListElementConverterService;
 
 @Controller
 public class BooksController extends BaseController implements BooksResource {
@@ -39,16 +41,18 @@ public class BooksController extends BaseController implements BooksResource {
 	private final BookCopyConverterService bookCopyConverter;
 	private final OpinionConverterService opinionConverter;
 	private final ChangeProposalConverterService changeProposalConverter;
+	private final UserListElementConverterService userListElementConverter;
 	private final BookService bookService;
 	
     @Autowired
     public BooksController(BookConverterService bookConverter, BookCopyConverterService bookCopyConverter,
     		OpinionConverterService opinionConverter, BookService bookService, 
-    		ChangeProposalConverterService changeProposalConverter){
+    		ChangeProposalConverterService changeProposalConverter, UserListElementConverterService userListElementConverter){
         this.bookConverter = bookConverter;
         this.bookCopyConverter = bookCopyConverter;
 		this.opinionConverter = opinionConverter;
 		this.changeProposalConverter = changeProposalConverter;
+		this.userListElementConverter = userListElementConverter;
 		this.bookService = bookService;
     }
 	
@@ -171,17 +175,17 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> updateChangeProposal(ChangeProposalDto changeProposal) {
-		Opinion opinion = opinionConverter.toModel(opinionDto);
-		bookService.updateOpinion(opinion);
+	public ResponseEntity<Response<String>> updateChangeProposal(ChangeProposalDto changeProposalDto) {
+		ChangeProposal changeProposal = changeProposalConverter.toModel(changeProposalDto);
+		bookService.updateChangePorposal(changeProposal);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> createUserListElement(UserListElementDto userListElement) {
-		Opinion opinion = opinionConverter.toModel(opinionDto);
-		bookService.updateOpinion(opinion);
+	public ResponseEntity<Response<String>> createUserListElement(UserListElementDto userListElementDto) {
+		UserListElement userListElement = userListElementConverter.toModel(userListElementDto);
+		bookService.createUserListElement(userListElement);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);
 	}
@@ -189,20 +193,22 @@ public class BooksController extends BaseController implements BooksResource {
 	@Override
 	public ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(Long userId,
 			String type) {
-		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
+		Response<List<UserListElementDto>> response = createSuccessResponse(userListElementConverter.toDtoList(
+				bookService.getUserListElementByUserAndType(userId, type)));
 		return ResponseEntity.ok(response);
 	}
 
 	@Override
 	public ResponseEntity<Response<String>> deleteUserListElement(Long elementId) {
-		// TODO Auto-generated method stub
-		return null;
+		bookService.deleteUserListElement(elementId);
+		Response<String> response = createSuccessResponse("");
+		return ResponseEntity.ok(response);
 	}
 	
 	@Override
 	public ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(Long id) {
-		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
-		return ResponseEntity.ok(response);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
