@@ -1,5 +1,7 @@
 package com.library.dto;
 
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -8,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BookFileColumnDto {
-	private Long id;
+	private UUID id;
 }

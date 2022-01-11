@@ -1,6 +1,7 @@
 package com.library.dto;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Builder
 public class AppUserDto {
 	
-	private Long id;
+	private UUID id;
 	private String name;
 	private String surname;
 	private String phoneNo;

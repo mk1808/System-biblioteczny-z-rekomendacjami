@@ -1,5 +1,7 @@
 package com.library.dto;
 
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class AuthorDto {
 
-	private Long id;
+	private UUID id;
 	private String name;
 	private String surname;
 	private String description;

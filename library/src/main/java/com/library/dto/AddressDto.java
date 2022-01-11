@@ -1,5 +1,7 @@
 package com.library.dto;
 
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class AddressDto {
-	private Long id;
+	private UUID id;
 	private String street;
 	private String houseNo;
 	private String flatNo;

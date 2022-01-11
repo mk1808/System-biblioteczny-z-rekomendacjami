@@ -1,6 +1,7 @@
 package com.library.dto;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -16,12 +17,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ReservationDto {
-	private Long id;
+	private UUID id;
 	private BookDto book;
-	private Long bookId;
+	private UUID bookId;
 
 	private AppUserDto user;
-	private Long userId;
+	private UUID userId;
 	
 	private LocalDateTime reservationDate;
 	private LocalDateTime availabilityStartDate;

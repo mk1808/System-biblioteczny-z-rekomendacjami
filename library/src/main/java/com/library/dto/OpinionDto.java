@@ -1,5 +1,7 @@
 package com.library.dto;
 
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -8,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class OpinionDto {
-	private Long id;
+	private UUID id;
 	private BookDto book;
-	private Long bookId;
+	private UUID bookId;
 
 	private AppUserDto user;
-	private Long userId;
+	private UUID userId;
 	
 	private Long rating;
 	private String comment;

@@ -2,6 +2,7 @@ package com.library.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -18,9 +19,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BorrowingDto {
 	private BookCopyDto bookCopy;
-	private Long bookCopyId;
+	private UUID bookCopyId;
 	private AppUserDto user;
-	private Long userId;
+	private UUID userId;
 	private LocalDateTime borrowDate;
 	private LocalDateTime returnDate;
 	private LocalDateTime expectedReturnDate;

@@ -1,6 +1,7 @@
 package com.library.dto;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.library.enums.UserListType;
 
@@ -12,12 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserListElementDto {
-	private Long id;
+	private UUID id;
 	private BookDto book;
-	private Long bookId;
+	private UUID bookId;
 
 	private AppUserDto user;
-	private Long userId;
+	private UUID userId;
 	
 	private UserListType type;
 	private LocalDateTime deleteDate;

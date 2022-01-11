@@ -1,5 +1,7 @@
 package com.library.dto;
 
+import java.util.UUID;
+
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
@@ -15,13 +17,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class LibraryDto {
-	private Long id;
+	private UUID id;
 	private String name;
 	private String phoneNo;
 	private String mail;
 	private String description;
-	private Long addressId;
+	private UUID addressId;
 	private AddressDto address;
-	private Long termsId;
+	private UUID termsId;
 	private String terms;
 }

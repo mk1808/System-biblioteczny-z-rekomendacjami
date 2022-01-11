@@ -1,6 +1,7 @@
 package com.library.dto;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.library.model.Author;
 import com.library.model.Genre;
@@ -20,6 +21,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class SeriesDto {
-	private Long id;
+	private UUID id;
 	private String name;
 }

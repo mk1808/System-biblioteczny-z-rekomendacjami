@@ -1,5 +1,7 @@
 package com.library.dto;
 
+import java.util.UUID;
+
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
@@ -16,12 +18,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ChangeProposalDto {
-	private Long id;
+	private UUID id;
 	private String value;
 	private String type;
 	private ChangeProposalStatus status;
 	private BookDto book;
-	private Long bookId;
+	private UUID bookId;
 	private AppUserDto user;
-	private Long userId;
+	private UUID userId;
 }
