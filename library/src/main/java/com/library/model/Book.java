@@ -1,19 +1,16 @@
 package com.library.model;
 
-import java.util.UUID;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,6 +41,18 @@ public class Book extends BaseEntity{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Publisher publisher;
+	
+	@Transient
+	private List<Author> authors;
+	
+	@Transient
+	private List<Genre> genres;
+	
+	@Transient
+	private List<Series> series;
+	
+	@Transient
+	private List<KeyWord> keyWords;
 	
 	
 }
