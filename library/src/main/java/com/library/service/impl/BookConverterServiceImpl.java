@@ -84,6 +84,7 @@ public class BookConverterServiceImpl implements BookConverterService {
 	@Override
 	public Book toModel(BookDto dto) {
 		Book model = Book.builder()
+				.id(dto.getId())
 				.ISBN(dto.getISBN())
 				.title(dto.getTitle())
 				.publicationYear(dto.getPublicationYear())
@@ -96,7 +97,6 @@ public class BookConverterServiceImpl implements BookConverterService {
 				.keyWords(createDtos(dto.getKeyWords(), this::createKeyWordDto))
 				.series(createDtos(dto.getSeries(), this::createSeriesDto))
 				.build();
-		model.setId(dto.getId());
 				
 		return model;
 	}
