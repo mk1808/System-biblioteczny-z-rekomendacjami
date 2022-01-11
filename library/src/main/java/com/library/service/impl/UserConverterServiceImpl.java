@@ -3,11 +3,13 @@ package com.library.service.impl;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import com.library.dto.AppUserDto;
 import com.library.model.AppUser;
 import com.library.service.UserConverterService;
 
+@Service
 public class UserConverterServiceImpl implements UserConverterService {
 
 	@Override

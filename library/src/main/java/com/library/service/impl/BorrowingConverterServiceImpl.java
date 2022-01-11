@@ -3,11 +3,13 @@ package com.library.service.impl;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import com.library.dto.BorrowingDto;
 import com.library.model.Borrowing;
 import com.library.service.BorrowingConverterService;
 
+@Service
 public class BorrowingConverterServiceImpl implements BorrowingConverterService{
 
 	@Override

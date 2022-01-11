@@ -3,11 +3,13 @@ package com.library.service.impl;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import com.library.dto.RecommendationDto;
 import com.library.model.Recommendation;
 import com.library.service.RecommendationConverterService;
 
+@Service
 public class RecommendationConverterServiceImpl implements RecommendationConverterService {
 
 	@Override

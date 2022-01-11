@@ -2,10 +2,13 @@ package com.library.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.library.model.Library;
 import com.library.model.Terms;
 import com.library.service.LibraryService;
 
+@Service
 public class LibraryServiceImpl implements LibraryService {
 
 	@Override

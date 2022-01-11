@@ -3,11 +3,13 @@ package com.library.service.impl;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import com.library.dto.ChangeProposalDto;
 import com.library.model.ChangeProposal;
 import com.library.service.ChangeProposalConverterService;
 
+@Service
 public class ChangeProposalConverterServiceImpl implements ChangeProposalConverterService{
 
 	@Override

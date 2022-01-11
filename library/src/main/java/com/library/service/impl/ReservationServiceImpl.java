@@ -2,9 +2,12 @@ package com.library.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.library.model.Reservation;
 import com.library.service.ReservationService;
 
+@Service
 public class ReservationServiceImpl implements ReservationService {
 
 	@Override
