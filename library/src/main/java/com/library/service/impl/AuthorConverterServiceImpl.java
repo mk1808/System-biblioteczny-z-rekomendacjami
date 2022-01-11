@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,24 @@ public class AuthorConverterServiceImpl implements AuthorConverterService{
 
 	@Override
 	public AuthorDto toDto(Author model) {
-		// TODO Auto-generated method stub
-		return null;
+		AuthorDto dto = AuthorDto.builder()
+				.id(model.getId())
+				.name(model.getName())
+				.surname(model.getSurname())
+				.description(model.getDescription())
+				.build();
+		return dto;
 	}
 
 	@Override
 	public Author toModel(AuthorDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		Author model = Author.builder()
+				.id(dto.getId())
+				.name(dto.getName())
+				.surname(dto.getSurname())
+				.description(dto.getDescription())
+				.build();
+		return model;
 	}
 
 	@Override
