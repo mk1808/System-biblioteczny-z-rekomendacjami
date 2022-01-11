@@ -10,4 +10,8 @@ public interface UserService extends RepositoryService<AppUser>  {
 	
 	AppUser getByMail(String mail);
 	AppUser save(AppUserDto user);
+
+	AppUser updateByAdmin(AppUser user);
+
+	void deactivate(Long id);
 }

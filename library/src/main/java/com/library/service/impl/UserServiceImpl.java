@@ -91,9 +91,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return list;
 	}
 
-	
-
-
     public AppUser save(AppUserDto user) {
 		AppUser newUser = AppUser.builder()
 				.mail(user.getMail())
@@ -106,5 +103,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         newUser.setRoles(roleSet);
         return userRepository.save(newUser);
     }
+	@Override
+	public AppUser updateByAdmin(AppUser user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void deactivate(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
