@@ -1,13 +1,22 @@
 package com.library.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.library.dto.AuthorDto;
 import com.library.dto.BookDto;
+import com.library.dto.GenreDto;
+import com.library.dto.KeyWordDto;
+import com.library.dto.SeriesDto;
 import com.library.model.Author;
 import com.library.model.Book;
 import com.library.model.Genre;
@@ -82,6 +91,10 @@ public class BookConverterServiceImpl implements BookConverterService {
 				.descrpition(dto.getDescrpition())
 				.photo(dto.getPhoto())
 				.publisher(Publisher.builder().id(dto.getId()).build())
+				.authors(createDtos(dto.getAuthors(), this::createAuthorDto))
+				.genres(createDtos(dto.getGenres(), this::createGenreDto))
+				.keyWords(createDtos(dto.getKeyWords(), this::createKeyWordDto))
+				.series(createDtos(dto.getSeries(), this::createSeriesDto))
 				.build();
 		model.setId(dto.getId());
 				
@@ -112,8 +125,25 @@ public class BookConverterServiceImpl implements BookConverterService {
 		return null;
 	}
 
+	private <M,D> List<M> createDtos(List<D> dtos, Function<D, M>function) {
+		return dtos.stream().map(function).collect(Collectors.toList());
+	}
+	
+	private Author createAuthorDto(AuthorDto dto) {
+		return Author.builder().id(UUID.fromString(dto.getId().toString())).build();
+	}
+	
+	private Genre createGenreDto(GenreDto dto) {
+		return Genre.builder().id(UUID.fromString(dto.getId().toString())).build();
+	}
+	
+	private Series createSeriesDto(SeriesDto dto) {
+		return Series.builder().id(UUID.fromString(dto.getId().toString())).build();
+	}
 
-
+	private KeyWord createKeyWordDto(KeyWordDto dto) {
+		return KeyWord.builder().id(UUID.fromString(dto.getId().toString())).build();
+	}
 
 
 
