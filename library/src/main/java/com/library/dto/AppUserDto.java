@@ -1,13 +1,8 @@
 package com.library.dto;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
-
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-
-import com.library.enums.Role;
-import com.library.model.Address;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +25,7 @@ public class AppUserDto {
 	private AddressDto address;
 	private String mail;
 	private String password;
-	private Role role;
+	private Set<UUID> roleIds;
 	private String photo;
 	private LocalDateTime creationDate;
 	private LocalDateTime dezactivationDate; 
