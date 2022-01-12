@@ -7,17 +7,23 @@ import java.util.UUID;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
+import com.library.enums.Role;
 import com.library.model.AppUser;
 import com.library.model.BookCopy;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class BorrowingDto {
+	private UUID id;
 	private BookCopyDto bookCopy;
 	private UUID bookCopyId;
 	private AppUserDto user;
