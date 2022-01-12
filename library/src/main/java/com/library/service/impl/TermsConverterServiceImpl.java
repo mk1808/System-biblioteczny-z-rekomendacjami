@@ -6,7 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.library.dto.BookCopyDto;
+import com.library.dto.SeriesDto;
 import com.library.dto.TermsDto;
+import com.library.model.Series;
 import com.library.model.Terms;
 import com.library.service.TermsConverterService;
 
@@ -15,19 +17,20 @@ public class TermsConverterServiceImpl implements TermsConverterService {
 
 	@Override
 	public TermsDto toDto(Terms model) {
-		BookCopyDto dto = BookCopyDto.builder()
-				.id(Long.valueOf(model.getId().toString()))
-				.name(model.getName())
-				.surname(model.getSurname())
-				.description(model.getDescription())
+		TermsDto dto = TermsDto.builder()
+				.id(model.getId())
+				.content(model.getContent())
 				.build();
 		return dto;
 	}
 
 	@Override
 	public Terms toModel(TermsDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		Terms model = Terms.builder()
+				.id(dto.getId())
+				.content(dto.getContent())
+				.build();
+		return model;
 	}
 
 	@Override

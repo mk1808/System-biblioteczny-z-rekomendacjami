@@ -2,32 +2,58 @@ package com.library.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import com.library.dto.BookCopyDto;
 import com.library.dto.ReservationDto;
+import com.library.model.AppUser;
+import com.library.model.Book;
 import com.library.model.Reservation;
+import com.library.service.BookConverterService;
 import com.library.service.ReservationConverterService;
+import com.library.service.UserConverterService;
 
 @Service
 public class ReservationConverterServiceImpl implements ReservationConverterService {
 
+	private final BookConverterService bookConverter;
+	private final UserConverterService userConverter;
+		
+		@Autowired
+		public ReservationConverterServiceImpl(BookConverterService bookConverter, 
+				UserConverterService userConverter) {
+			this.bookConverter = bookConverter;
+			this.userConverter = userConverter;
+		}
+		
 	@Override
 	public ReservationDto toDto(Reservation model) {
-		BookCopyDto dto = BookCopyDto.builder()
-				.id(Long.valueOf(model.getId().toString()))
-				.name(model.getName())
-				.surname(model.getSurname())
-				.description(model.getDescription())
+		ReservationDto dto = ReservationDto.builder()
+				.id(model.getId())
+				.book(bookConverter.toDto(model.getBook()))
+				.bookId(model.getBook().getId())
+				.user(userConverter.toDto(model.getUser()))
+				.userId(model.getUser().getId())
+				
+				.reservationDate(model.getReservationDate())
+				.availabilityStartDate(model.getAvailabilityStartDate())
+				.wasBorrowed(model.getWasBorrowed())
 				.build();
 		return dto;
 	}
 
 	@Override
 	public Reservation toModel(ReservationDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		Reservation model = Reservation.builder()
+				.id(dto.getId())
+				.book(Book.builder().id(dto.getBookId()).build())
+				.user(AppUser.builder().id(dto.getUserId()).build())
+				.reservationDate(dto.getReservationDate())
+				.availabilityStartDate(dto.getAvailabilityStartDate())
+				.wasBorrowed(dto.getWasBorrowed())
+				.build();
+		return model;
 	}
 
 	@Override

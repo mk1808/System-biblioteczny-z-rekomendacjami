@@ -3,16 +3,14 @@ package com.library.dto;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-
-import com.library.model.AppUser;
-import com.library.model.Book;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
