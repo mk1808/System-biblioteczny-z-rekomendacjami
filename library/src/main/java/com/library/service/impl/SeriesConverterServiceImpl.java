@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import com.library.dto.BookCopyDto;
 import com.library.dto.SeriesDto;
 import com.library.model.Series;
 import com.library.service.SeriesConverterService;
@@ -15,19 +14,20 @@ public class SeriesConverterServiceImpl implements SeriesConverterService{
 
 	@Override
 	public SeriesDto toDto(Series model) {
-		BookCopyDto dto = BookCopyDto.builder()
-				.id(Long.valueOf(model.getId().toString()))
+		SeriesDto dto = SeriesDto.builder()
+				.id(model.getId())
 				.name(model.getName())
-				.surname(model.getSurname())
-				.description(model.getDescription())
 				.build();
 		return dto;
 	}
 
 	@Override
 	public Series toModel(SeriesDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		Series model = Series.builder()
+				.id(dto.getId())
+				.name(dto.getName())
+				.build();
+		return model;
 	}
 
 	@Override

@@ -1,9 +1,6 @@
 package com.library.dto;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
-
-import com.library.enums.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -3,11 +3,13 @@ package com.library.service.impl;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import com.library.dto.AddressDto;
 import com.library.model.Address;
 import com.library.service.AddressConverterService;
 
+@Service
 public class AddressConverterServiceImpl implements AddressConverterService{
 
 	@Override

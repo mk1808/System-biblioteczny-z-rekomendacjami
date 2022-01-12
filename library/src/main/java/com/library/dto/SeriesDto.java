@@ -1,13 +1,6 @@
 package com.library.dto;
 
-import java.util.List;
 import java.util.UUID;
-
-import com.library.model.Author;
-import com.library.model.Genre;
-import com.library.model.KeyWord;
-import com.library.model.Publisher;
-import com.library.model.Series;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
