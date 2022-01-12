@@ -1,11 +1,14 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.library.dto.BookCopyDto;
 import com.library.dto.GenreDto;
+import com.library.model.BookCopy;
 import com.library.model.Genre;
 import com.library.service.GenreConverterService;
 
@@ -14,14 +17,20 @@ public class GenreConverterServiceImpl implements GenreConverterService{
 
 	@Override
 	public GenreDto toDto(Genre model) {
-		// TODO Auto-generated method stub
-		return null;
+		GenreDto dto = GenreDto.builder()
+				.id(model.getId())
+				.name(model.getName())
+				.build();
+		return dto;
 	}
-
+	
 	@Override
 	public Genre toModel(GenreDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		Genre model = Genre.builder()
+				.id(dto.getId())
+				.name(dto.getName())
+				.build();
+		return model;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.library.dto.BookCopyDto;
 import com.library.dto.RecommendationDto;
 import com.library.model.Recommendation;
 import com.library.service.RecommendationConverterService;
@@ -14,8 +15,13 @@ public class RecommendationConverterServiceImpl implements RecommendationConvert
 
 	@Override
 	public RecommendationDto toDto(Recommendation model) {
-		// TODO Auto-generated method stub
-		return null;
+		BookCopyDto dto = BookCopyDto.builder()
+				.id(Long.valueOf(model.getId().toString()))
+				.name(model.getName())
+				.surname(model.getSurname())
+				.description(model.getDescription())
+				.build();
+		return dto;
 	}
 
 	@Override

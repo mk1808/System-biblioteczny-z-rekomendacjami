@@ -1,11 +1,14 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.library.dto.BookCopyDto;
 import com.library.dto.KeyWordDto;
+import com.library.model.BookCopy;
 import com.library.model.KeyWord;
 import com.library.service.KeyWordConverterService;
 
@@ -14,14 +17,22 @@ public class KeyWordConverterServiceImpl implements KeyWordConverterService{
 
 	@Override
 	public KeyWordDto toDto(KeyWord model) {
-		// TODO Auto-generated method stub
-		return null;
+		KeyWordDto dto = KeyWordDto.builder()
+				.id(model.getId())
+				.name(model.getName())
+				.isVerified(model.getIsVerified())
+				.build();
+		return dto;
 	}
 
 	@Override
 	public KeyWord toModel(KeyWordDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		KeyWord model = KeyWord.builder()
+				.id(dto.getId())
+				.name(dto.getName())
+				.isVerified(dto.getIsVerified())
+				.build();
+		return model;
 	}
 
 	@Override

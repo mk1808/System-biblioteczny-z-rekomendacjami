@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.library.dto.AppUserDto;
+import com.library.dto.BookCopyDto;
 import com.library.model.AppUser;
 import com.library.service.UserConverterService;
 
@@ -14,8 +15,13 @@ public class UserConverterServiceImpl implements UserConverterService {
 
 	@Override
 	public AppUserDto toDto(AppUser model) {
-		// TODO Auto-generated method stub
-		return null;
+		BookCopyDto dto = BookCopyDto.builder()
+				.id(Long.valueOf(model.getId().toString()))
+				.name(model.getName())
+				.surname(model.getSurname())
+				.description(model.getDescription())
+				.build();
+		return dto;
 	}
 
 	@Override
