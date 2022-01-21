@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -35,14 +36,12 @@ public class TermsConverterServiceImpl implements TermsConverterService {
 
 	@Override
 	public List<TermsDto> toDtoList(List<Terms> models) {
-		// TODO Auto-generated method stub
-		return null;
+		return models.stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Terms> toModelList(List<TermsDto> dtos) {
-		// TODO Auto-generated method stub
-		return null;
+		return dtos.stream().map(this::toModel).collect(Collectors.toList());
 	}
 
 	@Override

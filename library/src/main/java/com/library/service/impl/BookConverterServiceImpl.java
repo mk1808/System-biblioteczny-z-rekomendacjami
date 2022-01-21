@@ -103,14 +103,12 @@ public class BookConverterServiceImpl implements BookConverterService {
 
 	@Override
 	public List<BookDto> toDtoList(List<Book> models) {
-		// TODO Auto-generated method stub
-		return null;
+		return models.stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Book> toModelList(List<BookDto> dtos) {
-		// TODO Auto-generated method stub
-		return null;
+		return dtos.stream().map(this::toModel).collect(Collectors.toList());
 	}
 
 	@Override

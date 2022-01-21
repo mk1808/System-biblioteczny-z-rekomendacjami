@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,12 @@ public class SeriesConverterServiceImpl implements SeriesConverterService{
 
 	@Override
 	public List<SeriesDto> toDtoList(List<Series> models) {
-		// TODO Auto-generated method stub
-		return null;
+		return models.stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Series> toModelList(List<SeriesDto> dtos) {
-		// TODO Auto-generated method stub
-		return null;
+		return dtos.stream().map(this::toModel).collect(Collectors.toList());
 	}
 
 	@Override

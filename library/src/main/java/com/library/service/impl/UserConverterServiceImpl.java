@@ -72,14 +72,12 @@ private final AddressConverterService addressConverter;
 
 	@Override
 	public List<AppUserDto> toDtoList(List<AppUser> models) {
-		// TODO Auto-generated method stub
-		return null;
+		return models.stream().map(this::toDto).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<AppUser> toModelList(List<AppUserDto> dtos) {
-		// TODO Auto-generated method stub
-		return null;
+		return dtos.stream().map(this::toModel).collect(Collectors.toList());
 	}
 
 	@Override
