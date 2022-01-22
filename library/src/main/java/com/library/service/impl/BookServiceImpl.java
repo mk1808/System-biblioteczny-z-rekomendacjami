@@ -2,6 +2,7 @@ package com.library.service.impl;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,16 @@ private final ChangeProposalRepository changeProposalRepository;
 	@Override
 	public List<BookCopy> getBookCopiesByBookId(UUID id) {
 		return bookCopyRepository.getBookCopiesByBookId(id);
+	}
+	
+	@Override
+	public BookCopy getBookCopyById(UUID bookCopyId) {
+		return bookCopyRepository.getById(bookCopyId);
+	}
+	
+	@Override
+	public List<BookCopy> getBookCopiesByIds(List<UUID> bookCopiesIds) {
+		return bookCopiesIds.stream().map(this::getBookCopyById).collect(Collectors.toList());
 	}
 
 	@Override
@@ -153,6 +164,8 @@ private final ChangeProposalRepository changeProposalRepository;
 		userListElementRepository.deleteById(elementId);
 		
 	}
+	
+
 
 
 }

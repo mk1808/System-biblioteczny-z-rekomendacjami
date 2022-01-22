@@ -54,7 +54,7 @@ public class BorrowingsController extends BaseController implements BorrowingsRe
 	@Override
 	public ResponseEntity<Response<String>> create(List<BorrowingDto> borrowingsDtos) {
 		List<Borrowing> borrowings = borrowingConverter.toModelList(borrowingsDtos);
-		borrowingService.createMultiple(borrowingsDtos);
+		borrowingService.createMultiple(borrowings);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);
 	}

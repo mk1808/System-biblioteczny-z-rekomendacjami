@@ -41,4 +41,8 @@ public interface BookService extends RepositoryService<Book>{
 	
 	ChangeProposal createChangeProposal(ChangeProposal changeProposal);
 
+	BookCopy getBookCopyById(UUID bookCopyId);
+
+	List<BookCopy> getBookCopiesByIds(List<UUID> bookCopiesIds);
+
 }
