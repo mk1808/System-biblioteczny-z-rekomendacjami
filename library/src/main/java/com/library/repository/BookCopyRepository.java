@@ -11,6 +11,7 @@ import com.library.model.BookCopy;
 
 @Repository
 public interface BookCopyRepository extends JpaRepository<BookCopy, UUID>{
-	@Query("SELECT c FROM bookCopy c JOIN book b ON c.book=b.id WHERE b.id=?1")
+	//@Query("SELECT c FROM BookCopy c JOIN book.id b WHERE b= :id")
 	List<BookCopy> getBookCopiesByBookId(UUID id);
 }
+//@Query("select u.userName from User u inner join u.area ar where ar.idArea = :idArea")

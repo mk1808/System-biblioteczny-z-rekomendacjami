@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public AppUser get(Long id) {
+	public AppUser get(UUID id) {
 		return userRepository.findById(id).get();
 	}
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 	
 	@Override
-	public void delete(long id) {
+	public void delete(UUID id) {
 		userRepository.deleteById(id);
 	}
 
@@ -109,7 +110,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return null;
 	}
 	@Override
-	public void deactivate(Long id) {
+	public void deactivate(UUID id) {
 		// TODO Auto-generated method stub
 		
 	}

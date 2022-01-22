@@ -1,5 +1,7 @@
 package com.library.api.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,7 @@ public class UsersController extends BaseController implements UsersResource {
 	}
 
 	@Override
-	public ResponseEntity<Response<AppUserDto>> getById(Long id) {
+	public ResponseEntity<Response<AppUserDto>> getById(UUID id) {
 		Response<AppUserDto> response = createSuccessResponse(userConverter.toDto(userService.get(id)));
 		return ResponseEntity.ok(response);
 	}
@@ -64,7 +66,7 @@ public class UsersController extends BaseController implements UsersResource {
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> deactivate(Long id) {
+	public ResponseEntity<Response<String>> deactivate(UUID id) {
 		userService.deactivate(id);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);

@@ -1,5 +1,7 @@
 package com.library.service.impl;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.library.dto.SurveyDto;
@@ -9,7 +11,7 @@ import com.library.service.SurveyService;
 public class SurveyServiceImpl implements SurveyService{
 
 	@Override
-	public SurveyDto get(Long id) {
+	public SurveyDto get(UUID id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,6 +1,7 @@
 package com.library.api.resource;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public interface UsersResource {
 	
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/{id}")
-	ResponseEntity<Response<AppUserDto>> getById(@PathVariable Long id);
+	ResponseEntity<Response<AppUserDto>> getById(@PathVariable UUID id);
 	
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping
@@ -45,5 +46,5 @@ public interface UsersResource {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}/deactivate")
-	ResponseEntity<Response<String>> deactivate(@PathVariable Long id);
+	ResponseEntity<Response<String>> deactivate(@PathVariable UUID id);
 }
