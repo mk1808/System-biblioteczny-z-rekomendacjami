@@ -2,6 +2,7 @@ package com.library.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,19 +33,19 @@ public class BorrowingsController extends BaseController implements BorrowingsRe
 	}
 
 	@Override
-	public ResponseEntity<Response<List<BorrowingDto>>> getByUserId(Long userId) {
+	public ResponseEntity<Response<List<BorrowingDto>>> getByUserId(UUID userId) {
 		Response<List<BorrowingDto>> response = createSuccessResponse(borrowingConverter.toDtoList(borrowingService.getByUserId(userId)));
 		return ResponseEntity.ok(response);
 	}
 
 	@Override
-	public ResponseEntity<Response<List<BorrowingDto>>> getPastByUserId(Long userId) {
+	public ResponseEntity<Response<List<BorrowingDto>>> getPastByUserId(UUID userId) {
 		Response<List<BorrowingDto>> response = createSuccessResponse(borrowingConverter.toDtoList(borrowingService.getPastByUserId(userId)));
 		return ResponseEntity.ok(response);
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> prolong(Long id) {
+	public ResponseEntity<Response<String>> prolong(UUID id) {
 		borrowingService.prolong(id);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);
@@ -59,7 +60,7 @@ public class BorrowingsController extends BaseController implements BorrowingsRe
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> returnBorrowing(List<Long> bookCopiesIds) {
+	public ResponseEntity<Response<String>> returnBorrowing(List<UUID> bookCopiesIds) {
 		borrowingService.returnBorrowings(bookCopiesIds);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);

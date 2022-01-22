@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import com.library.service.BorrowingService;
 public class BorrowingServiceImpl implements BorrowingService {
 
 	@Override
-	public Borrowing get(Long id) {
+	public Borrowing get(UUID id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -30,7 +31,7 @@ public class BorrowingServiceImpl implements BorrowingService {
 	}
 
 	@Override
-	public List<Borrowing> getByUserId(Long userId) {
+	public List<Borrowing> getByUserId(UUID userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,19 +43,19 @@ public class BorrowingServiceImpl implements BorrowingService {
 	}
 
 	@Override
-	public void returnBorrowings(List<Long> bookCopiesIds) {
+	public void returnBorrowings(List<UUID> bookCopiesIds) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<Borrowing> getPastByUserId(Long userId) {
+	public List<Borrowing> getPastByUserId(UUID userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void prolong(Long id) {
+	public void prolong(UUID id) {
 		// TODO Auto-generated method stub
 		
 	}

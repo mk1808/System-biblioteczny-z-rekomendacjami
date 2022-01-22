@@ -1,6 +1,7 @@
 package com.library.api.resource;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,15 +24,15 @@ public interface BorrowingsResource {
 	
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/user/{userId}")
-	ResponseEntity<Response<List<BorrowingDto>>> getByUserId(@PathVariable Long userId);
+	ResponseEntity<Response<List<BorrowingDto>>> getByUserId(@PathVariable UUID userId);
 	
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/user/{userId}/past")
-	ResponseEntity<Response<List<BorrowingDto>>> getPastByUserId(@PathVariable Long userId);
+	ResponseEntity<Response<List<BorrowingDto>>> getPastByUserId(@PathVariable UUID userId);
 	
 	@PreAuthorize("hasRole('USER')")
 	@PatchMapping("/{id}/prolong")
-	ResponseEntity<Response<String>> prolong(@PathVariable Long id);
+	ResponseEntity<Response<String>> prolong(@PathVariable UUID id);
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
@@ -39,7 +40,7 @@ public interface BorrowingsResource {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/return")
-	ResponseEntity<Response<String>> returnBorrowing(@RequestParam List<Long> bookCopiesIds);
+	ResponseEntity<Response<String>> returnBorrowing(@RequestParam List<UUID> bookCopiesIds);
 	
 	
 	
