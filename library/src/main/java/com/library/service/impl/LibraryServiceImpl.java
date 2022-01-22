@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import com.library.service.LibraryService;
 public class LibraryServiceImpl implements LibraryService {
 
 	@Override
-	public Library get(Long id) {
+	public Library get(UUID id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
