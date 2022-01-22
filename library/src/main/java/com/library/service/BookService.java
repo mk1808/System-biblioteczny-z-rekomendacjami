@@ -36,6 +36,8 @@ public interface BookService extends RepositoryService<Book>{
 
 	List<UserListElement> getUserListElementByUserAndType(Long userId, String type);
 
-	void deleteUserListElement(Long elementId);
+	public void deleteUserListElement(Long elementId);
+	
+	ChangeProposal createChangeProposal(ChangeProposal changeProposal);
 
 }

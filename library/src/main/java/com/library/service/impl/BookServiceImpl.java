@@ -5,22 +5,36 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.library.enums.ChangeProposalStatus;
 import com.library.model.Book;
 import com.library.model.BookCopy;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
 import com.library.model.UserListElement;
+import com.library.repository.BookCopyRepository;
 import com.library.repository.BookRepository;
+import com.library.repository.ChangeProposalRepository;
+import com.library.repository.OpinionRepository;
+import com.library.repository.UserListElementRepository;
 import com.library.service.BookService;
 
 @Service
 public class BookServiceImpl implements BookService {
-private BookRepository repository;
+private final BookRepository repository;
+private final BookCopyRepository bookCopyRepository;
+private final OpinionRepository opinionRepository;
+private final UserListElementRepository userListElementRepository;
+private final ChangeProposalRepository changeProposalRepository;
 	
 	
 	@Autowired
-	public BookServiceImpl(BookRepository repository) {
+	public BookServiceImpl(BookRepository repository, BookCopyRepository bookCopyRepository, OpinionRepository opinionRepository,
+			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository) {
 		this.repository = repository;
+		this.bookCopyRepository = bookCopyRepository;
+		this.opinionRepository = opinionRepository;
+		this.userListElementRepository = userListElementRepository;
+		this.changeProposalRepository = changeProposalRepository;
 	}
 
 
@@ -42,98 +56,100 @@ private BookRepository repository;
 
 	@Override
 	public Book getByBookCopy(Long bookCopyId) {
-		// TODO Auto-generated method stub
-		return null;
+		BookCopy bookCopy = bookCopyRepository.getById(bookCopyId);
+		return bookCopy.getBook();
 	}
 
+	@Override
+	public List<BookCopy> getBookCopiesByBookId(Long id) {
+		return bookCopyRepository.getBookCopiesByBookId(id);
+	}
 
 	@Override
 	public void createOpinion(Opinion opinion) {
-		// TODO Auto-generated method stub
+		opinionRepository.save(opinion);
 		
 	}
 
 
 	@Override
 	public List<Opinion> getOpinionsByBookId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return opinionRepository.getByBookId(id);
 	}
 
 
 	@Override
 	public Opinion getOpinionByBookIdAndUserId(Long userId, Long bookId) {
-		// TODO Auto-generated method stub
-		return null;
+		return opinionRepository.getByBookIdAndUserId(bookId, userId);
 	}
 
 
 	@Override
 	public List<Opinion> getOpinionsByUser(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return opinionRepository.getByUserId(userId);
 	}
 
 
 	@Override
 	public void updateOpinion(Opinion opinion) {
-		// TODO Auto-generated method stub
-		
+		if(opinionRepository.getById(opinion.getId())!=null) {
+			opinionRepository.save(opinion);
+		}
 	}
 
 
-	@Override
-	public List<BookCopy> getBookCopiesByBookId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 	@Override
 	public void createChangeProposals(List<ChangeProposal> changeProposals) {
-		// TODO Auto-generated method stub
+		changeProposals.stream().forEach(this::createChangeProposal);
 		
+	}
+	
+	@Override
+	public ChangeProposal createChangeProposal(ChangeProposal changeProposal) {
+		return changeProposalRepository.save(changeProposal);
 	}
 
 
 	@Override
 	public List<ChangeProposal> getChangeProposalsByBookId(Long bookId) {
-		// TODO Auto-generated method stub
-		return null;
+		return changeProposalRepository.getChangeProposalsByBookId(bookId);
 	}
 
 
 	@Override
 	public List<ChangeProposal> getNewChangeProposals() {
-		// TODO Auto-generated method stub
-		return null;
+		return changeProposalRepository.getByStatus(ChangeProposalStatus.WAITING);
 	}
 
 
 	@Override
 	public void updateChangePorposal(ChangeProposal changeProposal) {
-		// TODO Auto-generated method stub
+		if(changeProposalRepository.getById(changeProposal.getId())!=null) {
+			changeProposalRepository.save(changeProposal);
+		}
 		
 	}
 
 
 	@Override
 	public void createUserListElement(UserListElement userListElement) {
-		// TODO Auto-generated method stub
+		userListElementRepository.save(userListElement);
 		
 	}
 
 
 	@Override
 	public List<UserListElement> getUserListElementByUserAndType(Long userId, String type) {
-		// TODO Auto-generated method stub
-		return null;
+		return userListElementRepository.getByUserIdAndType(userId, type);
 	}
 
 
 	@Override
 	public void deleteUserListElement(Long elementId) {
-		// TODO Auto-generated method stub
+		userListElementRepository.deleteById(elementId);
 		
 	}
 
