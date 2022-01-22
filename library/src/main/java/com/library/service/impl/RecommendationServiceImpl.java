@@ -1,5 +1,7 @@
 package com.library.service.impl;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.library.model.Recommendation;
@@ -9,7 +11,7 @@ import com.library.service.RecommendationService;
 public class RecommendationServiceImpl implements RecommendationService {
 
 	@Override
-	public Recommendation get(Long id) {
+	public Recommendation get(UUID id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

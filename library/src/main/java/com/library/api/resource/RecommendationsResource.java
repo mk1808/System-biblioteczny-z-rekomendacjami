@@ -1,6 +1,7 @@
 package com.library.api.resource;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public interface RecommendationsResource {
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/user/{userId}")
-	ResponseEntity<Response<Page<RecommendationDto>>> getByUserId(@PathVariable Long userId, @RequestParam Long pageNo, @RequestParam Long pageSize);
+	ResponseEntity<Response<Page<RecommendationDto>>> getByUserId(@PathVariable UUID userId, @RequestParam Long pageNo, @RequestParam Long pageSize);
 
 	@PreAuthorize("hasRole('USER')")
 	@PatchMapping

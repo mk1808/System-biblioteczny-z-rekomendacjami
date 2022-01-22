@@ -1,5 +1,7 @@
 package com.library.api.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,7 @@ public class RecommendationsController extends BaseController implements Recomme
 	}
 
 	@Override
-	public ResponseEntity<Response<Page<RecommendationDto>>> getByUserId(Long userId, Long pageNo, Long pageSize) {
+	public ResponseEntity<Response<Page<RecommendationDto>>> getByUserId(UUID userId, Long pageNo, Long pageSize) {
 		Response<Page<RecommendationDto>> response = null;// = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
 		return ResponseEntity.ok(response);
 	}
