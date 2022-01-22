@@ -1,6 +1,7 @@
 package com.library.api.resource;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -43,20 +44,20 @@ public interface BooksResource {
 	ResponseEntity<Response<List<BookDto>>> getPopular(@RequestParam Long number);
 	
 	@GetMapping("/{id}")
-	ResponseEntity<Response<BookDto>> getById(@PathVariable Long id);
+	ResponseEntity<Response<BookDto>> getById(@PathVariable UUID id);
 	
 	@GetMapping("/{id}/bookCopies")
-	ResponseEntity<Response<List<BookCopyDto>>> getBookCopiesByBookId(@PathVariable Long id);
+	ResponseEntity<Response<List<BookCopyDto>>> getBookCopiesByBookId(@PathVariable UUID id);
 	
 	@GetMapping("/{id}/availability")
-	ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(@PathVariable Long id);
+	ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(@PathVariable UUID id);
 	
 	@GetMapping("/{id}/opinions")
-	ResponseEntity<Response<List<OpinionDto>>> getOpinionsByBookId(@PathVariable Long id);
+	ResponseEntity<Response<List<OpinionDto>>> getOpinionsByBookId(@PathVariable UUID id);
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/{bookId}/user/{userId}/opinions")
-	ResponseEntity<Response<OpinionDto>> getOpinionsByBookIdAndUserId(@PathVariable Long userId, @PathVariable Long bookId);
+	ResponseEntity<Response<OpinionDto>> getOpinionsByBookIdAndUserId(@PathVariable UUID userId, @PathVariable UUID bookId);
 	
 	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/opinions")
@@ -76,15 +77,15 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/userList/user/{userId}")
-	ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(@PathVariable Long userId, @RequestParam String type);
+	ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(@PathVariable UUID userId, @RequestParam String type);
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/user/{userId}/opinions")
-	ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(@PathVariable Long userId);
+	ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(@PathVariable UUID userId);
 	
 	@PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/userList/{elementId}")
-	ResponseEntity<Response<String>> deleteUserListElement(@PathVariable Long elementId);
+	ResponseEntity<Response<String>> deleteUserListElement(@PathVariable UUID elementId);
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
@@ -96,11 +97,11 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/bookCopies/file")
-	ResponseEntity<Response<List<OpinionDto>>> createQRFile(@RequestParam List<Long> bookCopiesIds);
+	ResponseEntity<Response<List<OpinionDto>>> createQRFile(@RequestParam List<UUID> bookCopiesIds);
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}/changeProposal")
-	ResponseEntity<Response<List<ChangeProposalDto>>> getChangeProposal(@PathVariable Long bookId);
+	ResponseEntity<Response<List<ChangeProposalDto>>> getChangeProposal(@PathVariable UUID bookId);
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/changeProposal")
@@ -116,11 +117,11 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/bookCopies/{bookCopyId}/users/{userId}/canBorrow")
-	ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(@PathVariable Long bookCopyId, @PathVariable Long userId);
+	ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(@PathVariable UUID bookCopyId, @PathVariable UUID userId);
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/bookCopies/{bookCopyId}")
-	ResponseEntity<Response<BookDto>> getBookByBookCopy(@PathVariable Long bookCopyId);
+	ResponseEntity<Response<BookDto>> getBookByBookCopy(@PathVariable UUID bookCopyId);
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/import")

@@ -1,6 +1,7 @@
 package com.library.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.library.model.Book;
 import com.library.model.BookCopy;
@@ -10,23 +11,23 @@ import com.library.model.UserListElement;
 
 public interface BookService extends RepositoryService<Book>{
 
-	Book getByBookCopy(Long bookCopyId);
+	Book getByBookCopy(UUID bookCopyId);
 
 	void createOpinion(Opinion opinion);
 
-	List<Opinion> getOpinionsByBookId(Long id);
+	List<Opinion> getOpinionsByBookId(UUID id);
 
-	Opinion getOpinionByBookIdAndUserId(Long userId, Long bookId);
+	Opinion getOpinionByBookIdAndUserId(UUID userId, UUID bookId);
 
-	List<Opinion> getOpinionsByUser(Long userId);
+	List<Opinion> getOpinionsByUser(UUID userId);
 
 	void updateOpinion(Opinion opinion);
 
-	List<BookCopy> getBookCopiesByBookId(Long id);
+	List<BookCopy> getBookCopiesByBookId(UUID id);
 
 	void createChangeProposals(List<ChangeProposal> changeProposals);
 
-	List<ChangeProposal> getChangeProposalsByBookId(Long bookId);
+	List<ChangeProposal> getChangeProposalsByBookId(UUID bookId);
 
 	List<ChangeProposal> getNewChangeProposals();
 
@@ -34,9 +35,9 @@ public interface BookService extends RepositoryService<Book>{
 
 	void createUserListElement(UserListElement userListElement);
 
-	List<UserListElement> getUserListElementByUserAndType(Long userId, String type);
+	List<UserListElement> getUserListElementByUserAndType(UUID userId, String type);
 
-	public void deleteUserListElement(Long elementId);
+	public void deleteUserListElement(UUID elementId);
 	
 	ChangeProposal createChangeProposal(ChangeProposal changeProposal);
 

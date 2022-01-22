@@ -11,10 +11,10 @@ import com.library.model.Opinion;
 @Repository
 public interface OpinionRepository extends JpaRepository<Opinion, UUID>{
 
-	List<Opinion> getByBookId(Long id);
+	List<Opinion> getByBookId(UUID id);
 
-	Opinion getByBookIdAndUserId(Long bookId, Long userId);
+	Opinion getByBookIdAndUserId(UUID bookId, UUID userId);
 
-	List<Opinion> getByUserId(Long userId);
+	List<Opinion> getByUserId(UUID userId);
 
 }

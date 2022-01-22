@@ -2,6 +2,7 @@ package com.library.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,13 +64,13 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 
 	@Override
-	public ResponseEntity<Response<BookDto>> getById(Long id) {
+	public ResponseEntity<Response<BookDto>> getById(UUID id) {
 		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
 		return ResponseEntity.ok(response);
 	}
 	
 	@Override
-	public ResponseEntity<Response<BookDto>> getBookByBookCopy(Long bookCopyId) {
+	public ResponseEntity<Response<BookDto>> getBookByBookCopy(UUID bookCopyId) {
 		Response<BookDto> response = createSuccessResponse(bookConverter.toDto(bookService.getByBookCopy(bookCopyId)));
 		return ResponseEntity.ok(response);
 	}
@@ -116,19 +117,19 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 	
 	@Override
-	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByBookId(Long id) {
+	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByBookId(UUID id) {
 		Response<List<OpinionDto>> response = createSuccessResponse(opinionConverter.toDtoList(bookService.getOpinionsByBookId(id)));
 		return ResponseEntity.ok(response);
 	}
 	
 	@Override
-	public ResponseEntity<Response<OpinionDto>> getOpinionsByBookIdAndUserId(Long userId, Long bookId) {
+	public ResponseEntity<Response<OpinionDto>> getOpinionsByBookIdAndUserId(UUID userId, UUID bookId) {
 		Response<OpinionDto> response = createSuccessResponse(opinionConverter.toDto(bookService.getOpinionByBookIdAndUserId(userId, bookId)));
 		return ResponseEntity.ok(response);
 	}
 	
 	@Override
-	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(Long userId) {
+	public ResponseEntity<Response<List<OpinionDto>>> getOpinionsByUser(UUID userId) {
 		Response<List<OpinionDto>> response = createSuccessResponse(opinionConverter.toDtoList(bookService.getOpinionsByUser(userId)));
 		return ResponseEntity.ok(response);
 	}
@@ -147,7 +148,7 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 	
 	@Override
-	public ResponseEntity<Response<List<BookCopyDto>>> getBookCopiesByBookId(Long id) {
+	public ResponseEntity<Response<List<BookCopyDto>>> getBookCopiesByBookId(UUID id) {
 		Response<List<BookCopyDto>> response = createSuccessResponse(bookCopyConverter.toDtoList(bookService.getBookCopiesByBookId(id)));
 		return ResponseEntity.ok(response);
 	}
@@ -161,7 +162,7 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 	
 	@Override
-	public ResponseEntity<Response<List<ChangeProposalDto>>> getChangeProposal(Long bookId) {
+	public ResponseEntity<Response<List<ChangeProposalDto>>> getChangeProposal(UUID bookId) {
 		Response<List<ChangeProposalDto>> response = createSuccessResponse(changeProposalConverter.toDtoList(bookService.getChangeProposalsByBookId(bookId)));
 		return ResponseEntity.ok(response);
 	}
@@ -189,7 +190,7 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 
 	@Override
-	public ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(Long userId,
+	public ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(UUID userId,
 			String type) {
 		Response<List<UserListElementDto>> response = createSuccessResponse(userListElementConverter.toDtoList(
 				bookService.getUserListElementByUserAndType(userId, type)));
@@ -197,26 +198,26 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> deleteUserListElement(Long elementId) {
+	public ResponseEntity<Response<String>> deleteUserListElement(UUID elementId) {
 		bookService.deleteUserListElement(elementId);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);
 	}
 	
 	@Override
-	public ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(Long id) {
+	public ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(UUID id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(Long bookCopyId, Long userId) {
+	public ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(UUID bookCopyId, UUID userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResponseEntity<Response<List<OpinionDto>>> createQRFile(List<Long> bookCopiesIds) {
+	public ResponseEntity<Response<List<OpinionDto>>> createQRFile(List<UUID> bookCopiesIds) {
 		// TODO Auto-generated method stub
 		return null;
 	}

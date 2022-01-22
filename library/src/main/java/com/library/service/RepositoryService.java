@@ -1,9 +1,9 @@
 package com.library.service;
 
-import java.util.List;
+import java.util.UUID;
 
 public interface RepositoryService<T> extends Service {
-	T get(Long id);
+	T get(UUID id);
 	T create(T entity);
 	T update(T entity);
 	

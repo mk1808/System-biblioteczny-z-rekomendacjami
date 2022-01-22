@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ private final ChangeProposalRepository changeProposalRepository;
 
 
 	@Override
-	public Book get(Long id) {
+	public Book get(UUID id) {
 		return repository.getById(id);
 	}
 
@@ -55,13 +56,13 @@ private final ChangeProposalRepository changeProposalRepository;
 
 
 	@Override
-	public Book getByBookCopy(Long bookCopyId) {
+	public Book getByBookCopy(UUID bookCopyId) {
 		BookCopy bookCopy = bookCopyRepository.getById(bookCopyId);
 		return bookCopy.getBook();
 	}
 
 	@Override
-	public List<BookCopy> getBookCopiesByBookId(Long id) {
+	public List<BookCopy> getBookCopiesByBookId(UUID id) {
 		return bookCopyRepository.getBookCopiesByBookId(id);
 	}
 
@@ -73,19 +74,19 @@ private final ChangeProposalRepository changeProposalRepository;
 
 
 	@Override
-	public List<Opinion> getOpinionsByBookId(Long id) {
+	public List<Opinion> getOpinionsByBookId(UUID id) {
 		return opinionRepository.getByBookId(id);
 	}
 
 
 	@Override
-	public Opinion getOpinionByBookIdAndUserId(Long userId, Long bookId) {
+	public Opinion getOpinionByBookIdAndUserId(UUID userId, UUID bookId) {
 		return opinionRepository.getByBookIdAndUserId(bookId, userId);
 	}
 
 
 	@Override
-	public List<Opinion> getOpinionsByUser(Long userId) {
+	public List<Opinion> getOpinionsByUser(UUID userId) {
 		return opinionRepository.getByUserId(userId);
 	}
 
@@ -114,7 +115,7 @@ private final ChangeProposalRepository changeProposalRepository;
 
 
 	@Override
-	public List<ChangeProposal> getChangeProposalsByBookId(Long bookId) {
+	public List<ChangeProposal> getChangeProposalsByBookId(UUID bookId) {
 		return changeProposalRepository.getChangeProposalsByBookId(bookId);
 	}
 
@@ -142,13 +143,13 @@ private final ChangeProposalRepository changeProposalRepository;
 
 
 	@Override
-	public List<UserListElement> getUserListElementByUserAndType(Long userId, String type) {
+	public List<UserListElement> getUserListElementByUserAndType(UUID userId, String type) {
 		return userListElementRepository.getByUserIdAndType(userId, type);
 	}
 
 
 	@Override
-	public void deleteUserListElement(Long elementId) {
+	public void deleteUserListElement(UUID elementId) {
 		userListElementRepository.deleteById(elementId);
 		
 	}
