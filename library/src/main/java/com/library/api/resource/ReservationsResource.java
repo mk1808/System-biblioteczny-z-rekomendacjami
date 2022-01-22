@@ -1,6 +1,7 @@
 package com.library.api.resource;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,9 +29,9 @@ public interface ReservationsResource {
 	
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/user/{userId}")
-	ResponseEntity<Response<List<ReservationDto>>> getByUserId(@PathVariable Long userId);
+	ResponseEntity<Response<List<ReservationDto>>> getByUserId(@PathVariable UUID userId);
 	
 	@PreAuthorize("hasRole('USER')")
 	@PatchMapping("/{id}/cancel")
-	ResponseEntity<Response<String>> cancel(@PathVariable Long id);
+	ResponseEntity<Response<String>> cancel(@PathVariable UUID id);
 }

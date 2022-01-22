@@ -1,6 +1,7 @@
 package com.library.api.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,14 +37,14 @@ public class ReservationsController extends BaseController implements Reservatio
 	}
 
 	@Override
-	public ResponseEntity<Response<List<ReservationDto>>> getByUserId(Long userId) {
+	public ResponseEntity<Response<List<ReservationDto>>> getByUserId(UUID userId) {
 		Response<List<ReservationDto>> response = createSuccessResponse(reservationConverter.toDtoList(
 				reservationService.getByUserId(userId)));
 		return ResponseEntity.ok(response);
 	}
 
 	@Override
-	public ResponseEntity<Response<String>> cancel(Long id) {
+	public ResponseEntity<Response<String>> cancel(UUID id) {
 		reservationService.cancel(id);
 		Response<String> response = createSuccessResponse("");
 		return ResponseEntity.ok(response);
