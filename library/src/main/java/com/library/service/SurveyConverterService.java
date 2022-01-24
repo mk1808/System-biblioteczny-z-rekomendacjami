@@ -1,5 +1,8 @@
 package com.library.service;
 
-public interface SurveyConverterService {
+import com.library.dto.SurveyDto;
+import com.library.model.Survey;
+
+public interface SurveyConverterService extends ConverterService<SurveyDto, Survey>{
 
 }

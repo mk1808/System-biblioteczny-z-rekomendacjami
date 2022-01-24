@@ -1,7 +1,7 @@
 package com.library.service;
 
-import com.library.dto.SurveyDto;
+import com.library.model.Survey;
 
-public interface SurveyService extends RepositoryService <SurveyDto>{
+public interface SurveyService extends RepositoryService <Survey>{
 
 }
