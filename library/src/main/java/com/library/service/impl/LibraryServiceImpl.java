@@ -1,45 +1,49 @@
 package com.library.service.impl;
 
-import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.library.model.Library;
 import com.library.model.Terms;
+import com.library.repository.LibraryRepository;
 import com.library.service.LibraryService;
 
 @Service
 public class LibraryServiceImpl implements LibraryService {
 
+private final LibraryRepository repository;
+	
+	
+	@Autowired
+	public LibraryServiceImpl(LibraryRepository repository) {
+		this.repository = repository;
+	}
+	
 	@Override
 	public Library get(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.getById(id);
 	}
 
 	@Override
 	public Library create(Library entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(entity);
 	}
 
 	@Override
 	public Library update(Library entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(entity);
 	}
 
 	@Override
-	public List<Library> getContact() {
-		// TODO Auto-generated method stub
-		return null;
+	public Library getContact() {
+		return repository.findAll().get(0);
 	}
 
 	@Override
-	public List<Terms> getTerms() {
-		// TODO Auto-generated method stub
-		return null;
+	public Terms getTerms() {
+		return repository.findAll().get(0).getTerms();
 	}
 
 }

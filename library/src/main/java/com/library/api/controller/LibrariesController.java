@@ -30,14 +30,14 @@ public class LibrariesController extends BaseController implements LibrariesReso
 	}
 
 	@Override
-	public ResponseEntity<Response<List<LibraryDto>>> getContact() {
-		Response<List<LibraryDto>> response = createSuccessResponse(libraryConverter.toDtoList(libraryService.getContact()));
+	public ResponseEntity<Response<LibraryDto>> getContact() {
+		Response<LibraryDto> response = createSuccessResponse(libraryConverter.toDto(libraryService.getContact()));
 		return ResponseEntity.ok(response);
 	}
 
 	@Override
-	public ResponseEntity<Response<List<TermsDto>>> getTerms() {
-		Response<List<TermsDto>> response = createSuccessResponse(termsConverter.toDtoList(libraryService.getTerms()));
+	public ResponseEntity<Response<TermsDto>> getTerms() {
+		Response<TermsDto> response = createSuccessResponse(termsConverter.toDto(libraryService.getTerms()));
 		return ResponseEntity.ok(response);
 	}
 

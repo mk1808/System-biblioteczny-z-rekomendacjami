@@ -16,8 +16,8 @@ import com.library.response.Response;
 public interface LibrariesResource {
 	
 	@GetMapping("/contact")
-	ResponseEntity<Response<List<LibraryDto>>> getContact();
+	ResponseEntity<Response<LibraryDto>> getContact();
 	
 	@GetMapping("/terms")
-	ResponseEntity<Response<List<TermsDto>>> getTerms();
+	ResponseEntity<Response<TermsDto>> getTerms();
 }
