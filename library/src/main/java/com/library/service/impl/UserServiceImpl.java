@@ -1,5 +1,6 @@
 package com.library.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,51 +28,49 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private RoleService roleService; 
     
 	@Autowired
-	private AppUserRepository userRepository;
+	private AppUserRepository repository;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptEncoder;
 
 	public UserServiceImpl() {}
-	public UserServiceImpl(RoleService roleService, AppUserRepository userRepository,
+	public UserServiceImpl(RoleService roleService, AppUserRepository repository,
 			BCryptPasswordEncoder bcryptEncoder) {
 		super();
 		this.roleService = roleService;
-		this.userRepository = userRepository;
+		this.repository = repository;
 		this.bcryptEncoder = bcryptEncoder;
 	}
 
 	@Override
 	public AppUser get(UUID id) {
-		return userRepository.findById(id).get();
+		return repository.findById(id).get();
 	}
 
 	@Override
 	public AppUser create(AppUser entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(entity);
 	}
 
 	@Override
 	public AppUser update(AppUser entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(entity);
 	}
 	
 	@Override
 	public void delete(UUID id) {
-		userRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 
 	@Override
 	public AppUser getByMail(String mail) {
-		return userRepository.findByMail(mail);
+		return repository.findByMail(mail);
 	}
 	
 
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		AppUser user = userRepository.findByMail(username);
+		AppUser user = repository.findByMail(username);
 		if(user == null){
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
@@ -88,7 +87,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	public List findAll() {
 		List list = new ArrayList();
-		userRepository.findAll().iterator().forEachRemaining(list::add);
+		repository.findAll().iterator().forEachRemaining(list::add);
 		return list;
 	}
 
@@ -102,16 +101,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
         newUser.setRoles(roleSet);
-        return userRepository.save(newUser);
+        return repository.save(newUser);
     }
 	@Override
-	public AppUser updateByAdmin(AppUser user) {
-		// TODO Auto-generated method stub
-		return null;
+	public AppUser updateByAdmin(AppUser entity) {
+		return repository.save(entity);
 	}
 	@Override
 	public void deactivate(UUID id) {
-		// TODO Auto-generated method stub
+		AppUser user = get(id);
+		user.setDezactivationDate(LocalDateTime.now());
+		update(user);
+		
 		
 	}
 

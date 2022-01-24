@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.library.dto.SurveyDto;
+import com.library.model.Survey;
 import com.library.repository.SurveyRepository;
 import com.library.service.SurveyService;
 
@@ -19,20 +20,18 @@ public class SurveyServiceImpl implements SurveyService{
 	}
 	
 	@Override
-	public SurveyDto get(UUID id) {
+	public Survey get(UUID id) {
 		return repository.getById(id);
 	}
 
 	@Override
-	public SurveyDto create(SurveyDto entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Survey create(Survey entity) {
+		return repository.save(entity);
 	}
 
 	@Override
-	public SurveyDto update(SurveyDto entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Survey update(Survey entity) {
+		return repository.save(entity);
 	}
 
 }
