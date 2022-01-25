@@ -54,8 +54,16 @@ const translations =
             "loginLib":"Logowanie - konto bibliotekarza",
             "addBook":"Dodaj nową książkę",
             "bookAdd.title":"Tytuł",
-            "bookAdd.author":"Autor",
+            "bookAddauthor":"Autor",
             "bookAdd.isbn":"ISBN",
+            "bookAddGenre":"Gatunek",
+            "bookAddPublisher":"Wydawnictwo",
+            "bookAddYear":"Rok wydania",
+            "bookAddSeries":"Seria",
+            "bookAddOriginalTitle":"Tytuł oryginalny",
+            "bookDescInput":"Opis",
+            "chooseOrWriteVal":"Wybierz lub wpisz",
+            "chooseVal":"Wybierz"
             
 
             

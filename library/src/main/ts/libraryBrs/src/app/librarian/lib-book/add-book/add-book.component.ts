@@ -10,7 +10,13 @@ export class AddBookComponent implements OnInit {
   rulesHeight = "rulesHeight";
   isbnInput="bookAdd.isbn";
   titleInput="bookAdd.title";
-  authorInput="bookAdd.author";
+  authorInput="bookAddauthor";
+  genreInput="bookAddGenre"
+  publisherInput = "bookAddPublisher";
+  yearInput = "bookAddYear";
+  seriesInput = "bookAddSeries";
+  originalTitleInput = "bookAddOriginalTitle";
+  descriptionInput="bookDescInput";
   btnClassSmall="small"
   btnClass="full"
   mailInput="mail";
