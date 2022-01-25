@@ -1,4 +1,4 @@
-<div class="ui form">
+<div class="ui form" [id]="label">
     <div class="field align-input">
       <label>{{label}}</label>
       <select class="ui search dropdown">
@@ -252,6 +252,7 @@
         <option value="YE">Yemen</option>
         <option value="ZM">Zambia</option>
         <option value="ZW">Zimbabwe</option>
+        <option *ngIf = "allowOwnValue" value="newValue" >Nowa wartość: </option>
       </select>
     </div>
   </div>
