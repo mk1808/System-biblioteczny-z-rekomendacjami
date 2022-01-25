@@ -10,6 +10,7 @@ declare let jQuery: any;
 export class SelectComponent implements OnInit, AfterViewInit {
   @Input() label: any;
   @Input() allowOwnValue: Boolean = false;
+  chooseValue=this.allowOwnValue?"chooseOrWriteVal":"chooseVal";
   constructor(private element: ElementRef) { }
 
   ngOnInit(): void {
