@@ -1,0 +1,34 @@
+.button-align {
+    width: 200px;
+}
+
+.text {
+    margin-bottom: 30px;
+}
+
+.inputs {
+    margin-bottom: 30px;
+}
+
+.info-with-icon {
+    display: grid;
+    grid-template-columns: 0.13fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.info.circle.icon {
+    color: var(--orange);
+    font-size: 30px;
+}
+
+app-button {
+    margin-top: 30px;
+}
+
+.info ::ng-deep {
+    width:auto;
+}
+
+.rightClass{    width:auto;}

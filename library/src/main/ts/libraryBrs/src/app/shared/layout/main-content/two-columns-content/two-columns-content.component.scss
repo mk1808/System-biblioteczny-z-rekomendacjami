@@ -5,13 +5,11 @@
     grid-column-gap: 2px;
     grid-row-gap: 0px;
     height: calc(100% - 150px);
-    .inside{
+    .inside {
         display: grid;
         align-self: center;
         justify-self: center;
         grid-gap: 30px;
-
-
     }
 }
 .mid-line {
@@ -25,9 +23,12 @@
     }
 }
 
-.info{
+.info {
     width: 400px;
     font-size: 25px;
     line-height: 1.2;
-   
+}
+
+.infoFull {
+    width: auto;
 }

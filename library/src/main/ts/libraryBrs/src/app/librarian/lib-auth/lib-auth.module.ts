@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LibLoginComponent } from './lib-login/lib-login.component';
 import { LibAuthRoutingModule } from './lib-auth-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import { LibAuthRoutingModule } from './lib-auth-routing.module';
   declarations: [LibLoginComponent],
   imports: [
     CommonModule,
-    LibAuthRoutingModule
+    LibAuthRoutingModule,
+    SharedModule
   ]
 })
 export class LibAuthModule { }

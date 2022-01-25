@@ -50,7 +50,8 @@ const translations =
             "bookDetails.availability.reserved":"Na książkę oczekują {{peopleNo}} osoby. Zarezerwuj teraz, aby być następnym w kolejce!",
             "recommendations":"Rekomendacje",
             "recommendations.info":"Poniższe książki zostały wybrane dla Ciebie na podstawie Twojej aktywności w aplikacji",
-            "options":"Opcje"
+            "options":"Opcje",
+            "loginLib":"Logowanie - konto bibliotekarza",
             
             
 

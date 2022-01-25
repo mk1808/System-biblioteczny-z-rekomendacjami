@@ -1,1 +1,14 @@
-<p>lib-login works!</p>
+<app-main-content [title]="title" [contentClass]="contactHeight">
+    <app-two-columns-content [rightClass]="rightClass">
+        <div header>
+            <div class="inputs">
+                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
+            </div>
+            <app-button [iconClass]="iconClass" [text]="textLogin" [btnClass]="btnClass"></app-button>
+        </div>
+        <div body class="infoFull">
+            <img src="../../../../assets/photos/lib.jpeg" height="420" class="background">
+        </div>
+    </app-two-columns-content>
+</app-main-content>
