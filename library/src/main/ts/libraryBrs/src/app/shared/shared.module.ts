@@ -20,6 +20,7 @@ import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExampleModalComponent } from './elements/modal/example-modal/example-modal.component';
 import { DropdownComponent } from './elements/dropdown/dropdown.component';
 import { RatingComponent } from './elements/rating/rating.component';
+import { TextareaComponent } from './elements/textarea/textarea.component';
 
 
 
@@ -39,7 +40,8 @@ import { RatingComponent } from './elements/rating/rating.component';
     ModalComponent,
     ExampleModalComponent,
     DropdownComponent,
-    RatingComponent
+    RatingComponent,
+    TextareaComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,7 @@ import { RatingComponent } from './elements/rating/rating.component';
     ExampleModalComponent,
     DropdownComponent,
     RatingComponent,
+    TextareaComponent,
     NgbModalModule,
     NgbModule,
     I18NextModule
