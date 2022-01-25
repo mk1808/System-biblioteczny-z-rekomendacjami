@@ -5,6 +5,7 @@ import { LibBookRoutingModule } from './lib-book-routing.module';
 import { LibBookDetailsComponent } from './lib-book-details/lib-book-details.component';
 import { LibBookSearchComponent } from './lib-book-search/lib-book-search.component';
 import { AddBookCopyComponent } from './add-book/add-book-copy/add-book-copy.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -17,7 +18,8 @@ import { AddBookCopyComponent } from './add-book/add-book-copy/add-book-copy.com
   ],
   imports: [
     CommonModule,
-    LibBookRoutingModule
+    LibBookRoutingModule,
+    SharedModule
   ]
 })
 export class LibBookModule { }

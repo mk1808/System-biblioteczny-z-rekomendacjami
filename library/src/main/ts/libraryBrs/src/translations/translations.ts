@@ -52,6 +52,7 @@ const translations =
             "recommendations.info":"Poniższe książki zostały wybrane dla Ciebie na podstawie Twojej aktywności w aplikacji",
             "options":"Opcje",
             "loginLib":"Logowanie - konto bibliotekarza",
+            "addBook":"Dodaj nową książkę"
             
             
 
