@@ -1,8 +1,15 @@
 <div class="ui form" [ngClass]="inputClass">
 <div class="field align-input" [ngClass]="disabledClass"> 
-    <label>{{label}}</label>
+    <label>{{ label | i18next }} </label>
 <div class="ui field input focus fluid">
     <input [type]="type" [placeholder]="label">
   </div>
 </div>
 </div>
+
+<!--
+  <div class="ui labeled field input focus fluid">
+  <div class="ui label">
+    <i class="add icon"></i>
+  </div>
+-->
