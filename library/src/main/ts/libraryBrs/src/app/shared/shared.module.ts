@@ -21,6 +21,7 @@ import { ExampleModalComponent } from './elements/modal/example-modal/example-mo
 import { DropdownComponent } from './elements/dropdown/dropdown.component';
 import { RatingComponent } from './elements/rating/rating.component';
 import { TextareaComponent } from './elements/textarea/textarea.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -50,7 +51,9 @@ import { TextareaComponent } from './elements/textarea/textarea.component';
     I18NextModule,
     NgbModule,
     NgbAccordionModule,
-    NgbModalModule
+    NgbModalModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     LayoutComponent,
@@ -69,8 +72,7 @@ import { TextareaComponent } from './elements/textarea/textarea.component';
     TextareaComponent,
     NgbModalModule,
     NgbModule,
-    I18NextModule
-
+    I18NextModule,
   ]
 })
 export class SharedModule { }

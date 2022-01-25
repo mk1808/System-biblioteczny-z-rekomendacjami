@@ -8,12 +8,13 @@
     margin: 40px auto 20px auto;
     min-height: calc(100% - 150px);
     font-size: 20px;
+    justify-content: center;
     
     .inside{
         display: grid;
         align-self: center;
         justify-self: center;
-        grid-gap: 20px;
+     
         .number{
             font-weight: 600;
         }
@@ -42,6 +43,19 @@
 .inputs {
     margin-bottom: 30px;
     justify-content: center;
+    width: 275px;
+    justify-self: center;
 
+}
 
+.comments{
+    width: 400px;
+}
+
+.bottomAction{
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
 }

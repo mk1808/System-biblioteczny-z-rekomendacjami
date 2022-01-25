@@ -1,20 +1,27 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
     <div class="parent">
         <div class="inside">
-            <span> 
-                <div class="inputs">
-                    <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
-                    <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                    <app-textarea></app-textarea>
-                </div>
-               </span>
+            <div class="inputs">
+                <app-input [label]="isbnInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="titleInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="authorInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
+                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
+                <app-select [label]="label" [allowOwnValue]="true"></app-select>
+                <app-multi-select [label]="label1"></app-multi-select>
+            </div>
+            <div class="comments">
+                <app-textarea></app-textarea>
+            </div>
+            <div class="bottomAction">
+                <app-button [text]="cancelText" [btnClass]="cancelClass" [onClick]="onCancel"></app-button>
+               <app-button [text]="prolongText" [btnClass]="confirmBtnClass" [onClick]="onConfirm"></app-button>
+             
+               </div>
         </div>
     </div>
 </app-main-content>
