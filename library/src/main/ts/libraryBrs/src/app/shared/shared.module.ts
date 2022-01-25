@@ -22,6 +22,7 @@ import { DropdownComponent } from './elements/dropdown/dropdown.component';
 import { RatingComponent } from './elements/rating/rating.component';
 import { TextareaComponent } from './elements/textarea/textarea.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -53,7 +54,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbAccordionModule,
     NgbModalModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ],
   exports: [
     LayoutComponent,

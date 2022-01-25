@@ -1,10 +1,10 @@
 <div class="ui form" [ngClass]="inputClass">
-<div class="field align-input" [ngClass]="disabledClass"> 
+  <div class="field align-input" [ngClass]="disabledClass">
     <label>{{ label | i18next }} </label>
-<div class="ui field input focus fluid">
-    <input [type]="type" [placeholder]="label">
+    <div class="ui field input focus fluid">
+      <input [type]="type" [placeholder]="labelTranslated">
+    </div>
   </div>
-</div>
 </div>
 
 <!--
