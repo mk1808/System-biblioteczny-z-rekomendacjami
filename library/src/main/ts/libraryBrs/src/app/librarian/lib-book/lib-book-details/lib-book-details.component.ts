@@ -37,10 +37,11 @@ export class LibBookDetailsComponent implements OnInit {
   rating:6, date:"05.01.2022r."};
   comments = [this.comment, this.comment, this.comment, this.comment]
  
-
+  accHeader=this.getTranslation("booklist.table.copies");
   accHeaders=this.getAccorditionHeaders();
   headers=this.getHeaders();
   text1=""
+  downloadText=this.getTranslation("booklist.table.download")
   deleteText=this.getTranslation("booklist.table.delete")
   prolongText=this.getTranslation("booklist.table.prolong")
   resignText=this.getTranslation("booklist.table.resign")
