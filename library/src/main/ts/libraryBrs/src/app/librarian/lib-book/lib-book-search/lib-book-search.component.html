@@ -1,1 +1,43 @@
-<p>lib-book-search works!</p>
+<app-notification-bar></app-notification-bar>
+<div class="background-title">
+</div>
+<div class="height valign">
+    <div class="content">
+        <p>{{ title | i18next }}</p>
+        <div class="parent">
+            <div class="inside">
+                <div>
+                    <div class="title1">Filtry</div>
+                    <app-input [label]="label"></app-input>
+                    <app-input [label]="label"></app-input>
+                    <app-input [label]="label"></app-input>
+                    <app-input [label]="label"></app-input>
+                    <app-input [label]="label"></app-input>
+                    <app-select [label]="label"></app-select>
+                    <app-multi-select [label]="label"></app-multi-select>
+                    <app-checkbox [label]="label"></app-checkbox>
+
+                    <app-button [iconClass]="iconClass" [text]="text" [btnClass]="btnClass"></app-button>
+                </div>
+            </div>
+
+            <div>
+
+            </div>
+            <div class="inside list">
+                <div *ngFor="let singleBook of books; index as i;">
+                    <app-lib-book-search-element></app-lib-book-search-element>
+                </div>
+                <app-lib-book-search-element></app-lib-book-search-element>
+                <app-lib-book-search-element></app-lib-book-search-element>
+                <app-lib-book-search-element></app-lib-book-search-element>
+                <app-lib-book-search-element></app-lib-book-search-element>
+                <app-lib-book-search-element></app-lib-book-search-element>
+                <app-lib-book-search-element></app-lib-book-search-element>
+                <app-lib-book-search-element></app-lib-book-search-element>
+                <app-lib-book-search-element></app-lib-book-search-element>
+
+            </div>
+        </div>
+    </div>
+</div>
