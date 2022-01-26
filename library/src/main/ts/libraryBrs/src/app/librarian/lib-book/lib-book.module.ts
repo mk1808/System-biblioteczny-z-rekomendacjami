@@ -7,6 +7,8 @@ import { LibBookSearchComponent } from './lib-book-search/lib-book-search.compon
 import { AddBookCopyComponent } from './add-book/add-book-copy/add-book-copy.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LibBookSearchElementComponent } from './lib-book-search/lib-book-search-element/lib-book-search-element.component';
+import { LibBookStatsComponent } from './lib-book-details/lib-book-stats/lib-book-stats.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 
@@ -16,12 +18,14 @@ import { LibBookSearchElementComponent } from './lib-book-search/lib-book-search
     LibBookDetailsComponent,
     LibBookSearchComponent,
     AddBookCopyComponent,
-    LibBookSearchElementComponent
+    LibBookSearchElementComponent,
+    LibBookStatsComponent
   ],
   imports: [
     CommonModule,
     LibBookRoutingModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ]
 })
 export class LibBookModule { }

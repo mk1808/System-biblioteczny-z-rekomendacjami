@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LibrarianRoutingModule } from './librarian-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -11,7 +12,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     LibrarianRoutingModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ]
 })
 export class LibrarianModule { }
