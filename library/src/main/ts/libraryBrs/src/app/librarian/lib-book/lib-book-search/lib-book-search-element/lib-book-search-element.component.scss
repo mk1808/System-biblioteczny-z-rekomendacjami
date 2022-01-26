@@ -1,0 +1,28 @@
+.single {
+    height: 400px;
+    width: 220px;
+    background-color: var(--mid-orange);
+    padding: 10px;
+    transition: 2s ease;
+    margin: 0 auto;
+    img {
+        max-height: 80%;
+    }
+    div {
+        margin-left: 6px;
+        margin-top: 7px;
+        font-size: 18px;
+    }
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    img:hover {
+        cursor: pointer;
+        -webkit-transform: scale(0.95);
+        -ms-transform: scale(0.95);
+        transform: scale(0.95);
+        transition: 2s ease;
+    }
+}
