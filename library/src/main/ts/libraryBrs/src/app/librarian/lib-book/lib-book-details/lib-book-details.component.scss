@@ -89,3 +89,24 @@
         line-height: 1.4;
     }
 }
+
+.acc-container {
+    padding: 20px 0px;
+
+    ::ng-deep {
+        .my-accordion {
+            .card-header {
+                background-color: var(--light-brown) !important;
+                color: white !important;
+            }
+            .btn.btn-link {
+                color: var(--lightest);
+                text-decoration: none;
+                font-size: 20px;
+                outline: none;
+                border: none;
+                box-shadow: none;
+            }
+        }
+    }
+}

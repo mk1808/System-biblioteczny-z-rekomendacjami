@@ -30,6 +30,34 @@
     </div>
     <!--<app-book-availability [availability] = "availability"></app-book-availability>-->
     <app-lib-book-stats [availability] = "availability"></app-lib-book-stats>
+    <div class="acc-container">
+    <ngb-accordion activeIds="ngb-panel-0" >
+        <ngb-panel [title]="accHeaders.borrowed" cardClass="my-accordion">
+          <ng-template ngbPanelContent>
+            <table class="ui celled table">
+              <thead>
+                <tr><th>{{'booklist.table.no'|i18next}}</th>
+                <th>{{'booklist.table.title'|i18next}}</th>
+                <th>{{'booklist.table.author'|i18next}}</th>
+                <th>{{'booklist.table.borrowingDate'|i18next}}</th>
+                  <th>{{'booklist.table.dueDate'|i18next}}</th>
+                  <th></th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td data-label="Name" class="one wide">1</td>
+                  <td data-label="Age">Abcdef</td>
+                  <td data-label="Job">Jan Kowalski</td>
+                  <td data-label="Job">18-11-2021</td>
+                  <td data-label="Job">18-12-2021</td>
+                  <td class="three wide"><app-button [text]="prolongText" [btnClass]="btnClass"></app-button></td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+    </div>
     <div class="description">
         <p class="line rating"><span>Opis</span> </p>
         <div>
