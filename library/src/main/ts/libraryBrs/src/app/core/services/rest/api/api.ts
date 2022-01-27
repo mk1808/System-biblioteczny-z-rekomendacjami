@@ -40,14 +40,14 @@ export interface AppUser {
     dezactivationDate?: string;
 }
 
-export interface AuthorDto {
+export interface Author {
     id?: string;
     name?: string;
     surname?: string;
     description?: string;
 }
 
-export interface BookAvailabilityDto {
+export interface BookAvailability {
     id?: string;
 }
 
@@ -58,11 +58,11 @@ export interface BookCopy {
     status?: string;
 }
 
-export interface BookFileColumnDto {
+export interface BookFileColumn {
     id?: string;
 }
 
-export interface BookFIlterDto {
+export interface BookFIlter {
     id?: string;
 }
 
@@ -94,30 +94,30 @@ export interface ChangeProposal {
     userId?: string;
 }
 
-export interface CreateBookCopiesDto {
+export interface CreateBookCopies {
     id?: string;
 }
 
-export interface FileDto {
+export interface File {
     id?: string;
 }
 
-export interface GenreDto {
+export interface Genre {
     id?: string;
     name?: string;
 }
 
-export interface ImportFileResultDto {
+export interface ImportFileResult {
     id?: string;
 }
 
-export interface KeyWordDto {
+export interface KeyWord {
     id?: string;
     name?: string;
     isVerified?: boolean;
 }
 
-export interface LibraryDto {
+export interface Library {
     id?: string;
     name?: string;
     phoneNo?: string;
@@ -134,7 +134,7 @@ export interface Login {
     password?: string;
 }
 
-export interface MessageDto {
+export interface Message {
     id?: string;
     user?: AppUser;
     date?: string;
@@ -142,7 +142,7 @@ export interface MessageDto {
     ids?: string[];
 }
 
-export interface OpinionDto {
+export interface Opinion {
     id?: string;
     book?: Book;
     bookId?: string;
@@ -152,7 +152,7 @@ export interface OpinionDto {
     comment?: string;
 }
 
-export interface RecommendationDto {
+export interface Recommendation {
     id?: string;
     book?: Book;
     bookId?: string;
@@ -163,7 +163,7 @@ export interface RecommendationDto {
     shouldNotRecommendType?: boolean;
 }
 
-export interface RegisterDto {
+export interface Register {
     name?: string;
     surname?: string;
     phoneNo?: string;
@@ -176,7 +176,7 @@ export interface RegisterDto {
 
 }
 
-export interface ReservationDto {
+export interface Reservation {
     id?: string;
     book?: Book;
     bookId?: string;
@@ -187,29 +187,29 @@ export interface ReservationDto {
     wasBorrowed?: boolean;
 }
 
-export interface SeriesDto {
+export interface Series {
     id?: string;
     name?: string;
 }
 
-export interface SurveyDto {
+export interface Survey {
     id?: string;
 }
 
-export interface TermsDto {
+export interface Terms {
     id?: string;
     content?: string;
 }
 
-export interface UserBooksDto {
+export interface UserBooks {
     id?: string;
 }
 
-export interface UserFilterDto {
+export interface UserFilter {
     id?: string;
 }
 
-export interface UserListElementDto {
+export interface UserListElement {
     id?: string;
     book?: Book;
     bookId?: string;
