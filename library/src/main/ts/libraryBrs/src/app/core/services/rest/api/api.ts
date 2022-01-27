@@ -94,15 +94,74 @@ export interface ChangeProposal {
     userId?: string;
 }
 
-export interface BookAvailabilityDto {
+export interface CreateBookCopiesDto {
     id?: string;
 }
 
-export interface BookAvailabilityDto {
+export interface FileDto {
     id?: string;
 }
 
-export interface BookAvailabilityDto {
+export interface GenreDto {
+    id?: string;
+    name?: string;
+}
+
+export interface ImportFileResultDto {
     id?: string;
 }
 
+export interface KeyWordDto {
+    id?: string;
+    name?: string;
+    isVerified?: boolean;
+}
+
+export interface LibraryDto {
+    id?: string;
+    name?: string;
+    phoneNo?: string;
+    mail?: string;
+    description?: string;
+    addressId?: string;
+    address?: Address;
+    termsId?: string;
+    terms?: string;
+}
+
+export interface Login {
+    mail?: string;
+    password?: string;
+}
+
+export interface MessageDto {
+    id?: string;
+    user?: AppUser;
+    date?: string;
+    type?: string;
+    ids?: string[];
+}
+
+export interface OpinionDto {
+    id?: string;
+    book?: Book;
+    bookId?: string;
+    user?: AppUser;
+    userId?: string;
+    rating?: number;
+    comment?: string;
+}
+
+export interface RecommendationDto {
+    id?: string;
+    book?: Book;
+    bookId?: string;
+    user?: AppUser;
+    userId?: string;
+    rating?: number;
+    shouldNotRecommend?: boolean;
+    shouldNotRecommendType?: boolean;
+}
+
+
+                                      
