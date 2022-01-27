@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { RestService } from './rest.service';
+const URL = "api/borrowings";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BorrowingsService {
+  public borrowings: BehaviorSubject<[]> = new BehaviorSubject([]);
 
-  constructor() { }
+  constructor(private restService: RestService) { }
 }

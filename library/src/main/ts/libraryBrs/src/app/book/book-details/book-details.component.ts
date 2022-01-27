@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { BooksService } from 'src/app/core/services/rest/books.service';
 
 @Component({
   selector: 'app-book-details',
@@ -32,7 +33,7 @@ export class BookDetailsComponent implements OnInit {
   comments = [this.comment, this.comment, this.comment, this.comment]
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private booksService: BooksService) { }
 
   ngOnInit(): void {
     this.getBookId();
