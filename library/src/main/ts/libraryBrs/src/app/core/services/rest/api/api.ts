@@ -163,5 +163,70 @@ export interface RecommendationDto {
     shouldNotRecommendType?: boolean;
 }
 
+export interface RegisterDto {
+    name?: string;
+    surname?: string;
+    phoneNo?: string;
+    address?: Address;
+    mail?: string;
+    password?: string;
+    passwordRepeat?: string;
+    role?: string;
+    photo?: string;
 
-                                      
+}
+
+export interface ReservationDto {
+    id?: string;
+    book?: Book;
+    bookId?: string;
+    user?: AppUser;
+    userId?: string;
+    eservationDate?: string;
+    availabilityStartDate?: string;
+    wasBorrowed?: boolean;
+}
+
+export interface SeriesDto {
+    id?: string;
+    name?: string;
+}
+
+export interface SurveyDto {
+    id?: string;
+}
+
+export interface TermsDto {
+    id?: string;
+    content?: string;
+}
+
+export interface UserBooksDto {
+    id?: string;
+}
+
+export interface UserFilterDto {
+    id?: string;
+}
+
+export interface UserListElementDto {
+    id?: string;
+    book?: Book;
+    bookId?: string;
+    user?: AppUser;
+    userId?: string;
+
+    type?: string;
+    deleteDate?: string;
+    status?: boolean;
+}
+
+export interface Response<T> {
+    content?: T;
+    errors?: any;
+    status?:string;
+    
+}
+
+
+
