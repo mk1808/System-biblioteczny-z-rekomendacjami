@@ -33,6 +33,12 @@ export class RestService {
     );
   }
 
+  public patch(url: string, body: any) {
+    return this.http.patch(url, body).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public getWithBody<T>(url: string, body: any) {
     return this.http.get<T>(url, body).pipe(
       catchError(this.handleError)
