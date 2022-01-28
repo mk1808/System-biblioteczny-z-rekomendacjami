@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Response } from './api/api';
+import { Recommendation, Response } from './api/api';
 import { RestService } from './rest.service';
 const URL = "api/recommendations";
 
@@ -10,5 +10,11 @@ export class RecommendationsService {
 
   constructor(private restService: RestService) { }
 
+  getByUserId(userId:string): Observable<Response<any>> {
+    return this.restService.get(`${URL}/user/${userId}`);
+  }
 
+  updateInfo(recommendation:Recommendation): Observable<Response<any>> {
+    return this.restService.patch(`${URL}`, recommendation);
+  }
 }
