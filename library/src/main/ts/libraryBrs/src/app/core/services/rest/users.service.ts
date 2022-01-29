@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AppUser, Login, Response, UserFilter } from './api/api';
 import { RestService } from './rest.service';
-const URL = "api/users";
+const URL = "/api/users";
 const AUTH_URL = "api/auth";
 
 @Injectable()
