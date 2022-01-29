@@ -15,6 +15,9 @@ public class AddressConverterServiceImpl implements AddressConverterService{
 
 	@Override
 	public AddressDto toDto(Address model) {
+		if (model == null) {
+			return null;
+		}
 		AddressDto dto = AddressDto.builder()
 				.id(model.getId())
 				.street(model.getStreet())
