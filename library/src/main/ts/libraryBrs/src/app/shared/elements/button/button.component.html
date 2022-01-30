@@ -1,4 +1,4 @@
-<button class="ui button" [ngClass]="btnClass" (click)="onClick()" >
+<button class="ui button" [ngClass]="btnClass" (click)="onClick()" [type]="type" >
    <i *ngIf="iconClass" class="icon" [ngClass]="iconClass" >
     </i> {{ text | i18next }}
   </button>
