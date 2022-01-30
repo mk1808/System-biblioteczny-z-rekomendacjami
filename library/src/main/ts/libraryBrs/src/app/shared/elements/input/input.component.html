@@ -2,7 +2,7 @@
   <div class="field align-input" [ngClass]="disabledClass">
     <label>{{ label | i18next }} </label>
     <div class="ui field input focus fluid">
-      <input [type]="type" [placeholder]="labelTranslated">
+      <input [type]="type" [placeholder]="labelTranslated" [(ngModel)]="value" (input)="change()">
     </div>
   </div>
 </div>
