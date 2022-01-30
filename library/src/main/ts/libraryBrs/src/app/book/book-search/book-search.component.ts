@@ -49,11 +49,8 @@ export class BookSearchComponent implements OnInit {
     this.dictionaryService.getGenres();
     this.dictionaryService.getPublishers();
     this.authors = this.dictionaryService.authors;
-    this.authors.getValue();
     this.genres = this.dictionaryService.genres;
-    this.genres.getValue();
     this.publishers = this.dictionaryService.publishers;
-    this.publishers.getValue();
     console.log(this.authors)
 
     console.log(this.publishers)
@@ -80,5 +77,11 @@ export class BookSearchComponent implements OnInit {
     })
 
 
+  }
+
+  getAuthorDisplayedValue(option:any){
+   
+      return `${option.name} ${option.surname}`
+    
   }
 }

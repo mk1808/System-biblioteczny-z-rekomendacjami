@@ -11,7 +11,10 @@
                     <div class="title1">Filtry</div>
                     <app-input [label]="titleLabel" [formControlName]="bookTitle"></app-input>
                     <app-input [label]="ISBNLabel" [formControlName]="ISBN"></app-input>
-
+                    <app-select [label]="label" [options]="authors|async" 
+                    [getDisplayedValue]="getAuthorDisplayedValue" 
+                    formControlName="authorId"></app-select>
+                
                     <app-input [label]="label"></app-input>
                     <app-input [label]="label"></app-input>
                     <app-input [label]="label"></app-input>
