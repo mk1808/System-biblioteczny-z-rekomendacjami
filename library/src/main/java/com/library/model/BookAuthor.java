@@ -24,7 +24,7 @@ public class BookAuthor extends BaseEntity {
 	    @ManyToOne(fetch = FetchType.LAZY)
 	    Book book;
 
-	    @ManyToOne(fetch = FetchType.LAZY)
+	    @ManyToOne(fetch = FetchType.EAGER)
 	    Author author;
 
 	    Long orderNumber;

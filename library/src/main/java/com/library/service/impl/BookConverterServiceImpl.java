@@ -71,7 +71,7 @@ public class BookConverterServiceImpl implements BookConverterService {
 				.photo(model.getPhoto())
 				.publisherId(model.getPublisher().getId())
 				.publisherName(model.getPublisher().getName())
-				.authors(authorConverter.toDtoList(authors))
+				.authors(authorConverter.toDtoList(model.getBookAuthors().stream().map(x->x.getAuthor()).collect(Collectors.toList())))
 				.genres(genreConverter.toDtoList(genres))
 				.series(seriesConverter.toDtoList(series))
 				.keyWords(keyWordConverter.toDtoList(keywords))

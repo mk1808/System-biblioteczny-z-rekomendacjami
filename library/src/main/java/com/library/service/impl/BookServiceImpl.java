@@ -13,6 +13,7 @@ import com.library.model.BookCopy;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
 import com.library.model.UserListElement;
+import com.library.repository.AuthorRepository;
 import com.library.repository.BookCopyRepository;
 import com.library.repository.BookRepository;
 import com.library.repository.ChangeProposalRepository;
@@ -27,16 +28,18 @@ private final BookCopyRepository bookCopyRepository;
 private final OpinionRepository opinionRepository;
 private final UserListElementRepository userListElementRepository;
 private final ChangeProposalRepository changeProposalRepository;
+private final AuthorRepository authorRepository;
 	
 	
 	@Autowired
 	public BookServiceImpl(BookRepository repository, BookCopyRepository bookCopyRepository, OpinionRepository opinionRepository,
-			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository) {
+			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository, AuthorRepository authorRepository) {
 		this.repository = repository;
 		this.bookCopyRepository = bookCopyRepository;
 		this.opinionRepository = opinionRepository;
 		this.userListElementRepository = userListElementRepository;
 		this.changeProposalRepository = changeProposalRepository;
+		this.authorRepository = authorRepository;
 	}
 
 
@@ -164,7 +167,7 @@ private final ChangeProposalRepository changeProposalRepository;
 		userListElementRepository.deleteById(elementId);
 		
 	}
-	
+		
 
 
 

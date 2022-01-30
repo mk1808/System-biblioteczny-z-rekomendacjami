@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
@@ -41,6 +43,10 @@ public class Book extends BaseEntity{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Publisher publisher;
+	
+	@OneToMany
+	@JoinColumn(name = "book_id")
+	private List<BookAuthor> bookAuthors;
 	
 	@Transient
 	private List<Author> authors;

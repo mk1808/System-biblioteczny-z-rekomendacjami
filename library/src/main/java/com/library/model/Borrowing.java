@@ -21,7 +21,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 public class Borrowing extends BaseEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private BookCopy bookCopy;
 
 	@ManyToOne(fetch = FetchType.LAZY)

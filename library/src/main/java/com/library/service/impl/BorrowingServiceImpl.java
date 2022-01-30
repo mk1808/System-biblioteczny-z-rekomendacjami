@@ -46,7 +46,7 @@ public class BorrowingServiceImpl implements BorrowingService {
 
 	@Override
 	public List<Borrowing> getByUserId(UUID userId) {
-		
+
 		return repository.getByUserId(userId)
 				.stream()
 				.filter(borrowing->!this.isReturned(borrowing))
