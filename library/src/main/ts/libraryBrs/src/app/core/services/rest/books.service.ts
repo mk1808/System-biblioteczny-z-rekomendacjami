@@ -7,6 +7,7 @@ const URL = "api/books";
 @Injectable()
 export class BooksService {
   public books: BehaviorSubject<[]> = new BehaviorSubject([]);
+  public borrowedBooks: BehaviorSubject<Book[]> = new BehaviorSubject(new Array());
 
   constructor(private restService: RestService) { }
 

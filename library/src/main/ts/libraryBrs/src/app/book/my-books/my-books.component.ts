@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import i18next from 'i18next';
+import { Author } from 'src/app/core/services/rest/api/api';
+import { BorrowingsService } from 'src/app/core/services/rest/borrowings.service';
 @Component({
   selector: 'app-my-books',
   templateUrl: './my-books.component.html',
@@ -17,9 +19,26 @@ export class MyBooksComponent implements OnInit {
   prolongText=this.getTranslation("booklist.table.prolong")
   resignText=this.getTranslation("booklist.table.resign")
   btnClass="full"
-  constructor( @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService) { }
+  borrowings:any;
+  constructor( @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService, private borrowingsService:BorrowingsService) { }
 
   ngOnInit(): void {
+    this.updateBorrowings()
+    this.borrowings = this.borrowingsService.borrowings;
+    console.log(this.borrowings)
+    
+    
+  }
+
+  updateBorrowings(){
+    this.borrowingsService.getByUserId("a5edd677-14a9-449b-ab3f-76742762c5f1")
+  }
+
+  formatAuthors(authors:Author[]){
+    let displayed="";
+    authors.forEach(x=>{displayed+=`${x.name} ${x.surname}, `})
+    displayed=displayed.substring(0, displayed.length-2);
+    return displayed;
   }
 
   getTranslation(key:String){

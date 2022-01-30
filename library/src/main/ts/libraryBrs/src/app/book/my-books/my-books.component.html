@@ -13,12 +13,12 @@
                 <th></th>
             </tr></thead>
             <tbody>
-              <tr>
-                <td data-label="Name" class="one wide">1</td>
-                <td data-label="Age">Abcdef</td>
-                <td data-label="Job">Jan Kowalski</td>
-                <td data-label="Job">18-11-2021</td>
-                <td data-label="Job">18-12-2021</td>
+              <tr *ngFor="let borrowing of borrowings|async; let i = index">
+                <td data-label="Name" class="one wide">{{i+1}}</td>
+                <td data-label="Age">{{borrowing.bookCopy.book.title}}</td>
+                <td data-label="Job">{{formatAuthors(borrowing.bookCopy.book.authors)}}</td>
+                <td data-label="Job">{{borrowing.borrowDate | date: 'dd.MM.yyyy'}}</td>
+                <td data-label="Job">{{borrowing.expectedReturnDate | date: 'dd.MM.yyyy'}}</td>
                 <td class="three wide"><app-button [text]="prolongText" [btnClass]="btnClass"></app-button></td>
               </tr>
             </tbody>

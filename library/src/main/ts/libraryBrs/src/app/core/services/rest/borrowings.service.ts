@@ -6,12 +6,17 @@ const URL = "api/borrowings";
 
 @Injectable()
 export class BorrowingsService {
-  public borrowings: BehaviorSubject<[]> = new BehaviorSubject([]);
+  public borrowings: BehaviorSubject<Borrowing[]> = new BehaviorSubject<Borrowing[]>([]);
 
   constructor(private restService: RestService) { }
 
-  getByUserId(userId:string): Observable<Response<any>> {
-    return this.restService.get(`${URL}/user/${userId}`);
+  getByUserId(userId:string): any {
+    return this.restService.get<Response<Borrowing[]>>(`${URL}/user/${userId}`).subscribe((resp:Response<Borrowing[]>) => {
+      if(resp.content){
+         this.borrowings.next(resp.content);
+      }
+     
+    })
   }
 
   getPastByUserId(userId:string): Observable<Response<any>> {
