@@ -1,19 +1,47 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit,OnChanges, SimpleChanges  } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 //import * as $ from 'jquery';
 declare let $: any;
 declare let jQuery: any;
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss']
+  styleUrls: ['./select.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: SelectComponent
+    }
+  ]
 })
-export class SelectComponent implements OnInit, AfterViewInit {
+export class SelectComponent implements OnInit, AfterViewInit, OnChanges, ControlValueAccessor {
   @Input() label: any;
   @Input() allowOwnValue: Boolean = false;
+  @Input() options: any[]|null = [];
+  @Input() getDisplayedValue:any;
+  
   chooseValue=this.allowOwnValue?"chooseOrWriteVal":"chooseVal";
+  value = ""
+  onChange = (quantity: any) => { };
+  onTouched = () => { };
   constructor(private element: ElementRef) { }
 
+  writeValue(value: any): void {
+    this.value = value;
+  }
+  registerOnChange(onChange: any): void {
+    this.onChange = onChange;
+  }
+  registerOnTouched(onTouched: any): void {
+    this.onTouched = onTouched;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.options)
+  }
+
   ngOnInit(): void {
+    
   }
 
   ngAfterViewInit() {
@@ -42,6 +70,10 @@ export class SelectComponent implements OnInit, AfterViewInit {
         input.trigger(e)
       })
     }
+  }
+
+  change(e:any) {
+    this.onChange(e.target.value)
   }
 
 }

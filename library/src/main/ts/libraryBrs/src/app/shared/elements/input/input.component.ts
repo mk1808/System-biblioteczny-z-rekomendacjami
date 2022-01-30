@@ -19,7 +19,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() inputClass: any;
   @Input() type: any;
   @Input() disabled: any;
-  @Input() formControlName: any;
   disabledClass = '';
   labelTranslated = ""
 
