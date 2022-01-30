@@ -32,7 +32,7 @@ import com.library.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/token")
+//@RequestMapping("/token")
 public class AuthController implements AuthResource {
 	
 	public AuthController(AuthenticationManager authenticationManager, TokenProvider jwtTokenUtil,
