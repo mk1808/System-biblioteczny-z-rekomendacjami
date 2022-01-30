@@ -47,6 +47,12 @@ export interface Author {
     description?: string;
 }
 
+export interface Publisher {
+    id?: string;
+    name?: string;
+    description?: string;
+}
+
 export interface BookAvailability {
     id?: string;
 }
@@ -63,7 +69,11 @@ export interface BookFileColumn {
 }
 
 export interface BookFIlter {
-    id?: string;
+    ISBN?:string;
+    title?:string;
+    authorId?:string;
+    publisherId?:string;
+    genreId?:string;
 }
 
 export interface Borrowing {
