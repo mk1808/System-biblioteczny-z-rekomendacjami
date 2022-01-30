@@ -3,6 +3,7 @@ package com.library.service;
 import java.util.List;
 import java.util.UUID;
 
+import com.library.dto.BookFIlterDto;
 import com.library.model.Book;
 import com.library.model.BookCopy;
 import com.library.model.ChangeProposal;
@@ -44,5 +45,7 @@ public interface BookService extends RepositoryService<Book>{
 	BookCopy getBookCopyById(UUID bookCopyId);
 
 	List<BookCopy> getBookCopiesByIds(List<UUID> bookCopiesIds);
+
+	List<Book> getFiltered(BookFIlterDto bookFilterDto);
 
 }

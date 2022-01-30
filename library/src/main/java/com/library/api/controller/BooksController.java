@@ -13,6 +13,7 @@ import com.library.api.resource.BooksResource;
 import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookCopyDto;
 import com.library.dto.BookDto;
+import com.library.dto.BookFIlterDto;
 import com.library.dto.BookFileColumnDto;
 import com.library.dto.CanBorrowBookDto;
 import com.library.dto.ChangeProposalDto;
@@ -98,14 +99,12 @@ public class BooksController extends BaseController implements BooksResource {
 	}
 
 	@Override
-	public ResponseEntity<Response<Page<BookDto>>> getFiltered(Long pageNo, Long size) {
+	//page
+	public ResponseEntity<Response<List<BookDto>>> getFiltered(Long pageNo, Long size, BookFIlterDto bookFilterDto) {
 		
-		/*Response<Page<BookDto>> response = Response.<Page<BookDto>> builder()
-				.content(bookConverter.toDtoPage(books))
-				.status(HttpStatus.OK)
-				.build();
-		return ResponseEntity.ok(response);*/
-		return null;
+		Response<List<BookDto>> response = createSuccessResponse(bookConverter.toDtoList(bookService.getFiltered(bookFilterDto)));
+		return ResponseEntity.ok(response);
+		
 	}
 
 	@Override

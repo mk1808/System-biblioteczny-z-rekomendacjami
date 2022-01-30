@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookCopyDto;
 import com.library.dto.BookDto;
+import com.library.dto.BookFIlterDto;
 import com.library.dto.BookFileColumnDto;
 import com.library.dto.CanBorrowBookDto;
 import com.library.dto.ChangeProposalDto;
@@ -38,7 +39,7 @@ public interface BooksResource {
 	ResponseEntity<Response<List<BookDto>>> getNewest(@RequestParam Long number);
 	
 	@GetMapping("/filtered")
-	ResponseEntity<Response<Page<BookDto>>> getFiltered(@RequestParam Long pageNo, @RequestParam Long size);
+	ResponseEntity<Response<List<BookDto>>> getFiltered(@RequestParam Long pageNo, @RequestParam Long size, BookFIlterDto bookFilterDto);
 
 	@GetMapping("/popular")
 	ResponseEntity<Response<List<BookDto>>> getPopular(@RequestParam Long number);

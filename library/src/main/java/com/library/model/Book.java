@@ -48,6 +48,10 @@ public class Book extends BaseEntity{
 	@JoinColumn(name = "book_id")
 	private List<BookAuthor> bookAuthors;
 	
+	@OneToMany
+	@JoinColumn(name = "book_id")
+	private List<BookGenre> bookGenres;
+	
 	@Transient
 	private List<Author> authors;
 	

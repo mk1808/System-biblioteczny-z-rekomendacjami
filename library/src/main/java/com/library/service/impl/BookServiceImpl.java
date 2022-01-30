@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.library.dto.BookFIlterDto;
 import com.library.enums.ChangeProposalStatus;
 import com.library.model.Book;
 import com.library.model.BookCopy;
@@ -166,6 +167,17 @@ private final AuthorRepository authorRepository;
 	public void deleteUserListElement(UUID elementId) {
 		userListElementRepository.deleteById(elementId);
 		
+	}
+
+
+	@Override
+	public List<Book> getFiltered(BookFIlterDto bookFilterDto) {
+		return repository.findByFilter(
+				bookFilterDto.getISBN(), 
+				bookFilterDto.getTitle(), 
+				bookFilterDto.getAuthorId(), 
+				bookFilterDto.getPublisherId(), 
+				bookFilterDto.getGenreId());
 	}
 		
 
