@@ -9,6 +9,7 @@ import { BorrowingsService } from './services/rest/borrowings.service';
 import { LibrariesService } from './services/rest/libraries.service';
 import { ReservationsService } from './services/rest/reservations.service';
 import { UsersService } from './services/rest/users.service';
+import { DictionaryService } from './services/rest/dictionary.service';
 
 
 
@@ -26,7 +27,8 @@ import { UsersService } from './services/rest/users.service';
     BorrowingsService,
     LibrariesService,
     ReservationsService,
-    UsersService
+    UsersService,
+    DictionaryService
   ],
   exports:[
     //I18nService
