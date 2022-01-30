@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Book, BookCopy, BookFileColumn, ChangeProposal, Opinion, Response, UserListElement } from './api/api';
+import { Book, BookCopy, BookFileColumn, BookFIlter, ChangeProposal, Opinion, Response, UserListElement } from './api/api';
 import { RestService } from './rest.service';
 const URL = "api/books";
 
@@ -15,8 +15,8 @@ export class BooksService {
     return this.restService.get(`${URL}/newest?number=${number}`);
   }
 
-  getFiltered(pageNo:number, size:number): Observable<any> {
-    return this.restService.get(`${URL}/filtered?pageNo=${pageNo}&&size=${size}`);
+  getFiltered(pageNo:number, size:number, filter:BookFIlter ): Observable<any> {
+    return this.restService.get(`${URL}/filtered?pageNo=${pageNo}&size=${size}&bookFilterDto=${encodeURIComponent(JSON.stringify(filter))}`);
   }
 
   getPopular(number:number): Observable<any> {

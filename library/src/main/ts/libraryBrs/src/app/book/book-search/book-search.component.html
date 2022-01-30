@@ -6,9 +6,12 @@
         <p>{{ title | i18next }}</p>
         <div class="parent">
             <div class="inside">
+                <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
                 <div>
                     <div class="title1">Filtry</div>
-                    <app-input [label]="label"></app-input>
+                    <app-input [label]="titleLabel" [formControlName]="bookTitle"></app-input>
+                    <app-input [label]="ISBNLabel" [formControlName]="ISBN"></app-input>
+
                     <app-input [label]="label"></app-input>
                     <app-input [label]="label"></app-input>
                     <app-input [label]="label"></app-input>
@@ -17,8 +20,9 @@
                     <app-multi-select [label]="label"></app-multi-select>
                     <app-checkbox [label]="label"></app-checkbox>
 
-                    <app-button [iconClass]="iconClass" [text]="text" [btnClass]="btnClass"></app-button>
+                    <app-button [iconClass]="iconClass" [text]="text" [btnClass]="btnClass" [type]="submitBtnType"></app-button>
                 </div>
+            </form>
             </div>
 
             <div>

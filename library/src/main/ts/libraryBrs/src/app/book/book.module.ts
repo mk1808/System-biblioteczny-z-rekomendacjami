@@ -11,6 +11,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookAvailabilityComponent } from './book-details/book-availability/book-availability.component';
 import { CoreModule } from '../core/core.module';
 import { CommentComponent } from './book-details/comment/comment.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { BookOpinionComponent } from '../auth/book-opinion/book-opinion.component';
 
 
@@ -30,7 +31,9 @@ import { CommentComponent } from './book-details/comment/comment.component';
     BookRoutingModule,
     SharedModule,
     CoreModule,
-    NgbModule
+    NgbModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers:[
     CoreModule
