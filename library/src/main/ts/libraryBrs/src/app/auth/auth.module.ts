@@ -8,6 +8,7 @@ import { BookOpinionComponent } from './book-opinion/book-opinion.component';
 import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { SurveyComponent } from './survey/survey.component';
 import { BookSurveyElementComponent } from './survey/book-survey-element/book-survey-element.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { BookSurveyElementComponent } from './survey/book-survey-element/book-su
     AuthRoutingModule,
     SharedModule,
     NgbModule,
-    NgbRatingModule
+    NgbRatingModule,
+    ReactiveFormsModule,
+    FormsModule
     
   ],
   

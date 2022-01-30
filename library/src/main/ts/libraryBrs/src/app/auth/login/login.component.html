@@ -1,11 +1,14 @@
 <app-main-content [title]="title" [contentClass]="contactHeight">
     <app-two-columns-content [rightClass]="rightClass">
         <div header>
-            <div class="inputs">
-                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
-            </div>
-            <app-button [iconClass]="iconClass" [text]="textLogin" [btnClass]="btnClass"></app-button>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+                <div class="inputs">
+                    <app-input [label]="mailInput" [inputClass]="inputClass" [formControlName]="mail"></app-input>
+                    <app-input [label]="passwordInput" [inputClass]="inputClass" [formControlName]="pass"></app-input>
+                </div>
+                <app-button [iconClass]="iconClass" [text]="textLogin" [btnClass]="btnClass" [type]="submitBtnType">
+                </app-button>
+            </form>
         </div>
         <div body class="info">
             <div class="info-with-icon">
@@ -18,12 +21,9 @@
                 <app-button [iconClass]="iconClass" [text]="textRegister" [btnClass]="btnClass"></app-button>
             </div>
             <div class="button-align horizontal-middle">
-                <app-button [iconClass]="iconClass" [text]="textOpen"  
-                [onClick]="openModal"></app-button>
-                <app-button [iconClass]="iconClass" [text]="textOpen"  
-                [onClick]="openModal2"></app-button>
-                <app-button [iconClass]="iconClass" [text]="textOpen"  
-                [onClick]="openModal3"></app-button>
+                <app-button [iconClass]="iconClass" [text]="textOpen" [onClick]="openModal"></app-button>
+                <app-button [iconClass]="iconClass" [text]="textOpen" [onClick]="openModal2"></app-button>
+                <app-button [iconClass]="iconClass" [text]="textOpen" [onClick]="openModal3"></app-button>
             </div>
         </div>
     </app-two-columns-content>

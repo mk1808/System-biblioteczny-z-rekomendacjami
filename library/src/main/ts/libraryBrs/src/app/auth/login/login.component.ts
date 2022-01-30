@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Login } from 'src/app/core/services/rest/api/api';
+import { UsersService } from 'src/app/core/services/rest/users.service';
 import { ExampleModalComponent } from 'src/app/shared/elements/modal/example-modal/example-modal.component';
 import { BookOpinionComponent } from '../book-opinion/book-opinion.component';
 import { SurveyComponent } from '../survey/survey.component';
@@ -23,11 +27,16 @@ export class LoginComponent implements OnInit {
   textLogin="login"
   textRegister="goToRegister"
   textOpen="open"
+  submitBtnType="submit";
+  mail="mail";
+  pass="password";
+  loginForm:FormGroup= new FormGroup({});
 
   
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private usersService:UsersService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.initForm();
   }
 
   openModal=()=>{
@@ -50,6 +59,23 @@ export class LoginComponent implements OnInit {
     const modalRef = this.modalService.open(SurveyComponent, { size: 'lg' });
     modalRef.componentInstance.name = "Modal1";
     
+  }
+
+  initForm(){
+    this.loginForm = new FormGroup({
+      mail: new FormControl(''),
+      password: new FormControl('')
+    });
+  }
+
+  onSubmit(form:any){
+    let login:Login = this.loginForm.value;
+    this.usersService.login(login).subscribe(resp=>{
+      this.router.navigate(['/user/myAccount']);
+      console.log(resp)
+    })
+
+
   }
 
 }
