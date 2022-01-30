@@ -6,7 +6,7 @@ const URL = "api/reservations";
 
 @Injectable()
 export class ReservationsService {
-  public reservations: BehaviorSubject<[]> = new BehaviorSubject([]);
+  public reservations: BehaviorSubject<Reservation[]> = new BehaviorSubject<Reservation[]>([]);
 
   constructor(private restService: RestService) { }
 
@@ -14,8 +14,12 @@ export class ReservationsService {
     return this.restService.post(`${URL}`, reservation);
   }
 
-  getByUserId(userId:string): Observable<Response<any>> {
-    return this.restService.get(`${URL}/user/${userId}`);
+  getByUserId(userId: string): any {
+    return this.restService.get<Response<Reservation[]>>(`${URL}/user/${userId}`).subscribe((resp: Response<Reservation[]>) => {
+      if (resp.content) {
+        this.reservations.next(resp.content);
+      }
+    })
   }
 
   cancel(id:string): Observable<Response<any>> {

@@ -4,6 +4,7 @@ import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import i18next from 'i18next';
 import { Author } from 'src/app/core/services/rest/api/api';
 import { BorrowingsService } from 'src/app/core/services/rest/borrowings.service';
+import { ReservationsService } from 'src/app/core/services/rest/reservations.service';
 @Component({
   selector: 'app-my-books',
   templateUrl: './my-books.component.html',
@@ -20,18 +21,26 @@ export class MyBooksComponent implements OnInit {
   resignText=this.getTranslation("booklist.table.resign")
   btnClass="full"
   borrowings:any;
-  constructor( @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService, private borrowingsService:BorrowingsService) { }
+  reservations:any;
+  constructor( @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService, private borrowingsService:BorrowingsService,
+  private reservationsService:ReservationsService) { }
 
   ngOnInit(): void {
     this.updateBorrowings()
+    this.updateReservations()
     this.borrowings = this.borrowingsService.borrowings;
-    console.log(this.borrowings)
+    this.reservations = this.reservationsService.reservations;
+    console.log(this.reservations)
     
     
   }
 
   updateBorrowings(){
     this.borrowingsService.getByUserId("a5edd677-14a9-449b-ab3f-76742762c5f1")
+  }
+
+  updateReservations(){
+    this.reservationsService.getByUserId("a5edd677-14a9-449b-ab3f-76742762c5f1")
   }
 
   formatAuthors(authors:Author[]){

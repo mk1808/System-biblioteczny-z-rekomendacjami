@@ -182,7 +182,7 @@ export interface Reservation {
     bookId?: string;
     user?: AppUser;
     userId?: string;
-    eservationDate?: string;
+    reservationDate?: string;
     availabilityStartDate?: string;
     wasBorrowed?: boolean;
 }
