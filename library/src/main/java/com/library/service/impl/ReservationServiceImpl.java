@@ -1,5 +1,6 @@
 package com.library.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -11,16 +12,29 @@ import com.library.model.Borrowing;
 import com.library.model.Reservation;
 import com.library.repository.ReservationRepository;
 import com.library.service.BookService;
+import com.library.service.UserService;
 import com.library.service.ReservationService;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
 	private final ReservationRepository repository;
+	private BookService bookService;
+	private UserService userService;
 	
 	@Autowired
 	public ReservationServiceImpl(ReservationRepository repository) {
 		this.repository = repository;
 	}
+	
+    @Autowired
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
+    }
+    
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 	
 	@Override
 	public Reservation get(UUID id) {
@@ -29,6 +43,12 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public Reservation create(Reservation entity) {
+		entity.setBook(bookService.get(entity.getBook().getId()));
+		entity.setUser(userService.get(entity.getUser().getId()));
+		entity.setReservationDate(LocalDateTime.now());
+		entity.setWasBorrowed(false);
+		
+		
 		return repository.save(entity);
 	}
 

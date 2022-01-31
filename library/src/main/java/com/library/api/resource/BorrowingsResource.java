@@ -22,7 +22,7 @@ import com.library.response.Response;
 @RequestMapping("/api/borrowings")
 public interface BorrowingsResource {
 	
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	//@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/user/{userId}")
 	ResponseEntity<Response<List<BorrowingDto>>> getByUserId(@PathVariable UUID userId);
 	

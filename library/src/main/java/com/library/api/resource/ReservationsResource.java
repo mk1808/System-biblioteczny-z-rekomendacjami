@@ -23,11 +23,11 @@ import com.library.response.Response;
 @RequestMapping("/api/reservations")
 public interface ReservationsResource {
 	
-	@PreAuthorize("hasRole('USER')")
+	//@PreAuthorize("hasRole('USER')")
 	@PostMapping
 	ResponseEntity<Response<String>> create(@RequestBody ReservationDto reservation);
 	
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	//@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/user/{userId}")
 	ResponseEntity<Response<List<ReservationDto>>> getByUserId(@PathVariable UUID userId);
 	

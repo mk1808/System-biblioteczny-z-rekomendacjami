@@ -37,13 +37,13 @@ private final UserListElementRepository userListElementRepository;
 private final ChangeProposalRepository changeProposalRepository;
 private final AuthorRepository authorRepository;
 private final BorrowingService borrowingService;
-private final ReservationService reservationService;
+private ReservationService reservationService;
 	
 	
 	@Autowired
 	public BookServiceImpl(BookRepository repository, BookCopyRepository bookCopyRepository, OpinionRepository opinionRepository,
 			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository, AuthorRepository authorRepository,
-			BorrowingService borrowingService, ReservationService reservationService) {
+			BorrowingService borrowingService) {
 		this.repository = repository;
 		this.bookCopyRepository = bookCopyRepository;
 		this.opinionRepository = opinionRepository;
@@ -51,9 +51,13 @@ private final ReservationService reservationService;
 		this.changeProposalRepository = changeProposalRepository;
 		this.authorRepository = authorRepository;
 		this.borrowingService = borrowingService;
-		this.reservationService = reservationService;
 		
 	}
+	
+	@Autowired
+    public void setReservationService(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
 
 
 	@Override
