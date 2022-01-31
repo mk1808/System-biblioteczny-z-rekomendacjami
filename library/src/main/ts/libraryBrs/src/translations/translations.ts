@@ -70,7 +70,9 @@ const translations =
             "bookAddOriginalTitle":"Tytuł oryginalny",
             "bookDescInput":"Opis",
             "chooseOrWriteVal":"Wybierz lub wpisz",
-            "chooseVal":"Wybierz"
+            "chooseVal":"Wybierz",
+            "reservation.confirm":"Potwierdzenie rezerwacji",
+            "reservation.confirm.question":"Czy na pewno chcesz zarezerwować książkę?"
             
 
             

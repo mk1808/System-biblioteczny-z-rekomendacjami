@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="parent2" *ngIf="availability.available!=null && availability.available == 0">
-            <app-button [text]="reserveText" [btnClass]="btnClass"></app-button>
+            <app-button [text]="reserveText" [btnClass]="btnClass" [onClick]="makeReservation"></app-button>
             <div class="text">{{extraInfoText | i18next}}</div>
         </div>
     </div>

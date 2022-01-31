@@ -1,7 +1,9 @@
 import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { I18NextPipe, I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { I18nService } from 'src/app/core/services/i18n.service';
-import { BookAvailability } from 'src/app/core/services/rest/api/api';
+import { Book, BookAvailability } from 'src/app/core/services/rest/api/api';
+import { ReservationModalComponent } from '../reservation-modal/reservation-modal.component';
 
 @Component({
   selector: 'app-book-availability',
@@ -10,6 +12,7 @@ import { BookAvailability } from 'src/app/core/services/rest/api/api';
 })
 export class BookAvailabilityComponent implements OnInit, OnChanges {
   @Input() availability: BookAvailability = {};
+  @Input() book: Book={};
   static readonly AVAILABLE = "bookDetails.availability.available";
   static readonly NOT_AVAILABLE = "bookDetails.availability.notAvailable";
   static readonly RESERVED = "bookDetails.availability.reserved"
@@ -18,10 +21,12 @@ export class BookAvailabilityComponent implements OnInit, OnChanges {
   btnClass = "full"
   text = "";
   extraInfoText = "";
-  constructor(private i18nService: I18nService) { }
+  me = this;
+  constructor(private i18nService: I18nService, private modalService: NgbModal) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.availability)
+    console.log(this.book)
     debugger;
     this.getAvailabilityText();
     this.getExtraInfoText();
@@ -38,14 +43,15 @@ export class BookAvailabilityComponent implements OnInit, OnChanges {
   }
 
   getExtraInfoText() {
-    let textOnly = this.availability.numberOfReservations!=null && this.availability.numberOfReservations > 0 ? BookAvailabilityComponent.RESERVED : BookAvailabilityComponent.NOT_RESERVED;
+    let textOnly = this.availability.numberOfReservations != null && this.availability.numberOfReservations > 0 ? BookAvailabilityComponent.RESERVED : BookAvailabilityComponent.NOT_RESERVED;
     this.extraInfoText = this.i18nService.getTranslationWithParams(textOnly, this.availability);
   }
 
-  makeReservation() {
+  makeReservation = () => {
     console.log("reservation!")
+    const modalRef = this.modalService.open(ReservationModalComponent);
+    modalRef.componentInstance.book = this.book;
   }
-
 
 
 }
