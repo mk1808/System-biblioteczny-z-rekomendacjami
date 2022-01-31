@@ -31,18 +31,21 @@ class MyApp extends StatelessWidget {
 
   getTheme() {
     return ThemeData(
-      primaryColor: Colors.white,
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          primary: mainColor,
+        primaryColor: Colors.white,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: mainColor,
+          ),
         ),
-      ),
-      textButtonTheme:
-          TextButtonThemeData(style: TextButton.styleFrom(primary: mainColor)),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-      ),
-    );
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(primary: mainColor)),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: mainColor, width: 2.0)),
+        ));
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:reader/consts.dart';
 
-class MyAppBar extends StatelessWidget  with PreferredSizeWidget{
+class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   const MyAppBar({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +11,7 @@ class MyAppBar extends StatelessWidget  with PreferredSizeWidget{
         title: Row(
           children: [
             //  MyLogo(),
-            const Text('mGuide'),
+            Text(readerApp)
           ],
         ),
         backgroundColor: mainColor,
