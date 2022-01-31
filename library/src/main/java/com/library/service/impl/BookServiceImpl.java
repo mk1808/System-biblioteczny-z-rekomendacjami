@@ -7,13 +7,17 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookFIlterDto;
+import com.library.enums.BookCopyStatus;
 import com.library.enums.ChangeProposalStatus;
 import com.library.model.Book;
 import com.library.model.BookCopy;
+import com.library.model.Borrowing;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
 import com.library.model.UserListElement;
+import com.library.model.Reservation;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookCopyRepository;
 import com.library.repository.BookRepository;
@@ -21,6 +25,8 @@ import com.library.repository.ChangeProposalRepository;
 import com.library.repository.OpinionRepository;
 import com.library.repository.UserListElementRepository;
 import com.library.service.BookService;
+import com.library.service.BorrowingService;
+import com.library.service.ReservationService;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -30,17 +36,23 @@ private final OpinionRepository opinionRepository;
 private final UserListElementRepository userListElementRepository;
 private final ChangeProposalRepository changeProposalRepository;
 private final AuthorRepository authorRepository;
+private final BorrowingService borrowingService;
+private final ReservationService reservationService;
 	
 	
 	@Autowired
 	public BookServiceImpl(BookRepository repository, BookCopyRepository bookCopyRepository, OpinionRepository opinionRepository,
-			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository, AuthorRepository authorRepository) {
+			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository, AuthorRepository authorRepository,
+			BorrowingService borrowingService, ReservationService reservationService) {
 		this.repository = repository;
 		this.bookCopyRepository = bookCopyRepository;
 		this.opinionRepository = opinionRepository;
 		this.userListElementRepository = userListElementRepository;
 		this.changeProposalRepository = changeProposalRepository;
 		this.authorRepository = authorRepository;
+		this.borrowingService = borrowingService;
+		this.reservationService = reservationService;
+		
 	}
 
 
@@ -178,6 +190,24 @@ private final AuthorRepository authorRepository;
 				bookFilterDto.getAuthorId(), 
 				bookFilterDto.getPublisherId(), 
 				bookFilterDto.getGenreId());
+	}
+
+
+	@Override
+	public BookAvailabilityDto getAvailabilityByBookId(UUID id) {
+		List<BookCopy> copies = this.getBookCopiesByBookId(id);
+		List<Borrowing> borrowings= this.borrowingService.getCurrentByBookCopies(copies);
+		List<Reservation> reservations = this.reservationService.getByBookId(id);
+		
+		return BookAvailabilityDto.builder()
+				.bookId(id)
+				.allBooks(copies.size())
+				.borrowedBooks(borrowings.size())
+				.available(copies.size()-borrowings.size())
+				.keptTooLong(this.borrowingService.getKeptTooLong(borrowings).size())
+				.numberOfReservations(reservations.size())
+				.status(borrowings.size()<copies.size()?BookCopyStatus.CANBORROW:BookCopyStatus.BORROWED)
+				.build();
 	}
 		
 

@@ -205,8 +205,8 @@ public class BooksController extends BaseController implements BooksResource {
 	
 	@Override
 	public ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		Response<BookAvailabilityDto> response = createSuccessResponse(bookService.getAvailabilityByBookId(id));
+		return ResponseEntity.ok(response);
 	}
 
 	@Override

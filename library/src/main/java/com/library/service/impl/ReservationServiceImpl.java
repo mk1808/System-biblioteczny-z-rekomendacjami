@@ -18,7 +18,7 @@ public class ReservationServiceImpl implements ReservationService {
 	private final ReservationRepository repository;
 	
 	@Autowired
-	public ReservationServiceImpl(ReservationRepository repository, BookService bookService) {
+	public ReservationServiceImpl(ReservationRepository repository) {
 		this.repository = repository;
 	}
 	
@@ -54,6 +54,14 @@ public class ReservationServiceImpl implements ReservationService {
 	public void cancel(UUID id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Reservation> getByBookId(UUID id) {
+		return repository.getByBookId(id)
+				.stream()
+				.filter(this::wasNotBorrowed)
+				.collect(Collectors.toList());
 	}
 
 }

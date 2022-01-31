@@ -9,6 +9,7 @@ import com.library.model.BookCopy;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
 import com.library.model.UserListElement;
+import com.library.dto.BookAvailabilityDto;
 
 public interface BookService extends RepositoryService<Book>{
 
@@ -47,5 +48,7 @@ public interface BookService extends RepositoryService<Book>{
 	List<BookCopy> getBookCopiesByIds(List<UUID> bookCopiesIds);
 
 	List<Book> getFiltered(BookFIlterDto bookFilterDto);
+
+	BookAvailabilityDto getAvailabilityByBookId(UUID id);
 
 }

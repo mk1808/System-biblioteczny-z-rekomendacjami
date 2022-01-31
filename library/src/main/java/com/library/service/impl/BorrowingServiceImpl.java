@@ -19,13 +19,13 @@ import com.library.service.BorrowingService;
 @Service
 public class BorrowingServiceImpl implements BorrowingService {
 	private final BorrowingRepository repository;
-	private final BookService bookService;
+	//private final BookService bookService;
 	private final Long BORROW_PERIOD=30L;
 	
 	@Autowired
-	public BorrowingServiceImpl(BorrowingRepository repository, BookService bookService) {
+	public BorrowingServiceImpl(BorrowingRepository repository) {//, BookService bookService
 		this.repository = repository;
-		this.bookService = bookService;
+		//this.bookService = bookService;
 	}
 	@Override
 	public Borrowing get(UUID id) {
@@ -65,14 +65,35 @@ public class BorrowingServiceImpl implements BorrowingService {
 		
 		
 	}
+	
 
+	public List<Borrowing> getCurrentByBookCopyId(UUID bookCopyId) {
+		return repository.getByBookCopyId(bookCopyId).stream().filter(borrowing->!this.isReturned(borrowing))
+				.collect(Collectors.toList());
+		
+		
+	}
+	
 	@Override
-	public void returnBorrowings(List<UUID> bookCopiesIds) {
-		List<Borrowing> borrowings = bookCopiesIds.stream()
+	public List<Borrowing> getCurrentByBookCopies(List<BookCopy> bookCopies) {
+		return bookCopies.stream().map(BookCopy::getId)
 				.map(this::getByBookCopyId)
 				.flatMap(List::stream)
 				.filter(borrowing->!this.isReturned(borrowing))
 				.collect(Collectors.toList());
+	}
+
+	public List<Borrowing> getCurrentByBookCopiesIds(List<UUID> bookCopiesIds) {
+		return bookCopiesIds.stream()
+				.map(this::getByBookCopyId)
+				.flatMap(List::stream)
+				.filter(borrowing->!this.isReturned(borrowing))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public void returnBorrowings(List<UUID> bookCopiesIds) {
+		List<Borrowing> borrowings = getCurrentByBookCopiesIds(bookCopiesIds);
 		LocalDateTime now = LocalDateTime.now();
 		borrowings.stream().forEach(borrowing->borrowing.setReturnDate(now));
 		borrowings.stream().forEach(this::update);
@@ -82,6 +103,19 @@ public class BorrowingServiceImpl implements BorrowingService {
 	
 	private Boolean isReturned(Borrowing borrowing) {
 		return borrowing.getReturnDate()!=null;
+	}
+	
+	public Boolean isKeptTooLong(Borrowing borrowing) {
+		int compared = borrowing.getExpectedReturnDate().compareTo(LocalDateTime.now());
+		return compared<0;
+	}
+	
+	@Override
+	public List<Borrowing> getKeptTooLong(List<Borrowing> borrowings) {
+		return borrowings
+				.stream()
+				.filter(this::isKeptTooLong)
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -97,6 +131,10 @@ public class BorrowingServiceImpl implements BorrowingService {
 		Borrowing borrowing = repository.getById(id);
 		borrowing.setExpectedReturnDate(borrowing.getExpectedReturnDate().plusDays(BORROW_PERIOD));
 		borrowing.setNumberOfProlongings(borrowing.getNumberOfProlongings()+1);
+	}
+	@Override
+	public List<Borrowing> getByBookCopiesIds(List<UUID> bookCopiesIds) {
+		return bookCopiesIds.stream().map(x->getByBookCopyId(x)).flatMap(List::stream).collect(Collectors.toList());
 	}
 
 }

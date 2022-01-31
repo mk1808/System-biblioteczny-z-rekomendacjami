@@ -11,4 +11,5 @@ import com.library.model.Reservation;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, UUID> {
 	List<Reservation> getByUserId(UUID userId);
+	List<Reservation> getByBookId(UUID bookId);
 }
