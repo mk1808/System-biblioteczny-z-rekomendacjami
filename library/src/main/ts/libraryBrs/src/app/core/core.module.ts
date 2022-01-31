@@ -10,6 +10,7 @@ import { LibrariesService } from './services/rest/libraries.service';
 import { ReservationsService } from './services/rest/reservations.service';
 import { UsersService } from './services/rest/users.service';
 import { DictionaryService } from './services/rest/dictionary.service';
+import { FormatterService } from './services/formatter.service';
 
 
 
@@ -28,7 +29,8 @@ import { DictionaryService } from './services/rest/dictionary.service';
     LibrariesService,
     ReservationsService,
     UsersService,
-    DictionaryService
+    DictionaryService,
+    FormatterService
   ],
   exports:[
     //I18nService

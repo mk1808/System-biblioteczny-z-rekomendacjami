@@ -5,14 +5,14 @@
         </div>
         <div>
             <div>
-                <p class="title">Tytuł książki ABC</p>
-                <p class="line"><span>Autor:</span> Jan Kowalski</p>
-                <p class="line"><span>Wydawnictwo:</span> Nasza Księgarnia</p>
-                <p class="line"><span>Rok wydania:</span> 2005</p>
-                <p class="line"><span>Tytuł oryginalny:</span> Title aa</p>
-                <p class="line"><span>Cykl:</span> Zbiór powieści</p>
-                <p class="line"><span>Gatunek:</span> Fantastyka, Powieść</p>
-                <p class="line"><span>Tagi:</span> Fantastyka, Klasyka</p>
+                <p class="title">{{book.title}}</p>
+                <p class="line"><span>Autor:</span> {{formatAuthors(book.authors)}}</p>
+                <p class="line"><span>Wydawnictwo:</span> {{book.publisherName}}</p>
+                <p class="line"><span>Rok wydania:</span> {{book.publicationYear}}</p>
+                <p class="line"><span>Tytuł oryginalny:</span> {{book.originalTitle}}</p>
+                <p class="line"><span>Cykl:</span> {{formatOther(book.series)}}</p>
+                <p class="line"><span>Gatunek:</span> {{formatOther(book.genres)}}</p>
+                <p class="line"><span>Tagi:</span> {{formatOther(book.keyWords)}}</p>
             </div>
         </div>
         <div class="insideButtons">
@@ -31,17 +31,7 @@
     <app-book-availability [availability] = "availability"></app-book-availability>
     <div class="description">
         <p class="line rating"><span>Opis</span> </p>
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed enim in nunc feugiat euismod vitae nec
-            nunc. Morbi ac massa ut sem hendrerit consequat non sit amet quam. Pellentesque ut leo metus. Etiam laoreet
-            tincidunt tortor, ut posuere ligula faucibus quis. Fusce consequat, lectus at rutrum accumsan, odio turpis
-            tincidunt odio, ac commodo nulla justo vitae magna. Duis suscipit sem a dolor condimentum, sit amet ornare arcu
-            finibus. Nam malesuada justo vitae rhoncus vestibulum. Sed sit amet placerat tortor. Nullam vitae diam nec eros
-            dignissim faucibus vitae eu sapien. Proin egestas elit eu pellentesque consequat. Pellentesque venenatis dui
-            ipsum, nec fringilla neque posuere id. Vivamus eleifend felis non viverra molestie. Nunc dapibus risus bibendum,
-            tincidunt urna quis, tempor felis. Maecenas sollicitudin interdum placerat. Aliquam dolor arcu, eleifend nec
-            lorem sed, feugiat placerat tellus. Fusce molestie tortor maximus sapien aliquet ultrices.
-        </div>
+        <div>{{book.descrpition}}</div>
     </div>
     <div class="comments">
         <p class="line rating"><span>Komentarze</span> </p>

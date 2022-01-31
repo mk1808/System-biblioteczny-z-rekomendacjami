@@ -36,6 +36,7 @@ public class Book extends BaseEntity{
 	
 	private String originalTitle;
 	
+	@Column(length = 1000)
 	private String descrpition;
 	
 	@Column(length = 1000)
