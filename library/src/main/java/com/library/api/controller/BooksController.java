@@ -100,9 +100,9 @@ public class BooksController extends BaseController implements BooksResource {
 
 	@Override
 	//page
-	public ResponseEntity<Response<List<BookDto>>> getFiltered(Long pageNo, Long size, BookFIlterDto bookFilterDto) {
+	public ResponseEntity<Response<List<BookDto>>> getFiltered(Long pageNo, Long size, BookFIlterDto filter) {
 		
-		Response<List<BookDto>> response = createSuccessResponse(bookConverter.toDtoList(bookService.getFiltered(bookFilterDto)));
+		Response<List<BookDto>> response = createSuccessResponse(bookConverter.toDtoList(bookService.getFiltered(filter)));
 		return ResponseEntity.ok(response);
 		
 	}

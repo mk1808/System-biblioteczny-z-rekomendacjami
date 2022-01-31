@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +39,8 @@ public interface BooksResource {
 	@GetMapping("/newest")
 	ResponseEntity<Response<List<BookDto>>> getNewest(@RequestParam Long number);
 	
-	@GetMapping("/filtered")
-	ResponseEntity<Response<List<BookDto>>> getFiltered(@RequestParam Long pageNo, @RequestParam Long size, BookFIlterDto bookFilterDto);
+	@PostMapping("/filtered")
+	ResponseEntity<Response<List<BookDto>>> getFiltered(@RequestParam Long pageNo, @RequestParam Long size,  @RequestBody BookFIlterDto filter);
 
 	@GetMapping("/popular")
 	ResponseEntity<Response<List<BookDto>>> getPopular(@RequestParam Long number);
