@@ -33,14 +33,12 @@ export class BookAvailabilityComponent implements OnInit, OnChanges {
   }
 
   getAvailabilityText() {
-    let availObj = { available: this.availability.available, all: this.availability.allBooks };
     let textOnly = this.availability.available && this.availability.available > 0 ? BookAvailabilityComponent.AVAILABLE : BookAvailabilityComponent.NOT_AVAILABLE;
     this.text = this.i18nService.getTranslationWithParams(textOnly, this.availability);
   }
 
   getExtraInfoText() {
-    let availObj = { peopleNo: this.availability.numberOfReservations };
-    let textOnly = this.availability.numberOfReservations && this.availability.numberOfReservations > 0 ? BookAvailabilityComponent.RESERVED : BookAvailabilityComponent.NOT_RESERVED;
+    let textOnly = this.availability.numberOfReservations!=null && this.availability.numberOfReservations > 0 ? BookAvailabilityComponent.RESERVED : BookAvailabilityComponent.NOT_RESERVED;
     this.extraInfoText = this.i18nService.getTranslationWithParams(textOnly, this.availability);
   }
 
