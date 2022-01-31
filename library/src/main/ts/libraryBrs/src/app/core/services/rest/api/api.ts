@@ -8,7 +8,7 @@ export interface Book {
     photo?: string;
     publisherId?: string;
     publisherName?: string;
-    authors?: Object[];
+    authors?: Author[];
     genres?: Object[];
     series?: Object[];
     keyWords?: Object[];

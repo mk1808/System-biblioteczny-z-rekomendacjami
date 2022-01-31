@@ -9,12 +9,18 @@
                 <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
                 <div>
                     <div class="title1">Filtry</div>
-                    <app-input [label]="titleLabel" [formControlName]="bookTitle"></app-input>
-                    <app-input [label]="ISBNLabel" [formControlName]="ISBN"></app-input>
-                    <app-select [label]="label" [options]="authors|async" 
+                    <app-input label="bookAdd.title" [formControlName]="bookTitle"></app-input>
+                    <app-input label="bookAdd.isbn" [formControlName]="ISBN"></app-input>
+                    <app-select label="bookAddauthor" [options]="authors|async" 
                     [getDisplayedValue]="getAuthorDisplayedValue" 
                     formControlName="authorId"></app-select>
-                
+                    <app-select label="bookAddGenre" [options]="genres|async" 
+                    
+                    formControlName="genreId"></app-select>
+                    <app-select label="bookAddPublisher" [options]="publishers|async" 
+                  
+                    formControlName="publisherId"></app-select>
+                <!--
                     <app-input [label]="label"></app-input>
                     <app-input [label]="label"></app-input>
                     <app-input [label]="label"></app-input>
@@ -22,7 +28,7 @@
                     <app-select [label]="label"></app-select>
                     <app-multi-select [label]="label"></app-multi-select>
                     <app-checkbox [label]="label"></app-checkbox>
-
+-->
                     <app-button [iconClass]="iconClass" [text]="text" [btnClass]="btnClass" [type]="submitBtnType"></app-button>
                 </div>
             </form>
@@ -32,17 +38,17 @@
 
             </div>
             <div class="inside list">
-                <div *ngFor="let singleBook of books; index as i;">
-                    <app-book-search-element></app-book-search-element>
+                <div *ngFor="let singleBook of booksFiltered|async; index as i;">
+                    <app-book-search-element [book]="singleBook"></app-book-search-element>
                 </div>
+               <!-- <app-book-search-element></app-book-search-element>
                 <app-book-search-element></app-book-search-element>
                 <app-book-search-element></app-book-search-element>
                 <app-book-search-element></app-book-search-element>
                 <app-book-search-element></app-book-search-element>
                 <app-book-search-element></app-book-search-element>
                 <app-book-search-element></app-book-search-element>
-                <app-book-search-element></app-book-search-element>
-                <app-book-search-element></app-book-search-element>
+                <app-book-search-element></app-book-search-element>-->
 
             </div>
         </div>

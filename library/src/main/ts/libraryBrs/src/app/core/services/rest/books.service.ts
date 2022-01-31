@@ -8,6 +8,7 @@ const URL = "api/books";
 export class BooksService {
   public books: BehaviorSubject<[]> = new BehaviorSubject([]);
   public borrowedBooks: BehaviorSubject<Book[]> = new BehaviorSubject(new Array());
+  public searchedBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
 
   constructor(private restService: RestService) { }
 
@@ -15,8 +16,18 @@ export class BooksService {
     return this.restService.get(`${URL}/newest?number=${number}`);
   }
 
-  getFiltered(pageNo:number, size:number, filter:BookFIlter ): Observable<any> {
-    return this.restService.get(`${URL}/filtered?pageNo=${pageNo}&size=${size}&bookFilterDto=${encodeURIComponent(JSON.stringify(filter))}`);
+  getFiltered(pageNo:number, size:number, filter:BookFIlter ): any{
+   // searchedBooks
+//
+ // return this.restService.post(`${URL}/filtered?pageNo=${pageNo}&size=${size}`,filter);
+ 
+  return this.restService.post(`${URL}/filtered?pageNo=${pageNo}&size=${size}`,filter).subscribe((resp:Response<Book[]>) => {
+    if(resp.content){
+       this.searchedBooks.next(resp.content);
+    }
+   
+  })
+
   }
 
   getPopular(number:number): Observable<any> {

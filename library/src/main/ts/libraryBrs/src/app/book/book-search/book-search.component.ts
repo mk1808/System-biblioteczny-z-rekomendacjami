@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { Author, BookFIlter, Genre, Login, Publisher } from 'src/app/core/services/rest/api/api';
+import { Author, Book, BookFIlter, Genre, Login, Publisher } from 'src/app/core/services/rest/api/api';
 import { BooksService } from 'src/app/core/services/rest/books.service';
 import { DictionaryService } from 'src/app/core/services/rest/dictionary.service';
 
@@ -29,6 +29,7 @@ export class BookSearchComponent implements OnInit {
   genres: BehaviorSubject<Genre[]> = new BehaviorSubject<Genre[]>([]);
   authors: BehaviorSubject<Author[]> = new BehaviorSubject<Author[]>([]);
   publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject<Publisher[]>([]);
+  booksFiltered: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
 
   constructor(private route: ActivatedRoute, private router: Router, private booksService: BooksService,
     private dictionaryService: DictionaryService) { }
@@ -36,6 +37,7 @@ export class BookSearchComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.updateDictionariesValues()
+    this.updateBook();
   }
 
   getBook() {
@@ -58,6 +60,11 @@ export class BookSearchComponent implements OnInit {
 
   }
 
+  updateBook(){
+    this.booksService.getFiltered(0,0,{})
+    this.booksFiltered=this.booksService.searchedBooks;
+  }
+
   initForm() {
     this.searchForm = new FormGroup({
       title: new FormControl(''),
@@ -71,10 +78,8 @@ export class BookSearchComponent implements OnInit {
   onSubmit(form: any) {
     console.log(this.searchForm.value)
     let bookFilter: BookFIlter = this.searchForm.value;
-    this.booksService.getFiltered(0, 0, bookFilter).subscribe(resp => {
-      //this.router.navigate(['/user/myAccount']);
-      console.log(resp)
-    })
+    this.booksService.getFiltered(0, 0, bookFilter);
+    this.booksFiltered=this.booksService.searchedBooks;
 
 
   }

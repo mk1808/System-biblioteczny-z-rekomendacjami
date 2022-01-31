@@ -7,8 +7,8 @@ const URL = "api/dictionaries";
 @Injectable()
 export class DictionaryService {
   public authors: BehaviorSubject<Author[]> = new BehaviorSubject<Author[]>([]);
-  public genres: BehaviorSubject<Genre[]> = new BehaviorSubject<Author[]>([]);
-  public publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject<Author[]>([]);
+  public genres: BehaviorSubject<Genre[]> = new BehaviorSubject<Genre[]>([]);
+  public publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject<Publisher[]>([]);
 
   constructor(private restService: RestService) { }
 

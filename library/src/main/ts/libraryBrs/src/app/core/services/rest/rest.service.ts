@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 
@@ -11,6 +11,14 @@ export class RestService {
 
   public get<T>(url: string) {
     return this.http.get<T>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getWithParams<T>(url: string, paramName:string, paramContent:any) {
+    let params= new HttpParams().set(paramName,encodeURIComponent(JSON.stringify(paramContent)) )
+    console.log(params)
+    return this.http.get<T>(url, {params:params}).pipe(
       catchError(this.handleError)
     );
   }
