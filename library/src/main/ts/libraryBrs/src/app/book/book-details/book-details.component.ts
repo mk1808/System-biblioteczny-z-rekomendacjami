@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { FormatterService } from 'src/app/core/services/formatter.service';
-import { Book, Response } from 'src/app/core/services/rest/api/api';
+import { Book, BookAvailability, Response } from 'src/app/core/services/rest/api/api';
 import { BooksService } from 'src/app/core/services/rest/books.service';
 
 @Component({
@@ -29,7 +29,8 @@ export class BookDetailsComponent implements OnInit {
   isAvailable: boolean = false;
   infoText = ""
   fee = "123"
-  availability = { available: 0, all: 5, peopleWaiting: 1 };
+  //availability = { available: 0, all: 5, peopleWaiting: 1 };
+  availability:BookAvailability={};
   comment = {
     username: "Użytkownik 1", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed enim in nunc feugiat euismod vitae necnunc. Morbi ac massa ut sem hendrerit",
     rating: 6, date: "05.01.2022r."
@@ -43,6 +44,7 @@ export class BookDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getBookId();
     this.getBook();
+    this.getBookAvailability();
 
   }
 
@@ -61,13 +63,21 @@ export class BookDetailsComponent implements OnInit {
     })
   }
 
+  getBookAvailability() {
+    this.booksService.getAvailabilityByBookId(this.id).subscribe((resp: Response<BookAvailability>) => {
+      if (resp.content) {
+       this.availability = resp.content;
+        console.log(resp)
+      }
+    })
+  }
+
   formatAuthors(list: Object[] | undefined) {
     if (list) { return this.formatterService.displayList(list); }
     return "-"
   }
 
   formatOther(list: Object[] | undefined) {
-    debugger;
     if (list) { return this.formatterService.displayListNames(list); }
     return "-";
   }

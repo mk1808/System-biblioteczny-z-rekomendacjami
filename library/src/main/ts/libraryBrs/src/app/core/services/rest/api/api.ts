@@ -54,7 +54,13 @@ export interface Publisher {
 }
 
 export interface BookAvailability {
-    id?: string;
+    bookId?: string;
+    allBooks?: number;
+    available?:number;
+    borrowedBooks?: number;
+    numberOfReservations?: number;
+    keptTooLong?: number;
+    status?: string;
 }
 
 export interface BookCopy {

@@ -6,7 +6,7 @@
                 {{text | i18next}}
             </div>
         </div>
-        <div class="parent2" *ngIf="availability.available<=0">
+        <div class="parent2" *ngIf="availability.available&&availability.available<=0">
             <app-button [text]="reserveText" [btnClass]="btnClass"></app-button>
             <div class="text">{{extraInfoText | i18next}}</div>
         </div>
