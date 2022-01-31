@@ -1,0 +1,7 @@
+<app-modal [modalTitle]="title" [onCancel]="onCancel" [onConfirm]="onConfirm">
+    <p>{{question|i18next}}</p>
+    <div class="additional-content">
+        Tytuł: <span>{{book.title}} </span><br>
+        Autor: <span>{{formatAuthors(book.authors)}}</span> <br>
+    </div>
+</app-modal>
