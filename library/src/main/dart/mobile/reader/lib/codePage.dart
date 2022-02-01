@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:reader/consts.dart';
 import 'package:reader/menu.dart';
 import 'package:reader/myAppBar.dart';
@@ -57,6 +58,11 @@ class _CodePageState extends State<CodePage> {
   getQR() {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        child: Column(children: []));
+        child: QrImage(
+          data: "a5edd677-14a9-449b-ab3f-76742762c5f1",
+          version: QrVersions.auto,
+          size: 400.0,
+        )
+        );
   }
 }
