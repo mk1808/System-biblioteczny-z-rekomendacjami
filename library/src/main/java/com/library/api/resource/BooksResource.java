@@ -117,8 +117,8 @@ public interface BooksResource {
 	@GetMapping("/changeProposal/new")
 	ResponseEntity<Response<List<ChangeProposalDto>>> getNewChangeProposals();
 	
-	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("/bookCopies/{bookCopyId}/users/{userId}/canBorrow")
+	//@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/bookCopies/{bookCopyId}/users/{userId}/canBorrow")
 	ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(@PathVariable(required=false) UUID bookCopyId, @PathVariable(required=false) UUID userId);
 	
 	@PreAuthorize("hasRole('ADMIN')")

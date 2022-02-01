@@ -30,6 +30,7 @@ public class BookCopyConverterServiceImpl implements BookCopyConverterService {
 
 	@Override
 	public BookCopyDto toDto(BookCopy model) {
+		if(model == null) return null;
 		BookCopyDto dto = BookCopyDto.builder()
 				.id(model.getId())
 				.bookId(model.getBook().getId())

@@ -61,6 +61,7 @@ public class BookConverterServiceImpl implements BookConverterService {
 	
 	@Override
 	public BookDto toDto(Book model) {
+		if(model == null) return null;
 		BookDto dto = BookDto.builder()
 				.id(model.getId())
 				.ISBN(model.getISBN())

@@ -97,7 +97,7 @@ private ReservationService reservationService;
 	
 	@Override
 	public BookCopy getBookCopyById(UUID bookCopyId) {
-		return bookCopyRepository.getById(bookCopyId);
+		return bookCopyRepository.findById(bookCopyId).orElse(null);
 	}
 	
 	@Override
@@ -234,13 +234,25 @@ private ReservationService reservationService;
 				.build();
 	}
 
+
 	@Override
 	public CanBorrowBook canBorrow(UUID bookCopyId, UUID userId) {
+	/*	UUID oldUserId = userId;
+		if (bookCopyId!=null) {
+			BookCopy bookCopyCheck = this.getBookCopyById(bookCopyId);
+			if(bookCopyCheck==null) {
+				userId=bookCopyId;
+			}else {
+				
+			}
+		}*/
+		
+		
 		CanBorrowBook canBorrowBook = new CanBorrowBook();
 		BookCopy bookCopy;
 		Book book = null;
 		BookAvailabilityDto bookAvailability;
-		if (bookCopyId!=null) {
+		if (bookCopyId!=null&&this.getBookCopyById(bookCopyId)!=null) {
 			bookCopy = this.getBookCopyById(bookCopyId);
 			book = this.getByBookCopy(bookCopyId);
 			bookAvailability = this.getAvailabilityByBookId(book.getId());
@@ -250,19 +262,20 @@ private ReservationService reservationService;
 		
 		AppUser user;
 		UserAvailabilityDto userAvailability;
-		if (userId!=null) {
+		if (userId!=null&&userService.get(userId)!=null) {
 			user = userService.get(userId);
 			canBorrowBook.setUser(user);
 			canBorrowBook.setUserAvailabilityDto(this.getAvailabilityByUserId(userId));
 			
 		}
+		/*
 		Boolean reservedByUser;
 		if (userId!=null&&bookCopyId!=null) {
 			List<Reservation> reservations = this.reservationService.getCurrentByBookAndUser(book.getId(), userId);
 			reservedByUser=reservations.size()>0;
 			canBorrowBook.setIsReservedByUser(reservedByUser);
 			canBorrowBook.setReservationId(reservedByUser?reservations.get(0).getId():null);
-		}
+		}*/
 		
 		return canBorrowBook;
 	}

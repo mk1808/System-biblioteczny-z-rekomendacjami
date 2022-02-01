@@ -36,6 +36,7 @@ private final AddressConverterService addressConverter;
 	
 	@Override
 	public AppUserDto toDto(AppUser model) {
+		if(model == null) return null;
 		AppUserDto dto = AppUserDto.builder()
 				.id(model.getId())
 				.name(model.getName())
