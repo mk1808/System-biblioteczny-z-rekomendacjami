@@ -26,7 +26,7 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
       children: [
         Container(
           padding: const EdgeInsets.fromLTRB(12.0, 40.0, 12.0, 10.0),
-          height: 160.0,
+          height: 90.0,
           child:
               Text('Moje książki', textAlign: TextAlign.center, style: midFont),
         ),
@@ -58,18 +58,18 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
               Text('Wypożyczone', textAlign: TextAlign.center, style: midSmall),
         ),
         getBorrowed(),
-        getSingleBorrowed(),
-        getSingleBorrowed(),
         Container(
           decoration: myBooksInfoContainer,
           padding: const EdgeInsets.fromLTRB(12.0, 40.0, 12.0, 10.0),
+          margin: const EdgeInsets.only(bottom: 30.0),
           child: Text('Zarezerwowane',
               textAlign: TextAlign.center, style: midSmall),
         ),
-        Container(
+        getReserved(),
+      /*  Container(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           child: SizedBox(width: 300, height: 50, child: getButton()),
-        )
+        )*/
       ],
     ));
   }
@@ -117,6 +117,38 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
     return Column(
         children: List.generate(2, (index) {
       return getSingleBorrowed();
+    }));
+  }
+
+
+  getSingleReserved() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Column(children: [
+        Align(
+            alignment: Alignment.centerLeft,
+            child:
+                Text('Tytuł:', textAlign: TextAlign.left, style: smallerFont)),
+        Align(
+            alignment: Alignment.centerLeft,
+            child:
+                Text('Autor:', textAlign: TextAlign.left, style: smallerFont)),
+        Align(
+            alignment: Alignment.centerLeft,
+            child: Text('Data rezerwacji:',
+                textAlign: TextAlign.left, style: smallerFont)),
+                Align(
+            alignment: Alignment.centerLeft,
+            child: Text('Numer w kolejce:',
+                textAlign: TextAlign.left, style: smallerFont)),
+      ]),
+    );
+  }
+
+  getReserved() {
+    return Column(
+        children: List.generate(2, (index) {
+      return getSingleReserved();
     }));
   }
 

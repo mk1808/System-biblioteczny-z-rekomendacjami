@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:reader/consts.dart';
 import 'package:reader/menu.dart';
 import 'package:reader/myAppBar.dart';
+import 'package:reader/myBooksInfoPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -74,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.white,
           size: 30.0,
         ),
-        onPressed: () => navigateTo(context, const LoginPage()),
+        onPressed: () => navigateTo(context, const MyBooksInfoPage()),
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ));
