@@ -17,6 +17,8 @@ TextStyle midSmall =
     const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w500);    
 TextStyle smallerFont =
     const TextStyle(fontSize: 23.0, fontWeight: FontWeight.w400);
+TextStyle smallestFont =
+    const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400);
 double iconSize = 40;
 Color mainColor = getColor();
 

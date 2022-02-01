@@ -33,9 +33,9 @@ class _AfterLoginPageState extends State<AfterLoginPage> {
         ),
         Container(
               padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 80.0),
-              width: 260.0,
+             width: 300.0,
               child: Text(infoActions,
-                  textAlign: TextAlign.left, style: smallerFont),
+                  textAlign: TextAlign.center, style: smallerFont),
             ),
          
         Container(

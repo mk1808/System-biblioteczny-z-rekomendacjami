@@ -24,7 +24,7 @@ class _MenuState extends State<Menu> {
               color: mainColor,
             ),
             child: const Text(
-              'Aplikacja dla czytelnika',
+              'Aplikacja dla bibliotekarza',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,

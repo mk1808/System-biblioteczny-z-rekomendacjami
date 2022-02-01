@@ -6,6 +6,7 @@ import 'package:librarian/consts.dart';
 import 'package:librarian/loginPage.dart';
 import 'package:librarian/menu.dart';
 import 'package:librarian/myAppBar.dart';
+import 'package:librarian/qrCodeScanner.dart';
 
 class BorrowPage extends StatefulWidget {
   const BorrowPage({Key? key}) : super(key: key);
@@ -65,7 +66,11 @@ class _BorrowPageState extends State<BorrowPage> {
           color: Colors.white,
           size: 30.0,
         ),
-        onPressed: () => navigateTo(context, const LoginPage()),
+        onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const QRCodeScanner(),
+            ));
+        },
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ));
