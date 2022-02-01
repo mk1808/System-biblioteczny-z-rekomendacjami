@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:reader/codePage.dart';
 import 'package:reader/consts.dart';
 import 'package:reader/mainPage.dart';
 
@@ -33,6 +34,10 @@ class _MenuState extends State<Menu> {
               leading: const Icon(Icons.star_rounded),
               title: const Text('Strona główna'),
               onTap: () => navigateTo(context, const MainPage())),
+          ListTile(
+              leading: const Icon(Icons.star_rounded),
+              title: const Text('Kod QR'),
+              onTap: () => navigateTo(context, const CodePage())),
         ],
       ),
     );
