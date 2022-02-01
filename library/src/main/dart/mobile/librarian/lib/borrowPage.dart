@@ -7,6 +7,9 @@ import 'package:librarian/loginPage.dart';
 import 'package:librarian/menu.dart';
 import 'package:librarian/myAppBar.dart';
 import 'package:librarian/qrCodeScanner.dart';
+import 'package:librarian/services/api/api.dart';
+import 'package:librarian/services/booksService.dart';
+import 'package:provider/provider.dart';
 
 class BorrowPage extends StatefulWidget {
   const BorrowPage({Key? key}) : super(key: key);
@@ -95,50 +98,54 @@ class _BorrowPageState extends State<BorrowPage> {
         context, MaterialPageRoute<void>(builder: (context) => component));
   }
 
-  getSingleBook() {
+  getSingleBook(Book book, BookAvailability bookAvailability) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(children: [
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Tytuł:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Tytuł: ${book.title}', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Autor:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Autor: ${book.authors[0].name} ${book.authors[0].surname}', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Dostępność:',
+            child: Text('Dostępność: ${bookAvailability.available}',
                 textAlign: TextAlign.left, style: smallerFont)),
       ]),
     );
   }
 
   getBooks() {
-    return Column(
-        children: List.generate(2, (index) {
-      return getSingleBook();
-    }));
+    return Consumer<BooksService>(builder: (context, booksService, child) {
+      return Column(
+          children: List.generate(booksService.books.length, (index) {
+        return getSingleBook(booksService.books[index], booksService.booksAvailAbility[index]);
+      }));
+    });
   }
 
   getUser() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Column(children: [
-        Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Imię i nazwisko:',
-                textAlign: TextAlign.left, style: smallerFont)),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Aktualnie wypożyczone książki:',
-                textAlign: TextAlign.left, style: smallerFont)),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Przetrzymane książki:',
-                textAlign: TextAlign.left, style: smallerFont)),
-      ]),
-    );
+    return Consumer<BooksService>(builder: (context, booksService, child) {
+      return booksService.user != null ? Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        child: Column(children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Imię i nazwisko: ${booksService.user?.name} ${booksService.user?.surname}',
+                  textAlign: TextAlign.left, style: smallerFont)),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Aktualnie wypożyczone książki: ${booksService.userAvailability?.currentlyBorrowed}',
+                  textAlign: TextAlign.left, style: smallerFont)),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Przetrzymane książki: ${booksService.userAvailability?.keptTooLong}',
+                  textAlign: TextAlign.left, style: smallerFont)),
+        ]),
+      ): Text('Należy zeskanować kartę biblioteczną', textAlign: TextAlign.center, style: midSmall.copyWith(color: Colors.red));
+    });
   }
 }

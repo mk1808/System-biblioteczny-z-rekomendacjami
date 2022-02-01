@@ -12,10 +12,10 @@ class Book {
   final String photo;
   final String publisherId;
   final String publisherName;
-  final String authors;
-  final String genres;
-  final String series;
-  final String keyWords;
+  final List<Author> authors;
+  final List<Genre> genres;
+  final List<Series> series;
+  final List<String> keyWords;
 
   Book(
       this.id,
@@ -34,7 +34,7 @@ class Book {
 
   Book.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        ISBN = json['ISBN'],
+        ISBN = json['isbn'],
         title = json['title'],
         publicationYear = json['publicationYear'],
         originalTitle = json['originalTitle'],
@@ -42,10 +42,10 @@ class Book {
         photo = json['photo'],
         publisherId = json['publisherId'],
         publisherName = json['publisherName'],
-        authors = json['authors'],
-        genres = json['genres'],
-        series = json['series'],
-        keyWords = json['keyWords'];
+        authors = json['authors'].map<Author>((author)=>Author.fromJson(author)).toList(),
+        genres = json['genres'].map<Genre>((genre)=>Genre.fromJson(genre)).toList(),
+        series = json['series'].map<Series>((series)=>Series.fromJson(series)).toList(),
+        keyWords = json['keyWords'].map<String>((keyWord)=>keyWord.toString()).toList();
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -108,15 +108,15 @@ class AppUser {
   final String id;
   final String name;
   final String surname;
-  final String phoneNo;
-  final int addressId;
-  final Address address;
+  final String? phoneNo;
+  final int? addressId;
+  final Address? address;
   final String mail;
   final String password;
   final List<String> roleIds;
-  final String photo;
-  final String creationDate;
-  final String dezactivationDate;
+  final String? photo;
+  final String? creationDate;
+  final String? dezactivationDate;
 
   AppUser(
     this.id,
@@ -141,7 +141,7 @@ class AppUser {
         address = json['address'],
         mail = json['mail'],
         password = json['password'],
-        roleIds = json['roleIds'],
+        roleIds = json['roleIds'].map<String>((roleId)=>roleId.toString()).toList(),
         photo = json['photo'],
         creationDate = json['creationDate'],
         dezactivationDate = json['dezactivationDate'];
@@ -181,13 +181,44 @@ class Author {
       {'id': id, 'name': name, 'surname': surname, 'description': description};
 }
 
+enum BookCopyStatus {
+	IDLE, IDLE2, BORROWED, RESERVED, CANBORROW
+}
+
 class BookAvailability {
-  final String id;
+  final String bookId;
+	final int allBooks;
+	final int available;
+	final int borrowedBooks;
+	final int numberOfReservations;
+	final int keptTooLong;
+	final BookCopyStatus status;
   BookAvailability(
-    this.id,
+    this.bookId,
+    this.allBooks,
+    this.available,
+    this.borrowedBooks,
+    this.numberOfReservations,
+    this.keptTooLong,
+    this.status,
   );
-  BookAvailability.fromJson(Map<String, dynamic> json) : id = json['id'];
-  Map<String, dynamic> toJson() => {'id': id};
+  BookAvailability.fromJson(Map<String, dynamic> json) : 
+    bookId = json['bookId'],
+    allBooks = json['allBooks'],
+    available = json['available'],
+    borrowedBooks = json['borrowedBooks'],
+    numberOfReservations = json['numberOfReservations'],
+    keptTooLong = json['keptTooLong'],
+    status = BookCopyStatus.values.firstWhere((e) => e.toString() == json['status'],orElse: () => BookCopyStatus.IDLE);
+  Map<String, dynamic> toJson() => {
+    'bookId': bookId,
+    'allBooks': allBooks,
+    'available': available,
+    'borrowedBooks': borrowedBooks,
+    'numberOfReservations': numberOfReservations,
+    'keptTooLong': keptTooLong,
+    'status': status
+    };
 }
 
 class BookCopy {
@@ -204,7 +235,7 @@ class BookCopy {
   BookCopy.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         bookId = json['bookId'],
-        book = json['book'],
+        book = Book.fromJson(json['book']),
         status = json['status'];
   Map<String, dynamic> toJson() =>
       {'id': id, 'bookId': bookId, 'book': book, 'status': status};
@@ -272,14 +303,67 @@ class Borrowing {
       };
 }
 
+
+class UserAvailability {
+	final int currentlyBorrowed;
+	final int keptTooLong;
+  UserAvailability(
+    this.currentlyBorrowed,
+    this.keptTooLong
+  );
+  UserAvailability.fromJson(Map<String, dynamic> json) :
+    currentlyBorrowed = json["currentlyBorrowed"],
+    keptTooLong = json["keptTooLong"];
+  Map<String, dynamic> toJson() => {
+    'currentlyBorrowed': currentlyBorrowed,
+    'keptTooLong': keptTooLong
+  };
+}
+
 class CanBorrowBook {
-  final String id;
+  final String? id;
+  final Book? book;
+	final BookCopy? bookCopy;
+	final AppUser? user;
+	final BookAvailability? bookAvailabilityDto;
+	final UserAvailability? userAvailabilityDto;
+	final Bool? isReservedByUser;
+	final Bool? canBorrow;
+	final String? reservationId;
   CanBorrowBook(
     this.id,
+    this.book,
+    this.bookCopy,
+    this.user,
+    this.bookAvailabilityDto,
+    this.userAvailabilityDto,
+    this.isReservedByUser,
+    this.canBorrow,
+    this.reservationId
   );
-  CanBorrowBook.fromJson(Map<String, dynamic> json) : id = json['id'];
-  Map<String, dynamic> toJson() => {'id': id};
+  CanBorrowBook.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        book = json["book"] != null ? Book.fromJson(json["book"]) : null,
+        bookCopy = json["bookCopy"] != null ? BookCopy.fromJson(json["bookCopy"]) : null,
+        user = json["user"] != null ? AppUser.fromJson(json["user"]) : null,
+        bookAvailabilityDto = json["bookAvailabilityDto"] != null ? BookAvailability.fromJson(json["bookAvailabilityDto"]) : null,
+        userAvailabilityDto = json["userAvailabilityDto"] != null ? UserAvailability.fromJson(json["userAvailabilityDto"]) : null,
+        isReservedByUser = json["isReservedByUser"],
+        canBorrow = json["canBorrow"],
+        reservationId = json["reservationId"];
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'book': book,
+    'bookCopy': bookCopy,
+    'user': user,
+    'bookAvailabilityDto': bookAvailabilityDto,
+    'userAvailabilityDto': userAvailabilityDto,
+    'isReservedByUser': isReservedByUser,
+    'canBorrow': canBorrow,
+    'reservationId': reservationId
+  };
 }
+
 
 class ChangeProposal {
   final String id;

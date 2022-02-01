@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:librarian/borrowPage.dart';
 import 'package:librarian/consts.dart';
+import 'package:librarian/services/booksService.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRCodeScanner extends StatefulWidget {
@@ -98,7 +100,14 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
         context, MaterialPageRoute<void>(builder: (context) => component));
   }
 
-    navigateBack(context) {
+  navigateBack(context) {
+    var code = result!.code;
+    if (code != null) {
+      print("zeskanowano");
+      print(code);
+      Provider.of<BooksService>(context, listen: false)
+          .canBorrowBookCopy(code, code);
+    }
     Navigator.pop(context);
   }
 }

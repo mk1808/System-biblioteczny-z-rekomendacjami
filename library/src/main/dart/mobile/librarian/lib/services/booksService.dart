@@ -5,11 +5,13 @@ import 'package:librarian/services/api/api.dart';
 import 'package:librarian/services/restService.dart';
 
 class BooksService extends ChangeNotifier {
-  final String _url = "/api/books";
+  final String _url = "api/books";
 
-  final List<Book> _books = [];
+  final List<Book> books = [];
+  final List<BookAvailability> booksAvailAbility = [];
+  AppUser? user;
+  UserAvailability? userAvailability;
 
-  UnmodifiableListView<Book> get items => UnmodifiableListView(_books);
 
   void getById(String id) {
     RestService rest = RestService();
@@ -65,12 +67,23 @@ class BooksService extends ChangeNotifier {
     RestService rest = RestService();
     rest.get<dynamic>(
         path: "${_url}/bookCopies/${bookCopyId}/users/${userId}/canBorrow",
-        onSuccess: onSuccessCanBorrowBookCopy);
+        onSuccess: onSuccessCanBorrowBookCopy,
+        onError: (e)=>print(e));
   }
 
   void onSuccessCanBorrowBookCopy(dynamic object) {
-    print(object);
     Response response = Response.fromJson(object);
+    CanBorrowBook canBorrowBook = CanBorrowBook.fromJson(response.content);
+    Book? book = canBorrowBook.book;
+    BookAvailability? bookAvailAbility = canBorrowBook.bookAvailabilityDto;
+    if (book != null && bookAvailAbility != null) {
+      books.add(book);
+      booksAvailAbility.add(bookAvailAbility);
+    }
+    if(canBorrowBook.user != null){
+      user = canBorrowBook.user;
+      userAvailability = canBorrowBook.userAvailabilityDto;
+    }
     notifyListeners();
   }
 

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class RestService {
-  static const host = "http://10.0.2.15:8080/";
+  static const host = "http://192.168.33.6:8080/";
 
   dynamic get<T>(
       {required String path,

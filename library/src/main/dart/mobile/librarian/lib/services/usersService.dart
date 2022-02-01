@@ -5,8 +5,8 @@ import 'package:librarian/services/api/api.dart';
 import 'package:librarian/services/restService.dart';
 
 class UsersService extends ChangeNotifier {
-  final String _url = "/api/users";
-  final String _urlAuth = "/api/auth";
+  final String _url = "api/users";
+  final String _urlAuth = "api/auth";
 
   final List<AppUser> _users = [];
 
