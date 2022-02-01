@@ -1,6 +1,9 @@
-package com.library.dto;
+package com.library.model;
 
 import java.util.UUID;
+
+import com.library.dto.BookAvailabilityDto;
+import com.library.dto.UserAvailabilityDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,15 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CanBorrowBookDto {
-	private UUID id;
-	private BookDto book;
-	private BookCopyDto bookCopy;
-	private AppUserDto user;
+public class CanBorrowBook {
+	private Book book;
+	private BookCopy bookCopy;
+	private AppUser user;
 	private BookAvailabilityDto bookAvailabilityDto;
 	private UserAvailabilityDto userAvailabilityDto;
-	private Boolean isReservedByUser;
 	private Boolean canBorrow;
+	private Boolean isReservedByUser;
 	private UUID reservationId;
-	
+
 }

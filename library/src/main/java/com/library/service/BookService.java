@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.library.dto.BookFIlterDto;
+import com.library.dto.CanBorrowBookDto;
 import com.library.model.Book;
 import com.library.model.BookCopy;
+import com.library.model.CanBorrowBook;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
 import com.library.model.UserListElement;
@@ -50,5 +52,7 @@ public interface BookService extends RepositoryService<Book>{
 	List<Book> getFiltered(BookFIlterDto bookFilterDto);
 
 	BookAvailabilityDto getAvailabilityByBookId(UUID id);
+
+	CanBorrowBook canBorrow(UUID bookCopyId, UUID userId);
 
 }

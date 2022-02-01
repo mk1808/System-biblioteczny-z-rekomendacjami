@@ -83,5 +83,25 @@ public class ReservationServiceImpl implements ReservationService {
 				.filter(this::wasNotBorrowed)
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<Reservation> getFromListByUser(List<Reservation> reservations, UUID userId) {
+		return reservations
+				.stream()
+				.filter(x->x.getUser().getId().equals(userId))
+				.collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<Reservation> getCurrentByBookAndUser(UUID bookId, UUID userId) {
+		return getByBookId(bookId)
+				.stream()
+				.filter(x->x.getUser().getId().equals(userId))
+				.collect(Collectors.toList());
+	}
+	
+	
+	
+	
 
 }

@@ -9,15 +9,19 @@ import org.springframework.stereotype.Service;
 
 import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookFIlterDto;
+import com.library.dto.CanBorrowBookDto;
+import com.library.dto.UserAvailabilityDto;
 import com.library.enums.BookCopyStatus;
 import com.library.enums.ChangeProposalStatus;
 import com.library.model.Book;
 import com.library.model.BookCopy;
 import com.library.model.Borrowing;
+import com.library.model.CanBorrowBook;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
 import com.library.model.UserListElement;
 import com.library.model.Reservation;
+import com.library.model.AppUser;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookCopyRepository;
 import com.library.repository.BookRepository;
@@ -27,6 +31,7 @@ import com.library.repository.UserListElementRepository;
 import com.library.service.BookService;
 import com.library.service.BorrowingService;
 import com.library.service.ReservationService;
+import com.library.service.UserService;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -37,13 +42,15 @@ private final UserListElementRepository userListElementRepository;
 private final ChangeProposalRepository changeProposalRepository;
 private final AuthorRepository authorRepository;
 private final BorrowingService borrowingService;
+private final UserService userService;
 private ReservationService reservationService;
+
 	
 	
 	@Autowired
 	public BookServiceImpl(BookRepository repository, BookCopyRepository bookCopyRepository, OpinionRepository opinionRepository,
 			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository, AuthorRepository authorRepository,
-			BorrowingService borrowingService) {
+			BorrowingService borrowingService, UserService userService) {
 		this.repository = repository;
 		this.bookCopyRepository = bookCopyRepository;
 		this.opinionRepository = opinionRepository;
@@ -51,6 +58,7 @@ private ReservationService reservationService;
 		this.changeProposalRepository = changeProposalRepository;
 		this.authorRepository = authorRepository;
 		this.borrowingService = borrowingService;
+		this.userService = userService;
 		
 	}
 	
@@ -213,6 +221,83 @@ private ReservationService reservationService;
 				.status(borrowings.size()<copies.size()?BookCopyStatus.CANBORROW:BookCopyStatus.BORROWED)
 				.build();
 	}
+	
+	public UserAvailabilityDto getAvailabilityByUserId(UUID id) {
+		//List<BookCopy> copies = this.getBookCopiesByBookId(id);
+		List<Borrowing> borrowings= this.borrowingService.getByUserId(id);
+		List<Borrowing> keptTooLong=this.borrowingService.getKeptTooLong(borrowings);
+	//	List<Reservation> reservations = this.reservationService.getCurrentByBookAndUser(id);
+		
+		return UserAvailabilityDto.builder()
+				.currentlyBorrowed(borrowings.size())
+				.keptTooLong(keptTooLong.size())
+				.build();
+	}
+
+	@Override
+	public CanBorrowBook canBorrow(UUID bookCopyId, UUID userId) {
+		CanBorrowBook canBorrowBook = new CanBorrowBook();
+		BookCopy bookCopy;
+		Book book = null;
+		BookAvailabilityDto bookAvailability;
+		if (bookCopyId!=null) {
+			bookCopy = this.getBookCopyById(bookCopyId);
+			book = this.getByBookCopy(bookCopyId);
+			bookAvailability = this.getAvailabilityByBookId(book.getId());
+			canBorrowBook.setBook(book);
+			canBorrowBook.setBookCopy(bookCopy);
+			canBorrowBook.setBookAvailabilityDto(bookAvailability);}
+		
+		AppUser user;
+		UserAvailabilityDto userAvailability;
+		if (userId!=null) {
+			user = userService.get(userId);
+			canBorrowBook.setUser(user);
+			canBorrowBook.setUserAvailabilityDto(this.getAvailabilityByUserId(userId));
+			
+		}
+		Boolean reservedByUser;
+		if (userId!=null&&bookCopyId!=null) {
+			List<Reservation> reservations = this.reservationService.getCurrentByBookAndUser(book.getId(), userId);
+			reservedByUser=reservations.size()>0;
+			canBorrowBook.setIsReservedByUser(reservedByUser);
+			canBorrowBook.setReservationId(reservedByUser?reservations.get(0).getId():null);
+		}
+		
+		return canBorrowBook;
+	}
+	
+	void checkBook(UUID bookCopyId) {
+		CanBorrowBook canBorrowBook = new CanBorrowBook();
+		BookCopy bookCopy;
+		Book book;
+		BookAvailabilityDto bookAvailability;
+		if (bookCopyId!=null) {
+			bookCopy = this.getBookCopyById(bookCopyId);
+			book = this.getByBookCopy(bookCopyId);
+			bookAvailability = this.getAvailabilityByBookId(book.getId());
+			canBorrowBook.setBook(book);
+			canBorrowBook.setBookCopy(bookCopy);
+			canBorrowBook.setBookAvailabilityDto(bookAvailability);
+			
+		}
+	}
+	void checkUser(UUID userId) {
+		CanBorrowBook canBorrowBook = new CanBorrowBook();
+		AppUser user;
+		UserAvailabilityDto userAvailability;
+		if (userId!=null) {
+			user = userService.get(userId);
+			canBorrowBook.setUser(user);
+			canBorrowBook.setUserAvailabilityDto(this.getAvailabilityByUserId(userId));
+			
+			
+			
+			
+		}
+	}
+	
+	
 		
 
 

@@ -15,4 +15,8 @@ public interface ReservationService extends RepositoryService<Reservation> {
 
 	List<Reservation> getByBookId(UUID id);
 
+	List<Reservation> getFromListByUser(List<Reservation> reservations, UUID id);
+
+	List<Reservation> getCurrentByBookAndUser(UUID bookId, UUID userId);
+
 }

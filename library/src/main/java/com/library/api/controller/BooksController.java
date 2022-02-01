@@ -30,6 +30,7 @@ import com.library.response.Response;
 import com.library.service.BookConverterService;
 import com.library.service.BookCopyConverterService;
 import com.library.service.BookService;
+import com.library.service.CanBorrowBookConverterService;
 import com.library.service.ChangeProposalConverterService;
 import com.library.service.OpinionConverterService;
 import com.library.service.UserListElementConverterService;
@@ -43,17 +44,21 @@ public class BooksController extends BaseController implements BooksResource {
 	private final ChangeProposalConverterService changeProposalConverter;
 	private final UserListElementConverterService userListElementConverter;
 	private final BookService bookService;
+	private final CanBorrowBookConverterService canBorrowBookConverter;
 	
     @Autowired
     public BooksController(BookConverterService bookConverter, BookCopyConverterService bookCopyConverter,
     		OpinionConverterService opinionConverter, BookService bookService, 
-    		ChangeProposalConverterService changeProposalConverter, UserListElementConverterService userListElementConverter){
+    		ChangeProposalConverterService changeProposalConverter, 
+    		UserListElementConverterService userListElementConverter,
+    		CanBorrowBookConverterService canBorrowBookConverter){
         this.bookConverter = bookConverter;
         this.bookCopyConverter = bookCopyConverter;
 		this.opinionConverter = opinionConverter;
 		this.changeProposalConverter = changeProposalConverter;
 		this.userListElementConverter = userListElementConverter;
 		this.bookService = bookService;
+		this.canBorrowBookConverter = canBorrowBookConverter;
     }
 	
     
@@ -211,8 +216,8 @@ public class BooksController extends BaseController implements BooksResource {
 
 	@Override
 	public ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(UUID bookCopyId, UUID userId) {
-		// TODO Auto-generated method stub
-		return null;
+		Response<CanBorrowBookDto> response = createSuccessResponse(canBorrowBookConverter.toDto(bookService.canBorrow(bookCopyId, userId)));
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
