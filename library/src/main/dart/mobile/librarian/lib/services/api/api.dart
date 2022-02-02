@@ -260,15 +260,15 @@ class BookFIlter {
 }
 
 class Borrowing {
-  final String id;
+  final String? id;
   final BookCopy bookCopy;
   final String bookCopyId;
   final AppUser user;
   final String userId;
-  final String borrowDate;
-  final String returnDate;
-  final String expectedReturnDate;
-  final int numberOfProlongings;
+  final String? borrowDate;
+  final String? returnDate;
+  final String? expectedReturnDate;
+  final int? numberOfProlongings;
   Borrowing(
     this.id,
     this.bookCopy,

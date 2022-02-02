@@ -13,10 +13,18 @@ class BorrowingsService extends ChangeNotifier {
   Borrowing? _borrowing;
   Borrowing? get item => (_borrowing);
 
-  void create(Borrowing borrowing) {
+  void create( List<Borrowing> borrowings, void Function(dynamic) onSuccess) {
     RestService rest = RestService();
+    List<Map<dynamic, dynamic>> borrowingsJson = borrowings.map((borrowing) => borrowing.toJson()).toList();
     rest.post<dynamic>(
-        path: _url, body: borrowing.toJson(), onSuccess: onSuccessCreate);
+        path: _url, body: borrowingsJson, onSuccess: onSuccess, onError: (j)=>print(j));
+  }
+
+  void createBorrowing(List<BookCopy> bookCopies, AppUser user, void Function(dynamic) onSuccess){
+    List<Borrowing> borrowings = bookCopies.map((copy) => 
+    Borrowing(null, copy, copy.id, user, user.id, null, null, null, null)).toList();
+    create(borrowings, onSuccess);
+
   }
 
   void onSuccessCreate(dynamic object) {

@@ -8,10 +8,10 @@ class BooksService extends ChangeNotifier {
   final String _url = "api/books";
 
   final List<Book> books = [];
+  final List<BookCopy> bookCopies = [];
   final List<BookAvailability> booksAvailAbility = [];
   AppUser? user;
   UserAvailability? userAvailability;
-
 
   void getById(String id) {
     RestService rest = RestService();
@@ -68,7 +68,7 @@ class BooksService extends ChangeNotifier {
     rest.get<dynamic>(
         path: "${_url}/bookCopies/${bookCopyId}/users/${userId}/canBorrow",
         onSuccess: onSuccessCanBorrowBookCopy,
-        onError: (e)=>print(e));
+        onError: (e) => print(e));
   }
 
   void onSuccessCanBorrowBookCopy(dynamic object) {
@@ -76,15 +76,25 @@ class BooksService extends ChangeNotifier {
     CanBorrowBook canBorrowBook = CanBorrowBook.fromJson(response.content);
     Book? book = canBorrowBook.book;
     BookAvailability? bookAvailAbility = canBorrowBook.bookAvailabilityDto;
-    if (book != null && bookAvailAbility != null) {
+    BookCopy? bookCopy = canBorrowBook.bookCopy;
+    if (book != null && bookAvailAbility != null && bookCopy != null) {
       books.add(book);
       booksAvailAbility.add(bookAvailAbility);
+      bookCopies.add(bookCopy);
     }
-    if(canBorrowBook.user != null){
+    if (canBorrowBook.user != null) {
       user = canBorrowBook.user;
       userAvailability = canBorrowBook.userAvailabilityDto;
     }
     notifyListeners();
+  }
+
+  void clean() {
+    books.clear();
+    bookCopies.clear();
+    booksAvailAbility.clear();
+    user = null;
+    userAvailability = null;
   }
 
   void getBookByBookCopy(String bookCopyId) {
