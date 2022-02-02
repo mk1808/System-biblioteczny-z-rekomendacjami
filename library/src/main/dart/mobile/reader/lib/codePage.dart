@@ -38,18 +38,18 @@ class _CodePageState extends State<CodePage> {
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Mail:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Mail: jNowak@test.com.pl', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Imię:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Imię: Jan', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Nazwisko:',
+            child: Text('Nazwisko: Nowak',
                 textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Numer konta:',
+            child: Text('Numer konta: 3503',
                 textAlign: TextAlign.left, style: smallerFont)),
       ]),
     );

@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   getInputLogin() {
     return TextFormField(
         decoration: const InputDecoration(
-          hintText: 'Login',
+          hintText: 'Email',
         ),
         validator: (String? value) {
           if (value == null || value.isEmpty) {
@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       decoration: const InputDecoration(
         hintText: 'Hasło',
       ),
+      obscureText: true,
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter some text';

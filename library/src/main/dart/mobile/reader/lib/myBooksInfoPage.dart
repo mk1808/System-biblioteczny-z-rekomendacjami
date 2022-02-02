@@ -6,6 +6,7 @@ import 'package:reader/loginPage.dart';
 import 'package:reader/main.dart';
 import 'package:reader/menu.dart';
 import 'package:reader/myAppBar.dart';
+import 'package:reader/services/api/api.dart';
 
 class MyBooksInfoPage extends StatefulWidget {
   const MyBooksInfoPage({Key? key}) : super(key: key);
@@ -45,8 +46,8 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
               //   padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
               //   height: 300.0,
               width: 260.0,
-              child: Text(bookInfo + bookInfo2,
-                  textAlign: TextAlign.left, style: smallerFont),
+              child: Text(bookInfo+" 2 \n\n" + bookInfo2+" 3",
+                  textAlign: TextAlign.left, style: smallerFont.copyWith(fontSize: 19)),
             ),
           ]),
         ),
@@ -93,21 +94,21 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
         context, MaterialPageRoute<void>(builder: (context) => component));
   }
 
-  getSingleBorrowed() {
+  getSingleBorrowed(String title, String authors, String date) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(children: [
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Tytuł:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Tytuł: ${title}', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Autor:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Autor: ${authors}', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Data wypożyczenia:',
+            child: Text('Data wypożyczenia: $date',
                 textAlign: TextAlign.left, style: smallerFont)),
       ]),
     );
@@ -115,31 +116,32 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
 
   getBorrowed() {
     return Column(
-        children: List.generate(2, (index) {
-      return getSingleBorrowed();
-    }));
+        children: [
+      getSingleBorrowed("Nieodnaleziona", "Remigiusz Mróz", "01.02.2022"),
+      getSingleBorrowed("Hyperion", "Dan Simmons", "01.02.2022"),
+    ]);
   }
 
 
-  getSingleReserved() {
+  getSingleReserved(String title, String authors, String date, String no) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(children: [
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Tytuł:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Tytuł: $title', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Autor:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Autor: $authors', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Data rezerwacji:',
+            child: Text('Data rezerwacji: $date',
                 textAlign: TextAlign.left, style: smallerFont)),
                 Align(
             alignment: Alignment.centerLeft,
-            child: Text('Numer w kolejce:',
+            child: Text('Numer w kolejce: $no',
                 textAlign: TextAlign.left, style: smallerFont)),
       ]),
     );
@@ -147,9 +149,11 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
 
   getReserved() {
     return Column(
-        children: List.generate(2, (index) {
-      return getSingleReserved();
-    }));
+        children: [
+          getSingleReserved("Behawiorysta", "Remigiusz Mróz", "02.02.2022", "1" ),
+          getSingleReserved("Pułapki myślenia", "Daniel Kahneman", "02.02.2022", "3" ),
+        ]
+    );
   }
 
   getBorrowedContainer() {

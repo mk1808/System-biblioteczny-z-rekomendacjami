@@ -43,7 +43,7 @@ class _MainPageState extends State<MainPage> {
 
   getButton() {
     return ElevatedButton.icon(
-        label: Text('Rozpocznij mapowanie'),
+        label: Text('Zaloguj się'),
         icon: Icon(
           FontAwesomeIcons.clipboardList,
           color: Colors.white,

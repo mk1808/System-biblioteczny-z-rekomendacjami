@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:reader/codePage.dart';
 import 'package:reader/consts.dart';
 import 'package:reader/mainPage.dart';
+import 'package:reader/myBooksInfoPage.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -38,6 +39,10 @@ class _MenuState extends State<Menu> {
               leading: const Icon(Icons.star_rounded),
               title: const Text('Kod QR'),
               onTap: () => navigateTo(context, const CodePage())),
+               ListTile(
+              leading: const Icon(Icons.star_rounded),
+              title: const Text('Moje książki'),
+              onTap: () => navigateTo(context, const MyBooksInfoPage())),
         ],
       ),
     );
