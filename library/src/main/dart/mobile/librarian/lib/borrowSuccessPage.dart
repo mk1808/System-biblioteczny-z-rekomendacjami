@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:librarian/afterLoginPage.dart';
 import 'package:librarian/consts.dart';
 import 'package:librarian/loginPage.dart';
 import 'package:librarian/menu.dart';
@@ -79,7 +80,7 @@ class _BorrowSuccessPageState extends State<BorrowSuccessPage> {
           color: Colors.white,
           size: 30.0,
         ),
-        onPressed: () => navigateTo(context, const LoginPage()),
+        onPressed: () => navigateTo(context, const AfterLoginPage()),
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ));

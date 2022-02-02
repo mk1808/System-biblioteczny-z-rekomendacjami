@@ -36,6 +36,7 @@ public class BorrowingServiceImpl implements BorrowingService {
 	public Borrowing create(Borrowing entity) {
 		LocalDateTime now = LocalDateTime.now();
 		entity.setBorrowDate(now);
+		entity.setExpectedReturnDate(now.plusDays(BORROW_PERIOD));
 		return repository.save(entity);
 	}
 
@@ -93,12 +94,13 @@ public class BorrowingServiceImpl implements BorrowingService {
 
 	@Override
 	public void returnBorrowings(List<UUID> bookCopiesIds) {
+		
 		List<Borrowing> borrowings = getCurrentByBookCopiesIds(bookCopiesIds);
 		LocalDateTime now = LocalDateTime.now();
 		borrowings.stream().forEach(borrowing->borrowing.setReturnDate(now));
 		borrowings.stream().forEach(this::update);
 		
-		
+		System.out.println("returned");
 	}
 	
 	private Boolean isReturned(Borrowing borrowing) {
@@ -106,7 +108,12 @@ public class BorrowingServiceImpl implements BorrowingService {
 	}
 	
 	public Boolean isKeptTooLong(Borrowing borrowing) {
-		int compared = borrowing.getExpectedReturnDate().compareTo(LocalDateTime.now());
+		if(borrowing.getExpectedReturnDate()==null)
+		{
+			return false;
+		}
+		int compared = LocalDateTime.now().compareTo(borrowing.getExpectedReturnDate());
+				
 		return compared<0;
 	}
 	

@@ -5,10 +5,15 @@ import 'package:librarian/consts.dart';
 import 'package:librarian/loginPage.dart';
 import 'package:librarian/menu.dart';
 import 'package:librarian/myAppBar.dart';
+import 'package:librarian/qrCodeScanner.dart';
 import 'package:librarian/returnSuccessPage.dart';
+import 'package:librarian/services/api/api.dart';
+import 'package:librarian/services/booksService.dart';
+import 'package:librarian/services/borrowingsService.dart';
+import 'package:provider/provider.dart';
 
 class ReturnPage extends StatefulWidget {
-  const ReturnPage({ Key? key }) : super(key: key);
+  const ReturnPage({Key? key}) : super(key: key);
 
   @override
   _ReturnPageState createState() => _ReturnPageState();
@@ -17,7 +22,7 @@ class ReturnPage extends StatefulWidget {
 class _ReturnPageState extends State<ReturnPage> {
   @override
   Widget build(BuildContext context) {
-       return Scaffold(appBar: const MyAppBar(), body: getBody(), drawer: Menu());
+    return Scaffold(appBar: const MyAppBar(), body: getBody(), drawer: Menu());
   }
 
   getBody() {
@@ -38,7 +43,8 @@ class _ReturnPageState extends State<ReturnPage> {
           decoration: myBooksInfoContainer,
           margin: const EdgeInsets.only(bottom: 30.0),
           padding: const EdgeInsets.fromLTRB(12.0, 40.0, 12.0, 10.0),
-          child: Text('Książki do zwrotu', textAlign: TextAlign.center, style: midSmall),
+          child: Text('Książki do zwrotu',
+              textAlign: TextAlign.center, style: midSmall),
         ),
         getBooks(),
         Container(
@@ -65,24 +71,46 @@ class _ReturnPageState extends State<ReturnPage> {
           color: Colors.white,
           size: 30.0,
         ),
-        onPressed: () => navigateTo(context, const LoginPage()),
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const QRCodeScanner(),
+          ));
+        },
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ));
   }
 
   getButtonConfirm() {
-    return ElevatedButton.icon(
-        label: Text('Potwierdź odebranie zwrotu'),
-        icon: Icon(
-          FontAwesomeIcons.clipboardList,
-          color: Colors.white,
-          size: 30.0,
-        ),
-        onPressed: () => navigateTo(context, const ReturnSuccessPage()),
-        style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        ));
+    return Consumer2<BooksService, BorrowingsService>(
+        builder: (context, booksService, borrowingsService, child) {
+      return ElevatedButton.icon(
+          label: Text('Potwierdź odebranie zwrotu'),
+          icon: Icon(
+            FontAwesomeIcons.clipboardList,
+            color: Colors.white,
+            size: 30.0,
+          ),
+          onPressed: () => pressedButton(booksService, borrowingsService),
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          ));
+    });
+  }
+    pressedButton(
+      BooksService booksService, BorrowingsService borrowingsService) {
+    //AppUser? user = booksService.user;
+    //if (user != null) {
+      borrowingsService.returnBorrowing(booksService.bookCopies, (data){
+        onSuccess(booksService);
+        print(data);}
+        );
+     
+    //}
+  }
+  onSuccess(BooksService booksService){
+    booksService.clean();
+    navigateTo(context, const ReturnSuccessPage());
   }
 
   navigateTo(context, component) {
@@ -90,31 +118,37 @@ class _ReturnPageState extends State<ReturnPage> {
         context, MaterialPageRoute<void>(builder: (context) => component));
   }
 
-  getSingleBook() {
+  getSingleBook(Book book, BookAvailability bookAvailability) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(children: [
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Tytuł:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Tytuł: ${book.title}', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Autor:', textAlign: TextAlign.left, style: smallerFont)),
+                Text(
+                  'Autor: ${book.authors[0].name} ${book.authors[0].surname}',
+                   textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Status:',
-                textAlign: TextAlign.left, style: smallerFont)),
+            child:
+                Text('Status:oddana w terminie', textAlign: TextAlign.left, style: smallerFont)),
       ]),
     );
   }
 
+
   getBooks() {
-    return Column(
-        children: List.generate(2, (index) {
-      return getSingleBook();
-    }));
+    return Consumer<BooksService>(builder: (context, booksService, child) {
+      return Column(
+          children: List.generate(booksService.books.length, (index) {
+        return getSingleBook(
+            booksService.books[index], booksService.booksAvailAbility[index]);
+      }));
+    });
   }
 
   getUser() {

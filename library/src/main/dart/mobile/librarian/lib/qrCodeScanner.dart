@@ -74,7 +74,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
           color: Colors.white,
           size: 30.0,
         ),
-        onPressed: () => navigateBack(context),
+        onPressed: () => confirmQR(context),
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ));
@@ -100,14 +100,15 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
         context, MaterialPageRoute<void>(builder: (context) => component));
   }
 
-  navigateBack(context) {
+  confirmQR(context) {
     var code = result!.code;
     if (code != null) {
-      print("zeskanowano");
-      print(code);
       Provider.of<BooksService>(context, listen: false)
           .canBorrowBookCopy(code, code);
     }
+    navigateBack();
+  }
+  navigateBack() {
     Navigator.pop(context);
   }
 }

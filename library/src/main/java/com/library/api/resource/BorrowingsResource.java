@@ -38,7 +38,7 @@ public interface BorrowingsResource {
 	@PostMapping
 	ResponseEntity<Response<String>> create(@RequestBody List<BorrowingDto> borrowings);
 	
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/return")
 	ResponseEntity<Response<String>> returnBorrowing(@RequestParam List<UUID> bookCopiesIds);
 	

@@ -58,14 +58,16 @@ class BorrowingsService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void returnBorrowing(List<String> bookCopiesIds) {
+  void returnBorrowing(List<BookCopy> bookCopies, void Function(dynamic) onSuccess) {
     RestService rest = RestService();
     String stringIds = "";
-    bookCopiesIds.forEach((id) => stringIds += "&bookCopiesIds=${id}");
+    bookCopies.forEach((bookCopy) => stringIds += "&bookCopiesIds=${bookCopy.id}");
     stringIds = stringIds.substring(0, stringIds.length - 1);
-    rest.get<dynamic>(
+    print(stringIds);
+    rest.patch<dynamic>(
         path: "${_url}/return?${stringIds}",
-        onSuccess: onSuccessReturnBorrowing);
+        onSuccess: onSuccess,
+        onError: (j)=>print(j));
   }
 
   void onSuccessReturnBorrowing(dynamic object) {
