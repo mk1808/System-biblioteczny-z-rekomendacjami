@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/", "/*.js","/assets/**", "/*.css", "/users/authenticate", "/users/register", "/token/register", "/token/authenticate",
 				"/api/books/**", "/api/users/*", "/api/auth/authenticate", "/api/auth/register", "/api/dictionaries/**",
-				"/api/reservations/**", "/api/reservations").permitAll()
+				"/api/reservations/**", "/api/reservations", "/api/borrowings", "/api/borrowings/**").permitAll()
 		.anyRequest().authenticated()
 		.and().exceptionHandling()
 				.authenticationEntryPoint(unauthorizedEntryPoint).and().sessionManagement()

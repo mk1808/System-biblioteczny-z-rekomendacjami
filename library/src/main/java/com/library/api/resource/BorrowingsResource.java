@@ -34,7 +34,7 @@ public interface BorrowingsResource {
 	@PatchMapping("/{id}/prolong")
 	ResponseEntity<Response<String>> prolong(@PathVariable UUID id);
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	ResponseEntity<Response<String>> create(@RequestBody List<BorrowingDto> borrowings);
 	
