@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton.icon(
         label: Text('Zaloguj'),
         icon: Icon(
-          FontAwesomeIcons.clipboardList,
+          FontAwesomeIcons.signInAlt,
           color: Colors.white,
           size: 30.0,
         ),

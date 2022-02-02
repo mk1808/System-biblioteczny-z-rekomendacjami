@@ -59,16 +59,16 @@ class _BorrowSuccessPageState extends State<BorrowSuccessPage> {
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Książki wypożyczone dzisiaj:', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Książki wypożyczone dzisiaj: 2', textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Zakładana data zwrotu:', textAlign: TextAlign.left, style: smallerFont)),
-        Align(
+                Text('Zakładana data zwrotu: 02.03.22r.', textAlign: TextAlign.left, style: smallerFont)),
+    /*    Align(
             alignment: Alignment.centerLeft,
             child: Text('Książki wypożyczone łącznie:',
                 textAlign: TextAlign.left, style: smallerFont)),
-      ]),
+   */   ]),
     );
   }
 
@@ -76,7 +76,7 @@ class _BorrowSuccessPageState extends State<BorrowSuccessPage> {
     return ElevatedButton.icon(
         label: Text('Powrót'),
         icon: Icon(
-          FontAwesomeIcons.clipboardList,
+          FontAwesomeIcons.longArrowAltLeft,
           color: Colors.white,
           size: 30.0,
         ),

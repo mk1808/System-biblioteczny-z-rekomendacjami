@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:librarian/afterLoginPage.dart';
 import 'package:librarian/consts.dart';
 import 'package:librarian/loginPage.dart';
 import 'package:librarian/menu.dart';
@@ -59,6 +60,10 @@ class _ReturnPageState extends State<ReturnPage> {
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           child: SizedBox(width: 300, height: 50, child: getButtonConfirm()),
         ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(40.0, 1.0, 40.0, 30.0),
+          child: SizedBox(width: 300, height: 40, child: getButtonCancel()),
+        ),
       ],
     ));
   }
@@ -87,7 +92,7 @@ class _ReturnPageState extends State<ReturnPage> {
       return ElevatedButton.icon(
           label: Text('Potwierdź odebranie zwrotu'),
           icon: Icon(
-            FontAwesomeIcons.clipboardList,
+            FontAwesomeIcons.check,
             color: Colors.white,
             size: 30.0,
           ),
@@ -96,6 +101,21 @@ class _ReturnPageState extends State<ReturnPage> {
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           ));
     });
+  }
+
+    getButtonCancel() {
+    return ElevatedButton.icon(
+        label: Text('Anuluj'),
+        icon: Icon(
+          FontAwesomeIcons.times,
+          color: Colors.white,
+          size: 30.0,
+        ),
+        onPressed: () => navigateTo(context, const AfterLoginPage()),
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+           backgroundColor: MaterialStateProperty.all<Color>(cancelColor)
+        ));
   }
     pressedButton(
       BooksService booksService, BorrowingsService borrowingsService) {
@@ -135,7 +155,7 @@ class _ReturnPageState extends State<ReturnPage> {
         Align(
             alignment: Alignment.centerLeft,
             child:
-                Text('Status:oddana w terminie', textAlign: TextAlign.left, style: smallerFont)),
+                Text('Status: Oddana w terminie', textAlign: TextAlign.left, style: smallerFont)),
       ]),
     );
   }
@@ -152,7 +172,9 @@ class _ReturnPageState extends State<ReturnPage> {
   }
 
   getUser() {
-    return Container(
+   return Consumer<BooksService>(builder: (context, booksService, child) {
+      return booksService.userR == true
+  ? Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(children: [
         Align(
@@ -168,6 +190,11 @@ class _ReturnPageState extends State<ReturnPage> {
             child: Text('Przetrzymane książki:',
                 textAlign: TextAlign.left, style: smallerFont)),
       ]),
+    ): Container(child: Text('Po zeskanowaniu książki pojawią się informacje o użytkowniku',
+              textAlign: TextAlign.center,
+              style: smallerFont),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
     );
+    });
   }
 }

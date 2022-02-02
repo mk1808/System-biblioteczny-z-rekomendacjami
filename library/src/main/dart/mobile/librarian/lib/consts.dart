@@ -9,6 +9,22 @@ getColor() {
   return Colors.orangeAccent;
 }
 
+getSecondColor() {
+  Color? c1 = Color(0xff6f6657);
+  if (c1 != null) {
+    return c1;
+  }
+  return Colors.brown;
+}
+
+getCancelColor() {
+  Color? c1 = Color(0xdd525452);
+  if (c1 != null) {
+    return c1;
+  }
+  return Colors.grey;
+}
+
 TextStyle headerFont = const TextStyle(fontSize: 100.0);
 TextStyle bigFont = const TextStyle(fontSize: 40.0);
 TextStyle midFont =
@@ -21,7 +37,8 @@ TextStyle smallestFont =
     const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400);
 double iconSize = 40;
 Color mainColor = getColor();
-
+Color secondColor = getSecondColor();
+Color cancelColor = getCancelColor();
 Decoration myBooksInfoContainer = BoxDecoration(
   border: BorderDirectional(
     bottom: BorderSide(

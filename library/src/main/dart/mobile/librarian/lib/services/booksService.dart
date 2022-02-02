@@ -12,6 +12,7 @@ class BooksService extends ChangeNotifier {
   final List<BookAvailability> booksAvailAbility = [];
   AppUser? user;
   UserAvailability? userAvailability;
+  bool? userR=false;
 
   void getById(String id) {
     RestService rest = RestService();
@@ -84,8 +85,9 @@ class BooksService extends ChangeNotifier {
     }
     if (canBorrowBook.user != null) {
       user = canBorrowBook.user;
+      
       userAvailability = canBorrowBook.userAvailabilityDto;
-    }
+    }userR=true;
     notifyListeners();
   }
 
@@ -94,6 +96,7 @@ class BooksService extends ChangeNotifier {
     bookCopies.clear();
     booksAvailAbility.clear();
     user = null;
+    userR=false;
     userAvailability = null;
   }
 

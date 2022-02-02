@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:librarian/afterLoginPage.dart';
 import 'package:librarian/borrowSuccessPage.dart';
 import 'package:librarian/consts.dart';
 import 'package:librarian/loginPage.dart';
@@ -59,6 +60,10 @@ class _BorrowPageState extends State<BorrowPage> {
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           child: SizedBox(width: 300, height: 50, child: getButtonConfirm()),
         ),
+        Container(
+          padding: const EdgeInsets.fromLTRB(40.0, 1.0, 40.0, 30.0),
+          child: SizedBox(width: 300, height: 40, child: getButtonCancel()),
+        ),
       ],
     ));
   }
@@ -81,13 +86,28 @@ class _BorrowPageState extends State<BorrowPage> {
         ));
   }
 
+  getButtonCancel() {
+    return ElevatedButton.icon(
+        label: Text('Anuluj'),
+        icon: Icon(
+          FontAwesomeIcons.times,
+          color: Colors.white,
+          size: 30.0,
+        ),
+        onPressed: () => navigateTo(context, const AfterLoginPage()),
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+           backgroundColor: MaterialStateProperty.all<Color>(cancelColor)
+        ));
+  }
+
   getButtonConfirm() {
     return Consumer2<BooksService, BorrowingsService>(
         builder: (context, booksService, borrowingsService, child) {
       return ElevatedButton.icon(
           label: Text('Wypożycz książkę użytkownikowi'),
           icon: Icon(
-            FontAwesomeIcons.clipboardList,
+            FontAwesomeIcons.check,
             color: Colors.white,
             size: 30.0,
           ),
@@ -175,9 +195,12 @@ class _BorrowPageState extends State<BorrowPage> {
                         style: smallerFont)),
               ]),
             )
-          : Text('Należy zeskanować kartę biblioteczną',
+          : Container(child:     
+          Text('Należy zeskanować kartę biblioteczną',
               textAlign: TextAlign.center,
-              style: midSmall.copyWith(color: Colors.red));
-    });
+              style: smallerFont.copyWith(color: Colors.red)),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
+    );
+             });
   }
 }

@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
     return ElevatedButton.icon(
         label: Text('Zaloguj'),
         icon: Icon(
-          FontAwesomeIcons.clipboardList,
+          FontAwesomeIcons.signInAlt,
           color: Colors.white,
           size: 30.0,
         ),

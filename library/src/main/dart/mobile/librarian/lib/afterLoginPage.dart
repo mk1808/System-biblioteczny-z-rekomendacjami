@@ -54,7 +54,7 @@ class _AfterLoginPageState extends State<AfterLoginPage> {
     return ElevatedButton.icon(
         label: Text('Wypożyczenie'),
         icon: Icon(
-          FontAwesomeIcons.clipboardList,
+          FontAwesomeIcons.bookOpen,
           color: Colors.white,
           size: 30.0,
         ),
@@ -69,13 +69,14 @@ class _AfterLoginPageState extends State<AfterLoginPage> {
     return ElevatedButton.icon(
         label: Text('Zwrot'),
         icon: Icon(
-          FontAwesomeIcons.clipboardList,
+          FontAwesomeIcons.book,
           color: Colors.white,
           size: 30.0,
         ),
         onPressed: () => navigateTo(context, const ReturnPage()),
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          backgroundColor: MaterialStateProperty.all<Color>(secondColor),
         ));
   }
 
