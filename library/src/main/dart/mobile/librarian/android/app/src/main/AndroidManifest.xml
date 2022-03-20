@@ -2,7 +2,7 @@
     package="com.example.librarian">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="librarian"
+        android:label="Bibliotekarz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
