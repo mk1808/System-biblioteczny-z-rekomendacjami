@@ -13,7 +13,7 @@ import com.library.model.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID> {
 
-	@Query("SELECT b FROM Book b "
+	@Query("SELECT distinct b FROM Book b "
 			+"JOIN b.bookAuthors ba "
 			+"JOIN b.bookGenres bg "
 			+"WHERE "
