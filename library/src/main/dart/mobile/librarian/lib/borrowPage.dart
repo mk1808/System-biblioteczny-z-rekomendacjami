@@ -105,7 +105,7 @@ class _BorrowPageState extends State<BorrowPage> {
     return Consumer2<BooksService, BorrowingsService>(
         builder: (context, booksService, borrowingsService, child) {
       return ElevatedButton.icon(
-          label: Text('Wypożycz książkę użytkownikowi'),
+          label: Text('Wypożycz książki użytkownikowi'),
           icon: Icon(
             FontAwesomeIcons.check,
             color: Colors.white,

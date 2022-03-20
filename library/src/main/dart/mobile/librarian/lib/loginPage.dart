@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   getInputLogin() {
     return TextFormField(
         decoration: const InputDecoration(
-          hintText: 'Login',
+          hintText: 'Email',
         ),
         validator: (String? value) {
           if (value == null || value.isEmpty) {
@@ -64,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
         }
         return null;
       },
+      obscureText: true
     );
   }
 

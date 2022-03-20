@@ -179,15 +179,15 @@ class _ReturnPageState extends State<ReturnPage> {
       child: Column(children: [
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Imię i nazwisko:',
+            child: Text('Imię i nazwisko: Jan Nowak',
                 textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Aktualnie wypożyczone książki:',
+            child: Text('Aktualnie wypożyczone książki: 4',
                 textAlign: TextAlign.left, style: smallerFont)),
         Align(
             alignment: Alignment.centerLeft,
-            child: Text('Przetrzymane książki:',
+            child: Text('Przetrzymane książki: 0',
                 textAlign: TextAlign.left, style: smallerFont)),
       ]),
     ): Container(child: Text('Po zeskanowaniu książki pojawią się informacje o użytkowniku',

@@ -94,7 +94,7 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
         context, MaterialPageRoute<void>(builder: (context) => component));
   }
 
-  getSingleBorrowed(String title, String authors, String date) {
+  getSingleBorrowed(String title, String authors, String date, String expectedReturnDate) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(children: [
@@ -110,6 +110,10 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
             alignment: Alignment.centerLeft,
             child: Text('Data wypożyczenia: $date',
                 textAlign: TextAlign.left, style: smallerFont)),
+                Align(
+            alignment: Alignment.centerLeft,
+            child: Text('Należy oddać do: $expectedReturnDate',
+                textAlign: TextAlign.left, style: smallerFont)),
       ]),
     );
   }
@@ -117,8 +121,8 @@ class _MyBooksInfoPageState extends State<MyBooksInfoPage> {
   getBorrowed() {
     return Column(
         children: [
-      getSingleBorrowed("Nieodnaleziona", "Remigiusz Mróz", "01.02.2022"),
-      getSingleBorrowed("Hyperion", "Dan Simmons", "01.02.2022"),
+      getSingleBorrowed("Nieodnaleziona", "Remigiusz Mróz", "01.02.2022", "01.03.2022"),
+      getSingleBorrowed("Hyperion", "Dan Simmons", "01.02.2022", "01.03.2022"),
     ]);
   }
 

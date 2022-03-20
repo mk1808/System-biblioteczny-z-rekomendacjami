@@ -35,7 +35,7 @@ class _ReturnSuccessPageState extends State<ReturnSuccessPage> {
       Container(
           padding: const EdgeInsets.fromLTRB(12.0, 40.0, 12.0, 20.0),
           height: 160.0,
-          child: Text('Zwrot książek został odebrany',
+          child: Text('Zwrot książek został zatwierdzony',
               textAlign: TextAlign.center, style: midFont)),
    /*   Container(
           decoration: myBooksInfoContainer,
