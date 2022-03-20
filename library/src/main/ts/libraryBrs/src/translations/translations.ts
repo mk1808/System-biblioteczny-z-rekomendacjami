@@ -9,11 +9,15 @@ const translations =
             "contact":"Kontakt",
             "borrowingRules":"Zasady wypożyczeń",
             "booksSearch":"Wyszukiwanie książek",
+            "goLogin":"Zaloguj",
+            "createAccount":"Utwórz konto",
             "login":"Logowanie",
             "register":"Rejestracja",
-            "loginInfo":"Po zalogowaniu na swoje konto możesz przeglądać wypożyczone i zarezerwowane ksiażki oraz otrzymywać rekomendacje.",
+            "loginInfo":"Po zalogowaniu na swoje konto możesz przeglądać wypożyczone i zarezerwowane książki.", //oraz otrzymywać rekomendacje.",
             "loginInfo.more":"Nie posiadasz konta?",
             "goToRegister":"Przejdź do rejestracji",
+            "registerInfo":"Aby móc korzystać z usług biblioteki, należy założyć konto.",
+            "registerInfo.more":"Jeżeli posiadasz już konto, zaloguj się.",
             "cardQRCode":"Kod QR",
             "cardNo":"Numer karty bibliotecznej",
             "myAccount":"Moje konto",
@@ -72,8 +76,22 @@ const translations =
             "chooseOrWriteVal":"Wybierz lub wpisz",
             "chooseVal":"Wybierz",
             "reservation.confirm":"Potwierdzenie rezerwacji",
-            "reservation.confirm.question":"Czy na pewno chcesz zarezerwować książkę?"
-            
+            "reservation.confirm.question":"Czy na pewno chcesz zarezerwować książkę?",
+            "name":"Imię",
+            "surname":"Nazwisko",
+            "phoneNo":"Numer telefonu",
+            "mail":"Email",
+            "password":"Hasło",
+            "passwordRepeat":"Powtórzenie hasła",
+            "street":"Ulica",
+            "houseNo":"Numer domu",
+            "flatNo":"Numer mieszkania",
+            "postalCode":"Kod pocztowy",
+            "city":"Miasto",
+            "edit":"Edytuj",
+            "search":"Szukaj"
+
+
 
             
             
