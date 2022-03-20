@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { UsersService } from 'src/app/core/services/rest/users.service';
 declare let $ : any;
 @Component({
   selector: 'app-header',
@@ -6,8 +8,11 @@ declare let $ : any;
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
-
-  constructor() { }
+  logged:BehaviorSubject<Boolean>;
+  constructor(private usersService:UsersService) { 
+    this.logged=this.usersService.logged;
+    this.logged.subscribe(x=>{debugger;console.log(x)})
+  }
 
   ngOnInit(): void {
   }

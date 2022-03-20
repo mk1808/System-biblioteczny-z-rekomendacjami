@@ -5,13 +5,20 @@ import { RestService } from './rest.service';
 const URL = "/api/users";
 const AUTH_URL = "api/auth";
 
+
+var _logged: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
+
 @Injectable()
 export class UsersService {
   public users: BehaviorSubject<[]> = new BehaviorSubject([]);
-
-  constructor(private restService: RestService) { }
+  public logged: BehaviorSubject<Boolean> = _logged;
+  constructor(private restService: RestService) {
+    
+   }
 
   login(login: Login):Observable<Response<any>> {
+    debugger
+    this.logged.next(true);
     return this.restService.post(`${AUTH_URL}/authenticate`, login);
   }
 

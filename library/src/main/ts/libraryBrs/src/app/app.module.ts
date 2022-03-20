@@ -8,6 +8,9 @@ import { I18N_PROVIDERS } from './shared/i18n';
 import { I18NextModule } from 'angular-i18next';
 import { MainPagesModule } from './main-pages/main-pages.module';
 import { TestComponent } from './test/test.component';
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePl);
 
 @NgModule({
   declarations: [

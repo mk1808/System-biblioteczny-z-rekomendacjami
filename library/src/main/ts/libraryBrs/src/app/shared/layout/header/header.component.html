@@ -6,14 +6,18 @@
         </a>
         <div class="right menu">
             <a class="item" [routerLink]="['/books/search']" routerLinkActive="active">{{ 'booksSearch' | i18next }}</a>
-            <a class="item" [routerLink]="['/home/terms']" routerLinkActive="active">{{ 'borrowingRules' | i18next
-                }}</a>
-            <a class="item" [routerLink]="['/home/contact']" routerLinkActive="active">{{ 'contact' | i18next }}</a>
+            <a class="item" [routerLink]="['/home/terms']" routerLinkActive="active">{{ 'borrowingRules' | i18next }}</a>
+
          <!--    <a class="item" [routerLink]="['/auth/login']" routerLinkActive="active">{{ 'login' | i18next }}</a>
           <a class="item" [routerLink]="['/auth/register']" routerLinkActive="active">{{ 'register' | i18next }}</a>--> 
-          <a class="item" [routerLink]="['/books/myLists']" routerLinkActive="active">{{ 'myBooks' | i18next }}</a>
 
-      <!--     <div class="ui simple dropdown item" routerLinkActive="active">
+          <a *ngIf="logged|async" class="item" [routerLink]="['/books/myLists']" routerLinkActive="active">{{ 'myBooks' | i18next }}</a>
+
+          <a *ngIf="!(logged|async)" class="item" [routerLink]="['/auth/login']" routerLinkActive="active">{{ 'Zaloguj' }}</a>
+          <a *ngIf="!(logged|async)" class="item" [routerLink]="['/auth/register']" routerLinkActive="active">{{ 'Zarejestruj' }}</a>
+          <a *ngIf="logged|async" class="item" [routerLink]="['/user/myAccount']" routerLinkActive="active">{{ 'Konto' }}</a>
+          <a class="item" [routerLink]="['/home/contact']" routerLinkActive="active">{{ 'contact' | i18next }}</a>
+          <!--     <div class="ui simple dropdown item" routerLinkActive="active">
                 Dropdown
                 <i class="dropdown icon"></i>
                 <div class="menu dmenu">
