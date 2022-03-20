@@ -1,14 +1,17 @@
 <div class="photo-container">
     <div class="photo parent">
-            <div class="div1 sparkle hover-sparkle square">
+            <div class="div1 sparkle hover-sparkle square" (click)="list()">
                 <div>{{ 'goToList' | i18next }}</div>
             </div>
-            <div class="div2 sparkle hover-sparkle square">
+            <div class="div2 sparkle hover-sparkle square" (click)="contact()">
                 <div>{{ 'contact' | i18next }}</div>
             </div>
-            <div class="div3 sparkle hover-sparkle square">
+            <div class="div3 sparkle hover-sparkle square" (click)="login()">
+                <div>{{ 'login' | i18next}}</div>
+            </div> 
+       <!--    <div class="div3 sparkle hover-sparkle square" (click)="borrowingRules()">
                 <div>{{ 'borrowingRules' | i18next }}</div>
-            </div>  
+            </div>  --> 
     </div>
 </div>
 <app-carousel></app-carousel>
