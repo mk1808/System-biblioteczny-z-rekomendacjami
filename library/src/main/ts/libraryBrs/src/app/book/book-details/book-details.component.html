@@ -1,3 +1,6 @@
+<p *ngFor="let alert of alerts">
+    <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
+  </p>
 <app-main-content [title]="title" [contentClass]="rulesHeight">
     <div class="parent padding">
         <div class="inside">
@@ -21,17 +24,17 @@
                 <div>
                     <app-button [iconClass]="iconClass" [text]="textRate" [btnClass]="btnClass"></app-button>
                     <div></div>
-                    <app-button [iconClass]="addClass" [text]="textFav" [btnClass]="orangeBtnClass"></app-button>
+           <!--         <app-button [iconClass]="addClass" [text]="textFav" [btnClass]="orangeBtnClass"></app-button>
                     <div></div>
                     <app-button [iconClass]="addClass" [text]="textToRead" [btnClass]="orangeBtnClass"></app-button>
-                </div>
+              -->  </div>
             </div>
         </div>
     </div>
     <app-book-availability [availability] = "availability" [book]="book"></app-book-availability>
     <div class="description">
         <p class="line rating"><span>Opis</span> </p>
-        <div>{{book.descrpition}}</div>
+        <div [innerHTML]="book.descrpition"></div>
     </div>
     <div class="comments">
         <p class="line rating"><span>Komentarze</span> </p>

@@ -5,6 +5,38 @@ import { FormatterService } from 'src/app/core/services/formatter.service';
 import { Book, BookAvailability, Response } from 'src/app/core/services/rest/api/api';
 import { BooksService } from 'src/app/core/services/rest/books.service';
 
+interface Alert {
+  type: string;
+  message: string;
+}
+
+ 
+const ALERTS: Alert[] = [{
+  type: 'success',
+  message: 'This is an success alert',
+}, {
+  type: 'info',
+  message: 'This is an info alert',
+}, {
+  type: 'warning',
+  message: 'This is a warning alert',
+}, {
+  type: 'danger',
+  message: 'This is a danger alert',
+}, {
+  type: 'primary',
+  message: 'This is a primary alert',
+}, {
+  type: 'secondary',
+  message: 'This is a secondary alert',
+}, {
+  type: 'light',
+  message: 'This is a light alert',
+}, {
+  type: 'dark',
+  message: 'This is a dark alert',
+}
+];
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
@@ -35,9 +67,16 @@ export class BookDetailsComponent implements OnInit {
     username: "Użytkownik 1", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed enim in nunc feugiat euismod vitae necnunc. Morbi ac massa ut sem hendrerit",
     rating: 6, date: "05.01.2022r."
   };
-  comments = [this.comment, this.comment, this.comment, this.comment]
+  comment5 = {
+    username: "Użytkownik 3", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed enim in nunc feugiat euismod vitae necnunc. Morbi ac massa ut sem hendrerit",
+    rating: 8, date: "30.01.2022r."
+  };
+  comments = [this.comment, this.comment5]
   book: Book = {};
 
+
+  alerts: Alert[]=[];
+ 
 
   constructor(private route: ActivatedRoute, private booksService: BooksService, private formatterService: FormatterService) { }
 
@@ -45,9 +84,16 @@ export class BookDetailsComponent implements OnInit {
     this.getBookId();
     this.getBook();
     this.getBookAvailability();
+    this.reset();
 
   }
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
 
+  reset() {
+    this.alerts = Array.from(ALERTS);
+  }
   getBookId() {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id)
@@ -82,7 +128,13 @@ export class BookDetailsComponent implements OnInit {
     return "-";
   }
 
-
+  newq() {
+    let a: Alert = {
+      type: 'dark',
+      message: 'This is a dark alert',
+    };
+    this.alerts.push(a);
+  }
 
 
 }

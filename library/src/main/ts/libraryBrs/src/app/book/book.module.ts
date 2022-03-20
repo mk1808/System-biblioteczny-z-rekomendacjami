@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CarouselElementComponent } from '../main-pages/main/carousel/carousel-element/carousel-element.component';
 import { BookSearchElementComponent } from './book-search/book-search-element/book-search-element.component';
 import { MyBooksComponent } from './my-books/my-books.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookAvailabilityComponent } from './book-details/book-availability/book-availability.component';
 import { CoreModule } from '../core/core.module';
@@ -35,10 +35,11 @@ import { ReservationModalComponent } from './book-details/reservation-modal/rese
     CoreModule,
     NgbModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbAlertModule
   ],
   providers:[
-    CoreModule
+    CoreModule,NgbAlertModule
   ],
 
 })
