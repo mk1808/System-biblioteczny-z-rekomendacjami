@@ -17,17 +17,17 @@
                 <app-input [label]="postalCodeInput" [inputClass]="inputClass"></app-input>
                 <app-input [label]="cityInput" [inputClass]="inputClass"></app-input>
             </div>
-            <app-button [iconClass]="iconClass" [text]="textLogin" [btnClass]="btnClass"></app-button>
+            <app-button [text]="textRegister" [btnClass]="btnClass"></app-button>
         </div>
         <div body class="info">
             <div class="info-with-icon">
                 <i class="info circle icon"></i>
                 <div class="text">
-                    {{ 'loginInfo' | i18next }} <br>
-                    {{ 'loginInfo.more' | i18next }}</div>
+                    {{ 'registerInfo' | i18next }} <br>
+                    {{ 'registerInfo.more' | i18next }}</div>
             </div>
             <div class="button-align horizontal-middle">
-                <app-button [iconClass]="iconClass" [text]="textRegister" [btnClass]="btnClass"></app-button>
+                <app-button [text]="goLogin" [btnClass]="btnClass"></app-button>
             </div>
         </div>
     </app-two-columns-content>

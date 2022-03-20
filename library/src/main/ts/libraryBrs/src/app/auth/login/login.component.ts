@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
   onSubmit(form:any){
     let login:Login = this.loginForm.value;
     this.usersService.login(login).subscribe(resp=>{
+      
       this.router.navigate(['/user/myAccount']);
       console.log(resp)
     })

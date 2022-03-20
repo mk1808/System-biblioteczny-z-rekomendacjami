@@ -16,8 +16,9 @@ export class RegisterComponent implements OnInit {
   rightClass="info"
   leftClass="info"
   textLogin="login"
-  textRegister="goToRegister"
-  
+  textRegister="createAccount"
+  iconClass2="sign-in-alt";
+  goLogin="goLogin";
   mailInput="mail"
   passwordInput="password"
   passwordRepeatInput="passwordRepeat"
