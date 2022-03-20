@@ -105,7 +105,7 @@ packages:
     source: hosted
     version: "0.8.1"
   flutter_launcher_name:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_launcher_name
       url: "https://pub.dartlang.org"
