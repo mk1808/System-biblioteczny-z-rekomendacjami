@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { I18nService } from 'src/app/core/services/i18n.service';
 
@@ -14,19 +14,24 @@ import { I18nService } from 'src/app/core/services/i18n.service';
     }
   ]
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
+export class InputComponent implements OnInit, OnChanges, ControlValueAccessor {
   @Input() label: any;
   @Input() inputClass: any;
   @Input() type: any;
   @Input() disabled: any;
   disabledClass = '';
-  labelTranslated = ""
+  labelTranslated = '';
+
 
   value = ""
   onChange = (quantity: any) => { };
   onTouched = () => { };
 
   constructor(private i18nService: I18nService) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+   this.labelTranslated = this.i18nService.getTranslation(this.label);
+  }
 
   writeValue(value: any): void {
     this.value = value;
