@@ -1,23 +1,27 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
     <app-two-columns-content [rightClass]="rightClass">
         <div header>
-            <div class="inputs">
-                <app-input [label]="nameInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="surnameInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="phoneInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="passwordInput" [inputClass]="inputClass" type="password"></app-input>
-                <app-input [label]="passwordRepeatInput" [inputClass]="inputClass" type="password"></app-input>  
-            </div>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="inputs">
+                    <app-input [label]="nameInput" [inputClass]="inputClass" [formControlName]="name"></app-input>
+                    <app-input [label]="surnameInput" [inputClass]="inputClass" [formControlName]="surname"></app-input>
+                    <app-input [label]="phoneInput" [inputClass]="inputClass" [formControlName]="phoneNo"></app-input>
+                    <app-input [label]="mailInput" [inputClass]="inputClass" [formControlName]="mail"></app-input>
+                    <app-input [label]="passwordInput" [inputClass]="inputClass" type="password" [formControlName]="password">
+                    </app-input>
+                    <app-input [label]="passwordRepeatInput" [inputClass]="inputClass" type="password"
+                        [formControlName]="passwordRepeat"></app-input>
+                </div>
                 <div class="address-label">Adres</div>
                 <div class="inputs">
-                <app-input [label]="streetInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="houseNoInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="flatNoInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="postalCodeInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="cityInput" [inputClass]="inputClass"></app-input>
-            </div>
-            <app-button [text]="textRegister" [btnClass]="btnClass"></app-button>
+                    <app-input [label]="streetInput" [inputClass]="inputClass" [formControlName]="street"></app-input>
+                    <app-input [label]="houseNoInput" [inputClass]="inputClass" [formControlName]="houseNo"></app-input>
+                    <app-input [label]="flatNoInput" [inputClass]="inputClass" [formControlName]="flatNo"></app-input>
+                    <app-input [label]="postalCodeInput" [inputClass]="inputClass" [formControlName]="postcode"></app-input>
+                    <app-input [label]="cityInput" [inputClass]="inputClass" [formControlName]="city"></app-input>
+                </div>
+                <app-button [text]="textRegister" [btnClass]="btnClass" [type]="submitBtnType"></app-button>
+            </form>
         </div>
         <div body class="info">
             <div class="info-with-icon">
