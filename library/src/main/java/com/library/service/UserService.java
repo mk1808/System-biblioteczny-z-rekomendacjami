@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 public interface UserService extends RepositoryService<AppUser>  {
 	
 	AppUser getByMail(String mail);
+	
 	AppUser save(AppUserDto user);
+	AppUser save1(AppUser user);
 
 	AppUser updateByAdmin(AppUser user);
 

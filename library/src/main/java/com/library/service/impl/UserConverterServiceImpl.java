@@ -1,5 +1,6 @@
 package com.library.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -60,7 +61,7 @@ private final AddressConverterService addressConverter;
 				.name(dto.getName())
 				.surname(dto.getSurname())
 				.phoneNo(dto.getPhoneNo())
-				.address(Address.builder().id(dto.getAddress().getId()).build())
+				.address(addressConverter.toModel(dto.getAddress()))
 				.mail(dto.getMail())
 				.password(dto.getPassword())
 				.photo(dto.getPhoto())
@@ -94,7 +95,7 @@ private final AddressConverterService addressConverter;
 	}
 	
 	private <M,D> Set<M> createDtos(Set<UUID> dtos, Function<UUID, M>function) {
-		return dtos.stream().map(function).collect(Collectors.toSet());
+		return dtos!=null?dtos.stream().map(function).collect(Collectors.toSet()):new HashSet<>();
 	}
 	
 	private Role createRoleDto(UUID id) {

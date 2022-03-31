@@ -28,6 +28,7 @@ import com.library.dto.LoginDto;
 import com.library.dto.TokenDto;
 import com.library.model.AppUser;
 import com.library.response.Response;
+import com.library.service.UserConverterService;
 import com.library.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,23 +36,25 @@ import com.library.service.UserService;
 //@RequestMapping("/token")
 public class AuthController implements AuthResource {
 	
+	private final UserConverterService userConverter;
+	private UserService userService;
+	private AuthenticationManager authenticationManager;
+	private TokenProvider jwtTokenUtil;
+	
+	@Autowired
 	public AuthController(AuthenticationManager authenticationManager, TokenProvider jwtTokenUtil,
-			UserService userService) {
+			UserService userService, UserConverterService userConverter) {
 		super();
 		this.authenticationManager = authenticationManager;
 		this.jwtTokenUtil = jwtTokenUtil;
 		this.userService = userService;
+		this.userConverter = userConverter;
 	}
 
-	@Autowired
-    private AuthenticationManager authenticationManager;
+    
+    
 
-    @Autowired
-    private TokenProvider jwtTokenUtil;
-
-    @Autowired
-    private UserService userService;
-
+   
     @Override
     public ResponseEntity<?> generateToken(@RequestBody LoginDto loginUser, HttpServletResponse response) throws AuthenticationException {
 
@@ -72,8 +75,10 @@ public class AuthController implements AuthResource {
     }
 
     @Override
-    public AppUser saveUser(@RequestBody AppUserDto user){
-        return userService.save(user);
+    public AppUser saveUser(@RequestBody AppUserDto userDto){
+    	AppUser user = userConverter.toModel(userDto);
+		
+        return userService.save1(user);
     }
 
     @Override

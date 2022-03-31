@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +19,9 @@ import org.springframework.stereotype.Service;
 import com.library.dto.AppUserDto;
 import com.library.model.AppUser;
 import com.library.model.Role;
+import com.library.model.Address;
 import com.library.repository.AppUserRepository;
+import com.library.repository.AddressRepository;
 import com.library.service.RoleService;
 import com.library.service.UserService;
 
@@ -29,17 +32,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     
 	@Autowired
 	private AppUserRepository repository;
+	
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptEncoder;
 
 	public UserServiceImpl() {}
 	public UserServiceImpl(RoleService roleService, AppUserRepository repository,
-			BCryptPasswordEncoder bcryptEncoder) {
+			BCryptPasswordEncoder bcryptEncoder, AddressRepository addressRepository) {
 		super();
 		this.roleService = roleService;
 		this.repository = repository;
 		this.bcryptEncoder = bcryptEncoder;
+		this.addressRepository = addressRepository;
 	}
 
 	@Override
@@ -92,10 +99,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
     public AppUser save(AppUserDto user) {
+    	
 		AppUser newUser = AppUser.builder()
 				.mail(user.getMail())
 				.name(user.getName())
 				.password(bcryptEncoder.encode(user.getPassword()))
+				
+				
+				
+			
+				
 				.build();
 		Role role = roleService.findByName("USER");
         Set<Role> roleSet = new HashSet<>();
@@ -103,6 +116,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         newUser.setRoles(roleSet);
         return repository.save(newUser);
     }
+    
+    public AppUser save1(AppUser user) {
+    	
+	Address address = addressRepository.save(user.getAddress());
+		Role role = roleService.findByName("USER");
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(role);
+        user.setRoles(roleSet);
+        user.setAddress(address);
+        return repository.save(user);
+    }
+    
 	@Override
 	public AppUser updateByAdmin(AppUser entity) {
 		return repository.save(entity);
