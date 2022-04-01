@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
       'country': this.registerForm.value.country}
 
   this.usersService.register(register).subscribe(resp => {
-
+      this.registerForm.reset();
       //this.router.navigate(['/user/myAccount']);
       console.log(resp)
     })
