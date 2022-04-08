@@ -46,6 +46,10 @@ export class LoginComponent implements OnInit {
     const modalRef = this.modalService.open(BasicModalComponent);
     modalRef.componentInstance.name = "Modal123";
     modalRef.componentInstance.internalTemplate = this.template;
+    modalRef.componentInstance.header = "reservation.confirm.question";
+    modalRef.componentInstance.modalTitle = "reservation.confirm";
+    modalRef.componentInstance.onConfirm = this.onConfirm;
+    modalRef.componentInstance.onCancel = this.onCancel;
    // [templateFooSelector]="containerTemplate"
    // (<ExampleModalComponent>modalRef.componentInstance).templateFooSelector = this.template;
 
@@ -88,6 +92,14 @@ export class LoginComponent implements OnInit {
     })
 
 
+  }
+
+  onCancel = () => {
+    console.log("cnacel")
+  }
+
+  onConfirm = () => {
+    console.log("confirm")
   }
 
 }
