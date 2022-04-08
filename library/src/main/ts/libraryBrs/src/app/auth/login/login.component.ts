@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   mail="mail";
   pass="password";
   loginForm:FormGroup= new FormGroup({});
+  @ViewChild("containerTemplate") template: TemplateRef<any>|undefined|null=null;
 
   
   constructor(private modalService: NgbModal, private usersService:UsersService, private route: ActivatedRoute, private router: Router) { }
@@ -40,10 +41,20 @@ export class LoginComponent implements OnInit {
   }
 
   openModal=()=>{
-    console.log("abc")
+    console.log("abc1")
   //  debugger;
     const modalRef = this.modalService.open(ExampleModalComponent);
-    modalRef.componentInstance.name = "Modal";
+    modalRef.componentInstance.name = "Modal123";
+    modalRef.componentInstance.templateFooSelector = this.template;
+   // [templateFooSelector]="containerTemplate"
+   // (<ExampleModalComponent>modalRef.componentInstance).templateFooSelector = this.template;
+
+
+
+
+
+
+
   }
 
   openModal2=()=>{

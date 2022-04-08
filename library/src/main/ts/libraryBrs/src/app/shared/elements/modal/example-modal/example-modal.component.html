@@ -3,5 +3,8 @@
     <div class="additional-content">
         Tytuł: <span>abcTytuł </span><br>
         Autor: <span>abcAutor</span> <br>
+
+        <ng-container *ngTemplateOutlet="templateFooSelector2; context: {parentFoo: this}">
+        </ng-container>
     </div>
 </app-modal>
