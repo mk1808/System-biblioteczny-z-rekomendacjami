@@ -11,7 +11,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   logged:BehaviorSubject<Boolean>;
   constructor(private usersService:UsersService) { 
     this.logged=this.usersService.logged;
-    this.logged.subscribe(x=>{debugger;console.log(x)})
+    this.logged.subscribe(x=>{//debugger;
+      console.log(x)})
   }
 
   ngOnInit(): void {
