@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Login } from 'src/app/core/services/rest/api/api';
 import { UsersService } from 'src/app/core/services/rest/users.service';
-import { ExampleModalComponent } from 'src/app/shared/elements/modal/example-modal/example-modal.component';
+import { BasicModalComponent } from 'src/app/shared/elements/modal/basic-modal/basic-modal.component';
 import { BookOpinionComponent } from '../book-opinion/book-opinion.component';
 import { SurveyComponent } from '../survey/survey.component';
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   mail="mail";
   pass="password";
   loginForm:FormGroup= new FormGroup({});
-  @ViewChild("containerTemplate") template: TemplateRef<any>|undefined|null=null;
+  @ViewChild("modalTemplate") template: TemplateRef<any>|undefined|null=null;
 
   
   constructor(private modalService: NgbModal, private usersService:UsersService, private route: ActivatedRoute, private router: Router) { }
@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
   openModal=()=>{
     console.log("abc1")
   //  debugger;
-    const modalRef = this.modalService.open(ExampleModalComponent);
+    const modalRef = this.modalService.open(BasicModalComponent);
     modalRef.componentInstance.name = "Modal123";
-    modalRef.componentInstance.templateFooSelector = this.template;
+    modalRef.componentInstance.internalTemplate = this.template;
    // [templateFooSelector]="containerTemplate"
    // (<ExampleModalComponent>modalRef.componentInstance).templateFooSelector = this.template;
 

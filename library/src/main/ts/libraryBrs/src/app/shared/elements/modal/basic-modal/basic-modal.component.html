@@ -1,0 +1,9 @@
+<app-modal [modalTitle]="modalTitle" [onCancel]="onCancel" [onConfirm]="onConfirm">
+    <p>Czy na pewno chcesz zarezerwować książkę?{{header}}</p>
+    <div class="additional-content">
+        Tytuł: <span>abcTytuł </span><br>
+        Autor: <span>abcAutor</span> <br>
+        <ng-container *ngTemplateOutlet="activeInternalTemplate; context: {parentFoo: this}">
+        </ng-container>
+    </div>
+</app-modal>

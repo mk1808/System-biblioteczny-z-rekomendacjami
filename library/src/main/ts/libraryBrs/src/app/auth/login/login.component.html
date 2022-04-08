@@ -26,7 +26,7 @@
                 <app-button [iconClass]="iconClass" [text]="textOpen" [onClick]="openModal2"></app-button>
                 <app-button [iconClass]="iconClass" [text]="textOpen" [onClick]="openModal3"></app-button>
             </div>
-            <ng-template #containerTemplate let-parentFoo="parentFoo">
+            <ng-template #modalTemplate let-parentFoo="parentFoo">
                 <div > ParentFoo has variable Bar: {{parentFoo.bar}} </div>
               </ng-template>
         </div>

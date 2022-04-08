@@ -17,12 +17,12 @@ import { TwoColumnsContentComponent } from './layout/main-content/two-columns-co
 import { NgbAccordion, NgbAccordionModule, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './elements/modal/modal.component';
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { ExampleModalComponent } from './elements/modal/example-modal/example-modal.component';
 import { DropdownComponent } from './elements/dropdown/dropdown.component';
 import { RatingComponent } from './elements/rating/rating.component';
 import { TextareaComponent } from './elements/textarea/textarea.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
+import { BasicModalComponent } from './elements/modal/basic-modal/basic-modal.component';
 
 
 
@@ -40,7 +40,7 @@ import { CoreModule } from '../core/core.module';
     NotificationBarComponent,
     TwoColumnsContentComponent,
     ModalComponent,
-    ExampleModalComponent,
+    BasicModalComponent,
     DropdownComponent,
     RatingComponent,
     TextareaComponent
@@ -69,7 +69,7 @@ import { CoreModule } from '../core/core.module';
     NotificationBarComponent,
     TwoColumnsContentComponent,
     ModalComponent,
-    ExampleModalComponent,
+    BasicModalComponent,
     DropdownComponent,
     RatingComponent,
     TextareaComponent,
