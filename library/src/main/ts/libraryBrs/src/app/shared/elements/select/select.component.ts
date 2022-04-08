@@ -37,6 +37,7 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, Contro
     this.onTouched = onTouched;
   }
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.options!=null) {this.options.unshift({id:0, name:"Wybierz"})}
     console.log(this.options)
   }
 

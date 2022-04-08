@@ -14,7 +14,7 @@ import { CheckboxComponent } from './elements/checkbox/checkbox.component';
 import { MultiSelectComponent } from './elements/multi-select/multi-select.component';
 import { NotificationBarComponent } from './elements/notification-bar/notification-bar.component';
 import { TwoColumnsContentComponent } from './layout/main-content/two-columns-content/two-columns-content.component';
-import { NgbAccordion, NgbAccordionModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordion, NgbAccordionModule, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './elements/modal/modal.component';
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExampleModalComponent } from './elements/modal/example-modal/example-modal.component';
@@ -55,7 +55,8 @@ import { CoreModule } from '../core/core.module';
     NgbModalModule,
     FormsModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    NgbTooltipModule
   ],
   exports: [
     LayoutComponent,

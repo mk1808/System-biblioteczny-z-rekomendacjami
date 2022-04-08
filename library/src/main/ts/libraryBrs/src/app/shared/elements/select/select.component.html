@@ -1,10 +1,17 @@
 <div class="ui form" [id]="label">
-    <div class="field align-input">
+    <div class="field align-input" placement="top" ngbTooltip="Tooltip on top" tooltipClass="tooltipClass">
       <label>{{label | i18next}}</label>
-      <select class="ui search dropdown" (change)="change($event)">
+      <select class="ui search dropdown" (change)="change($event)" >
         
         <option value="">{{chooseValue|i18next}}</option>
-        <option *ngFor="let option of options; index as i;" value="{{option.id}}">{{getDisplayedValue?getDisplayedValue(option):option.name}}</option>
+        <option *ngFor="let option of options; index as i;" value="{{option.id}}">
+          <!--<div class="ui checkbox">
+            <input type="checkbox" name="example">
+            <label>-->
+              {{getDisplayedValue&&option.id?getDisplayedValue(option):option.name}}
+       <!--      </label>
+          </div>
+          </option>-->
     <!--    <option value="AF">Afghanistan</option>
         <option value="AX">Åland Islands</option>
         <option value="AL">Albania</option>
@@ -258,3 +265,5 @@
       </select>
     </div>
   </div>
+
+  
