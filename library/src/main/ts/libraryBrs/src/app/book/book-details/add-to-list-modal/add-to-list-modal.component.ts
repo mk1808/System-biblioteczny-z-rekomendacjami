@@ -4,6 +4,7 @@ import { FormatterService } from 'src/app/core/services/formatter.service';
 import { Book, Reservation, UserListElement } from 'src/app/core/services/rest/api/api';
 import { ReservationsService } from 'src/app/core/services/rest/reservations.service';
 import { BooksService } from 'src/app/core/services/rest/books.service';
+import { UserListType } from 'src/app/core/enums';
 
 @Component({
   selector: 'app-add-to-list-modal',
@@ -13,7 +14,7 @@ import { BooksService } from 'src/app/core/services/rest/books.service';
 export class AddToListModalComponent implements OnInit {
 
   @Input() book: Book={};
-  @Input() typeOfList:string="";
+  @Input() typeOfList:UserListType=UserListType.FAV;
   title = "addToList.confirm";
   question="";
   questionFav = "addToListFavourite.confirm.question";
@@ -23,7 +24,7 @@ export class AddToListModalComponent implements OnInit {
   constructor(private formatterService:FormatterService, public activeModal: NgbActiveModal, public booksService:BooksService) { }
 
   ngOnInit(): void {
-    this.question = this.typeOfList==="f"?this.questionFav:this.questionToRead;
+    this.question = this.typeOfList==UserListType.FAV?this.questionFav:this.questionToRead;
     console.log(this.book)
   }
 

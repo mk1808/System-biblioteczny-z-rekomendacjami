@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap } from 'rxjs';
+import { UserListType } from 'src/app/core/enums';
 import { FormatterService } from 'src/app/core/services/formatter.service';
 import { Book, BookAvailability, Response } from 'src/app/core/services/rest/api/api';
 import { BooksService } from 'src/app/core/services/rest/books.service';
+import { AddToListModalComponent } from './add-to-list-modal/add-to-list-modal.component';
 
 interface Alert {
   type: string;
@@ -78,13 +81,15 @@ export class BookDetailsComponent implements OnInit {
   alerts: Alert[]=[];
  
 
-  constructor(private route: ActivatedRoute, private booksService: BooksService, private formatterService: FormatterService) { }
+  constructor(private route: ActivatedRoute, private booksService: BooksService, private formatterService: FormatterService,  private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.getBookId();
     this.getBook();
     this.getBookAvailability();
-    this.reset();
+   this.reset();
+   
+   // this.newq();
 
   }
   close(alert: Alert) {
@@ -134,6 +139,22 @@ export class BookDetailsComponent implements OnInit {
       message: 'This is a dark alert',
     };
     this.alerts.push(a);
+  }
+
+  addToListFav = () => {
+    this.addToList(UserListType.FAV);
+  }
+
+  addToListToRead = () => {
+    this.addToList(UserListType.TO_READ);
+  }
+
+  addToList = (type:UserListType) => {
+  
+    const modalRef = this.modalService.open(AddToListModalComponent);
+    modalRef.componentInstance.book = this.book;
+    modalRef.componentInstance.typeOfList = type;
+
   }
 
 

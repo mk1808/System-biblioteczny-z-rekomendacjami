@@ -1,6 +1,6 @@
-<p *ngFor="let alert of alerts">
+<!--<p *ngFor="let alert of alerts">
     <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
-  </p>
+  </p>-->
 <app-main-content [title]="title" [contentClass]="rulesHeight">
     <div class="parent padding">
         <div class="inside">
@@ -24,10 +24,10 @@
                 <div>
                     <app-button [iconClass]="iconClass" [text]="textRate" [btnClass]="btnClass"></app-button>
                     <div></div>
-           <!--         <app-button [iconClass]="addClass" [text]="textFav" [btnClass]="orangeBtnClass"></app-button>
+                  <app-button [iconClass]="addClass" [text]="textFav" [btnClass]="orangeBtnClass" [onClick]="addToListFav"></app-button>
                     <div></div>
-                    <app-button [iconClass]="addClass" [text]="textToRead" [btnClass]="orangeBtnClass"></app-button>
-              -->  </div>
+                    <app-button [iconClass]="addClass" [text]="textToRead" [btnClass]="orangeBtnClass" [onClick]="addToListToRead"></app-button>
+             </div>
             </div>
         </div>
     </div>

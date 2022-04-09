@@ -1,3 +1,5 @@
+import { UserListType } from "src/app/core/enums";
+
 export interface Book {
     id?: string;
     ISBN?: string;
@@ -12,6 +14,8 @@ export interface Book {
     genres?: Object[];
     series?: Object[];
     keyWords?: Object[];
+
+    
 }
 
 export interface Address {
@@ -232,7 +236,7 @@ export interface UserListElement {
     user?: AppUser;
     userId?: string;
 
-    type?: string;
+    type?: UserListType;
     deleteDate?: string;
     status?: boolean;
 }
