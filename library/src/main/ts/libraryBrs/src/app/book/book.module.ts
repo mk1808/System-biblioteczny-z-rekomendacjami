@@ -13,6 +13,8 @@ import { CoreModule } from '../core/core.module';
 import { CommentComponent } from './book-details/comment/comment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationModalComponent } from './book-details/reservation-modal/reservation-modal.component';
+import { AddToListModalComponent } from './book-details/add-to-list-modal/add-to-list-modal.component';
+import { RatingModalComponent } from './book-details/rating-modal/rating-modal.component';
 //import { BookOpinionComponent } from '../auth/book-opinion/book-opinion.component';
 
 
@@ -26,6 +28,8 @@ import { ReservationModalComponent } from './book-details/reservation-modal/rese
     BookAvailabilityComponent,
     CommentComponent,
     ReservationModalComponent,
+    AddToListModalComponent,
+    RatingModalComponent,
   //  BookOpinionComponent
   ],
   imports: [
