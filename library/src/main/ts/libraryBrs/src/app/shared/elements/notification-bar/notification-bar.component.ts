@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 declare let $ : any;
 @Component({
   selector: 'app-notification-bar',
@@ -9,20 +9,21 @@ export class NotificationBarComponent implements OnInit {
   @Input() title:any;
   @Input() content:any;
   @Input() type:any;
-  
+  display=false;
+
+  @Output('update')
+  change = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      
+      this.change.emit("close");
+    }, 5000);
   }
+  
   close(event: Event){
-    let event1:any=event.target;
-    debugger;
-    $(this)
-      .closest('.message')
-      .transition('fade')
-    ;
-    
+      this.change.emit("close");
   }
 
-  
 }

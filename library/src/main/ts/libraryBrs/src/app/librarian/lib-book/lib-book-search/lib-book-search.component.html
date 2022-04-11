@@ -1,4 +1,5 @@
-<app-notification-bar></app-notification-bar>
+<app-notification-bar *ngIf="shouldDisplayAlert" (update)="close($event)"></app-notification-bar>
+
 <div class="background-title">
 </div>
 <div class="height valign">
@@ -17,7 +18,7 @@
                     <app-multi-select [label]="label"></app-multi-select>
                     <app-checkbox [label]="label"></app-checkbox>
 
-                    <app-button [iconClass]="iconClass" [text]="text" [btnClass]="btnClass"></app-button>
+                    <app-button [iconClass]="iconClass" [text]="text" [btnClass]="btnClass" (click)="search()"></app-button>
                 </div>
             </div>
 

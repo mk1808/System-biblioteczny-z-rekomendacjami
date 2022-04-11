@@ -1,6 +1,13 @@
 .ui.message{
-    z-index: 3;
     width: 1126px;
     margin-left: auto;
     margin-right: auto;
+    position: fixed;
+    z-index: 100;
+    top: 20;
+    left: calc((100% - 1125px)/2);
+}
+
+.fade {
+    transition: opacity 0.15s linear;
 }
