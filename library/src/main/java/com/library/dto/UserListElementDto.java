@@ -26,4 +26,5 @@ public class UserListElementDto {
 	
 	private UserListType type;
 	private LocalDateTime deleteDate;
+	private Boolean status;
 }

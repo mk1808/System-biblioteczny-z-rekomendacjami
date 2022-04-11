@@ -3,6 +3,8 @@ package com.library.model;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
@@ -29,6 +31,7 @@ public class UserListElement extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private AppUser user;
 	
+	@Enumerated(EnumType.STRING)
 	private UserListType type;
 	private LocalDateTime deleteDate;
 
