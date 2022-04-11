@@ -78,6 +78,11 @@ export class BookSearchComponent implements OnInit {
   onSubmit(form: any) {
     console.log(this.searchForm.value)
     let bookFilter: BookFIlter = this.searchForm.value;
+    debugger;
+    bookFilter.authorId = this.replaceDefaultValue(bookFilter.authorId);
+    bookFilter.genreId = this.replaceDefaultValue(bookFilter.genreId);
+    bookFilter.publisherId = this.replaceDefaultValue(bookFilter.publisherId);
+   
     this.booksService.getFiltered(0, 0, bookFilter);
     this.booksFiltered=this.booksService.searchedBooks;
 
@@ -88,5 +93,9 @@ export class BookSearchComponent implements OnInit {
    
       return `${option.name} ${option.surname}`
     
+  }
+
+  replaceDefaultValue(value:string|undefined){
+    return value=="0"?"":value;
   }
 }

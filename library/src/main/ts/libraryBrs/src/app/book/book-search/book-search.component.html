@@ -26,9 +26,10 @@
                     <app-input [label]="label"></app-input>
                     <app-input [label]="label"></app-input>
                     <app-select [label]="label"></app-select>
-                    <app-multi-select [label]="label"></app-multi-select>
                     <app-checkbox [label]="label"></app-checkbox>
 -->
+                    <app-multi-select [label]="label" [options]="publishers|async" ></app-multi-select>
+
                     <app-button [iconClass]="iconClass" [text]="text" [btnClass]="btnClass" [type]="submitBtnType"></app-button>
                 </div>
             </form>
