@@ -26,7 +26,7 @@ export class UsersService {
     return this.restService.post(`${AUTH_URL}/register`, user);
   }
 
-  whoAmI(): Observable<Response<any>> {
+  whoAmI(): Observable<any> {
     return this.restService.get(`${AUTH_URL}/whoami`);
   }
 

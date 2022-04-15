@@ -9,6 +9,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.library.config.AuthUser;
 import com.library.dto.AppUserDto;
 import com.library.model.AppUser;
 import com.library.model.Role;
@@ -26,6 +28,7 @@ import com.library.service.RoleService;
 import com.library.service.UserService;
 
 @Service
+@Primary
 public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private RoleService roleService; 
@@ -51,6 +54,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public AppUser get(UUID id) {
+		//Address address = addressRepository.getById(null);
 		return repository.findById(id).orElse(null);
 	}
 
@@ -81,7 +85,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		if(user == null){
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new org.springframework.security.core.userdetails.User(user.getMail(), user.getPassword(), getAuthority(user));
+		return new AuthUser(user.getMail(), user.getPassword(), getAuthority(user), user.getId());
 	}
 
 	private Set getAuthority(AppUser user) {
