@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RatingModalComponent implements OnInit {
 
+  title = "My modal title"
+  labelKeyword = "Słowa kluczowe"
+  labelSubject = "Tematyka"
+  currentRate = 6;
   constructor() { }
-
   ngOnInit(): void {
+  }
+
+  onCancel=()=>{
+    console.log("cnacel")
+  }
+
+  onConfirm=()=>{
+    console.log("confirm")
   }
 
 }

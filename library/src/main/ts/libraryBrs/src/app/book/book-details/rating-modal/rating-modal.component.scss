@@ -1,0 +1,29 @@
+p{
+    font-size:17px;
+}
+
+span{
+    font-weight: 600;
+}
+
+.additional-content{
+    padding: 13px;
+    border-left: 2px solid black;
+   
+    ngb-rating{
+         text-align: center;
+    }
+}
+
+.star {
+    font-size: 3rem;
+    color: var(--light)
+  }
+  .filled {
+    color: var(--orange)
+  }
+
+
+  .ui.form textarea{
+    border-color: var(--light-brown);
+}

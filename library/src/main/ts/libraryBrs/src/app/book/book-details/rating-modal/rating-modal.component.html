@@ -1,1 +1,24 @@
-<p>rating-modal works!</p>
+<app-modal [modalTitle]="title" [onCancel]="onCancel" [onConfirm]="onConfirm">
+    <p>Możesz dodać opinię</p>
+    <div class="additional-content">
+        <div class="rating ui form">
+            <div class="field">
+                <label>Ocena</label>
+                <app-rating></app-rating>
+            </div>
+        </div>
+        <div class="ui form">
+            <div class="field align-input">
+                <label>Komentarz</label>
+                <textarea></textarea>
+            </div>
+        </div>
+        <div>
+            <app-multi-select [label]="labelKeyword"></app-multi-select>
+         
+
+        </div>
+
+    </div>
+
+</app-modal>
