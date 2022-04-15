@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Book } from 'src/app/core/services/rest/api/api';
+import { BooksService } from 'src/app/core/services/rest/books.service';
 
 @Component({
   selector: 'app-rating-modal',
@@ -6,21 +10,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rating-modal.component.scss']
 })
 export class RatingModalComponent implements OnInit {
-
-  title = "My modal title"
+  @Input() book: Book={};
+  title = "rating.title";
+  info="rating.info"
   labelKeyword = "Słowa kluczowe"
   labelSubject = "Tematyka"
-  currentRate = 6;
-  constructor() { }
+  initialRating = 0;
+  ratingForm:FormGroup= this.init();
+  
+  constructor(public activeModal: NgbActiveModal, public booksService:BooksService, private fb:FormBuilder) { }
   ngOnInit(): void {
+    console.log(this.ratingForm)
   }
 
-  onCancel=()=>{
-    console.log("cnacel")
+  onCancel = () => {
+    console.log(this.ratingForm.value)
+    //this.activeModal.dismiss('Cross click');
   }
 
-  onConfirm=()=>{
-    console.log("confirm")
+  onConfirm = () => {
+    this.activeModal.dismiss('Cross click');
+  }
+
+  init(){
+    return this.fb.group({
+      rating:this.initialRating
+    })
   }
 
 }
