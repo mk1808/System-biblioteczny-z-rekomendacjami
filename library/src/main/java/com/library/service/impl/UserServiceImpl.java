@@ -6,10 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,7 +26,6 @@ import com.library.service.RoleService;
 import com.library.service.UserService;
 
 @Service
-@Primary
 public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private RoleService roleService; 
@@ -54,7 +51,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public AppUser get(UUID id) {
-		//Address address = addressRepository.getById(null);
 		return repository.findById(id).orElse(null);
 	}
 
@@ -65,7 +61,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public AppUser update(AppUser entity) {
-		return repository.save(entity);
+		AppUser user = get(entity.getId());
+		entity.getAddress().setId(entity.getAddress().getId());
+		Address address = addressRepository.save(entity.getAddress());
+		user.setAddress(address);
+		user.setName(entity.getName());
+		user.setSurname(entity.getSurname());
+		user.setPhoneNo(entity.getPhoneNo());
+
+		return repository.save(user);
 	}
 	
 	@Override
