@@ -16,9 +16,14 @@ import { I18nService } from 'src/app/core/services/i18n.service';
 })
 export class InputComponent implements OnInit, OnChanges, ControlValueAccessor {
   @Input() label: any;
+  
   @Input() inputClass: any;
   @Input() type: any;
-  @Input() disabled: any;
+  disabled:any;
+  @Input('disabled') set setDisabled(value: boolean) {
+    this.disabled = value;
+}
+
   disabledClass = '';
   labelTranslated = '';
 
@@ -31,6 +36,8 @@ export class InputComponent implements OnInit, OnChanges, ControlValueAccessor {
 
   ngOnChanges(changes: SimpleChanges): void {
    this.labelTranslated = this.i18nService.getTranslation(this.label);
+ //  debugger;
+   this.disabledClass = this.disabled ? 'disabled' : ''
   }
 
   writeValue(value: any): void {
