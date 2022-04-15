@@ -92,7 +92,9 @@ const translations =
             "postalCode":"Kod pocztowy",
             "city":"Miasto",
             "edit":"Edytuj",
-            "search":"Szukaj"
+            "search":"Szukaj",
+            "submit":"Zatwierdź",
+            "cancel":"Anuluj"
 
 
 

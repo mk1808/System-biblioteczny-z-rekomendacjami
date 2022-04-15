@@ -3,24 +3,27 @@
         <div header>
             <form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm)">
             <div class="inputs">
-                <app-input [label]="nameInput" [inputClass]="inputClass" formControlName="name"></app-input>
-                <app-input [label]="surnameInput" [inputClass]="inputClass" formControlName="surname"></app-input>
-                <app-input [label]="phoneInput" [inputClass]="inputClass" formControlName="phoneNo"></app-input>
+                <app-input [label]="nameInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="name"></app-input>
+                <app-input [label]="surnameInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="surname"></app-input>
+                <app-input [label]="phoneInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="phoneNo"></app-input>
                 <app-input [label]="mailInput" [inputClass]="inputClass" [disabled]="mailDisabled" formControlName="mail"></app-input>
 <!--              <app-input [label]="passwordInput" [inputClass]="inputClass" type="password"></app-input>
                 <app-input [label]="passwordRepeatInput" [inputClass]="inputClass" type="password"></app-input>  
 -->              </div>
                 <div class="address-label">Adres</div>
                 <div class="inputs">
-                <app-input [label]="streetInput" [inputClass]="inputClass" formControlName="street"></app-input>
-                <app-input [label]="houseNoInput" [inputClass]="inputClass" formControlName="houseNo"></app-input>
-                <app-input [label]="flatNoInput" [inputClass]="inputClass" formControlName="flatNo"></app-input>
-                <app-input [label]="postalCodeInput" [inputClass]="inputClass" formControlName="postalCode"></app-input>
-                <app-input [label]="cityInput" [inputClass]="inputClass" formControlName="city"></app-input>
+                <app-input [label]="streetInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="street"></app-input>
+                <app-input [label]="houseNoInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="houseNo"></app-input>
+                <app-input [label]="flatNoInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="flatNo"></app-input>
+                <app-input [label]="postalCodeInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="postcode"></app-input>
+                <app-input [label]="cityInput" [inputClass]="inputClass" [disabled]="formDisabled" formControlName="city"></app-input>
             </div>
-            <div style="text-align: center;">
-                <app-button [iconClass]="editTextLogin" [text]="editTextLogin" [btnClass]="btnClass" type="submit"></app-button>
-   
+            <div *ngIf="formDisabled" style="text-align: center;">
+                <app-button [iconClass]="editTextLogin" [text]="editTextLogin" [btnClass]="btnClass" [onClick]="edit" ></app-button>
+            </div>
+            <div *ngIf="!formDisabled" class="editButtons">
+                <app-button [iconClass]="editTextLogin" [text]="textCancel" [btnClass]="cancelClass" [onClick]="cancel"></app-button>
+                <app-button [iconClass]="editTextLogin" [text]="textConfirm" [btnClass]="confirmClass" type="submit"></app-button>
             </div>
     </form>   
     </div>

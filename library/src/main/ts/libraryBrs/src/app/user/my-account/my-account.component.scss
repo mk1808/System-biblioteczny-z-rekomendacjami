@@ -23,9 +23,7 @@
     font-size: 30px;
 }
 
-app-button {
-    margin-top: 30px;
-}
+
 
 .address-label{
     font-size: 28px;
@@ -40,4 +38,9 @@ app-button {
     img{
         border:1px solid black;
     }
+}
+
+.editButtons{
+    display: flex;
+    justify-content: space-between;
 }
