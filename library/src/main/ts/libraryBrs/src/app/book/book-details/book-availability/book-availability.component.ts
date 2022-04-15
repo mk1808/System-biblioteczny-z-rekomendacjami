@@ -27,7 +27,7 @@ export class BookAvailabilityComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.availability)
     console.log(this.book)
-    debugger;
+   // debugger;
     this.getAvailabilityText();
     this.getExtraInfoText();
   }
