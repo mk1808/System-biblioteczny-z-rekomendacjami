@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Author, Genre, Publisher, Response } from './api/api';
+import { Author, Genre, KeyWord, Publisher, Response } from './api/api';
 import { RestService } from './rest.service';
 const URL = "api/dictionaries";
 
@@ -9,6 +9,7 @@ export class DictionaryService {
   public authors: BehaviorSubject<Author[]> = new BehaviorSubject<Author[]>([]);
   public genres: BehaviorSubject<Genre[]> = new BehaviorSubject<Genre[]>([]);
   public publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject<Publisher[]>([]);
+  public keywords: BehaviorSubject<KeyWord[]> = new BehaviorSubject<KeyWord[]>([]);
 
   constructor(private restService: RestService) { }
 
@@ -36,6 +37,14 @@ export class DictionaryService {
          this.publishers.next(resp.content);
       }
      
+    })
+  }
+
+  getKeyWords(): any {
+    return this.restService.get<Response<Publisher[]>>(`${URL}/keywords`).subscribe((resp:Response<KeyWord[]>) => {
+      if(resp.content){
+         this.keywords.next(resp.content);
+      }
     })
   }
 }
