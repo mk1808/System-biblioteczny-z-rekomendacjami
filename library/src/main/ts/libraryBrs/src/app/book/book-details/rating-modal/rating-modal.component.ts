@@ -18,6 +18,8 @@ export class RatingModalComponent implements OnInit {
   labelKeyword = "Słowa kluczowe"
   labelSubject = "Tematyka"
   initialRating = 0;
+  commentInput="comment";
+  comment="comment"
   ratingForm:FormGroup= this.init();
   
   constructor(public activeModal: NgbActiveModal, public booksService:BooksService, private fb:FormBuilder, private userService: UsersService) { }
@@ -38,7 +40,8 @@ export class RatingModalComponent implements OnInit {
 
   init(){
     return this.fb.group({
-      rating:this.initialRating
+      rating:this.initialRating,
+      comment:""
     })
   }
 

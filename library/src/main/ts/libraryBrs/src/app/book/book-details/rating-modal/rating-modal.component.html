@@ -2,21 +2,20 @@
     <p>{{info|i18next}}</p>
     <div class="additional-content">
         <form [formGroup]="ratingForm" (ngSubmit)="onConfirm()">
-        <div class="rating ui form">
-            <div class="field">
-                <label>Ocena</label>
-                <app-rating [ratingFormCtrl]="ratingForm.controls['rating']"></app-rating>
+            <div class="rating ui form">
+                <div class="field">
+                    <label>Ocena</label>
+                    <app-rating [ratingFormCtrl]="ratingForm.controls['rating']"></app-rating>
+                </div>
             </div>
-        </div>
-        <div class="ui form">
-            <div class="field align-input">
-                <label>Komentarz</label>
-                <textarea></textarea>
+            <div class="ui form">
+                <div class="field align-input">
+                    <app-textarea [label]="commentInput" [formControlName]="comment"></app-textarea>
+                </div>
             </div>
-        </div>
-        <div>
-            <app-multi-select [label]="labelKeyword"></app-multi-select>
-        </div>
+            <div>
+                <app-multi-select [label]="labelKeyword"></app-multi-select>
+            </div>
         </form>
     </div>
 </app-modal>
