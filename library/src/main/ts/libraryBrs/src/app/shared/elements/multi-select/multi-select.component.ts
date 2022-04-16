@@ -1,11 +1,18 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, Input, OnInit,OnChanges, SimpleChanges  } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 declare let $: any;
 declare let jQuery: any;
 @Component({
   selector: 'app-multi-select',
   templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.scss']
+  styleUrls: ['./multi-select.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: MultiSelectComponent
+    }
+  ]
 })
 export class MultiSelectComponent implements OnInit, AfterViewInit, OnChanges, ControlValueAccessor {
   @Input() label: any;
@@ -30,7 +37,7 @@ export class MultiSelectComponent implements OnInit, AfterViewInit, OnChanges, C
   onTouched = () => { };
 
   writeValue(value: any): void {
-    this.value = value;
+    this.value = value || [];
   }
   registerOnChange(onChange: any): void {
     this.onChange = onChange;
@@ -39,6 +46,7 @@ export class MultiSelectComponent implements OnInit, AfterViewInit, OnChanges, C
     this.onTouched = onTouched;
   }
   ngOnChanges(changes: SimpleChanges): void {
+    debugger;
     if (this.options!=null) {this.options.unshift({id:0, name:"Wybierz"})}
     console.log(this.options)
   }
@@ -108,6 +116,7 @@ export class MultiSelectComponent implements OnInit, AfterViewInit, OnChanges, C
     this.onChange(this.value)
 
     }, 10)
+    //this.onChange(this.value)
   }
 
 }
