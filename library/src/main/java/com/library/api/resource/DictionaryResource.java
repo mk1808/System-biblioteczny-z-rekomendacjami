@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.library.dto.AuthorDto;
 import com.library.dto.GenreDto;
 import com.library.dto.PublisherDto;
+import com.library.dto.KeyWordDto;
 import com.library.response.Response;
 
 @RestController
@@ -24,5 +25,8 @@ public interface DictionaryResource {
 	
 	@GetMapping("/publishers")
 	ResponseEntity<Response<List<PublisherDto>>> getPublishers();
+	
+	@GetMapping("/keywords")
+	ResponseEntity<Response<List<KeyWordDto>>> getKeywords();
 
 }
