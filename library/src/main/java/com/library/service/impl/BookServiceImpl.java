@@ -108,8 +108,13 @@ private ReservationService reservationService;
 
 	@Override
 	public void createOpinion(Opinion opinion) {
+	
 		UUID bookId = opinion.getBook().getId();
 		UUID userId = opinion.getUser().getId();
+		Opinion oldOpinion = getOpinionByBookIdAndUserId(userId,bookId);
+		if(oldOpinion!=null) {
+			opinion.setId(oldOpinion.getId());
+		}
 		opinion.setBook(repository.getById(bookId));
 		opinion.setUser(userService.get(userId));
 		opinionRepository.save(opinion);	
@@ -329,7 +334,7 @@ private ReservationService reservationService;
 		}
 	}
 
-	
+
 	
 		
 

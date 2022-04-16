@@ -7,6 +7,7 @@ import { FormatterService } from 'src/app/core/services/formatter.service';
 import { Book, BookAvailability, Response } from 'src/app/core/services/rest/api/api';
 import { BooksService } from 'src/app/core/services/rest/books.service';
 import { AddToListModalComponent } from './add-to-list-modal/add-to-list-modal.component';
+import { RatingModalComponent } from './rating-modal/rating-modal.component';
 
 interface Alert {
   type: string;
@@ -155,6 +156,11 @@ export class BookDetailsComponent implements OnInit {
     modalRef.componentInstance.book = this.book;
     modalRef.componentInstance.typeOfList = type;
 
+  }
+
+  giveRating=()=>{
+    const modalRef = this.modalService.open(RatingModalComponent);
+    modalRef.componentInstance.book = this.book;
   }
 
 
