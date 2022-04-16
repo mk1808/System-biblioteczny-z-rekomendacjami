@@ -94,7 +94,10 @@ const translations =
             "edit":"Edytuj",
             "search":"Szukaj",
             "submit":"Zatwierdź",
-            "cancel":"Anuluj"
+            "cancel":"Anuluj",
+            "rating.title":"Dodawanie opinii",
+            "rating.info":"Możesz ocenić książkę, opisać swoje wrażenia oraz określić słowa kluczowe, które według Ciebie najlepiej pasują.",
+            "comment":"Komentarz"
 
 
 

@@ -1,6 +1,6 @@
 <div class="ui form">
     <div class="field align-input">
         <label>{{label|i18next}}</label>
-        <textarea></textarea>
+        <textarea [placeholder]="labelTranslated" [(ngModel)]="value" (input)="change()"></textarea>
     </div>
 </div>
