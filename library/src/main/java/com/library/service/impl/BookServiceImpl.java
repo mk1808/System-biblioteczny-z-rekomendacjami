@@ -1,27 +1,28 @@
 package com.library.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.library.dto.BookAvailabilityDto;
 import com.library.dto.BookFIlterDto;
-import com.library.dto.CanBorrowBookDto;
 import com.library.dto.UserAvailabilityDto;
 import com.library.enums.BookCopyStatus;
 import com.library.enums.ChangeProposalStatus;
+import com.library.model.AppUser;
 import com.library.model.Book;
 import com.library.model.BookCopy;
 import com.library.model.Borrowing;
 import com.library.model.CanBorrowBook;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
-import com.library.model.UserListElement;
 import com.library.model.Reservation;
-import com.library.model.AppUser;
+import com.library.model.UserListElement;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookCopyRepository;
 import com.library.repository.BookRepository;
@@ -137,18 +138,33 @@ private ReservationService reservationService;
 		}
 	}
 
-
-	
-
-
 	@Override
 	public void createChangeProposals(List<ChangeProposal> changeProposals) {
-		changeProposals.stream().forEach(this::createChangeProposal);
+		ChangeProposal newChangeProposal = new ChangeProposal();
 		
+		if(!CollectionUtils.isEmpty(changeProposals)) {
+			UUID bookId = changeProposals.get(0).getBook().getId();
+			UUID userId = changeProposals.get(0).getUser().getId();
+			newChangeProposal.setBook(repository.getById(bookId));
+			newChangeProposal.setUser(userService.get(userId));
+		}
+		
+		changeProposals.stream().forEach(proposal->createSingleChangeProposal(proposal, newChangeProposal.getBook(), newChangeProposal.getUser()));
+		
+	}
+	
+	private ChangeProposal createSingleChangeProposal(ChangeProposal changeProposal, Book book, AppUser user) {
+		changeProposal.setBook(book);
+		changeProposal.setUser(user);
+		return changeProposalRepository.save(changeProposal);
 	}
 	
 	@Override
 	public ChangeProposal createChangeProposal(ChangeProposal changeProposal) {
+		UUID bookId = changeProposal.getBook().getId();
+		UUID userId = changeProposal.getUser().getId();
+		changeProposal.setBook(repository.getById(bookId));
+		changeProposal.setUser(userService.get(userId));
 		return changeProposalRepository.save(changeProposal);
 	}
 
@@ -309,6 +325,7 @@ private ReservationService reservationService;
 			
 		}
 	}
+
 	
 	
 		
