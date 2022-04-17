@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.library.model.Book;
+import com.library.model.BookCopy;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID> {
@@ -29,5 +30,7 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 			@Param("authorId")UUID authorId, 
 			@Param("publisherId")UUID publisherId, 
 			@Param("genreId")UUID genreId);
+	
+	List<Book> findAllByOrderByCreatedDesc();
 
 }

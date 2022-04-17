@@ -1,5 +1,6 @@
 package com.library.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -35,6 +36,8 @@ public class Book extends BaseEntity{
 	private String publicationYear;
 	
 	private String originalTitle;
+	
+	private Date created;
 	
 	@Column(length = 1000)
 	private String descrpition;

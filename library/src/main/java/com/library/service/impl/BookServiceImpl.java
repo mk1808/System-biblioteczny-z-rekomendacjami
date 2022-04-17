@@ -167,6 +167,7 @@ private ReservationService reservationService;
 		return changeProposalRepository.save(changeProposal);
 	}
 	
+	
 	@Override
 	public ChangeProposal createChangeProposal(ChangeProposal changeProposal) {
 		UUID bookId = changeProposal.getBook().getId();
@@ -333,7 +334,11 @@ private ReservationService reservationService;
 			
 		}
 	}
-
+	@Override
+	public List<Book> getNewest(long number) {
+		List<Book> books = new ArrayList<>();
+		return this.repository.findAllByOrderByCreatedDesc().stream().limit(number).collect(Collectors.toList());
+	}
 
 	
 		

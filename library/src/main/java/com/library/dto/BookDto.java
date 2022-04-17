@@ -1,6 +1,7 @@
 package com.library.dto;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,8 @@ public class BookDto {
 	private String photo;
 	private UUID publisherId;
 	private String publisherName;
+	private Date created;
+	
 	private List<AuthorDto> authors;
 	private List<GenreDto> genres;
 	private List<SeriesDto> series;

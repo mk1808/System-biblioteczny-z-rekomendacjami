@@ -50,9 +50,13 @@ public interface BookService extends RepositoryService<Book>{
 	List<BookCopy> getBookCopiesByIds(List<UUID> bookCopiesIds);
 
 	List<Book> getFiltered(BookFIlterDto bookFilterDto);
+	
+	List<Book> getNewest(long number);
 
 	BookAvailabilityDto getAvailabilityByBookId(UUID id);
 
 	CanBorrowBook canBorrow(UUID bookCopyId, UUID userId);
+	
+	
 
 }
