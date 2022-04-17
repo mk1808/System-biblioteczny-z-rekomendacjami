@@ -14,6 +14,7 @@ export interface Book {
     genres?: Object[];
     series?: Object[];
     keyWords?: Object[];
+    created?: string;
 
     
 }

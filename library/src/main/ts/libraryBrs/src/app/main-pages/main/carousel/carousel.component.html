@@ -4,7 +4,7 @@
     <carousel [height]="properties.height" [cellsToShow]="properties.cells"
         [arrowsOutside]="properties.areArrowsOutside">
         <div *ngFor="let singleBook of books; index as i;" class="carousel-cell">
-            <app-carousel-element [bookProp]="singleBook"></app-carousel-element>
+            <app-carousel-element [bookProp]="singleBook" [authors]="authors[i]"></app-carousel-element>
         </div>
     </carousel>
 </div>

@@ -7,6 +7,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 })
 export class CarouselElementComponent implements OnInit, OnChanges {
   @Input() bookProp:any;
+  @Input() authors:any;
   book={id:0, photo:'', title:'', author:''}
   constructor() { }
 
