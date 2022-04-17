@@ -35,12 +35,12 @@ export class RatingModalComponent implements OnInit {
 
   onCancel = () => {
     console.log(this.ratingForm.value)
-    //this.activeModal.dismiss('Cross click');
+    this.activeModal.dismiss('Cross click');
   }
 
   onConfirm = () => {
     this.save()
-    this.activeModal.dismiss('Cross click');
+    
   }
 
   init(){
@@ -58,6 +58,7 @@ export class RatingModalComponent implements OnInit {
 
     this.booksService.createOpinion(opinion).subscribe(response=>{
       console.log(response)
+      this.activeModal.close(response);
 
     })
     debugger;

@@ -169,6 +169,10 @@ export class BookDetailsComponent implements OnInit {
   giveRating = () => {
     const modalRef = this.modalService.open(RatingModalComponent);
     modalRef.componentInstance.book = this.book;
+    modalRef.result.then((data) => {
+      console.log(data)
+      this.ngOnInit();
+    });
   }
 
 
