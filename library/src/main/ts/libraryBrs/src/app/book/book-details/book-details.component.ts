@@ -75,7 +75,7 @@ export class BookDetailsComponent implements OnInit {
     username: "Użytkownik 3", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed enim in nunc feugiat euismod vitae necnunc. Morbi ac massa ut sem hendrerit",
     rating: 8, date: "30.01.2022r."
   };
-  comments = [this.comment, this.comment5]
+  comments = []
   book: Book = {};
 
 
@@ -88,6 +88,7 @@ export class BookDetailsComponent implements OnInit {
     this.getBookId();
     this.getBook();
     this.getBookAvailability();
+    this.getComments();
     this.reset();
 
     // this.newq();
@@ -121,6 +122,13 @@ export class BookDetailsComponent implements OnInit {
         this.availability = resp.content;
         console.log(resp)
       }
+    })
+  }
+
+  getComments(){
+    this.booksService.getOpinionsByBookId(this.id).subscribe(response=>{
+      this.comments = response.content;
+      console.log(response)
     })
   }
 
