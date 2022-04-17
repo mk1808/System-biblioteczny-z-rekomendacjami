@@ -171,6 +171,7 @@ export interface Opinion {
     userId?: string;
     rating?: number;
     comment?: string;
+    created?: Date;
 }
 
 export interface Recommendation {

@@ -1,5 +1,6 @@
 package com.library.dto;
 
+import java.util.Date;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -22,5 +23,6 @@ public class OpinionDto {
 	
 	private Long rating;
 	private String comment;
+	private Date created;
 
 }

@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -117,6 +118,7 @@ private ReservationService reservationService;
 		}
 		opinion.setBook(repository.getById(bookId));
 		opinion.setUser(userService.get(userId));
+		opinion.setCreated(new Date());
 		opinionRepository.save(opinion);	
 	}
 

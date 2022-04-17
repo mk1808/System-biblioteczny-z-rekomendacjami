@@ -39,9 +39,9 @@ public class OpinionConverterServiceImpl implements OpinionConverterService {
 				.bookId(model.getBook().getId())
 				.user(userConverter.toDto(model.getUser()))
 				.userId(model.getUser().getId())
-				
 				.rating(model.getRating())
 				.comment(model.getComment())
+				.created(model.getCreated())
 				.build();
 		return dto;
 	}
@@ -54,6 +54,7 @@ public class OpinionConverterServiceImpl implements OpinionConverterService {
 				.user(AppUser.builder().id(dto.getUserId()).build())
 				.rating(dto.getRating())
 				.comment(dto.getComment())
+				.created(dto.getCreated())
 				.build();
 		return model;
 	}
