@@ -22,16 +22,19 @@
             <p class="line rating"><span>Ocena:</span> 8,5/10</p>
             <div class="buttons">
                 <div>
-                    <app-button [iconClass]="iconClass" [text]="textRate" [btnClass]="btnClass" [onClick]="giveRating"></app-button>
+                    <app-button [iconClass]="iconClass" [text]="textRate" [btnClass]="btnClass" [onClick]="giveRating">
+                    </app-button>
                     <div></div>
-                  <app-button [iconClass]="addClass" [text]="textFav" [btnClass]="orangeBtnClass" [onClick]="addToListFav"></app-button>
+                    <app-button [iconClass]="addClass" [text]="textFav" [btnClass]="orangeBtnClass"
+                        [onClick]="addToListFav"></app-button>
                     <div></div>
-                    <app-button [iconClass]="addClass" [text]="textToRead" [btnClass]="orangeBtnClass" [onClick]="addToListToRead"></app-button>
-             </div>
+                    <app-button [iconClass]="addClass" [text]="textToRead" [btnClass]="orangeBtnClass"
+                        [onClick]="addToListToRead"></app-button>
+                </div>
             </div>
         </div>
     </div>
-    <app-book-availability [availability] = "availability" [book]="book"></app-book-availability>
+    <app-book-availability [availability]="availability" [book]="book"></app-book-availability>
     <div class="description">
         <p class="line rating"><span>Opis</span> </p>
         <div [innerHTML]="book.descrpition"></div>

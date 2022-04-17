@@ -14,7 +14,7 @@ interface Alert {
   message: string;
 }
 
- 
+
 const ALERTS: Alert[] = [{
   type: 'success',
   message: 'This is an success alert',
@@ -66,7 +66,7 @@ export class BookDetailsComponent implements OnInit {
   infoText = ""
   fee = "123"
   //availability = { available: 0, all: 5, peopleWaiting: 1 };
-  availability:BookAvailability={};
+  availability: BookAvailability = {};
   comment = {
     username: "Użytkownik 1", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed enim in nunc feugiat euismod vitae necnunc. Morbi ac massa ut sem hendrerit",
     rating: 6, date: "05.01.2022r."
@@ -79,18 +79,18 @@ export class BookDetailsComponent implements OnInit {
   book: Book = {};
 
 
-  alerts: Alert[]=[];
- 
+  alerts: Alert[] = [];
 
-  constructor(private route: ActivatedRoute, private booksService: BooksService, private formatterService: FormatterService,  private modalService: NgbModal) { }
+
+  constructor(private route: ActivatedRoute, private booksService: BooksService, private formatterService: FormatterService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.getBookId();
     this.getBook();
     this.getBookAvailability();
-   this.reset();
-   
-   // this.newq();
+    this.reset();
+
+    // this.newq();
 
   }
   close(alert: Alert) {
@@ -118,7 +118,7 @@ export class BookDetailsComponent implements OnInit {
   getBookAvailability() {
     this.booksService.getAvailabilityByBookId(this.id).subscribe((resp: Response<BookAvailability>) => {
       if (resp.content) {
-       this.availability = resp.content;
+        this.availability = resp.content;
         console.log(resp)
       }
     })
@@ -150,15 +150,15 @@ export class BookDetailsComponent implements OnInit {
     this.addToList(UserListType.TO_READ);
   }
 
-  addToList = (type:UserListType) => {
-  
+  addToList = (type: UserListType) => {
+
     const modalRef = this.modalService.open(AddToListModalComponent);
     modalRef.componentInstance.book = this.book;
     modalRef.componentInstance.typeOfList = type;
 
   }
 
-  giveRating=()=>{
+  giveRating = () => {
     const modalRef = this.modalService.open(RatingModalComponent);
     modalRef.componentInstance.book = this.book;
   }
