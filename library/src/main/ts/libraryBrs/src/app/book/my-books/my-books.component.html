@@ -1,17 +1,19 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
   <div class="acc-container">
-    <ngb-accordion activeIds="ngb-panel-0" >
+    <ngb-accordion activeIds="ngb-panel-0">
       <ngb-panel [title]="accHeaders.borrowed" cardClass="my-accordion">
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
-              <tr><th>{{'booklist.table.no'|i18next}}</th>
-              <th>{{'booklist.table.title'|i18next}}</th>
-              <th>{{'booklist.table.author'|i18next}}</th>
-              <th>{{'booklist.table.borrowingDate'|i18next}}</th>
+              <tr>
+                <th>{{'booklist.table.no'|i18next}}</th>
+                <th>{{'booklist.table.title'|i18next}}</th>
+                <th>{{'booklist.table.author'|i18next}}</th>
+                <th>{{'booklist.table.borrowingDate'|i18next}}</th>
                 <th>{{'booklist.table.dueDate'|i18next}}</th>
                 <th></th>
-            </tr></thead>
+              </tr>
+            </thead>
             <tbody>
               <tr *ngFor="let borrowing of borrowings|async; let i = index">
                 <td data-label="Name" class="one wide">{{i+1}}</td>
@@ -19,7 +21,9 @@
                 <td data-label="Job">{{formatAuthors(borrowing.bookCopy.book.authors)}}</td>
                 <td data-label="Job">{{borrowing.borrowDate | date: 'dd.MM.yyyy'}}</td>
                 <td data-label="Job">{{borrowing.expectedReturnDate | date: 'dd.MM.yyyy'}}</td>
-                <td class="three wide"><app-button [text]="prolongText" [btnClass]="btnClass"></app-button></td>
+                <td class="three wide">
+                  <app-button [text]="prolongText" [btnClass]="btnClass"></app-button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -29,14 +33,16 @@
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
-              <tr><th>{{'booklist.table.no'|i18next}}</th>
-              <th>{{'booklist.table.title'|i18next}}</th>
-              <th>{{'booklist.table.author'|i18next}}</th>
-              <th>{{'booklist.table.reservedDate'|i18next}}</th>
+              <tr>
+                <th>{{'booklist.table.no'|i18next}}</th>
+                <th>{{'booklist.table.title'|i18next}}</th>
+                <th>{{'booklist.table.author'|i18next}}</th>
+                <th>{{'booklist.table.reservedDate'|i18next}}</th>
                 <th>{{'booklist.table.noInQueue'|i18next}}</th>
                 <th>{{'booklist.table.expectedAvailabilityDate'|i18next}}</th>
                 <th></th>
-            </tr></thead>
+              </tr>
+            </thead>
             <tbody>
               <tr *ngFor="let reservation of reservations|async; let i = index">
                 <td data-label="Name" class="one wide">{{i+1}}</td>
@@ -45,7 +51,9 @@
                 <td data-label="Job">{{reservation.reservationDate| date: 'dd.MM.yyyy'}}</td>
                 <td data-label="Job">1</td>
                 <td data-label="Job">{{reservation.availabilityStartDate| date: 'dd.MM.yyyy'}}</td>
-                <td class="three wide"><app-button [text]="resignText" [btnClass]="btnClass"></app-button></td>
+                <td class="three wide">
+                  <app-button [text]="resignText" [btnClass]="btnClass"></app-button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -55,13 +63,15 @@
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
-              <tr><th>{{'booklist.table.no'|i18next}}</th>
-              <th>{{'booklist.table.title'|i18next}}</th>
-              <th>{{'booklist.table.author'|i18next}}</th>
-              <th>{{'booklist.table.borrowingDate'|i18next}}</th>
-              <th>{{'booklist.table.expectedReturnDate'|i18next}}</th>
-              <th>{{'booklist.table.returnDate'|i18next}}</th>
-            </tr></thead>
+              <tr>
+                <th>{{'booklist.table.no'|i18next}}</th>
+                <th>{{'booklist.table.title'|i18next}}</th>
+                <th>{{'booklist.table.author'|i18next}}</th>
+                <th>{{'booklist.table.borrowingDate'|i18next}}</th>
+                <th>{{'booklist.table.expectedReturnDate'|i18next}}</th>
+                <th>{{'booklist.table.returnDate'|i18next}}</th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <td data-label="Name" class="one wide">1</td>
@@ -79,17 +89,21 @@
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
-              <tr><th>{{'booklist.table.no'|i18next}}</th>
-              <th>{{'booklist.table.title'|i18next}}</th>
-              <th>{{'booklist.table.author'|i18next}}</th>
-              <th></th>
-            </tr></thead>
+              <tr>
+                <th>{{'booklist.table.no'|i18next}}</th>
+                <th>{{'booklist.table.title'|i18next}}</th>
+                <th>{{'booklist.table.author'|i18next}}</th>
+                <th></th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <td data-label="Name" class="one wide">1</td>
                 <td data-label="Age">Abcdef</td>
                 <td data-label="Job">Jan Kowalski</td>
-                <td class="three wide"><app-button [text]="deleteText" [btnClass]="btnClass"></app-button></td>
+                <td class="three wide">
+                  <app-button [text]="deleteText" [btnClass]="btnClass"></app-button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -99,17 +113,21 @@
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
-              <tr><th>{{'booklist.table.no'|i18next}}</th>
-              <th>{{'booklist.table.title'|i18next}}</th>
-              <th>{{'booklist.table.author'|i18next}}</th>
-              <th></th>
-            </tr></thead>
+              <tr>
+                <th>{{'booklist.table.no'|i18next}}</th>
+                <th>{{'booklist.table.title'|i18next}}</th>
+                <th>{{'booklist.table.author'|i18next}}</th>
+                <th></th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <td data-label="Name" class="one wide">1</td>
                 <td data-label="Age">Abcdef</td>
                 <td data-label="Job">Jan Kowalski</td>
-                <td class="three wide"><app-button [text]="deleteText" [btnClass]="btnClass"></app-button></td>
+                <td class="three wide">
+                  <app-button [text]="deleteText" [btnClass]="btnClass"></app-button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -119,27 +137,30 @@
         <ng-template ngbPanelContent>
           <table class="ui celled table">
             <thead>
-              <tr><th>{{'booklist.table.no'|i18next}}</th>
-              <th>{{'booklist.table.title'|i18next}}</th>
-              <th>{{'booklist.table.author'|i18next}}</th>
-              <th>{{'booklist.table.rating'|i18next}}</th>
+              <tr>
+                <th>{{'booklist.table.no'|i18next}}</th>
+                <th>{{'booklist.table.title'|i18next}}</th>
+                <th>{{'booklist.table.author'|i18next}}</th>
+                <th>{{'booklist.table.rating'|i18next}}</th>
                 <th>{{'booklist.table.comment'|i18next}}</th>
-   
-            </tr></thead>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <td data-label="Name" class="one wide">1</td>
                 <td data-label="Age">Abcdef</td>
                 <td data-label="Job">Jan Kowalski</td>
                 <td data-label="Job">5</td>
-                <td data-label="Job" class="eight wide">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce risus est, sodales nec risus non, ultrices mattis libero. Aliquam tellus lectus, luctus at ullamcorper non, condimentum a metus. Proin non aliquam nunc. Aliquam condimentum dignissim ex, dignissim viverra tellus pellentesque ac. Maecenas convallis dignissim dui, eget fermentum felis fringilla nec. Ut et dolor nec sapien ultrices viverra quis in dolor. Nam vestibulum orci vitae euismod convallis. </td>
-            </tr>
+                <td data-label="Job" class="eight wide">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                  risus est, sodales nec risus non, ultrices mattis libero. Aliquam tellus lectus, luctus at ullamcorper
+                  non, condimentum a metus. Proin non aliquam nunc. Aliquam condimentum dignissim ex, dignissim viverra
+                  tellus pellentesque ac. Maecenas convallis dignissim dui, eget fermentum felis fringilla nec. Ut et
+                  dolor nec sapien ultrices viverra quis in dolor. Nam vestibulum orci vitae euismod convallis. </td>
+              </tr>
             </tbody>
           </table>
         </ng-template>
       </ngb-panel>
-    
     </ngb-accordion>
   </div>
-    
 </app-main-content>
