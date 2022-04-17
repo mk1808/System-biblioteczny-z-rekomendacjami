@@ -64,22 +64,22 @@
           <table class="ui celled table">
             <thead>
               <tr>
-                <th>{{'booklist.table.no'|i18next}}</th>
-                <th>{{'booklist.table.title'|i18next}}</th>
-                <th>{{'booklist.table.author'|i18next}}</th>
-                <th>{{'booklist.table.borrowingDate'|i18next}}</th>
-                <th>{{'booklist.table.expectedReturnDate'|i18next}}</th>
-                <th>{{'booklist.table.returnDate'|i18next}}</th>
+                <th>{{'booklist.table.no' | i18next}}</th>
+                <th>{{'booklist.table.title' | i18next}}</th>
+                <th>{{'booklist.table.author' | i18next}}</th>
+                <th>{{'booklist.table.borrowingDate' | i18next}}</th>
+                <th>{{'booklist.table.expectedReturnDate' | i18next}}</th>
+                <th>{{'booklist.table.returnDate' | i18next}}</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td data-label="Name" class="one wide">1</td>
-                <td data-label="Age">Abcdef</td>
-                <td data-label="Job">Jan Kowalski</td>
-                <td data-label="Job">18-11-2021</td>
-                <td data-label="Job">18-12-2021</td>
-                <td data-label="Job">18-12-2021</td>
+              <tr *ngFor="let pastBorrowing of pastBorrowings|async; let i = index">
+                <td data-label="Name" class="one wide">{{i+1}}</td>
+                <td data-label="Age">{{pastBorrowing.bookCopy.book.title}}</td>
+                <td data-label="Job">{{formatAuthors(pastBorrowing.bookCopy.book.authors)}}</td>
+                <td data-label="Job">{{pastBorrowing.borrowDate | date: 'dd.MM.yyyy'}}</td>
+                <td data-label="Job">{{pastBorrowing.expectedReturnDate | date: 'dd.MM.yyyy'}}</td>
+                <td data-label="Job">{{pastBorrowing.returnDate | date: 'dd.MM.yyyy'}}</td>
               </tr>
             </tbody>
           </table>

@@ -3,6 +3,7 @@ import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import i18next from 'i18next';
 import { Author } from 'src/app/core/services/rest/api/api';
+import { BooksService } from 'src/app/core/services/rest/books.service';
 import { BorrowingsService } from 'src/app/core/services/rest/borrowings.service';
 import { ReservationsService } from 'src/app/core/services/rest/reservations.service';
 @Component({
@@ -21,16 +22,20 @@ export class MyBooksComponent implements OnInit {
   resignText=this.getTranslation("booklist.table.resign")
   btnClass="full"
   borrowings:any;
+  pastBorrowings:any;
   reservations:any;
   constructor( @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService, private borrowingsService:BorrowingsService,
-  private reservationsService:ReservationsService) { }
+  private reservationsService:ReservationsService, private booksService:BooksService) { }
 
   ngOnInit(): void {
     this.updateBorrowings()
     this.updateReservations()
+    this.updatePastBorrowings()
+
     this.borrowings = this.borrowingsService.borrowings;
     this.reservations = this.reservationsService.reservations;
-    console.log(this.reservations)
+    this.pastBorrowings = this.borrowingsService.pastBorrowings;
+    console.log(this.pastBorrowings)
     
     
   }
@@ -42,6 +47,11 @@ export class MyBooksComponent implements OnInit {
   updateReservations(){
     this.reservationsService.getByUserId("a5edd677-14a9-449b-ab3f-76742762c5f1")
   }
+
+  updatePastBorrowings(){
+    this.borrowingsService.getPastByUserId("a5edd677-14a9-449b-ab3f-76742762c5f1")
+  }
+  
 
   formatAuthors(authors:Author[]){
     let displayed="";

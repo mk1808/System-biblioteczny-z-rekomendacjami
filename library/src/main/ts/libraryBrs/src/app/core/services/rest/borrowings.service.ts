@@ -7,6 +7,8 @@ const URL = "api/borrowings";
 @Injectable()
 export class BorrowingsService {
   public borrowings: BehaviorSubject<Borrowing[]> = new BehaviorSubject<Borrowing[]>([]);
+  public pastBorrowings: BehaviorSubject<Borrowing[]> = new BehaviorSubject<Borrowing[]>([]);
+  
 
   constructor(private restService: RestService) { }
 
@@ -19,8 +21,12 @@ export class BorrowingsService {
     })
   }
 
-  getPastByUserId(userId:string): Observable<Response<any>> {
-    return this.restService.get(`${URL}/user/${userId}/past`);
+  getPastByUserId(userId: string): any {
+    return this.restService.get<Response<Borrowing[]>>(`${URL}/user/${userId}/past`).subscribe((resp:Response<Borrowing[]>) => {
+      if (resp.content) {
+        this.pastBorrowings.next(resp.content);
+      }
+    })
   }
 
   prolong(id:string): Observable<Response<any>> {
