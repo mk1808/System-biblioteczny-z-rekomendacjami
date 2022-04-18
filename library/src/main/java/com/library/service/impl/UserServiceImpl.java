@@ -133,6 +133,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         roleSet.add(role);
         user.setRoles(roleSet);
         user.setAddress(address);
+        user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return repository.save(user);
     }
     
