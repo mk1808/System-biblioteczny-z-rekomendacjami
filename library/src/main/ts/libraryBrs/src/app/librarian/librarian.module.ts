@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LibrarianRoutingModule } from './librarian-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,9 @@ import { CoreModule } from '../core/core.module';
     CommonModule,
     LibrarianRoutingModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class LibrarianModule { }

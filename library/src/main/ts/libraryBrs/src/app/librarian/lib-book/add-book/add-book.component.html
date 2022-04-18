@@ -1,25 +1,26 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
     <div class="parent">
         <div class="inside">
-            <div class="inputs">
-                <!--  <app-select [label]="label" [allowOwnValue]="true"></app-select>-->
-                <app-input [label]="isbnInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="titleInput" [inputClass]="inputClass"></app-input>
-                <app-select [label]="authorInput" [allowOwnValue]="true"></app-select>
-                <app-multi-select [label]="genreInput"></app-multi-select>
-                <app-select [label]="publisherInput" [allowOwnValue]="true"></app-select>
-                <app-input [label]="yearInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="originalTitleInput" [inputClass]="inputClass"></app-input>
-                <app-select [label]="seriesInput" [allowOwnValue]="true"></app-select>
-            </div>
-            <div class="comments">
-                <app-textarea [label] = "descriptionInput"></app-textarea>
-            </div>
-            <div class="bottomAction">
-                <app-button [text]="cancelText" [btnClass]="cancelClass" [onClick]="onCancel"></app-button>
-                <app-button [text]="prolongText" [btnClass]="confirmBtnClass" [onClick]="onConfirm"></app-button>
-
-            </div>
+            <form [formGroup]="bookAddForm" (ngSubmit)="onConfirm()">
+                <div class="inputs">
+                    <!--  <app-select [label]="label" [allowOwnValue]="true"></app-select>-->
+                    <app-input [label]="isbnInput" [inputClass]="inputClass"></app-input>
+                    <app-input [label]="titleInput" [inputClass]="inputClass"></app-input>
+                    <app-select [label]="authorInput" [allowOwnValue]="true"></app-select>
+                    <app-multi-select [label]="genreInput"></app-multi-select>
+                    <app-select [label]="publisherInput" [allowOwnValue]="true"></app-select>
+                    <app-input [label]="yearInput" [inputClass]="inputClass"></app-input>
+                    <app-input [label]="originalTitleInput" [inputClass]="inputClass"></app-input>
+                    <app-select [label]="seriesInput" [allowOwnValue]="true"></app-select>
+                </div>
+                <div class="comments">
+                    <app-textarea [label]="descriptionInput"></app-textarea>
+                </div>
+                <div class="bottomAction">
+                    <app-button [text]="cancelText" [btnClass]="cancelClass" [onClick]="onCancel"></app-button>
+                    <app-button [text]="prolongText" [btnClass]="confirmBtnClass"></app-button>
+                </div>
+            </form>
         </div>
     </div>
 </app-main-content>

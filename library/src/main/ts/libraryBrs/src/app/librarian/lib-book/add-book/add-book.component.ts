@@ -1,4 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { Author, Genre, Publisher } from 'src/app/core/services/rest/api/api';
+import { BooksService } from 'src/app/core/services/rest/books.service';
+import { DictionaryService } from 'src/app/core/services/rest/dictionary.service';
 
 @Component({
   selector: 'app-add-book',
@@ -35,20 +41,60 @@ export class AddBookComponent implements OnInit {
   textLogin="login"
   textRegister="goToRegister"
   textOpen="open"
-
-
-  @Input() name:any;
-  @Input() modalTitle:any;
-  @Input() onConfirm:any;
-  @Input() onCancel:any;
-  
   prolongText="Zatwierdź"
   cancelText="Anuluj"
   confirmBtnClass="full orange"
   cancelClass="full gray"
-  constructor() { }
+  bookAddForm:FormGroup= this.initForm();
+
+  genres: BehaviorSubject<Genre[]> = new BehaviorSubject<Genre[]>([]);
+  authors: BehaviorSubject<Author[]> = new BehaviorSubject<Author[]>([]);
+  publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject<Publisher[]>([]);
+
+  constructor(private route: ActivatedRoute, private router: Router, private booksService: BooksService,
+    private dictionaryService: DictionaryService, private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.updateDictionariesValues()
+  }
+
+  updateDictionariesValues() {
+    this.dictionaryService.getAuthors();
+    this.dictionaryService.getGenres();
+    this.dictionaryService.getPublishers();
+    this.authors = this.dictionaryService.authors;
+    this.genres = this.dictionaryService.genres;
+    this.publishers = this.dictionaryService.publishers;
+    console.log(this.authors)
+
+    console.log(this.publishers)
+    console.log(this.genres)
+
+  }
+
+  initForm() {
+    return this.fb.group({
+      ISBN: "",
+      title: "",
+      publicationYear: "",
+      originalTitle: "",
+      descrpition: "",
+      photo: "",
+      publisherId: "",
+      publisherName: "",
+      authors: [],
+      genres: [],
+      series: [],
+      keyWords: []
+    })
+  }
+
+  onCancel(){
+
+  }
+
+  onConfirm(){
+
   }
 
 }
