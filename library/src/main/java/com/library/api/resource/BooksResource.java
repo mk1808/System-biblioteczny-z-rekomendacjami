@@ -30,6 +30,7 @@ import com.library.dto.FileDto;
 import com.library.dto.ImportFileResultDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
+import com.library.enums.UserListType;
 import com.library.response.Response;
 
 @RestController
@@ -79,7 +80,7 @@ public interface BooksResource {
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/userList/user/{userId}")
-	ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(@PathVariable UUID userId, @RequestParam String type);
+	ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(@PathVariable UUID userId, @RequestParam UserListType type);
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/user/{userId}/opinions")

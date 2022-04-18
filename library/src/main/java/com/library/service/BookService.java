@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.library.dto.BookFIlterDto;
 import com.library.dto.CanBorrowBookDto;
+import com.library.enums.UserListType;
 import com.library.model.Book;
 import com.library.model.BookCopy;
 import com.library.model.CanBorrowBook;
@@ -39,7 +40,7 @@ public interface BookService extends RepositoryService<Book>{
 
 	void createUserListElement(UserListElement userListElement);
 
-	List<UserListElement> getUserListElementByUserAndType(UUID userId, String type);
+	List<UserListElement> getUserListElementByUserAndType(UUID userId, UserListType type);
 
 	public void deleteUserListElement(UUID elementId);
 	

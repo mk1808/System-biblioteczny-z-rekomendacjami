@@ -22,6 +22,7 @@ import com.library.dto.FileDto;
 import com.library.dto.ImportFileResultDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
+import com.library.enums.UserListType;
 import com.library.model.Book;
 import com.library.model.ChangeProposal;
 import com.library.model.Opinion;
@@ -201,7 +202,7 @@ public class BooksController extends BaseController implements BooksResource {
 
 	@Override
 	public ResponseEntity<Response<List<UserListElementDto>>> getUserListElementByUserAndType(UUID userId,
-			String type) {
+			UserListType type) {
 		Response<List<UserListElementDto>> response = createSuccessResponse(
 				userListElementConverter.toDtoList(bookService.getUserListElementByUserAndType(userId, type)));
 		return ResponseEntity.ok(response);

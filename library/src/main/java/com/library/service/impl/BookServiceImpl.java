@@ -15,6 +15,7 @@ import com.library.dto.BookFIlterDto;
 import com.library.dto.UserAvailabilityDto;
 import com.library.enums.BookCopyStatus;
 import com.library.enums.ChangeProposalStatus;
+import com.library.enums.UserListType;
 import com.library.model.AppUser;
 import com.library.model.Book;
 import com.library.model.BookCopy;
@@ -209,7 +210,7 @@ private ReservationService reservationService;
 
 
 	@Override
-	public List<UserListElement> getUserListElementByUserAndType(UUID userId, String type) {
+	public List<UserListElement> getUserListElementByUserAndType(UUID userId, UserListType type) {
 		return userListElementRepository.getByUserIdAndType(userId, type);
 	}
 
