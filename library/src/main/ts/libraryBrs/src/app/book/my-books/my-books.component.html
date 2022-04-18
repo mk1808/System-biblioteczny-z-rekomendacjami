@@ -97,10 +97,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td data-label="Name" class="one wide">1</td>
-                <td data-label="Age">Abcdef</td>
-                <td data-label="Job">Jan Kowalski</td>
+              <tr *ngFor="let toReadBook of toReadBooks; let i = index">
+                <td data-label="Name" class="one wide">{{i+1}}</td>
+                <td data-label="Age">{{toReadBook.book.title}}</td>
+                <td data-label="Job">{{formatAuthors(toReadBook.book.authors)}}</td>
                 <td class="three wide">
                   <app-button [text]="deleteText" [btnClass]="btnClass"></app-button>
                 </td>
@@ -121,10 +121,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td data-label="Name" class="one wide">1</td>
-                <td data-label="Age">Abcdef</td>
-                <td data-label="Job">Jan Kowalski</td>
+              <tr *ngFor="let favBook of favBooks; let i = index">
+                <td data-label="Name" class="one wide">{{i+1}}</td>
+                <td data-label="Age">{{favBook.book.title}}</td>
+                <td data-label="Job">{{formatAuthors(favBook.book.authors)}}</td>
                 <td class="three wide">
                   <app-button [text]="deleteText" [btnClass]="btnClass"></app-button>
                 </td>

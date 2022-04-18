@@ -9,6 +9,9 @@ export class BooksService {
   public books: BehaviorSubject<[]> = new BehaviorSubject([]);
   public borrowedBooks: BehaviorSubject<Book[]> = new BehaviorSubject(new Array());
   public searchedBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
+  public favBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
+  public toReadBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
+  public commentedBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
 
   constructor(private restService: RestService) { }
 

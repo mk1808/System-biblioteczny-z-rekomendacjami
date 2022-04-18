@@ -1,3 +1,4 @@
 export enum UserListType {
-    FAV, TO_READ
+    FAV= 'FAV', 
+    TO_READ= 'TO_READ',
 }
