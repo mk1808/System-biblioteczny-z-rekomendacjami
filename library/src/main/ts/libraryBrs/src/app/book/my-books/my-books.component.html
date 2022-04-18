@@ -146,16 +146,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td data-label="Name" class="one wide">1</td>
-                <td data-label="Age">Abcdef</td>
-                <td data-label="Job">Jan Kowalski</td>
-                <td data-label="Job">5</td>
-                <td data-label="Job" class="eight wide">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-                  risus est, sodales nec risus non, ultrices mattis libero. Aliquam tellus lectus, luctus at ullamcorper
-                  non, condimentum a metus. Proin non aliquam nunc. Aliquam condimentum dignissim ex, dignissim viverra
-                  tellus pellentesque ac. Maecenas convallis dignissim dui, eget fermentum felis fringilla nec. Ut et
-                  dolor nec sapien ultrices viverra quis in dolor. Nam vestibulum orci vitae euismod convallis. </td>
+              <tr *ngFor="let comment of comments; let i = index">
+                <td data-label="Name" class="one wide">{{i+1}}</td>
+                <td data-label="Age">{{comment.book.title}}</td>
+                <td data-label="Job">{{formatAuthors(comment.book.authors)}}</td>
+                <td data-label="Job">{{comment.rating}}</td>
+                <td data-label="Job" class="eight wide">{{comment.comment}}</td>
               </tr>
             </tbody>
           </table>

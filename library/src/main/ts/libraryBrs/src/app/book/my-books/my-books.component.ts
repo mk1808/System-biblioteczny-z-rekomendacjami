@@ -27,6 +27,7 @@ export class MyBooksComponent implements OnInit {
   reservations:any;
   toReadBooks:any;
   favBooks:any;
+  comments:any;
   constructor( @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService, private borrowingsService:BorrowingsService,
   private reservationsService:ReservationsService, private booksService:BooksService) { }
 
@@ -36,6 +37,7 @@ export class MyBooksComponent implements OnInit {
     this.updatePastBorrowings()
     this.getFav()
     this.getToRead()
+    this.getCommented()
 
     this.borrowings = this.borrowingsService.borrowings;
     this.reservations = this.reservationsService.reservations;
@@ -68,6 +70,13 @@ export class MyBooksComponent implements OnInit {
     this.booksService.getUserListElementByUserAndType("a5edd677-14a9-449b-ab3f-76742762c5f1", UserListType.TO_READ).subscribe(reponse=>{
       console.log(reponse)
       this.toReadBooks = reponse.content;
+    })
+  }
+
+  getCommented(){
+    this.booksService.getOpinionsByUser("a5edd677-14a9-449b-ab3f-76742762c5f1").subscribe(reponse=>{
+      console.log(reponse)
+      this.comments= reponse.content;
     })
   }
   
