@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HeaderService } from 'src/app/core/services/header.service';
 import { UsersService } from 'src/app/core/services/rest/users.service';
 declare let $: any;
 @Component({
@@ -9,8 +10,8 @@ declare let $: any;
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   logged: BehaviorSubject<Boolean>;
-  
-  constructor(private usersService: UsersService) {
+  navButtons:any;
+  constructor(private usersService: UsersService, private headerService:HeaderService) {
     this.logged = this.usersService.logged;
     this.logged.subscribe(x => {//debugger;
       console.log(x)
@@ -18,6 +19,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
+    this.navButtons = this.headerService.navButtons;
+
   }
   ngAfterViewInit() {
 

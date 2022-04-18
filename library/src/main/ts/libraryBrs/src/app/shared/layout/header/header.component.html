@@ -5,6 +5,8 @@
             {{ 'library' | i18next }}
         </a>
         <div class="right menu">
+            <a *ngFor="let navButton of navButtons|async" class="item" [routerLink]="navButton.routerLink" routerLinkActive="active">{{ navButton.name | i18next }}</a>
+            <!--
             <a class="item" [routerLink]="['/books/search']" routerLinkActive="active">{{ 'booksSearch' | i18next }}</a>
             <a class="item" [routerLink]="['/home/terms']" routerLinkActive="active">
                 {{ 'borrowingRules' | i18next}}
@@ -20,6 +22,9 @@
                 {{ 'Konto'}}
             </a>
             <a class="item" [routerLink]="['/home/contact']" routerLinkActive="active">{{ 'contact' | i18next }}</a>
+-->
+
+
 
             <!--    <a class="item" [routerLink]="['/auth/login']" routerLinkActive="active">{{ 'login' | i18next }}</a>
           <a class="item" [routerLink]="['/auth/register']" routerLinkActive="active">{{ 'register' | i18next }}</a>-->
