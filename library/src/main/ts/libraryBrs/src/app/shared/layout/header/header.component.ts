@@ -38,4 +38,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
      debugger*/
     $('.menu.dmenu').dropdown();
   }
+
+  logout(){
+    debugger;
+    this.usersService.logout();
+  }
 }

@@ -6,6 +6,9 @@
         </a>
         <div class="right menu">
             <a *ngFor="let navButton of navButtons|async" class="item" [routerLink]="navButton.routerLink" routerLinkActive="active">{{ navButton.name | i18next }}</a>
+            <a *ngIf="logged|async" class="item" (click)="logout()">
+                {{ 'logout' | i18next }}
+            </a>
             <!--
             <a class="item" [routerLink]="['/books/search']" routerLinkActive="active">{{ 'booksSearch' | i18next }}</a>
             <a class="item" [routerLink]="['/home/terms']" routerLinkActive="active">
