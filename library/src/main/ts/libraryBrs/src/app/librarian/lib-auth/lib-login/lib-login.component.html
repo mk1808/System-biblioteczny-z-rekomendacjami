@@ -1,11 +1,13 @@
 <app-main-content [title]="title" [contentClass]="contactHeight">
     <app-two-columns-content [rightClass]="rightClass">
         <div header>
-            <div class="inputs">
-                <app-input [label]="mailInput" [inputClass]="inputClass"></app-input>
-                <app-input [label]="passwordInput" [inputClass]="inputClass"></app-input>
-            </div>
-            <app-button [iconClass]="iconClass" [text]="textLogin" [btnClass]="btnClass"></app-button>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+                <div class="inputs">
+                    <app-input [label]="mailInput" [inputClass]="inputClass" [formControlName]="mail"></app-input>
+                    <app-input [label]="passwordInput" [inputClass]="inputClass" [formControlName]="pass" type="password"></app-input>
+                </div>
+                <app-button [iconClass]="iconClass" [text]="textLogin" [btnClass]="btnClass" [type]="submitBtnType"></app-button>
+            </form>
         </div>
         <div body class="infoFull">
             <img src="../../../../assets/photos/lib.jpeg" height="420" class="background">

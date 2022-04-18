@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LibLoginComponent } from './lib-login/lib-login.component';
 import { LibAuthRoutingModule } from './lib-auth-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     LibAuthRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class LibAuthModule { }
