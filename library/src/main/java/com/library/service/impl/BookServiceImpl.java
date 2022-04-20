@@ -69,10 +69,13 @@ private ReservationService reservationService;
     public void setReservationService(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
+	
+	@Autowired TestService testService;
 
 
 	@Override
 	public Book get(UUID id) {
+		testService.save();
 		return repository.getById(id);
 	}
 
