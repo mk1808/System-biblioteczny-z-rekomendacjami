@@ -10,5 +10,7 @@ public final class Consts {
 	public static final String OPINION_DTO= "com.library.dto.OpinionDto";
 	public static final String BORROWING_DTO= "com.library.dto.BorrowingDto";
 	public static final String LIST_BORROWING_DTO= "java.util.List<"+BORROWING_DTO+">";
+	public static final String CHANGE_PROPOSAL_DTO= "com.library.dto.ChangeProposalDto";
+	public static final String LIST_CHANGE_PROPOSAL_DTO= "java.util.List<"+CHANGE_PROPOSAL_DTO+">";
 
 }
