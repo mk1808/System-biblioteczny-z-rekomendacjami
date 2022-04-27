@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
+import org.springframework.http.HttpStatus.Series;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,6 +56,16 @@ public class Book extends BaseEntity{
 	@OneToMany
 	@JoinColumn(name = "book_id")
 	private List<BookGenre> bookGenres;
+	
+	@OneToMany
+	@JoinColumn(name = "book_id")
+	private List<BookInSeries> bookSeries;
+	
+	@OneToMany
+	@JoinColumn(name = "book_id")
+	private List<BookKeyWord> bookKeyWords;
+	
+	private Double avgRating;
 	
 	@Transient
 	private List<Author> authors;

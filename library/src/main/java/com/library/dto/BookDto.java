@@ -30,6 +30,7 @@ public class BookDto {
 	private UUID publisherId;
 	private String publisherName;
 	private Date created;
+	private Double avgRating;
 	
 	private List<AuthorDto> authors;
 	private List<GenreDto> genres;

@@ -73,10 +73,11 @@ public class BookConverterServiceImpl implements BookConverterService {
 				.created(model.getCreated())
 				.publisherId(model.getPublisher().getId())
 				.publisherName(model.getPublisher().getName())
+				.avgRating(model.getAvgRating())
 				.authors(authorConverter.toDtoList(model.getBookAuthors().stream().map(x->x.getAuthor()).collect(Collectors.toList())))
 				.genres(genreConverter.toDtoList(model.getBookGenres().stream().map(x->x.getGenre()).collect(Collectors.toList())))
-				.series(seriesConverter.toDtoList(series))
-				.keyWords(keyWordConverter.toDtoList(keywords))
+				.series(seriesConverter.toDtoList(model.getBookSeries().stream().map(x->x.getSeries()).collect(Collectors.toList())))
+				.keyWords(keyWordConverter.toDtoList(model.getBookKeyWords().stream().map(x->x.getKeyWord()).collect(Collectors.toList())))
 				.build();
 				
 		return dto;
@@ -95,10 +96,11 @@ public class BookConverterServiceImpl implements BookConverterService {
 				.photo(dto.getPhoto())
 				.created(dto.getCreated())
 				.publisher(Publisher.builder().id(dto.getId()).build())
+				.avgRating(dto.getAvgRating())
 				.authors(createDtos(dto.getAuthors(), this::createAuthorDto))
 				.genres(createDtos(dto.getGenres(), this::createGenreDto))
 				.keyWords(createDtos(dto.getKeyWords(), this::createKeyWordDto))
-				.series(createDtos(dto.getSeries(), this::createSeriesDto))
+				//.series(createDtos(dto.getSeries(), this::createSeriesDto))
 				.build();
 				
 		return model;

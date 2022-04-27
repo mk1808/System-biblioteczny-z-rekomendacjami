@@ -2,6 +2,7 @@ package com.library.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -27,6 +28,8 @@ public class Opinion extends BaseEntity {
 	private AppUser user;
 	
 	private Long rating;
+	
+	@Column(length=10000)
 	private String comment;
 	private Date created;
 

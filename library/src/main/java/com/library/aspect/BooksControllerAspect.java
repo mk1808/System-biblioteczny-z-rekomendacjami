@@ -89,7 +89,6 @@ public class BooksControllerAspect {
 	@After(value = "target(" + BOOK_CTRL + ") && execution(" + RESPONSE + "String>> createChangeProposal("
 			+ LIST_CHANGE_PROPOSAL_DTO + ")) && args(changeProposalsDto)")
 	public void afterOpinionAdvice(JoinPoint joinPoint, List<ChangeProposalDto> changeProposalsDto) {
-
 		String bookId = changeProposalsDto.get(0).getBookId().toString();
 		List<String> keyWordsIds = new ArrayList();
 		for (ChangeProposalDto proposal : changeProposalsDto) {

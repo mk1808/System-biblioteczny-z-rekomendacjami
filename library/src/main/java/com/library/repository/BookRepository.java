@@ -32,5 +32,6 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 			@Param("genreId")UUID genreId);
 	
 	List<Book> findAllByOrderByCreatedDesc();
+	
 
 }
