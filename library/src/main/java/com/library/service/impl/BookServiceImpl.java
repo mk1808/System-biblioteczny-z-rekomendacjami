@@ -1,6 +1,7 @@
 package com.library.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -19,16 +20,20 @@ import com.library.enums.UserListType;
 import com.library.model.AppUser;
 import com.library.model.Book;
 import com.library.model.BookCopy;
+import com.library.model.BookKeyWord;
 import com.library.model.Borrowing;
 import com.library.model.CanBorrowBook;
 import com.library.model.ChangeProposal;
+import com.library.model.KeyWord;
 import com.library.model.Opinion;
 import com.library.model.Reservation;
 import com.library.model.UserListElement;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookCopyRepository;
+import com.library.repository.BookKeyWordRepository;
 import com.library.repository.BookRepository;
 import com.library.repository.ChangeProposalRepository;
+import com.library.repository.KeyWordRepository;
 import com.library.repository.OpinionRepository;
 import com.library.repository.UserListElementRepository;
 import com.library.service.BookService;
@@ -44,6 +49,8 @@ private final OpinionRepository opinionRepository;
 private final UserListElementRepository userListElementRepository;
 private final ChangeProposalRepository changeProposalRepository;
 private final AuthorRepository authorRepository;
+private final KeyWordRepository keyWordRepository;
+private final BookKeyWordRepository bookKeyWordRepository;
 private final BorrowingService borrowingService;
 private final UserService userService;
 private ReservationService reservationService;
@@ -53,15 +60,17 @@ private ReservationService reservationService;
 	@Autowired
 	public BookServiceImpl(BookRepository repository, BookCopyRepository bookCopyRepository, OpinionRepository opinionRepository,
 			UserListElementRepository userListElementRepository, ChangeProposalRepository changeProposalRepository, AuthorRepository authorRepository,
-			BorrowingService borrowingService, UserService userService) {
+			KeyWordRepository keyWordRepository, BorrowingService borrowingService, UserService userService, BookKeyWordRepository bookKeyWordRepository) {
 		this.repository = repository;
 		this.bookCopyRepository = bookCopyRepository;
 		this.opinionRepository = opinionRepository;
 		this.userListElementRepository = userListElementRepository;
 		this.changeProposalRepository = changeProposalRepository;
 		this.authorRepository = authorRepository;
+		this.keyWordRepository = keyWordRepository;
 		this.borrowingService = borrowingService;
 		this.userService = userService;
+		this.bookKeyWordRepository = bookKeyWordRepository;
 		
 	}
 	
@@ -124,6 +133,27 @@ private ReservationService reservationService;
 		opinion.setUser(userService.get(userId));
 		opinion.setCreated(new Date());
 		opinionRepository.save(opinion);	
+		updateBookAfterRating(opinion);
+	}
+	
+	private void updateBookAfterRating(Opinion opinion) {
+		UUID id = opinion.getBook().getId();
+		List<Opinion> prevOpinions = getOpinionsByBookId(id);
+		Book book = get(id);
+		Double avgRating = book.getAvgRating()!=null?book.getAvgRating():0;
+		Long rating = 0L;
+		Long sum  = prevOpinions.stream().mapToLong(Opinion::getRating).sum();
+		List<Opinion> prevByUser = prevOpinions.stream().filter(bRating->bRating.getUser().getId().equals(opinion.getUser().getId())).collect(Collectors.toList());
+		Double newRating = Double.valueOf(0);
+		if(prevByUser.size()>0) {
+			newRating = Double.valueOf(( sum - prevByUser.get(0).getRating() + opinion.getRating()) / (prevOpinions.size()));
+		}
+		else {
+			newRating = Double.valueOf(( sum + opinion.getRating()) / (prevOpinions.size()+1));
+		}
+			
+		book.setAvgRating(newRating);
+		repository.save(book);
 	}
 
 
@@ -164,13 +194,38 @@ private ReservationService reservationService;
 		}
 		
 		changeProposals.stream().forEach(proposal->createSingleChangeProposal(proposal, newChangeProposal.getBook(), newChangeProposal.getUser()));
-		
+		saveKeyWords(changeProposals);
 	}
 	
 	private ChangeProposal createSingleChangeProposal(ChangeProposal changeProposal, Book book, AppUser user) {
 		changeProposal.setBook(book);
 		changeProposal.setUser(user);
 		return changeProposalRepository.save(changeProposal);
+	}
+	
+	private void saveKeyWords(List<ChangeProposal> proposals) {
+		List<KeyWord> newKeywords = new ArrayList<>();
+		List<ChangeProposal> withKeyWords = proposals.stream().filter(proposal->"keyword".equals(proposal.getType()) ).collect(Collectors.toList());
+		List<KeyWord> existingKeywords = new ArrayList<>();
+		for (ChangeProposal proposal: withKeyWords) {
+			try{
+			    UUID uuid = UUID.fromString(proposal.getValue());
+			    existingKeywords.add(keyWordRepository.findById(uuid).get());
+			    
+			} catch (IllegalArgumentException exception){
+				KeyWord newKeyWord = keyWordRepository.save(KeyWord.builder().name(proposal.getValue()).build());
+				newKeywords.add(newKeyWord);
+			}
+		}
+		if(!CollectionUtils.isEmpty(withKeyWords)) {
+			Book book = repository.findById(proposals.get(0).getBook().getId()).get();
+			
+			existingKeywords.addAll(newKeywords);
+			for (KeyWord word: existingKeywords) {
+				BookKeyWord bk = new BookKeyWord(book, word);
+				bookKeyWordRepository.save(bk);
+			}
+		}
 	}
 	
 	
