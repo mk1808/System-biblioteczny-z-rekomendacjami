@@ -1,6 +1,7 @@
 <!--<p *ngFor="let alert of alerts">
     <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
   </p>-->
+<app-notification-bar *ngIf="shouldDisplayAlert" (update)="closeAlert($event)" [content]="opinionAdded"></app-notification-bar>
 <app-main-content [title]="title" [contentClass]="rulesHeight">
     <div class="parent padding">
         <div class="inside">
@@ -19,7 +20,7 @@
             </div>
         </div>
         <div class="insideButtons">
-            <p class="line rating"><span>Ocena:</span> 8,5/10</p>
+            <p class="line rating"><span>Ocena:</span> {{book.avgRating?book.avgRating:noRating}}/10</p>
             <div class="buttons">
                 <div>
                     <app-button [iconClass]="iconClass" [text]="textRate" [btnClass]="btnClass" [onClick]="giveRating">

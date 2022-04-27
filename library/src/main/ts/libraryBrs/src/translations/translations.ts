@@ -13,6 +13,7 @@ const translations =
             "createAccount":"Utwórz konto",
             "login":"Logowanie",
             "register":"Rejestracja",
+            "logout":"Wyloguj",
             "loginInfo":"Po zalogowaniu na swoje konto możesz przeglądać wypożyczone i zarezerwowane książki.", //oraz otrzymywać rekomendacje.",
             "loginInfo.more":"Nie posiadasz konta?",
             "goToRegister":"Przejdź do rejestracji",
@@ -97,7 +98,8 @@ const translations =
             "cancel":"Anuluj",
             "rating.title":"Dodawanie opinii",
             "rating.info":"Możesz ocenić książkę, opisać swoje wrażenia oraz określić słowa kluczowe, które według Ciebie najlepiej pasują.",
-            "comment":"Komentarz"
+            "comment":"Komentarz",
+            "alert.opinionAdded":"Twoja ocena została zapisana."
 
 
 

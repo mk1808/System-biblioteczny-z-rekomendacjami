@@ -15,6 +15,7 @@ export interface Book {
     series?: Object[];
     keyWords?: Object[];
     created?: string;
+    avgRating?: number;
 
     
 }

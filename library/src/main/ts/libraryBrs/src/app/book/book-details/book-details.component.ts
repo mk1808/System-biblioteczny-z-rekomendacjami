@@ -77,10 +77,12 @@ export class BookDetailsComponent implements OnInit {
   };
   comments = []
   book: Book = {};
+  opinionAdded = "alert.opinionAdded"
 
 
   alerts: Alert[] = [];
-
+  shouldDisplayAlert = false;
+  noRating = "-";
 
   constructor(private route: ActivatedRoute, private booksService: BooksService, private formatterService: FormatterService, private modalService: NgbModal) { }
 
@@ -172,8 +174,11 @@ export class BookDetailsComponent implements OnInit {
     modalRef.result.then((data) => {
       console.log(data)
       this.ngOnInit();
+      this.shouldDisplayAlert = true;
     });
   }
-
+  closeAlert(event:any) {
+    this.shouldDisplayAlert = false;
+  }
 
 }

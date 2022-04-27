@@ -64,14 +64,19 @@ export class RatingModalComponent implements OnInit {
     debugger;
     let proposals: ChangeProposal[] = [];
     this.ratingForm.value.keyword.forEach((singleKeyword: any) => {
-      proposals.push(this.createChangeProposal(singleKeyword));
+      if(singleKeyword && singleKeyword.trim()!=""){
+        proposals.push(this.createChangeProposal(singleKeyword));
+      }
     })
-
-    this.booksService.createChangeProposal(proposals).subscribe(response => {
+if (proposals.length>0){
+     this.booksService.createChangeProposal(proposals).subscribe(response => {
       console.log(response)
     })
 
   }
+}
+
+ 
 
   whoAmI() {
     this.userService.whoAmI().subscribe(userPrincipal => {
