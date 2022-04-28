@@ -3,28 +3,44 @@ from pprint import pprint
 from user import User
 from book import Book
 
+def connectToDb():
+    client = MongoClient(
+        "mongodb+srv://admin:admin@cluster0.l4evp.mongodb.net/mlibrary?retryWrites=true&w=majority"
+    )
+    db = client.mlibrary
+    serverStatusResult = db.command("serverStatus")
+    pprint(serverStatusResult)
+    return db;
 
-client = MongoClient(
-    "mongodb+srv://admin:admin@cluster0.l4evp.mongodb.net/mlibrary?retryWrites=true&w=majority"
-)
-db = client.mlibrary
-serverStatusResult = db.command("serverStatus")
-# pprint(serverStatusResult)
+def getUsers(db):
+    users = db["users"]
 
-users = db["users"]
+    allUsers = users.find()
+    usersTab = []
+    for data in allUsers:
+        usersTab.append(User(data))
 
-allUsers = users.find()
-usersTab = []
-for data in allUsers:
-    usersTab.append(User(data))
+    return usersTab;
+
+def getBooks(db):
+    books = db["books"]
+
+    allBooks = books.find()
+    booksTab = []
+    for data in allBooks:
+        booksTab.append(Book(data))
+
+    return booksTab;
+
+db = connectToDb();
+users = getUsers(db);
+books = getBooks(db);
 
 
-books = db["books"]
 
-allBooks = books.find()
-booksTab = []
-for data in allBooks:
-    booksTab.append(Book(data))
+
+
+
 
 # printing the result
 # print("After Converting Dictionary to Class : ")
