@@ -3,38 +3,38 @@ from pprint import pprint
 from user import User
 from book import Book
 
-def connectToDb():
+def connect_to_db():
     client = MongoClient(
         "mongodb+srv://admin:admin@cluster0.l4evp.mongodb.net/mlibrary?retryWrites=true&w=majority"
     )
     db = client.mlibrary
-    serverStatusResult = db.command("serverStatus")
-    pprint(serverStatusResult)
+    server_status_result = db.command("serverStatus")
+    pprint(server_status_result)
     return db;
 
-def getUsers(db):
+def get_users(db):
     users = db["users"]
 
-    allUsers = users.find()
-    usersTab = []
-    for data in allUsers:
-        usersTab.append(User(data))
+    all_users = users.find()
+    users_tab = []
+    for data in all_users:
+        users_tab.append(User(data))
 
-    return usersTab;
+    return users_tab;
 
-def getBooks(db):
+def get_books(db):
     books = db["books"]
 
-    allBooks = books.find()
-    booksTab = []
-    for data in allBooks:
-        booksTab.append(Book(data))
+    all_books = books.find()
+    books_tab = []
+    for data in all_books:
+        books_tab.append(Book(data))
 
-    return booksTab;
+    return books_tab;
 
-db = connectToDb();
-users = getUsers(db);
-books = getBooks(db);
+db = connect_to_db();
+users = get_users(db);
+books = get_books(db);
 
 
 

@@ -1,12 +1,12 @@
 class Book(object):
     def __init__(self, obj):  # id, userId, action, bookId, value, date
         self.id = obj["_id"]
-        self.getField(obj, "genres")
-        self.getField(obj, "keyWords")
-        self.getField(obj, "authors")
-        self.getField(obj, "genreIds")
-        self.getField(obj, "keyWordIds")
-        self.getField(obj, "authorIds")
+        self.get_field(obj, "genres")
+        self.get_field(obj, "keyWords")
+        self.get_field(obj, "authors")
+        self.get_field(obj, "genreIds")
+        self.get_field(obj, "keyWordIds")
+        self.get_field(obj, "authorIds")
         #self.genres = obj["genres"]
         #self.keyWords = obj["keyWords"]
         #self.authors = obj["authors"]
@@ -15,7 +15,7 @@ class Book(object):
         #self.authorIds = obj["authorIds"]
 
     
-    def getField(self, obj, field):
+    def get_field(self, obj, field):
         if field in obj:
             setattr(self, field, obj[field])
            # self[field] = []

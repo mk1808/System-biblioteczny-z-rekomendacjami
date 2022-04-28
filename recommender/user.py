@@ -1,14 +1,14 @@
 class User(object):
     def __init__(self, obj):  # id, userId, action, bookId, value, date
         self.id = obj["_id"]
-        self.getField(obj, "userId")
-        self.getField(obj, "action")
-        self.getField(obj, "bookId")
-        self.getField(obj, "date")
-        self.getField(obj, "value")
+        self.get_field(obj, "userId")
+        self.get_field(obj, "action")
+        self.get_field(obj, "bookId")
+        self.get_field(obj, "date")
+        self.get_field(obj, "value")
 
         
-    def getField(self, obj, field):
+    def get_field(self, obj, field):
         if field in obj:
             setattr(self, field, obj[field])
 
