@@ -42,43 +42,44 @@ def get_prev_recommendations(db):
         recommendations_tab.append(Recommendation(data))
     return recommendations_tab;
 
-def mark_deleted(recommendations):
-    a=0;
+def recommendation_to_dict(recom):
+    rDict =	{
+      "_id": recom._id,
+      "userId": recom.userId,
+      "bookId": recom.bookId,
+      "rating": recom.rating,
+      "shouldNotRecommend": recom.shouldNotRecommend,
+      "shouldNotRecommendType": recom.shouldNotRecommendType,
+      "created": recom.created,
+      "deleted": recom.deleted,
+    }
+    return rDict;
+
+def mark_deleted(prev_recommendations):
+    for recom in prev_recommendations:
+        recom.deleted = round(time.time() * 1000)
+        id = recom['_id']
+        pprint(recom.deleted)
+        rDict =	recommendation_to_dict(recom)
+        db["recommendations"].replace_one({"_id": {"$eq": id}}, rDict, upsert=True) 
+        
+def mark_deleted_if_any(prev_recommendations):
+    if len(prev_recommendations)>0:
+        mark_deleted(prev_recommendations)    
 
 db = connect_to_db();
 users = get_users(db);
 books = get_books(db);
 prev_recommendations = get_prev_recommendations(db);
-db["recommendations"]
-recom1={}
-for recom in prev_recommendations:
-    recom.deleted = round(time.time() * 1000)
-    
+mark_deleted_if_any(prev_recommendations)
 
-    id = recom['_id']
-    # db["recommendations"].replace_one({"id": {"$eq": id}}, recom, upsert=True) 
-    pprint(recom.deleted)
-    recom1 = recom
-    
-rDict =	{
-  "_id": recom1._id,
-  "userId": recom1.userId,
-  "bookId": recom1.bookId,
-  "rating": recom1.rating,
-  "shouldNotRecommend": recom1.shouldNotRecommend,
-  "shouldNotRecommendType": recom1.shouldNotRecommendType,
-  "created": recom1.created,
-  "deleted": recom1.deleted,
-}
-id1 = recom['_id']
 
-db["recommendations"].replace_one({"_id": {"$eq": id1}}, rDict, upsert=True) 
+
     
     
     
 
-def recommendation_to_dict(recom):
-    a=0;
+
 
 
 
