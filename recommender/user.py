@@ -11,6 +11,8 @@ class User(object):
     def get_field(self, obj, field):
         if field in obj:
             setattr(self, field, obj[field])
+        else:
+            setattr(self, field, None)
 
 
 
