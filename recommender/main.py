@@ -4,6 +4,9 @@ import time
 from user import User
 from book import Book
 from recommendation import Recommendation
+import pandas as pd
+import random
+import types
 
 
 def connect_to_db():
@@ -74,15 +77,48 @@ def mark_deleted_if_any(prev_recommendations):
     if len(prev_recommendations) > 0:
         mark_deleted(prev_recommendations)
 
+def create_recom_dict(userId, bookId, created):
+    rDict = {
+        
+        "userId": userId,
+        "bookId": bookId,
+        "created": created
+     
+    }
+    return rDict
+
+def save_recom(db, users):
+    users_df = pd.DataFrame(map(vars, users))
+    grouped_users_df = users_df.groupby("userId")
+    keys = grouped_users_df.groups.keys()
+    books_size = len(books)
+    num_of_recoms=2
+    for key in keys:
+        for x in range(num_of_recoms):
+            random_number = random.randint(0, books_size-1)   
+            user_book = books[random_number]
+            rDict = create_recom_dict(key, user_book.id, round(time.time() * 1000))
+            inserted = db["recommendations"].insert_one(rDict)
+
 
 db = connect_to_db()
 users = get_users(db)
 books = get_books(db)
 prev_recommendations = get_prev_recommendations(db)
 mark_deleted_if_any(prev_recommendations)
+save_recom(db, users)
 
 
-# printing the result
-# print("After Converting Dictionary to Class : ")
-# print(user.userId, user.action, user.bookId)
-# print(type(user))
+
+
+
+# ids_tab = []
+# for user in users:
+#     ids_tab.append(user.userId)
+# users_ids = list(dict.fromkeys(ids_tab))
+
+#iterating over df
+# for single in grouped_users_df:
+#     single[1].reset_index() 
+#     for index, row in single[1].iterrows():
+#         b = row

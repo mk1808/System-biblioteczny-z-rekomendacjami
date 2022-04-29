@@ -1,6 +1,6 @@
 class Recommendation(object):
     def __init__(self, obj):  # id, userId, action, bookId, value, date
-        self._id = obj["_id"]
+        self.get_field(obj,"_id")
         self.get_field(obj, "userId")
         self.get_field(obj, "bookId")
         
@@ -25,6 +25,14 @@ class Recommendation(object):
 
     def __setitem__(self, key, value):
         setattr(self, key, value)
+        
+    
+    # def make_recom(userId, bookId, created):
+    #     recom = Recommendation({})
+    #     recom.userId = userId
+    #     recom.bookId = bookId
+    #     recom.created = created
+    #     return recom
         
     # def __init__(self,*arg,**kw):
     #     super(Recommendation, self).__init__(*arg, **kw)
