@@ -82,7 +82,10 @@ def create_recom_dict(userId, bookId, created):
         
         "userId": userId,
         "bookId": bookId,
-        "created": created
+        "created": created,
+        "rating": None,
+        "shouldNotRecommend": None,
+        "shouldNotRecommendType": None
      
     }
     return rDict
