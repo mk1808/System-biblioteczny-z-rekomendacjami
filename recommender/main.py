@@ -7,6 +7,8 @@ from recommendation import Recommendation
 import pandas as pd
 import random
 import types
+import schedule
+from datetime import datetime as dt
 
 
 def connect_to_db():
@@ -64,7 +66,7 @@ def recommendation_to_dict(recom):
     return rDict
 
 
-def mark_deleted(prev_recommendations):
+def mark_deleted(prev_recommendations, db):
     for recom in prev_recommendations:
         recom.deleted = round(time.time() * 1000)
         id = recom["_id"]
@@ -73,9 +75,9 @@ def mark_deleted(prev_recommendations):
         db["recommendations"].replace_one({"_id": {"$eq": id}}, rDict, upsert=True)
 
 
-def mark_deleted_if_any(prev_recommendations):
+def mark_deleted_if_any(prev_recommendations, db):
     if len(prev_recommendations) > 0:
-        mark_deleted(prev_recommendations)
+        mark_deleted(prev_recommendations, db)
 
 def create_recom_dict(userId, bookId, created):
     rDict = {
@@ -90,7 +92,7 @@ def create_recom_dict(userId, bookId, created):
     }
     return rDict
 
-def save_recom(db, users):
+def save_recom(db, users, books):
     users_df = pd.DataFrame(map(vars, users))
     grouped_users_df = users_df.groupby("userId")
     keys = grouped_users_df.groups.keys()
@@ -103,13 +105,17 @@ def save_recom(db, users):
             rDict = create_recom_dict(key, user_book.id, round(time.time() * 1000))
             inserted = db["recommendations"].insert_one(rDict)
 
+def recommend():
+    pprint("Start recommendation at: "+ str(dt.now()))
+    db = connect_to_db()
+    users = get_users(db)
+    books = get_books(db)
+    prev_recommendations = get_prev_recommendations(db)
+    mark_deleted_if_any(prev_recommendations, db)
+    save_recom(db, users, books)
+    pprint("End recommendation at: "+ str(dt.now()))
 
-db = connect_to_db()
-users = get_users(db)
-books = get_books(db)
-prev_recommendations = get_prev_recommendations(db)
-mark_deleted_if_any(prev_recommendations)
-save_recom(db, users)
+
 
 
 
