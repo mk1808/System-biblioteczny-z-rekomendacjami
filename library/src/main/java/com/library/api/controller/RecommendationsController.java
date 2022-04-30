@@ -1,5 +1,6 @@
 package com.library.api.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,9 @@ public class RecommendationsController extends BaseController implements Recomme
 	}
 
 	@Override
-	public ResponseEntity<Response<Page<RecommendationDto>>> getByUserId(UUID userId, Long pageNo, Long pageSize) {
-		Response<Page<RecommendationDto>> response = null;// = createSuccessResponse(bookConverter.toDto(bookService.get(id)));
+	public ResponseEntity<Response<List<RecommendationDto>>> getByUserId(UUID userId, Long pageNo, Long pageSize) {
+		Response<List<RecommendationDto>> response = createSuccessResponse(recommendationConverter
+				.toDtoList(recommendationService.getByUserId(userId)));
 		return ResponseEntity.ok(response);
 	}
 

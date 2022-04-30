@@ -24,7 +24,7 @@ public interface RecommendationsResource {
 	
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/user/{userId}")
-	ResponseEntity<Response<Page<RecommendationDto>>> getByUserId(@PathVariable UUID userId, @RequestParam Long pageNo, @RequestParam Long pageSize);
+	ResponseEntity<Response<List<RecommendationDto>>> getByUserId(@PathVariable UUID userId, @RequestParam Long pageNo, @RequestParam Long pageSize);
 
 	@PreAuthorize("hasRole('USER')")
 	@PatchMapping
