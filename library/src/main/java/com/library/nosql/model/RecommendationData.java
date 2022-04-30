@@ -1,6 +1,6 @@
 package com.library.nosql.model;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Id;
 
@@ -17,19 +17,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document("books")
-public class BookData {
-	
+@Document("recommendations")
+public class RecommendationData {
+
 	@Id
 	private String id;
-	
-	private List<String> genres;
-	private List<String> keyWords;
-	private List<String> authors;
-	
-	private List<String> genreIds;
-	private List<String> keyWordIds;
-	private List<String> authorIds;
-	
+	@Id
+	private String userId;
+
+	private String bookId;
+
+	private Long rating;
+	private Boolean shouldNotRecommend;
+	private Boolean shouldNotRecommendType;
+	private Date created;
+	private Date deleted;
 
 }
