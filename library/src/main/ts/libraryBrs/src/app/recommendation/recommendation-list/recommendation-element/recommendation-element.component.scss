@@ -42,17 +42,21 @@
         background-color: var(--white);
         margin-left: 0px;
         margin-top: 0px;
-        border-bottom: 2px solid var(--light-brown);
+        border: 2px solid var(--light-brown);
         &.parent{
             display: grid;
-            grid-template-columns: 0.2fr 1fr 1fr;
+            grid-template-columns: 0.4fr 1fr 1fr;
             grid-template-rows: 1fr;
             grid-column-gap: 0px;
             grid-row-gap: 0px;
             align-items: center;
+
+            :first-child{
+                text-align: center;
+            }
         }
         i{
-            color:#EEE8AA;
+            color:#fff47f;
             text-shadow: 2px 2px 2px #999999;
             font-size: 19px;
         }
