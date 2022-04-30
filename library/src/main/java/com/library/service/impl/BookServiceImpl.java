@@ -28,6 +28,7 @@ import com.library.model.KeyWord;
 import com.library.model.Opinion;
 import com.library.model.Reservation;
 import com.library.model.UserListElement;
+import com.library.nosql.model.RecommendationData;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookCopyRepository;
 import com.library.repository.BookKeyWordRepository;
@@ -84,7 +85,9 @@ private ReservationService reservationService;
 
 	@Override
 	public Book get(UUID id) {
-		testService.save();
+	//	testService.save();
+	//	testService.saveRecommendation();
+	//	List<RecommendationData> a = testService.getRecommendation();
 		return repository.getById(id);
 	}
 
