@@ -4,6 +4,7 @@ import { RecommendationListComponent } from './recommendation-list/recommendatio
 import { RecommendationElementComponent } from './recommendation-list/recommendation-element/recommendation-element.component';
 import { RecommendationRoutingModule } from './recommendation-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -15,7 +16,11 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     RecommendationRoutingModule,
-    SharedModule
+    SharedModule,
+    CoreModule
+  ],
+  providers:[
+    CoreModule
   ]
 })
 export class RecommendationModule { }

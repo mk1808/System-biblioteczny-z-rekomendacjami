@@ -11,7 +11,7 @@ export class RecommendationsService {
   constructor(private restService: RestService) { }
 
   getByUserId(userId:string): Observable<Response<any>> {
-    return this.restService.get(`${URL}/user/${userId}`);
+    return this.restService.get(`${URL}/user/${userId}?pageNo=1&pageSize=1`);
   }
 
   updateInfo(recommendation:Recommendation): Observable<Response<any>> {
