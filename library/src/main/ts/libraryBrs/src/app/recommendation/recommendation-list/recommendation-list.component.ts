@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppUser } from 'src/app/core/services/rest/api/api';
+import { FormatterService } from 'src/app/core/services/formatter.service';
+import { AppUser, Recommendation } from 'src/app/core/services/rest/api/api';
 import { RecommendationsService } from 'src/app/core/services/rest/recommendations.service';
 import { UsersService } from 'src/app/core/services/rest/users.service';
 
@@ -17,9 +18,10 @@ export class RecommendationListComponent implements OnInit {
   no=0;
   book={id:0, photo:'https://picsum.photos/200/300', title:'Lorem ipsum dolor', author:'Dolores Gibson'}
   books=[this.getBook(),this.getBook(),this.getBook(),this.getBook(),this.getBook(),this.getBook(),this.getBook() ];
-  recommendations=[]
+  recommendations:Recommendation[]=[]
   user:AppUser={};
-  constructor(private recommendationsService:RecommendationsService, private userService:UsersService) { }
+  authors:String[]=[]
+  constructor(private recommendationsService:RecommendationsService, private userService:UsersService, private formatterService:FormatterService) { }
 
   ngOnInit(): void {
     this.whoAmI();
@@ -45,9 +47,25 @@ export class RecommendationListComponent implements OnInit {
   getRecommendations(){
     if(this.user.id){
       this.recommendationsService.getByUserId(this.user.id).subscribe(resp=>{
+        this.recommendations = resp.content;
+
+        this.recommendations.forEach((recom)=>{
+          if(recom.book){
+            this.authors.push(this.formatAuthors(recom.book.authors));
+          }
+          
+        })
+        
         console.log(resp)
       })
     }
       
+  }
+
+
+
+  formatAuthors(list: Object[] | undefined) {
+    if (list) { return this.formatterService.displayList(list); }
+    return "-"
   }
 }

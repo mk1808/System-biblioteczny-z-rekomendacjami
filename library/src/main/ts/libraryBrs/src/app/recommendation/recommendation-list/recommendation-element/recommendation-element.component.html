@@ -22,14 +22,14 @@
         </div>
         <div class="content">
         <div class="photoContainer">
-            <img src="https://picsum.photos/200/300">
+            <img [src]="bookProp.book.photo">
         </div>
 
         <div class="description">
-            <p class="title">title</p>
-            <p>author</p>
+            <p class="title">{{bookProp.book.title}}</p>
+            <p>{{authors}}</p>
             <p>Gatunek: fantastyka</p>
-            <p>Ocena: 8/10</p>
+            <p>Ocena: {{bookProp.book.avgRating}}/10</p>
         </div>
     </div>
     </div>

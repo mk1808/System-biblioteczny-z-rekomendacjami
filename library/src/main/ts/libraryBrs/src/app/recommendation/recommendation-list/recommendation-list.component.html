@@ -9,15 +9,16 @@
     </div>
 
     <div class="inside list">
-        <div *ngFor="let singleBook of books; index as i;" >
-            <app-recommendation-element></app-recommendation-element>
+        <div *ngFor="let recommendation of recommendations; index as i;" >
+            <app-recommendation-element [bookProp]="recommendation" [authors]="authors[i]"></app-recommendation-element>
         </div>
+  <!--  <app-recommendation-element></app-recommendation-element>
         <app-recommendation-element></app-recommendation-element>
         <app-recommendation-element></app-recommendation-element>
         <app-recommendation-element></app-recommendation-element>
         <app-recommendation-element></app-recommendation-element>
         <app-recommendation-element></app-recommendation-element>
-        <app-recommendation-element></app-recommendation-element>
+    -->
     </div>
  <!--  <app-dropdown [text]="textDropdown">
         <div class="item">New</div>
