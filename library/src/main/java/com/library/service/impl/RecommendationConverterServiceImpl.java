@@ -39,10 +39,12 @@ public class RecommendationConverterServiceImpl implements RecommendationConvert
 				.bookId(model.getBook().getId())
 				.user(userConverter.toDto(model.getUser()))
 				.userId(model.getUser().getId())
-				
 				.rating(model.getRating())
 				.shouldNotRecommend(model.getShouldNotRecommend())
 				.shouldNotRecommendType(model.getShouldNotRecommendType())
+				.created(model.getCreated())
+				.deleted(model.getDeleted())
+				
 				.build();
 		return dto;
 	}
@@ -56,6 +58,8 @@ public class RecommendationConverterServiceImpl implements RecommendationConvert
 				.rating(dto.getRating())
 				.shouldNotRecommend(dto.getShouldNotRecommend())
 				.shouldNotRecommendType(dto.getShouldNotRecommendType())
+				.created(dto.getCreated())
+				.deleted(dto.getDeleted())
 				.build();
 		return model;
 	}

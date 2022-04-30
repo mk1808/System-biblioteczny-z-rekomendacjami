@@ -1,5 +1,7 @@
 package com.library.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -28,6 +30,8 @@ public class Recommendation extends BaseEntity {
 	private Long rating;
 	private Boolean shouldNotRecommend;
 	private Boolean shouldNotRecommendType;
+	private Date created;
+	private Date deleted;
 	
 
 }

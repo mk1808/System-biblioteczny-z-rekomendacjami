@@ -1,5 +1,6 @@
 package com.library.dto;
 
+import java.util.Date;
 import java.util.UUID;
 
 import com.library.model.AppUser;
@@ -27,4 +28,6 @@ public class RecommendationDto {
 	private Long rating;
 	private Boolean shouldNotRecommend;
 	private Boolean shouldNotRecommendType;
+	private Date created;
+	private Date deleted;
 }
