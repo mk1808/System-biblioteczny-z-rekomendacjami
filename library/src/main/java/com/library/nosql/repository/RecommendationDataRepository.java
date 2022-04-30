@@ -9,5 +9,5 @@ import com.library.nosql.model.RecommendationData;
 
 @Repository
 public interface RecommendationDataRepository extends MongoRepository<RecommendationData, String> {
-	List<RecommendationData> findByUserId(String userId);
+	List<RecommendationData> findByUserIdAndDeletedIsNull(String userId);
 }

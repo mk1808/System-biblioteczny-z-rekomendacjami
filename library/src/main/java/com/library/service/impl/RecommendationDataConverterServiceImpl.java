@@ -29,9 +29,9 @@ public class RecommendationDataConverterServiceImpl implements RecommendationDat
 	@Override
 	public Recommendation toModel(RecommendationData noSQLModel) {
 		Recommendation model = Recommendation.builder()
-				.id(UUID.fromString(noSQLModel.getId()))
+				//.id(UUID.fromString(noSQLModel.getId()))
 				.book(bookRepository.getById(UUID.fromString(noSQLModel.getBookId())))
-				.user(userRepository.getById(UUID.fromString(noSQLModel.getUserId())))
+				.user(userRepository.findByMail(noSQLModel.getUserId()))
 				.rating(noSQLModel.getRating())
 				.shouldNotRecommend(noSQLModel.getShouldNotRecommend())
 				.shouldNotRecommendType(noSQLModel.getShouldNotRecommendType())

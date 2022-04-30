@@ -9,23 +9,28 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.library.model.Recommendation;
+import com.library.model.AppUser;
 import com.library.nosql.model.RecommendationData;
 import com.library.nosql.repository.RecommendationDataRepository;
 import com.library.repository.RecommendationRepository;
 import com.library.service.RecommendationDataConverterService;
 import com.library.service.RecommendationService;
+import com.library.service.UserService;
 
 @Service
 public class RecommendationServiceImpl implements RecommendationService {
 	private final RecommendationRepository repository;
 	private final RecommendationDataRepository noSQLRepository;
 	private final RecommendationDataConverterService noSQLConverter;
+	private final UserService userService;
 	
 	@Autowired
-	public RecommendationServiceImpl(RecommendationRepository repository, RecommendationDataRepository noSQLRepository, RecommendationDataConverterService noSQLConverter) {
+	public RecommendationServiceImpl(RecommendationRepository repository, RecommendationDataRepository noSQLRepository, 
+			RecommendationDataConverterService noSQLConverter, UserService userService) {
 		this.repository = repository;
 		this.noSQLRepository = noSQLRepository;
 		this.noSQLConverter = noSQLConverter;
+		this.userService = userService;
 	}
 	
 	
@@ -46,7 +51,8 @@ public class RecommendationServiceImpl implements RecommendationService {
 	
 	@Override
 	public List<Recommendation> getByUserId(UUID id) {
-		List<RecommendationData> noSQLList =  noSQLRepository.findByUserId(id.toString());
+		AppUser user = userService.get(id);
+		List<RecommendationData> noSQLList =  noSQLRepository.findByUserIdAndDeletedIsNull(user.getMail());
 		return noSQLConverter.toModelList(noSQLList);
 	}
 
