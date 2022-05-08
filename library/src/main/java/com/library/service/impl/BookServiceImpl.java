@@ -322,6 +322,16 @@ private ReservationService reservationService;
 				.keptTooLong(keptTooLong.size())
 				.build();
 	}
+	
+	@Override
+	public List<BookAvailabilityDto> getAvailabilityByBookIds(UUID[] ids) {
+		List<BookAvailabilityDto> booksAvailability = new ArrayList<>();
+		for(UUID id:ids) {
+			booksAvailability.add(getAvailabilityByBookId(id));
+		}
+		
+		return booksAvailability;
+	}
 
 
 	@Override
@@ -403,6 +413,8 @@ private ReservationService reservationService;
 		List<Book> books = new ArrayList<>();
 		return this.repository.findAllByOrderByCreatedDesc().stream().limit(number).collect(Collectors.toList());
 	}
+
+
 
 	
 		

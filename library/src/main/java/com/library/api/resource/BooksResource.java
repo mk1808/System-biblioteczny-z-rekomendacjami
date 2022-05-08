@@ -55,6 +55,9 @@ public interface BooksResource {
 	@GetMapping("/{id}/availability")
 	ResponseEntity<Response<BookAvailabilityDto>> getAvailabilityByBookId(@PathVariable UUID id);
 	
+	@GetMapping("/availability")
+	ResponseEntity<Response<List<BookAvailabilityDto>>> getAvailabilityByBookIds(@RequestParam UUID[] ids);
+	
 	@GetMapping("/{id}/opinions")
 	ResponseEntity<Response<List<OpinionDto>>> getOpinionsByBookId(@PathVariable UUID id);
 	

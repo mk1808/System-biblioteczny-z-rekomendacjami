@@ -220,6 +220,12 @@ public class BooksController extends BaseController implements BooksResource {
 		Response<BookAvailabilityDto> response = createSuccessResponse(bookService.getAvailabilityByBookId(id));
 		return ResponseEntity.ok(response);
 	}
+	
+	@Override
+	public ResponseEntity<Response<List<BookAvailabilityDto>>> getAvailabilityByBookIds(UUID[] ids) {
+		Response<List<BookAvailabilityDto>> response = createSuccessResponse(bookService.getAvailabilityByBookIds(ids));
+		return ResponseEntity.ok(response);
+	}
 
 	@Override
 	public ResponseEntity<Response<CanBorrowBookDto>> canBorrowBookCopy(UUID bookCopyId, UUID userId) {
