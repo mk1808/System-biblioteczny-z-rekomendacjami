@@ -21,8 +21,11 @@ import com.library.dto.ChangeProposalDto;
 import com.library.dto.OpinionDto;
 import com.library.dto.UserListElementDto;
 import com.library.nosql.model.BookData;
+import com.library.nosql.model.SingleActionData;
+import com.library.nosql.model.UserAllData;
 import com.library.nosql.model.UserData;
 import com.library.nosql.repository.BookDataRepository;
+import com.library.nosql.repository.UserAllDataRepository;
 import com.library.nosql.repository.UserDataRepository;
 import com.library.response.Response;
 
@@ -32,12 +35,15 @@ public class BooksControllerAspect {
 	
 	private final BookDataRepository bookDataRepository;
 	private final UserDataRepository userDataRepository;
+	private final UserAllDataRepository userAllDataRepository;
 	private final AspectHelperService helperService;
 	
 	@Autowired
-	public BooksControllerAspect(BookDataRepository bookItemRepository, UserDataRepository userDataRepository, AspectHelperService helperService) {
+	public BooksControllerAspect(BookDataRepository bookItemRepository, UserDataRepository userDataRepository, AspectHelperService helperService,
+			UserAllDataRepository userAllDataRepository) {
 		this.bookDataRepository = bookItemRepository;
 		this.userDataRepository = userDataRepository;
+		this.userAllDataRepository = userAllDataRepository;
 		this.helperService = helperService;
 	}
 	
@@ -54,6 +60,7 @@ public class BooksControllerAspect {
 				.date((new Date()).getTime())
 				.build();
 		userDataRepository.save(toSave);
+		saveAsUserAllData(userEmail, id.toString(), "get", null);
 	} 
 	
 	@After(value = "target("+BOOK_CTRL+") && execution("+RESPONSE+"String>> createUserListElement("+LIST_ELEM_DTO+")) && args(userListElementDto)")  
@@ -68,6 +75,7 @@ public class BooksControllerAspect {
 				.value(userListElementDto.getType().toString())
 				.build();
 		userDataRepository.save(toSave);
+		saveAsUserAllData(userEmail, userListElementDto.getBookId().toString(), userListElementDto.getType().toString(), userListElementDto.getType().toString());
 	} 
 
 	@After(value = "target("+BOOK_CTRL+") && execution("+RESPONSE+"String>> createOpinion("+OPINION_DTO+")) && args(opinionDto)")  
@@ -82,6 +90,7 @@ public class BooksControllerAspect {
 				.value(opinionDto.getRating().toString())
 				.build();
 		userDataRepository.save(toSave);
+		saveAsUserAllData(userEmail, opinionDto.getBookId().toString(), StringUtils.isEmpty(opinionDto.getComment())?"opinion":"opinionWithComment", opinionDto.getRating().toString());
 	} 
 	
 	//ResponseEntity<Response<String>> createChangeProposal(List<ChangeProposalDto> changeProposalsDto)
@@ -106,6 +115,25 @@ public class BooksControllerAspect {
 		} else {
 			BookData toSave = BookData.builder().id(bookId).keyWordIds(keyWordsIds).build();
 			bookDataRepository.save(toSave);
+		}
+	}
+	
+	private void saveAsUserAllData(String userId, String bookId, String actionDesc, String value) {
+		Optional<UserAllData> userAllData = userAllDataRepository.findById(userId);
+		SingleActionData action = SingleActionData
+				.builder()
+				.action(actionDesc)
+				.bookId(bookId)
+				.date((new Date()).getTime())
+				.build();
+		if(value!=null) {action.setValue(value);}
+		if (userAllData.isPresent()) {
+			UserAllData userData = userAllData.get();
+			userData.withSingleAction(action);
+			userAllDataRepository.save(userData);
+		} else {
+			UserAllData toSave = UserAllData.builder().userId(userId).action(action).build();
+			userAllDataRepository.save(toSave);
 		}
 	}
 
