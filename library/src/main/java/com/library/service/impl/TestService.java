@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.library.nosql.model.Item;
+import com.library.nosql.model.Subitem;
 import com.library.nosql.model.RecommendationData;
 import com.library.nosql.repository.ItemRepository;
 import com.library.nosql.repository.RecommendationDataRepository;
@@ -21,6 +22,9 @@ public class TestService {
 	
 	public Item save() {
 		Item item = new Item("6", "name", 5, "catog");
+		Subitem subitem1 = new Subitem("nName1");
+		Subitem subitem2 = new Subitem("nName2");
+		item.withSubitem(subitem1).withSubitem(subitem2);
 		return itemRepository.save(item);
 	}
 	
