@@ -1,10 +1,10 @@
-<div class="carousel-cell">
+<div class="carousel-cell" (click)="onClick()">
     <div class="single twoColumnParent">
-        <img src = "https://picsum.photos/200/300"> <!--[src]="book.photo">>-->
+        <img [src]="book.photo">
         <div>
-            <p class="title">Tytuł: Lorem ipsum</p>
-            <p >Autor: Lorem ipsum</p>
-            <p >Gatunek: Lorem ipsum</p>
+            <p class="title">Tytuł: {{book.title}}</p>
+            <p >Autor: {{getAuthorDisplayedValue(book.authors)}}</p>
+            <p >Gatunek: {{formatOther(book.genres)}}</p>
         </div>
         <div class="bookCopyInfo">
             <p >Wypożyczone: 2/4</p>
