@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormatterService } from 'src/app/core/services/formatter.service';
-import { Author, Book } from 'src/app/core/services/rest/api/api';
+import { Author, Book, BookAvailability } from 'src/app/core/services/rest/api/api';
 
 @Component({
   selector: 'app-lib-book-search-element',
@@ -10,6 +10,8 @@ import { Author, Book } from 'src/app/core/services/rest/api/api';
 })
 export class LibBookSearchElementComponent implements OnInit, OnChanges {
   bookToDisplay: Book = {};
+  availabilityToDisplay: BookAvailability = {}
+  @Input() availability: BookAvailability = {};
   @Input() book: Book = {};
   constructor(private router: Router, private formatterService: FormatterService) { }
 
@@ -18,7 +20,9 @@ export class LibBookSearchElementComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.bookToDisplay = this.book;
+    this.availabilityToDisplay = this.availability;
     console.log(this.book)
+    console.log(this.availability)
   }
 
   getAuthorDisplayedValue(options: Author[] | undefined) {

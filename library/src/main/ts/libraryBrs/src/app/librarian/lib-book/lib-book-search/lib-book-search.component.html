@@ -50,7 +50,7 @@
             </div>
             <div class="inside list">
                 <div *ngFor="let singleBook of booksFiltered|async; index as i;">
-                    <app-lib-book-search-element [book]="singleBook"></app-lib-book-search-element>
+                    <app-lib-book-search-element [book]="singleBook" [availability] = "availabilities[i]"></app-lib-book-search-element>
                 </div>
                 <app-lib-book-search-element></app-lib-book-search-element>
                 <app-lib-book-search-element></app-lib-book-search-element>

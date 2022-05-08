@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-import { Author, Book, BookFIlter, Genre, Publisher } from 'src/app/core/services/rest/api/api';
+import { Author, Book, BookAvailability, BookFIlter, Genre, Publisher } from 'src/app/core/services/rest/api/api';
 import { BooksService } from 'src/app/core/services/rest/books.service';
 import { DictionaryService } from 'src/app/core/services/rest/dictionary.service';
 
@@ -30,6 +30,7 @@ export class LibBookSearchComponent implements OnInit {
   authors: BehaviorSubject<Author[]> = new BehaviorSubject<Author[]>([]);
   publishers: BehaviorSubject<Publisher[]> = new BehaviorSubject<Publisher[]>([]);
   booksFiltered: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
+  availabilities: BookAvailability[]=[];
 
   constructor(private booksService: BooksService,
     private dictionaryService: DictionaryService) { }
@@ -57,6 +58,11 @@ export class LibBookSearchComponent implements OnInit {
   updateBook(){
     this.booksService.getFiltered(0,0,{})
     this.booksFiltered=this.booksService.searchedBooks;
+    this.booksFiltered.subscribe(resp=>{
+      this.prepareAvailabilityInfo();
+    })
+    debugger;
+    
   }
 
   initForm() {
@@ -95,6 +101,8 @@ export class LibBookSearchComponent implements OnInit {
     this.booksService.getFiltered(0, 0, bookFilter);
     this.booksFiltered=this.booksService.searchedBooks;
 
+    this.prepareAvailabilityInfo();
+
 
   }
 
@@ -107,5 +115,19 @@ export class LibBookSearchComponent implements OnInit {
 replaceDefaultValue(value:string|undefined){
   return value=="0"?"":value;
 }
+
+prepareAvailabilityInfo(){
+  let books:string[]= []
+  this.booksFiltered.value.forEach(book=>books.push(book.id?book.id:""));
+  this.getBooksAvailability(books);
+}
+
+getBooksAvailability(ids:string[]) {
+  this.booksService.getAvailabilityByBookIds(ids).subscribe(resp=>{
+    this.availabilities = resp.content
+    console.log(resp)
+  })
+}
+
 
 }

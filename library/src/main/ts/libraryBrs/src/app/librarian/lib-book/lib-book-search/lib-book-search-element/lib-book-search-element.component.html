@@ -6,10 +6,10 @@
             <p >Autor: {{getAuthorDisplayedValue(book.authors)}}</p>
             <p >Gatunek: {{formatOther(book.genres)}}</p>
         </div>
-        <div class="bookCopyInfo">
-            <p >Wypożyczone: 2/4</p>
-            <p >Przetrzymane: 1</p>
-            <p >Rezerwacje: 1</p>
+        <div class="bookCopyInfo" *ngIf="availability">
+            <p >Wypożyczone: {{availability.borrowedBooks}}/{{availability.allBooks}}</p>
+            <p >Przetrzymane: {{availability.keptTooLong}}</p>
+            <p >Rezerwacje: {{availability.numberOfReservations}}</p>
         </div>
     </div>
 </div>

@@ -49,6 +49,13 @@ export class BooksService {
     return this.restService.get(`${URL}/${id}/availability`);
   }
 
+  getAvailabilityByBookIds(ids:string[]): Observable<Response<any>> {
+    var args = ""
+    ids.forEach(id=>{args+=`ids=${id}&`})
+    var allArgsSliced = args.slice(0, -1)
+    return this.restService.get(`${URL}/availability?${allArgsSliced}`);
+  }
+
   getOpinionsByBookId(id:string): Observable<Response<any>> {
     return this.restService.get(`${URL}/${id}/opinions`);
   }
