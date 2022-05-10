@@ -38,7 +38,7 @@ export class LibBookSearchElementComponent implements OnInit, OnChanges {
   }
 
   onClick(){
-    this.router.navigate(['/books/details/'+this.book.id]);
+    this.router.navigate(['/librarian/books/details/'+this.book.id]);
   }
 
   formatOther(list: Object[] | undefined) {
