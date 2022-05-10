@@ -41,10 +41,10 @@
                   <th></th>
               </tr></thead>
               <tbody>
-                <tr>
-                  <td data-label="Name" class="one wide">1</td>
-                  <td data-label="Age">Abcdef</td>
-                  <td data-label="Job">Wypożyczona</td>
+                <tr *ngFor="let bookCopy of bookCopies; let i = index">
+                  <td data-label="Name" class="one wide">{{i+1}}</td>
+                  <td data-label="Age">{{ bookCopy.id ? (bookCopy.id).split("-")[4]:'1a'}}</td>
+                  <td data-label="Job">{{formatStatus(bookCopy.status)}}</td>
                   <td class="three wide"><app-button [text]="downloadText" [btnClass]="btnClass"></app-button></td>
                 </tr>
               </tbody>

@@ -26,4 +26,17 @@ export class FormatterService {
     }
     return displayed;
   }
+
+  getBookCopyStatusName(status:any){
+    let name="";
+    switch(status){
+      case 'IDLE': 
+      case 'IDLE2':name = "Dostępna"; break;
+      case 'BORROWED':name = "Wypożyczona"; break;
+      case 'RESERVED':name = "Zarezerwowana"; break;
+      case 'CANBORROW':name = "Dostępna"; break;
+      default:"";
+      
+    }return name;
+  }
 }

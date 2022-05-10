@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
 import { FormatterService } from 'src/app/core/services/formatter.service';
-import { Book, BookAvailability, Response } from 'src/app/core/services/rest/api/api';
+import { Book, BookAvailability, BookCopy, Response } from 'src/app/core/services/rest/api/api';
 import { BooksService } from 'src/app/core/services/rest/books.service';
 
 @Component({
@@ -52,6 +52,7 @@ export class LibBookDetailsComponent implements OnInit {
   book: Book = {};
   availability1: BookAvailability = {};
   noRating = "-";
+  bookCopies:BookCopy[] = [];
 
 
 
@@ -62,6 +63,7 @@ export class LibBookDetailsComponent implements OnInit {
     this.getBookId();
     this.getBook();
     this.getBookAvailability();
+    this.getBookCopies();
   }
 
   getBookId() {
@@ -124,7 +126,16 @@ export class LibBookDetailsComponent implements OnInit {
     return "-";
   }
 
+  getBookCopies(){
+    this.booksService.getBookCopiesByBookId(this.id).subscribe(resp=>{
+      console.log(resp.content)
+      this.bookCopies = resp.content;
+    })
+  }
 
+  formatStatus(status:any){
+    return this.formatterService.getBookCopyStatusName(status);
+  }
 
 
 }
