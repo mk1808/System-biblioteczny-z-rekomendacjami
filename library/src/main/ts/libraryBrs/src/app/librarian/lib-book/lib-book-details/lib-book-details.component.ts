@@ -36,6 +36,7 @@ export class LibBookDetailsComponent implements OnInit {
   infoText=""
   fee="123"
   availability={available:0, all:5, peopleWaiting:1};
+
   comment = {username:"Użytkownik 1", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed enim in nunc feugiat euismod vitae necnunc. Morbi ac massa ut sem hendrerit", 
   rating:6, date:"05.01.2022r."};
   comments = [this.comment, this.comment, this.comment, this.comment]
@@ -122,6 +123,8 @@ export class LibBookDetailsComponent implements OnInit {
     if (list) { return this.formatterService.displayListNames(list); }
     return "-";
   }
+
+
 
 
 }

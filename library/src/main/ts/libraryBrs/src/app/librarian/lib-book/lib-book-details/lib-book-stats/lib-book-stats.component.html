@@ -3,9 +3,9 @@
         <div class="parent1">
             <i class="book icon"></i>
             <div class="text">
-                <p >Wypożyczone: 2/4</p>
-                <p >Przetrzymane: 1</p>
-                <p >Rezerwacje: 1</p>
+                <p >Wypożyczone: {{availability.borrowedBooks}}/{{availability.allBooks}}</p>
+                <p >Przetrzymane: {{availability.keptTooLong}}</p>
+                <p >Rezerwacje: {{availability.numberOfReservations}}</p>
             </div>
         </div>
      

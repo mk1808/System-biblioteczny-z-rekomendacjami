@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BookAvailabilityComponent } from 'src/app/book/book-details/book-availability/book-availability.component';
 import { I18nService } from 'src/app/core/services/i18n.service';
 
@@ -7,7 +7,7 @@ import { I18nService } from 'src/app/core/services/i18n.service';
   templateUrl: './lib-book-stats.component.html',
   styleUrls: ['./lib-book-stats.component.scss']
 })
-export class LibBookStatsComponent implements OnInit {
+export class LibBookStatsComponent implements OnInit, OnChanges {
   @Input() availability:any;
   static readonly AVAILABLE="bookDetails.availability.available";
   static readonly NOT_AVAILABLE="bookDetails.availability.notAvailable";
@@ -24,6 +24,10 @@ export class LibBookStatsComponent implements OnInit {
   ngOnInit(): void {
     this.getAvailabilityText();
     this.getExtraInfoText();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.availability)
   }
 
   getAvailabilityText(){
