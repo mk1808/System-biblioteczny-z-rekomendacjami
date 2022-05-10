@@ -9,6 +9,8 @@ const translations =
             "contact":"Kontakt",
             "borrowingRules":"Zasady wypożyczeń",
             "booksSearch":"Wyszukiwanie książek",
+            "booksAdd":"Dodaj",
+            "recommendation":"Rekomendacje",
             "goLogin":"Zaloguj",
             "createAccount":"Utwórz konto",
             "login":"Logowanie",

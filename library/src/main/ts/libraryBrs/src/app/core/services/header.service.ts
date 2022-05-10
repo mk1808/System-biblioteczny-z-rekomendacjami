@@ -18,6 +18,7 @@ export class HeaderService {
   getButtonsLoggedUser():any{
     let buttons:HeaderButton[]=[];
     buttons.push(this.createButton('/books/search', 'booksSearch'));
+    buttons.push(this.createButton('/recommendation/all', 'recommendation'));
     buttons.push(this.createButton('/home/terms', 'borrowingRules'));
     buttons.push(this.createButton('/books/myLists', 'myBooks'));
     buttons.push(this.createButton('/user/myAccount', 'myAccount'));
@@ -37,9 +38,10 @@ export class HeaderService {
 
   getButtonsLoggedLibrarian():any{
     let buttons:HeaderButton[]=[];
-    buttons.push(this.createButton('/books/search', 'booksSearch'));
+    buttons.push(this.createButton('/librarian/books/add', 'booksAdd'));
+    buttons.push(this.createButton('/librarian/books/search', 'booksSearch'));
     buttons.push(this.createButton('/home/terms', 'borrowingRules'));
-    buttons.push(this.createButton('/user/myAccount', 'myAccount'));
+    buttons.push(this.createButton('/librarian/user/myAccount', 'myAccount'));
     buttons.push(this.createButton('/home/contact', 'contact'));
     return buttons;
     
