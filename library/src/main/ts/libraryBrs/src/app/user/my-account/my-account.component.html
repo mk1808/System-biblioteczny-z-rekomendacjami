@@ -31,7 +31,7 @@
             <div class="info-with-icon">
                 <i class="info circle icon"></i>
                 <div class="text">
-                    {{ 'cardNo' | i18next }}: 3503<br> <br>
+                    {{ 'cardNo' | i18next }}: {{userInfo&&userInfo.id?userInfo.id.split('-')[4]:7789}}<br> <br>
                     {{ 'cardQRCode' | i18next }}: <br>
                     <div class="qr-code">
                     <img src="/assets/qr.png">
