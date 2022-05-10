@@ -6,6 +6,8 @@ const routes: Routes = [
 
   { path: 'auth', loadChildren: () => import('./lib-auth/lib-auth.module').then(m => m.LibAuthModule) },
   { path: 'books', loadChildren: () => import('./lib-book/lib-book.module').then(m => m.LibBookModule) },
+  { path: 'user', loadChildren: () => import('./lib-user/lib-user.module').then(m => m.LibUserModule) },
+
 ];
 
 @NgModule({
