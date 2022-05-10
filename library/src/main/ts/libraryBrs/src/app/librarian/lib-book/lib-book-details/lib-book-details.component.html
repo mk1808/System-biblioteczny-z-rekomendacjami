@@ -1,22 +1,22 @@
 <app-main-content [title]="title" [contentClass]="rulesHeight">
     <div class="parent padding">
         <div class="inside">
-            <img src="https://picsum.photos/220/280">
+            <img [src]="book.photo">
         </div>
         <div>
             <div>
-                <p class="title">Tytuł książki ABC</p>
-                <p class="line"><span>Autor:</span> Jan Kowalski</p>
-                <p class="line"><span>Wydawnictwo:</span> Nasza Księgarnia</p>
-                <p class="line"><span>Rok wydania:</span> 2005</p>
-                <p class="line"><span>Tytuł oryginalny:</span> Title aa</p>
-                <p class="line"><span>Cykl:</span> Zbiór powieści</p>
-                <p class="line"><span>Gatunek:</span> Fantastyka, Powieść</p>
-                <p class="line"><span>Tagi:</span> Fantastyka, Klasyka</p>
+              <p class="title">{{book.title}}</p>
+              <p class="line"><span>Autor:</span> {{formatAuthors(book.authors)}}</p>
+              <p class="line"><span>Wydawnictwo:</span> {{book.publisherName}}</p>
+              <p class="line"><span>Rok wydania:</span> {{book.publicationYear}}</p>
+              <p class="line"><span>Tytuł oryginalny:</span> {{book.originalTitle}}</p>
+              <p class="line"><span>Cykl:</span> {{formatOther(book.series)}}</p>
+              <p class="line"><span>Gatunek:</span> {{formatOther(book.genres)}}</p>
+              <p class="line"><span>Tagi:</span> {{formatOther(book.keyWords)}}</p>
             </div>
         </div>
         <div class="insideButtons">
-            <p class="line rating"><span>Ocena:</span> 8,5/10</p>
+            <p class="line rating"><span>Ocena:</span> {{book.avgRating?book.avgRating:noRating}}/10</p>
             <div class="buttons">
                 <div>
                     <app-button [iconClass]="addClass" [text]="textAdd" [btnClass]="orangeBtnClass"></app-button>

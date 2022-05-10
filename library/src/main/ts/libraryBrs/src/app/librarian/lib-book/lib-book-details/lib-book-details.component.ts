@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
+import { FormatterService } from 'src/app/core/services/formatter.service';
+import { Book, BookAvailability, Response } from 'src/app/core/services/rest/api/api';
+import { BooksService } from 'src/app/core/services/rest/books.service';
 
 @Component({
   selector: 'app-lib-book-details',
@@ -45,17 +48,44 @@ export class LibBookDetailsComponent implements OnInit {
   deleteText=this.getTranslation("booklist.table.delete")
   prolongText=this.getTranslation("booklist.table.prolong")
   resignText=this.getTranslation("booklist.table.resign")
+  book: Book = {};
+  availability1: BookAvailability = {};
+  noRating = "-";
 
 
-  constructor(private route: ActivatedRoute, @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService) { }
+
+  constructor(private route: ActivatedRoute, @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService, 
+  private booksService: BooksService, private formatterService: FormatterService) { }
 
   ngOnInit(): void {
     this.getBookId();
+    this.getBook();
+    this.getBookAvailability();
   }
 
   getBookId() {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id)
+  }
+
+
+  getBook() {
+    console.log(this.id)
+    this.booksService.getById(this.id).subscribe((resp: Response<Book>) => {
+      if (resp.content) {
+        this.book = resp.content;
+        console.log(this.book)
+      }
+    })
+  }
+
+  getBookAvailability() {
+    this.booksService.getAvailabilityByBookId(this.id).subscribe((resp: Response<BookAvailability>) => {
+      if (resp.content) {
+        this.availability1 = resp.content;
+        console.log(resp)
+      }
+    })
   }
 
   getTranslation(key:String){
@@ -82,5 +112,16 @@ export class LibBookDetailsComponent implements OnInit {
       rated: this.getTranslation("booklist.rated")
     }
   }
+
+  formatAuthors(list: Object[] | undefined) {
+    if (list) { return this.formatterService.displayList(list); }
+    return "-"
+  }
+
+  formatOther(list: Object[] | undefined) {
+    if (list) { return this.formatterService.displayListNames(list); }
+    return "-";
+  }
+
 
 }
