@@ -115,7 +115,7 @@ def recommend():
     save_recom(db, users, books)
     pprint("End recommendation at: "+ str(dt.now()))
 
-
+recommend()
 
 
 
