@@ -13,7 +13,7 @@ from datetime import datetime
 from multiprocessing import Process
 
 
-
+###############################################Pobranie i przygotowanie danych#########################
 books = pd.read_csv('data/books.csv', low_memory=False)
 book_tags = pd.read_csv('data/book_tags.csv', low_memory=False)
 ratings = pd.read_csv('data/ratings.csv', low_memory=False)
@@ -41,7 +41,7 @@ all_books_ids = book_tags['goodreads_book_id'].unique()
 #ids_only = book_tags['goodreads_book_id']
 #only_one = book_tags[book_tags['goodreads_book_id']==1]
 #tags_for_books.append(only_one)
-
+###########################################Obliczanie mf dla gatunku w książce########################3
 tags_for_books = []
 for single_id in all_books_ids:
     group = book_tags[book_tags['goodreads_book_id']==single_id]
@@ -55,7 +55,7 @@ for book in tags_for_books:
     rk=1
     j=0
     print(i)
-    for tag in book.iterrows():
+    for tag in book.iterrows():###########################################Obliczanie mf dla gatunku w książce########################3
         #random_num = random.randint(0, 1000)   
         tag[1]["mf"] = get_gaussian_membership(rk, len(book))
         book.iloc[j] = tag[1]
@@ -65,7 +65,8 @@ for book in tags_for_books:
     tags_for_books[i] = book
     i=i+1
     
-
+    
+########################################### Obliczanie mf dla preferencji uzytkownika wobec książki ########################3
 ############################################users#########################################################
 
 ratings.sort_values(by=['user_id'], inplace=True)
@@ -102,6 +103,7 @@ for rating in ratings_for_users:
     
     
 ############################################################################
+"""
 new_book_tags = book_tags.sort_values(by=['tag_id'], inplace=False)
 all_tags_ids = new_book_tags['tag_id'].unique()
 tags_for_books_copy = copy.deepcopy(tags_for_books)
@@ -124,6 +126,7 @@ for book_test in tags_for_books_copy:
     final_books_tags.append(book_tags_df_copy)
     i=i+1
     print(i)
+    """
 #####################################################################
   
 new_book_tags = book_tags.sort_values(by=['tag_id'], inplace=False)
@@ -155,7 +158,7 @@ for book_test in tags_for_books_copy:
     
 ####################################################old##################333
         
-        
+'''       
 
 data_test=tags_for_books_copy[0].iloc[0]
 books_for_comparison=[]
@@ -189,7 +192,7 @@ for book in tags_for_books_copy:
     book_no=book_no+1  
     print(book_no)
         
-
+''' 
 #df1=[]
 #df1=pd.DataFrame(books_for_comparison)
 #df1 = df1.append(data_test)
@@ -331,6 +334,8 @@ for user in ratings_for_users_copy:
     users_ids.append(user["user_id"].iloc[[0]].iloc[0])
     
 mutex = Lock()
+
+#####################################REKOMENDACJE z WHILE################
     
 def create_recom(ratings_for_users):
     ik=0
@@ -404,7 +409,7 @@ funkcja 10 elem 51:30 - 53:30 - 2 min
 
 
 while - 01:25 - 03:20
-
+#####################################REKOMENDACJE z FOR################
 
 i=0
 for ratings_of_user in ratings_for_users_copy[0:10]: #id
@@ -525,7 +530,7 @@ for recom in recoms4:
     i=i+1
     
 
-#################################
+#################################EWALUACJA ###################
 def get_random_list(planned_length, start, stop):
     randoms1=[]
     while(len(randoms1)<planned_length):
