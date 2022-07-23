@@ -464,7 +464,7 @@ print(datetime.now())
 create_recom(ratings_for_users_copy[0:user_limit])
 print(datetime.now())
 
-user_limit=100
+user_limit=1000
 print(datetime.now())
 create_recom2(ratings_for_users_copy[0:user_limit])
 print(datetime.now())
@@ -476,11 +476,48 @@ print(datetime.now())
 ############################################################ normalization
 max_predictions=np.zeros([len(users_ids), ])
 i=0
-for recom in recoms1:
+for recom in recoms1[0:user_limit]:
     max_predictions[i] = max(recom)    
     i=i+1 
 
+pd.DataFrame(recoms1).to_csv("recoms1.csv")
+
+
+normalized_recoms1=np.zeros([len(users_ids), len(all_books_ids_mapped)])
+def normalize():
+    i=0
+    for recom in recoms1[0:user_limit]:
+        j=0
+        print(i)
+        max_value = max_predictions[i]
+        for single_recom in recom:
+            if not single_recom==None:     
+                normalized_recoms1[i][j]=single_recom/float(max_value)
+            j=j+1
+        i=i+1
+
+
+normalize()
+top = 100
+sorted_recoms=np.zeros([len(users_ids), top])
+################### top n
 i=0
+for recom in normalized_recoms1[0:user_limit]:    
+    sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:100]]
+    for_checking = normalized_recoms1[i][np.argsort(recom)[::-1][:100]]     
+    i=i+1
+    print(i) 
+    
+'''        
+    recom.sort_values(by=['normalized'], ascending=False, inplace=True)
+    
+recoms5 = copy.deepcopy(recommendations)
+i=0
+n=100
+for recom in recoms5:
+    recoms5[i] = recom[0:n]
+    i=i+1
+    
 for recom in recommendations[0:user_limit]:
     j=0
     print(i)
@@ -507,4 +544,4 @@ n=100
 for recom in recoms5:
     recoms5[i] = recom[0:n]
     i=i+1
-    
+'''
