@@ -329,7 +329,7 @@ for user in ratings_for_users_copy:
 similarity = pd.read_csv("new_file_all_simil.csv").to_numpy()
 similarity = np.delete(similarity, 0, axis=1)
 
-#############3
+############rekomendacja##################################################3
 
     
  
@@ -424,6 +424,7 @@ def create_recom(ratings_for_users):
     return
 '''
 
+'''
 max_values_for_users = []
 def create_max_recom_value(ratings_for_users):
     
@@ -466,23 +467,26 @@ def create_max_recom_value(ratings_for_users):
         max_values_for_users.append(max_prediction)
         ik=ik+1
     return
+'''
 
-
-
-user_limit=100
-print(datetime.now())
-create_recom(ratings_for_users_copy[0:user_limit])
-print(datetime.now())
 
 user_limit=5000
 print(datetime.now())
 recoms1=np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)])
 create_recom2(ratings_for_users_copy[0:user_limit])
 print(datetime.now())
+pd.DataFrame(recoms1).to_csv("recoms2.csv")
 
-print(datetime.now())
-create_max_recom_value(ratings_for_users_copy[0:user_limit])
-print(datetime.now())
+################### top n
+top = 100
+sorted_recoms=np.zeros([len(ratings_for_users_copy), top])
+
+i=0
+for recom in recoms1[0:user_limit]:    
+    sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
+    for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
+    i=i+1
+    print(i) 
 
 ############################################################ normalization
 max_predictions=np.zeros([len(users_ids), ])
@@ -490,9 +494,6 @@ i=0
 for recom in recoms1[0:user_limit]:
     max_predictions[i] = max(recom)    
     i=i+1 
-
-pd.DataFrame(recoms1).to_csv("recoms1.csv")
-
 
 normalized_recoms1=np.zeros([len(users_ids), len(all_books_ids_mapped)])
 def normalize():
@@ -510,6 +511,8 @@ def normalize():
 
 normalize()
 top = 100
+
+
 sorted_recoms=np.zeros([len(users_ids), top])
 ################### top n
 i=0
