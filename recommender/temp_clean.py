@@ -484,45 +484,10 @@ sorted_recoms=np.zeros([len(ratings_for_users_copy), top])
 i=0
 for recom in recoms1[0:user_limit]:    
     sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
-    for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
+    #for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
     i=i+1
     print(i) 
 
-############################################################ normalization
-max_predictions=np.zeros([len(users_ids), ])
-i=0
-for recom in recoms1[0:user_limit]:
-    max_predictions[i] = max(recom)    
-    i=i+1 
-
-normalized_recoms1=np.zeros([len(users_ids), len(all_books_ids_mapped)])
-def normalize():
-    i=0
-    for recom in recoms1[0:user_limit]:
-        j=0
-        print(i)
-        max_value = max_predictions[i]
-        for single_recom in recom:
-            if not single_recom==None:     
-                normalized_recoms1[i][j]=single_recom/float(max_value)
-            j=j+1
-        i=i+1
-
-
-normalize()
-top = 100
-
-
-sorted_recoms=np.zeros([len(users_ids), top])
-################### top n
-i=0
-for recom in normalized_recoms1[0:user_limit]:    
-    sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:100]]
-    for_checking = normalized_recoms1[i][np.argsort(recom)[::-1][:100]]     
-    i=i+1
-    print(i) 
-    
-    
     
 #########################################################CF###################################3
 users_similar = []
