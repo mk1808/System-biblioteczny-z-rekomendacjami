@@ -508,6 +508,131 @@ for recom in normalized_recoms1[0:user_limit]:
     i=i+1
     print(i) 
     
+    
+    
+#########################################################CF###################################3
+users_similar = []
+
+max_id = max(all_books_ids_mapped)
+ids_mapped_reverted = [0] * (max_id+1)
+ii=0
+for id1 in all_books_ids_mapped:
+    ids_mapped_reverted[id1] = ii
+    ii=ii+1
+    
+    
+books_for_user = [0] * (len(liked_ratings_for_users)) 
+mf_books_for_user = [0] * (len(liked_ratings_for_users)) 
+i=0
+for user2 in liked_ratings_for_users:
+    print(i)
+    for_single_user=[]
+    mf_for_single_user=[]
+    for user_book in user2.iterrows():
+        for_single_user.append(user_book[1]["book_id"])
+        mf_for_single_user.append([user_book[1]["book_id"], user_book[1]["mf"]])
+        
+    books_for_user[i]=np.array(for_single_user)
+    mf_books_for_user[i]=np.array(mf_for_single_user)
+    i=i+1
+    
+users_for_user = [0] * (len(liked_ratings_for_users)) 
+i=0
+for user3 in books_for_user:
+    print(i)
+    for_single_user=[]
+    j=0
+    for user4 in books_for_user:
+        if list(set(user3).intersection(user4)):
+            for_single_user.append(j)
+        j=j+1    
+        
+    users_for_user[i]=for_single_user
+    i=i+1
+
+max_id = max(all_users_ids)
+ids_users_mapped_reverted = [0] * (max_id+1)
+ii=0
+for id1 in all_users_ids:
+    ids_users_mapped_reverted[id1] = ii
+    ii=ii+1
+
+i=0
+j=0
+single_row = []
+no_of_users = len(liked_ratings_for_users)
+similarity_u = copy.deepcopy(users_for_user)
+
+for user_i in users_for_user:
+    j=0
+    ind_i=ids_users_mapped_reverted[i]
+    liked_i = books_for_user[ind_i]
+    mf_i = mf_books_for_user[ind_i]
+    for user_j in user_i:
+        ind_j=ids_users_mapped_reverted[user_j]
+        liked_j = books_for_user[ind_j]
+        mf_j = mf_books_for_user[ind_j]
+
+        diff_ij = np.setdiff1d(liked_i, liked_j, assume_unique=False)
+       # liked_i.difference(liked_j)
+        diff_ji = np.setdiff1d(liked_j, liked_i, assume_unique=False)
+        common = liked_i[np.in1d(liked_i, liked_j)]
+         #liked_i.intersection(liked_j)
+        
+        sum_min=0
+        sum_max=0
+        k=0
+       
+        for liked_book_j in diff_ij:           
+            sum_max = sum_max + np.array(mf_i)[np.array(mf_i)[:,0]==liked_book_j][0][1]
+        for liked_book_j in diff_ji:
+            sum_max = sum_max + np.array(mf_j)[np.array(mf_j)[:,0]==liked_book_j][0][1]
+            
+        for single_col in common:
+            val_i=np.array(mf_i)[np.array(mf_i)[:,0]==single_col][0][1]
+            val_j=np.array(mf_j)[np.array(mf_j)[:,0]==single_col][0][1] 
+            min1 = min(val_i, val_j)
+            max1 = max(val_i, val_j)
+            sum_min=sum_min+min1
+            sum_max=sum_max+max1
+
+        if sum_max == 0:
+            simil = 0
+        else: 
+            simil = float(sum_min)/float(sum_max)
+        similarity_u[i][j] = simil
+       
+        
+       
+        
+        j=j+1
+        
+    
+    i=i+1    
+    print(i) 
+    break
+
+
+
+
+
+    
+max_users=0
+ids_books_for_user = [0] * (len(liked_ratings_for_users)) 
+i=0
+for user5 in users_for_user:
+    from_one_user = []
+    for single_user2 in user5: 
+        from_one_user.append(liked_ratings_for_users[single_user2])
+    ids_books_for_user[i]=from_one_user
+    i=i+1
+    print(i)
+
+    
+book_index = ids_mapped_reverted[no]
+single_user[book_index] = 1
+
+    
 '''        
     recom.sort_values(by=['normalized'], ascending=False, inplace=True)
     
