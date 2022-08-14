@@ -248,10 +248,9 @@ for book_i in short_book_tags:
         
         
         
-######################################################################################przewidywane oceny
+#############################################################mapowanie id ksiazek i uzytkownikow#########
 
 
-#liczone po lubianych!
 ratings_for_users_copy = copy.deepcopy(ratings_for_users)
 all_books_ids_mapped = []
 for b_id in all_books_ids:
@@ -262,6 +261,23 @@ for b_id in all_books_ids:
 all_books_ids_mapped = np.array(all_books_ids_mapped)
 all_books_ids_list = list(all_books_ids_mapped)
 
+max_id = max(all_books_ids_mapped)
+ids_mapped_reverted = [0] * (max_id+1) #przechowuje indeks pod ktorym dane id jest w tablicy all_books_ids_mapped
+ii=0
+for id1 in all_books_ids_mapped:
+    ids_mapped_reverted[id1] = ii
+    ii=ii+1
+    
+    
+max_id = max(all_users_ids)
+ids_users_mapped_reverted = [0] * (max_id+1) #przechowuje indeks pod ktorym dane id jest w tablicy all_users_ids
+ii=0
+for id1 in all_users_ids:
+    ids_users_mapped_reverted[id1] = ii
+    ii=ii+1
+
+
+####TODO refactor start (sprawdzic czy to jest uzywane)
 df2 = pd.DataFrame([[None,None, None]], columns=list(["user_id", "book_id", "predicted_rating"]))
 
 
@@ -289,23 +305,21 @@ users_ids=[]
 for user in ratings_for_users_copy:
     if len(user["user_id"]) > 0:
         users_ids.append(user["user_id"].iloc[[0]].iloc[0])
+####TODO refactor end
 
-#######przygotowanie uprosczonych macierzy##########################    
-no_of_books = []
+#######przygotowanie 3 uprosczonych macierzy##########################    
+no_of_books = [] # liczby ksiazek oceniionych przez uzytkownikow
 for user in ratings_for_users_copy:
     no_of_books.append(len(user))
 max_no_of_books = max(no_of_books)
 
-
-
-matr_mf = np.zeros(([len(ratings_for_users_copy), max_no_of_books])) 
-matr_book_id=np.zeros(([len(ratings_for_users_copy), max_no_of_books]), dtype=int) 
+matr_mf = np.zeros(([len(ratings_for_users_copy), max_no_of_books]))  # macierz z mf
+matr_book_id=np.zeros(([len(ratings_for_users_copy), max_no_of_books]), dtype=int)  # macierz z id ksiązek
 i=0
 for user in ratings_for_users_copy:
     print(i)
     j=0
-    for rating1 in user.iterrows() :
-        a=1
+    for rating1 in user.iterrows():
         matr_book_id[i,j]=rating1[1]["book_id"]
         matr_mf[i,j]=rating1[1]["mf"]
         j=j+1
@@ -316,54 +330,56 @@ similarity = pd.read_csv("new_file_all_simil.csv").to_numpy()
 similarity = np.delete(similarity, 0, axis=1)
 
 #############3
-max_id = max(all_books_ids_mapped)
-ids_mapped_reverted = [0] * (max_id+1)
-ii=0
-for id1 in all_books_ids_mapped:
-    ids_mapped_reverted[id1] = ii
-    ii=ii+1
+
     
  
-recom_books=[]
-recom_users=[]
-recom_predictions=[]
-recoms1=np.zeros([len(users_ids), len(all_books_ids_mapped)])
-max_predictions=np.zeros([len(users_ids), ])
+recoms1=np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)])
 def create_recom2(ratings_for_users):
     ik = 0
     while ik < len(ratings_for_users):
-        user_id = users_ids[ik]
-
-        known_books_ids = matr_book_id[ik]
-        known_books_count = no_of_books[ik]
+        user_index = ids_users_mapped_reverted[ratings_for_users[ik]["user_id"].iloc[0]]
+        known_books_ids = matr_book_id[user_index]
+        known_books_count = no_of_books[user_index]
         print(ik)
-        j = 0
+        max_prediction=0.001
         jk = 0
         while jk < len(all_books_ids_mapped):
             book_id = all_books_ids_mapped[jk]
             if not (book_id in known_books_ids):  # id
                 sum_value = 0
-
-               
                 kk = 0
                 while kk < known_books_count:
 
                     books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]] , jk]
-                    mf = matr_mf[ik][kk]
+                    mf = matr_mf[user_index][kk]
                     sum_value = sum_value + mf * books_similarity
                     kk = kk+1
                     
 
                 recoms1[ik][jk]=sum_value
+            else:
+                sum_value = 0
+                kk = 0
+                while kk < known_books_count:
 
+                    books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]] , jk]
+                    mf = matr_mf[user_index][kk]
+                    sum_value = sum_value + mf * books_similarity
+                    kk = kk+1
+                    
+                if sum_value>max_prediction:
+                    max_prediction=sum_value
 
-            j = j+1
             jk = jk+1
-            
+        
+        jk = 0
+        while jk < len(all_books_ids_mapped): 
+            recoms1[ik][jk]=recoms1[ik][jk]/max_prediction
+            jk = jk+1            
         ik = ik+1
     return
 
-
+'''
 def create_recom(ratings_for_users):
     ik = 0
     while ik < len(ratings_for_users):
@@ -377,7 +393,6 @@ def create_recom(ratings_for_users):
         jk = 0
         
         while jk < len(all_books_ids_mapped):
-            # for book_id in all_books_ids_mapped:#grid
             book_id = all_books_ids_mapped[jk]
             if not (book_id in known_books_ids):  # id
                 sum_value = 0
@@ -385,31 +400,29 @@ def create_recom(ratings_for_users):
                 book_in_tab_index = book_indexes[j]
                 kk = 0
                 while kk < len(known_books_ids):
-                    #for known_book_id in known_books_ids:
                     known_book_id = known_books_ids[kk]
                     known_book_in_tab = all_books_ids_mapped[all_books_ids_mapped ==
-                                                             known_book_id][0]
+                                                              known_book_id][0]
                     known_book_in_tab_index = all_books_ids_list.index(
                         known_book_in_tab)
 
                     books_similarity = similarity[known_book_in_tab_index,
                                                   book_in_tab_index]
                     mf = ratings_of_user[ratings_of_user["book_id"]
-                                         == known_book_id]["mf"].iloc[0]
+                                          == known_book_id]["mf"].iloc[0]
                     sum_value = sum_value + mf * books_similarity
                     kk = kk+1
 
-                #mutex.acquire()
                 recommendations[i].iloc[j]["user_id"] = user_id
                 recommendations[i].iloc[j]["book_id"] = book_id
                 recommendations[i].iloc[j]["predicted_rating"] = sum_value
-                #mutex.release()
+            
 
             j = j+1
             jk = jk+1
         ik = ik+1
     return
-
+'''
 
 max_values_for_users = []
 def create_max_recom_value(ratings_for_users):
@@ -461,8 +474,9 @@ print(datetime.now())
 create_recom(ratings_for_users_copy[0:user_limit])
 print(datetime.now())
 
-user_limit=1000
+user_limit=5000
 print(datetime.now())
+recoms1=np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)])
 create_recom2(ratings_for_users_copy[0:user_limit])
 print(datetime.now())
 
