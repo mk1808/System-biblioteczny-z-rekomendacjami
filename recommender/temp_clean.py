@@ -47,7 +47,7 @@ all_books_ids = book_tags['goodreads_book_id'].unique()
 #only_one = book_tags[book_tags['goodreads_book_id']==1]
 #tags_for_books.append(only_one)
 ###########################################Obliczanie mf dla gatunku w książce########################3
-tags_for_books = []
+tags_for_books = []  #dla każdej książki tagi jakie w niej są 
 for single_id in all_books_ids:
     group = book_tags[book_tags['goodreads_book_id']==single_id]
     group.sort_values(by=['count'], ascending=False, inplace=True)
@@ -78,9 +78,9 @@ for book in tags_for_books:
 
 ratings.sort_values(by=['user_id'], inplace=True)
 ratings.groupby('user_id')
-all_users_ids = ratings['user_id'].unique()
+all_users_ids = ratings['user_id'].unique() #wszystkie id uzytkownikow
 
-ratings_for_users = []
+ratings_for_users = [] #dla każdego użytkownika lista książek przez niego ocenionych
 for single_user_id in all_users_ids:
     one_group = ratings[ratings['user_id']==single_user_id]
     ratings_for_users.append(one_group)
@@ -95,14 +95,16 @@ for rating in ratings_for_users:
     user_max = rating.iloc[0]['rating']
     user_min = rating.iloc[len(rating)-1]['rating']
     
-    rating["mf"]=0.0
-    j=0
-    for single_book_rating in rating.iterrows():   
-        single_book_rating[1]["mf"] = get_half_traingular_membership(user_min, user_max, single_book_rating[1]["rating"])
-        rating.iloc[j] = single_book_rating[1]
-        j=j+1
+    if user_max == user_min:
+        rating["mf"]=1.0
+    else:
+        rating["mf"]=0.0
+        j=0
+        for single_book_rating in rating.iterrows():   
+            single_book_rating[1]["mf"] = get_half_traingular_membership(user_min, user_max, single_book_rating[1]["rating"])
+            rating.iloc[j] = single_book_rating[1]
+            j=j+1
   
-    
     ratings_for_users[i] = rating
     i=i+1   
     
@@ -112,23 +114,19 @@ new_book_tags = book_tags.sort_values(by=['tag_id'], inplace=False)
 all_tags_ids = new_book_tags['tag_id'].unique()
 tags_for_books_copy = copy.deepcopy(tags_for_books)
 
-all_tags_ids_copy = copy.deepcopy(all_tags_ids)
-
-book_tags_df = pd.DataFrame(np.zeros([1, len(all_tags_ids_copy)]), columns=all_tags_ids_copy)  
+#book_tags_df = pd.DataFrame(np.zeros([1, len(all_tags_ids)]), columns=all_tags_ids)  
 i=0
-final_books_tags=[]
+#final_books_tags=[]
 short_book_tags=[]
 for book_test in tags_for_books_copy:    
-    book_tags_df_copy = copy.deepcopy(book_tags_df)
+    #book_tags_df_copy = copy.deepcopy(book_tags_df)
     
-    bt=book_test
     my_df = pd.DataFrame(np.zeros([1, len(book_test)]), columns=list(book_test['tag_id']))  
     j=0
     for tag in book_test.iterrows():
-        tag1=tag
-        book_tags_df_copy[tag[1]['tag_id']] = tag[1]['mf']
+        #book_tags_df_copy[tag[1]['tag_id']] = tag[1]['mf']
         my_df[tag[1]['tag_id']] = tag[1]['mf']
-    final_books_tags.append(book_tags_df_copy)
+    #final_books_tags.append(book_tags_df_copy)
     short_book_tags.append(my_df)
     i=i+1
     print(i)
@@ -142,15 +140,15 @@ for book_test in tags_for_books_copy:
 i=0
 j=0
 single_row = []
-no_of_books = len(final_books_tags)
+no_of_books = len(short_book_tags)
 similarity = np.zeros([no_of_books, no_of_books])
 for book_i in short_book_tags:
     j=0
-    for book_j in short_book_tags:
-        if similarity[i,j] !=0:
-            j=j+1
+    for book_j in short_book_tags[i:no_of_books]:
+        #if similarity[i,j] !=0:
+            #j=j+1
             #print("continued")
-            continue
+            #continue
         col_j = book_j.columns
         col_i = book_i.columns
         diff_ij = col_i.difference(col_j)
@@ -211,19 +209,18 @@ for book_i in short_book_tags:
     
     
     
-    ##################################################################wyłonienie lubianych + fix danych
-
+    ##################################################################wyłonienie lubianych + usunięcie indexu
     liked_ratings_for_users=copy.deepcopy(ratings_for_users)
 
 
-    i=0
-    for any_rating in liked_ratings_for_users:
-        i=0
-        for single_any_rating in any_rating.iterrows():  
-            if single_any_rating[1]["mf"]==None:
-                single_any_rating[1]["mf"]=1
-                any_rating.iloc[i]= single_any_rating[1]
-            i=i+1  
+    # i=0
+    # for any_rating in liked_ratings_for_users:
+    #     i=0
+    #     for single_any_rating in any_rating.iterrows():  
+    #         if single_any_rating[1]["mf"]==None:
+    #             single_any_rating[1]["mf"]=1
+    #             any_rating.iloc[i]= single_any_rating[1]
+    #         i=i+1  
             
             
     i=0
@@ -234,7 +231,7 @@ for book_i in short_book_tags:
         for single_any_rating in any_rating.iterrows():  
             
             if not ((single_any_rating[1]["mf"])>0.5):
-                any_rating = any_rating.drop(j)
+                any_rating = any_rating.drop(j) 
             j=j+1
         
         liked_ratings_for_users[i] = any_rating
