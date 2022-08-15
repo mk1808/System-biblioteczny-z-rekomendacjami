@@ -558,7 +558,7 @@ for user_i in matr_book_id:
     print(i)
 '''
     
-    
+##################################### Użytkownicy potencjalnie podobni (co najmnjiej 1 wspolna ksiązka) ###############
 
 def get_users_for_user(user_indexes):
     
@@ -578,46 +578,49 @@ def get_users_for_user(user_indexes):
         i=i+1
     return
 
-users_for_user = [0] * (len(liked_ratings_for_users)) 
+users_for_user = [0] * (len(ratings_for_users_copy)) 
 get_users_for_user(list(range(0, 100)))
 
 
-
+##################### Liczenie podobieństwa użytkowników na bazie użytkowników potencjalnie podobnych###################
 i=0
 j=0
 single_row = []
-no_of_users = len(liked_ratings_for_users)
+no_of_users = len(ratings_for_users_copy)
 similarity_u = copy.deepcopy(users_for_user)
 
 def calculate_users_similarity(user_indexes):
+    
+    i=0
+    j=0
     for user_i in users_for_user[0:len(user_indexes)]:
         j=0
-        ind_i=ids_users_mapped_reverted[i]
-        liked_i = matr_book_id[ind_i]
-        mf_i = matr_mf[ind_i]
+        ind_i=user_indexes[i]
+        liked_i = matr_book_id[ind_i][0:no_of_books[ind_i]]
+        mf_i = matr_mf[ind_i][0:no_of_books[ind_i]]
         for user_j in user_i:
-            ind_j=ids_users_mapped_reverted[user_j]
-            liked_j = books_for_user[ind_j]
-            mf_j = mf_books_for_user[ind_j]
+            ind_j=user_j
+            liked_j = matr_book_id[ind_j][0:no_of_books[ind_j]]
+            mf_j = matr_mf[ind_j][0:no_of_books[ind_j]]
     
             diff_ij = np.setdiff1d(liked_i, liked_j, assume_unique=False)
-           # liked_i.difference(liked_j)
+      
             diff_ji = np.setdiff1d(liked_j, liked_i, assume_unique=False)
             common = liked_i[np.in1d(liked_i, liked_j)]
-             #liked_i.intersection(liked_j)
+         
             
             sum_min=0
             sum_max=0
             k=0
            
-            for liked_book_j in diff_ij:           
-                sum_max = sum_max + np.array(mf_i)[np.array(mf_i)[:,0]==liked_book_j][0][1]
+            for liked_book_j in diff_ij:  
+                sum_max = sum_max + mf_i[liked_i==liked_book_j][0]
             for liked_book_j in diff_ji:
-                sum_max = sum_max + np.array(mf_j)[np.array(mf_j)[:,0]==liked_book_j][0][1]
+                sum_max = sum_max + mf_j[liked_j==liked_book_j][0]
                 
             for single_col in common:
-                val_i=np.array(mf_i)[np.array(mf_i)[:,0]==single_col][0][1]
-                val_j=np.array(mf_j)[np.array(mf_j)[:,0]==single_col][0][1] 
+                val_i=mf_i[liked_i==single_col][0]
+                val_j=mf_j[liked_j==single_col][0]
                 min1 = min(val_i, val_j)
                 max1 = max(val_i, val_j)
                 sum_min=sum_min+min1
@@ -628,20 +631,38 @@ def calculate_users_similarity(user_indexes):
             else: 
                 simil = float(sum_min)/float(sum_max)
             similarity_u[i][j] = simil
-           
-            
-           
             
             j=j+1
             
         
         i=i+1    
         print(i) 
-        break
+    return
+user_indexes = list(range(0, 100))
+calculate_users_similarity(list(range(0, 100)))
+
+######################################### Top n użytkowników podobnych ###########################
 
 
+def get_top_n_users(user_indexes):
+    
+    i=0
+    for user in similarity_u[0:len(user_indexes)]:   
+        sorted_arr=np.array(users_for_user[i])[np.argsort(user)[::-1][:top]]
+        if(len(sorted_arr)<top):
+            to_add_num=top-len(sorted_arr)
+            sorted_arr=np.append(sorted_arr, [-1] * to_add_num)
 
-
+       
+        sorted_users[i]=sorted_arr
+        
+   
+        i=i+1
+        print(i) 
+        
+top = 100    
+sorted_users=np.zeros([len(ratings_for_users_copy), top],  dtype=int)
+get_top_n_users(user_indexes)
 
     
 max_users=0
