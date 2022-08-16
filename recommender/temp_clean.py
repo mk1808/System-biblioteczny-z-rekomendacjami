@@ -649,36 +649,57 @@ def get_top_n_users(user_indexes):
     i=0
     for user in similarity_u[0:len(user_indexes)]:   
         sorted_arr=np.array(users_for_user[i])[np.argsort(user)[::-1][:top]]
+        sorted_similarity_arr=np.array(user)[np.argsort(user)[::-1][:top]]
         if(len(sorted_arr)<top):
             to_add_num=top-len(sorted_arr)
             sorted_arr=np.append(sorted_arr, [-1] * to_add_num)
-
+            sorted_similarity_arr = np.append(sorted_similarity_arr, [-1] * to_add_num)
        
         sorted_users[i]=sorted_arr
-        
+        sorted_users_similarity[i] = sorted_similarity_arr
    
         i=i+1
         print(i) 
         
 top = 100    
 sorted_users=np.zeros([len(ratings_for_users_copy), top],  dtype=int)
+sorted_users_similarity = np.zeros([len(ratings_for_users_copy), top])
 get_top_n_users(user_indexes)
 
-    
-max_users=0
-ids_books_for_user = [0] * (len(liked_ratings_for_users)) 
-i=0
-for user5 in users_for_user:
-    from_one_user = []
-    for single_user2 in user5: 
-        from_one_user.append(liked_ratings_for_users[single_user2])
-    ids_books_for_user[i]=from_one_user
-    i=i+1
-    print(i)
 
+
+top_recoms=100
+recoms_cf=np.zeros([len(ratings_for_users_copy), top_recoms],  dtype=int)
+def get_recom_by_nearest_users(user_indexes):
     
-book_index = ids_mapped_reverted[no]
-single_user[book_index] = 1
+    i=0
+    for user_sorted_users in sorted_users[0:len(user_indexes)]:   # sorted_users - indexy najbliższych uzytkownikow
+        j=0
+        books_recom = [0] * (len(short_book_tags) + 1)
+        no_of_books
+        matr_book_id
+        matr_mf
+        
+        for similar_user in user_sorted_users[user_sorted_users>-1]: 
+            similar_users_similarity = sorted_users_similarity[i][j]
+            k=0
+            simil_user_books_ids = matr_book_id[similar_user][0:no_of_books[similar_user]]
+            simil_user_books_mf =  matr_mf[similar_user][0:no_of_books[similar_user]]
+            for book_mf in simil_user_books_mf:
+                books_recom[simil_user_books_ids[k]] = books_recom[simil_user_books_ids[k]] + book_mf * similar_users_similarity
+                k=k+1
+            
+            j=j+1  
+            
+            
+        recoms_cf[i]=np.argsort(books_recom)[::-1][:top_recoms]
+
+        i=i+1
+        print(i) 
+
+
+get_recom_by_nearest_users(user_indexes)
+    
 
     
 '''        
