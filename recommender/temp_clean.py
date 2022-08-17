@@ -677,14 +677,18 @@ def get_recom_by_nearest_users(user_indexes):
         j=0
         books_recom = [0] * (len(short_book_tags) + 1)
  
+        user_index = ids_users_mapped_reverted[ratings_for_users[user_indexes[i]]["user_id"].iloc[0]]
+        known_books_ids = matr_book_id[user_index]
         
         for similar_user in user_sorted_users[user_sorted_users>-1]: 
             similar_users_similarity = sorted_users_similarity[i][j]
             k=0
             simil_user_books_ids = matr_book_id[similar_user][0:no_of_books[similar_user]]
             simil_user_books_mf =  matr_mf[similar_user][0:no_of_books[similar_user]]
-            for book_mf in simil_user_books_mf:
-                books_recom[simil_user_books_ids[k]] = books_recom[simil_user_books_ids[k]] + book_mf * similar_users_similarity
+            for book_mf in simil_user_books_mf:             
+                book_id = simil_user_books_ids[k]
+                if not (book_id in known_books_ids):
+                    books_recom[book_id] = books_recom[book_id] + book_mf * similar_users_similarity
                 k=k+1
             
             j=j+1  
