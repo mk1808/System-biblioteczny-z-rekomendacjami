@@ -209,42 +209,42 @@ for book_i in short_book_tags:
     
     
     
-    ##################################################################wyłonienie lubianych + usunięcie indexu
-    liked_ratings_for_users=copy.deepcopy(ratings_for_users)
+##################################################################wyłonienie lubianych + usunięcie indexu
+liked_ratings_for_users=copy.deepcopy(ratings_for_users)
 
 
-    # i=0
-    # for any_rating in liked_ratings_for_users:
-    #     i=0
-    #     for single_any_rating in any_rating.iterrows():  
-    #         if single_any_rating[1]["mf"]==None:
-    #             single_any_rating[1]["mf"]=1
-    #             any_rating.iloc[i]= single_any_rating[1]
-    #         i=i+1  
-            
-            
-    i=0
-    for any_rating in liked_ratings_for_users:
-        print(i)
-        any_rating = any_rating.reset_index()
-        j=0
-        for single_any_rating in any_rating.iterrows():  
-            
-            if not ((single_any_rating[1]["mf"])>0.5):
-                any_rating = any_rating.drop(j) 
-            j=j+1
+# i=0
+# for any_rating in liked_ratings_for_users:
+#     i=0
+#     for single_any_rating in any_rating.iterrows():  
+#         if single_any_rating[1]["mf"]==None:
+#             single_any_rating[1]["mf"]=1
+#             any_rating.iloc[i]= single_any_rating[1]
+#         i=i+1  
         
-        liked_ratings_for_users[i] = any_rating
-        i=i+1   
         
+i=0
+for any_rating in liked_ratings_for_users:
+    print(i)
+    any_rating = any_rating.reset_index()
+    j=0
+    for single_any_rating in any_rating.iterrows():  
+        
+        if not ((single_any_rating[1]["mf"])>0.5):
+            any_rating = any_rating.drop(j) 
+        j=j+1
+    
+    liked_ratings_for_users[i] = any_rating
+    i=i+1   
+    
 
-    i=0
-    for any_rating in liked_ratings_for_users:
-        print(i)
-        if 'index' in any_rating.columns:
-            liked_ratings_for_users[i]=any_rating.drop('index', 1)
-        i=i+1 
-        
+i=0
+for any_rating in liked_ratings_for_users:
+    print(i)
+    if 'index' in any_rating.columns:
+        liked_ratings_for_users[i]=any_rating.drop('index', 1)
+    i=i+1 
+    
         
         
         
@@ -276,7 +276,7 @@ for id1 in all_users_ids:
     ids_users_mapped_reverted[id1] = ii
     ii=ii+1
 
-
+'''
 ####TODO refactor start (sprawdzic czy to jest uzywane)
 df2 = pd.DataFrame([[None,None, None]], columns=list(["user_id", "book_id", "predicted_rating"]))
 
@@ -306,12 +306,15 @@ for user in ratings_for_users_copy:
     if len(user["user_id"]) > 0:
         users_ids.append(user["user_id"].iloc[[0]].iloc[0])
 ####TODO refactor end
+'''
 
-#######przygotowanie 3 uprosczonych macierzy##########################    
+####### przygotowanie 3 uprosczonych macierzy ##########################    
 no_of_books = [] # liczby ksiazek oceniionych przez uzytkownikow
 for user in ratings_for_users_copy:
     no_of_books.append(len(user))
 max_no_of_books = max(no_of_books)
+
+
 
 matr_mf = np.zeros(([len(ratings_for_users_copy), max_no_of_books]))  # macierz z mf
 matr_book_id=np.zeros(([len(ratings_for_users_copy), max_no_of_books]), dtype=int)  # macierz z id ksiązek
@@ -325,16 +328,29 @@ for user in ratings_for_users_copy:
         j=j+1
     i=i+1
 
-##################czytanie z tablicy zapisanej##################################
+################## czytanie z tablicy zapisanej ##################################
+
+
+pd.DataFrame(matr_mf).to_csv("matr_mf.csv")   
+pd.DataFrame(matr_book_id).to_csv("matr_book_id.csv")  
+pd.DataFrame(no_of_books).to_csv("no_of_books.csv")  
+
 similarity = pd.read_csv("new_file_all_simil.csv").to_numpy()
 similarity = np.delete(similarity, 0, axis=1)
+matr_mf1 = pd.read_csv("matr_mf.csv").to_numpy()
+matr_mf1 = np.delete(matr_mf1, 0, axis=1)
+matr_book_id1 = pd.read_csv("matr_book_id.csv").to_numpy()
+matr_book_id1 = np.delete(matr_book_id1, 0, axis=1)
+no_of_books1 = pd.read_csv("no_of_books.csv").to_numpy()
+no_of_books1 = np.delete(no_of_books1, 0, axis=1)
 
-############rekomendacja##################################################3
+
+############ rekomendacja dla CB dla uzytkownikow ##################################################3
 
     
  
 recoms1=np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)])
-def create_recom2(ratings_for_users):
+def create_recom_cb(ratings_for_users):
     ik = 0
     while ik < len(ratings_for_users):
         user_index = ids_users_mapped_reverted[ratings_for_users[ik]["user_id"].iloc[0]]
@@ -473,22 +489,24 @@ def create_max_recom_value(ratings_for_users):
 user_limit=5000
 print(datetime.now())
 recoms1=np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)])
-create_recom2(ratings_for_users_copy[0:user_limit])
+create_recom_cb(ratings_for_users_copy[0:user_limit])
 print(datetime.now())
 pd.DataFrame(recoms1).to_csv("recoms2.csv")
 
 ################### top n
 top = 100
-sorted_recoms=np.zeros([len(ratings_for_users_copy), top])
 
-i=0
-for recom in recoms1[0:user_limit]:    
-    sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
-    #for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
-    i=i+1
-    print(i) 
+def get_top_recoms_cb(top, recoms1):
+    sorted_recoms=np.zeros([len(recoms1), top])
+    i=0
+    for recom in recoms1:    
+        sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
+        #for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
+        i=i+1
+        print(i) 
+    return sorted_recoms
 
-    
+sorted_recoms = get_top_recoms_cb(top, recoms1)  
 #########################################################CF###################################3
 
 ''' kopia tego z gory, moze zmienic na liked
