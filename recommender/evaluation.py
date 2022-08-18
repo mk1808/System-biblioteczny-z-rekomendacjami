@@ -89,8 +89,9 @@ recoms_cf = get_recom_by_nearest_users(sorted_similar_users, sorted_similar_user
 
 
 ################################### Wyznaczenie top rekomendacji H #####################################################   
-
-
+selected_users_nearest_books = get_books_by_nearest_users(sorted_similar_users)
+recoms_h = create_recom_h(no_of_books_learn, matr_mf_learn, matr_book_id_learn, selected_users_nearest_books)
+sorted_recoms_h = get_top_recoms_h(top, recoms_h)  
     
 ################################## Ewaluacja ##########################################################################
 
@@ -102,7 +103,7 @@ recall=[]
 f1_measure=[]
 i=0
 n=30
-for recom in recoms_cf:
+for recom in sorted_recoms_h:
     liked_user_books = set(matr_book_id_test_liked[i][matr_book_id_test_liked[i] != 0])
     recom_book_ids = set(recom)
     

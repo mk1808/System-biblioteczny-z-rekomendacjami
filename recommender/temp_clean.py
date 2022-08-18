@@ -731,10 +731,11 @@ get_recom_by_nearest_users(user_indexes)
 ############################################################ HYBRID #######################################################
 
 ############################################### ksiazki na podstawie najblizszych uzytkownikow #############################
-def get_books_by_nearest_users(user_indexes):
+def get_books_by_nearest_users(sorted_users):
     
+    nearest_users_books = np.zeros([len(sorted_users), len(all_books_ids_mapped)],  dtype=int)
     i=0
-    for user_sorted_users in sorted_users[0:len(user_indexes)]:   # sorted_users - indexy najbliższych uzytkownikow
+    for user_sorted_users in sorted_users:   # sorted_users - indexy najbliższych uzytkownikow
         j=0
         for similar_user in user_sorted_users[user_sorted_users>-1]: 
           
@@ -746,24 +747,25 @@ def get_books_by_nearest_users(user_indexes):
 
         i=i+1
         print(i) 
-        
+    return nearest_users_books    
          
-nearest_users_books = np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)],  dtype=int)
+
 get_books_by_nearest_users(user_indexes)
 
 
 ################################################# liczenie predykcji ######################################################
-def create_recom_h(ratings_for_users):
+def create_recom_h(no_of_books_selected, matr_mf_selected, matr_book_id_selected, selected_users_nearest_books):
+    recoms_h=np.zeros([len(no_of_books_selected), len(all_books_ids_mapped)])
     ik = 0
-    while ik < len(ratings_for_users):
-        user_index = ids_users_mapped_reverted[ratings_for_users[ik]["user_id"].iloc[0]]
-        known_books_ids = matr_book_id[user_index]
-        known_books_count = no_of_books[user_index]
+    while ik < len(no_of_books_selected):
+        
+        known_books_ids = matr_book_id_selected[ik]
+        known_books_count = no_of_books_selected[ik]
         print(ik)
         max_prediction=0.001
         jk = 0
         while jk < len(all_books_ids_mapped):
-            if nearest_users_books[ik][jk] == 0:
+            if selected_users_nearest_books[ik][jk] == 0:
                 jk = jk+1
                 continue
             book_id = all_books_ids_mapped[jk]
@@ -773,7 +775,7 @@ def create_recom_h(ratings_for_users):
                 while kk < known_books_count:
 
                     books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]] , jk]
-                    mf = matr_mf[user_index][kk]
+                    mf = matr_mf_selected[ik][kk]
                     sum_value = sum_value + mf * books_similarity
                     kk = kk+1
                     
@@ -785,7 +787,7 @@ def create_recom_h(ratings_for_users):
                 while kk < known_books_count:
 
                     books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]] , jk]
-                    mf = matr_mf[user_index][kk]
+                    mf = matr_mf_selected[ik][kk]
                     sum_value = sum_value + mf * books_similarity
                     kk = kk+1
                     
@@ -799,7 +801,7 @@ def create_recom_h(ratings_for_users):
             recoms_h[ik][jk]=recoms_h[ik][jk]/max_prediction
             jk = jk+1            
         ik = ik+1
-    return
+    return recoms_h
 
 
 user_limit=5000
@@ -814,12 +816,33 @@ print(datetime.now())
 top = 100
 sorted_recoms_h=np.zeros([len(ratings_for_users_copy), top],  dtype=int)
 
-i=0
-for recom in recoms_h[0:user_limit]:    
-    sorted_recoms_h[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
-    #for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
-    i=i+1
-    print(i) 
+def get_top_recoms_h(top, recoms1):
+    sorted_recoms_h=np.zeros([len(recoms1), top],  dtype=int)
+    i=0
+    for recom in recoms1:    
+        sorted_recoms_h[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
+        #for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
+        i=i+1
+        print(i) 
+    return sorted_recoms_h 
+    
+    
+#################################
+def get_top_recoms_cb(top, recoms1):
+    sorted_recoms=np.zeros([len(recoms1), top], dtype=int)
+    i=0
+    for recom in recoms1:    
+        sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
+        #for_checking = recoms1[i][np.argsort(recom)[::-1][:top]]     
+        i=i+1
+        print(i) 
+    return sorted_recoms
+
+sorted_recoms = get_top_recoms_cb(top, recoms_cb)  
+
+
+
+################################    
     
 '''        
     recom.sort_values(by=['normalized'], ascending=False, inplace=True)
