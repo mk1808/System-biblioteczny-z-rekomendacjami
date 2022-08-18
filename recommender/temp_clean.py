@@ -349,13 +349,15 @@ no_of_books1 = np.delete(no_of_books1, 0, axis=1)
 
     
  
-recoms1=np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)])
-def create_recom_cb(ratings_for_users):
+
+def create_recom_cb(no_of_books_selected, matr_mf_selected, matr_book_id_selected):
+     
+    recoms1=np.zeros([len(no_of_books_selected), len(all_books_ids_mapped)], dtype=int)
     ik = 0
-    while ik < len(ratings_for_users):
-        user_index = ids_users_mapped_reverted[ratings_for_users[ik]["user_id"].iloc[0]]
-        known_books_ids = matr_book_id[user_index]
-        known_books_count = no_of_books[user_index]
+    while ik < len(no_of_books_selected):
+        
+        known_books_ids = matr_book_id_selected[ik]
+        known_books_count = no_of_books_selected[ik]
         print(ik)
         max_prediction=0.001
         jk = 0
@@ -367,7 +369,7 @@ def create_recom_cb(ratings_for_users):
                 while kk < known_books_count:
 
                     books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]] , jk]
-                    mf = matr_mf[user_index][kk]
+                    mf = matr_mf_selected[ik][kk]
                     sum_value = sum_value + mf * books_similarity
                     kk = kk+1
                     
@@ -379,7 +381,7 @@ def create_recom_cb(ratings_for_users):
                 while kk < known_books_count:
 
                     books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]] , jk]
-                    mf = matr_mf[user_index][kk]
+                    mf = matr_mf_selected[ik][kk]
                     sum_value = sum_value + mf * books_similarity
                     kk = kk+1
                     
@@ -393,7 +395,7 @@ def create_recom_cb(ratings_for_users):
             recoms1[ik][jk]=recoms1[ik][jk]/max_prediction
             jk = jk+1            
         ik = ik+1
-    return
+    return recoms1
 
 '''
 def create_recom(ratings_for_users):
@@ -488,16 +490,15 @@ def create_max_recom_value(ratings_for_users):
 
 user_limit=5000
 print(datetime.now())
-recoms1=np.zeros([len(ratings_for_users_copy), len(all_books_ids_mapped)])
-create_recom_cb(ratings_for_users_copy[0:user_limit])
+recoms_cb=create_recom_cb(no_of_books[0:user_limit], matr_mf[0:user_limit], matr_book_id[0:user_limit])
 print(datetime.now())
-pd.DataFrame(recoms1).to_csv("recoms2.csv")
+pd.DataFrame(recoms_cb).to_csv("recoms2.csv")
 
 ################### top n
 top = 100
 
 def get_top_recoms_cb(top, recoms1):
-    sorted_recoms=np.zeros([len(recoms1), top])
+    sorted_recoms=np.zeros([len(recoms1), top], dtype=int)
     i=0
     for recom in recoms1:    
         sorted_recoms[i]=np.array(all_books_ids_mapped)[np.argsort(recom)[::-1][:top]]
@@ -506,7 +507,7 @@ def get_top_recoms_cb(top, recoms1):
         print(i) 
     return sorted_recoms
 
-sorted_recoms = get_top_recoms_cb(top, recoms1)  
+sorted_recoms = get_top_recoms_cb(top, recoms_cb)  
 #########################################################CF###################################3
 
 ''' kopia tego z gory, moze zmienic na liked
