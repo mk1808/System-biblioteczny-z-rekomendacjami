@@ -579,12 +579,12 @@ for user_i in matr_book_id:
     
 ##################################### Użytkownicy potencjalnie podobni (co najmnjiej 1 wspolna ksiązka) ###############
 
-def get_users_for_user(user_indexes):
-    
+def get_users_for_user(matr_book_id_selected, no_of_books_selected):
+    users_for_user = [0] * (len(no_of_books_selected)) 
     i=0
-    for user_i in matr_book_id[user_indexes]:
+    for user_i in matr_book_id_selected:
         print(i)
-        user_i_books = matr_book_id[user_indexes[i]][0:no_of_books[user_indexes[i]]]
+        user_i_books = user_i[0:no_of_books_selected[i]]
         for_single_user=[]
         j=0
         for user_j in matr_book_id:
@@ -595,9 +595,9 @@ def get_users_for_user(user_indexes):
             
         users_for_user[i]=for_single_user
         i=i+1
-    return
+    return users_for_user
 
-users_for_user = [0] * (len(ratings_for_users_copy)) 
+
 get_users_for_user(list(range(0, 100)))
 
 
@@ -608,19 +608,17 @@ single_row = []
 no_of_users = len(ratings_for_users_copy)
 similarity_u = copy.deepcopy(users_for_user)
 
-def calculate_users_similarity(user_indexes):
-    
+def calculate_users_similarity(users_for_selected_user, no_of_books_selected, matr_mf_selected, matr_book_id_selected):
+    similarity_u = copy.deepcopy(users_for_selected_user)
     i=0
     j=0
-    for user_i in users_for_user[0:len(user_indexes)]:
+    for user_i in users_for_selected_user:
         j=0
-        ind_i=user_indexes[i]
-        liked_i = matr_book_id[ind_i][0:no_of_books[ind_i]]
-        mf_i = matr_mf[ind_i][0:no_of_books[ind_i]]
+        liked_i = matr_book_id_selected[i][0:no_of_books_selected[i]]
+        mf_i = matr_mf_selected[i][0:no_of_books_selected[i]]
         for user_j in user_i:
-            ind_j=user_j
-            liked_j = matr_book_id[ind_j][0:no_of_books[ind_j]]
-            mf_j = matr_mf[ind_j][0:no_of_books[ind_j]]
+            liked_j = matr_book_id[user_j][0:no_of_books[user_j]]
+            mf_j = matr_mf[user_j][0:no_of_books[user_j]]
     
             diff_ij = np.setdiff1d(liked_i, liked_j, assume_unique=False)
       
@@ -656,18 +654,22 @@ def calculate_users_similarity(user_indexes):
         
         i=i+1    
         print(i) 
-    return
+    return similarity_u
+
 user_indexes = list(range(0, 100))
 calculate_users_similarity(list(range(0, 100)))
 
 ######################################### Top n użytkowników podobnych ###########################
 
 
-def get_top_n_users(user_indexes):
+def get_top_n_users(users_selected_similarity, users_for_selected_user, top_users):
+    
+    sorted_users=np.zeros([len(users_selected_similarity), top_users],  dtype=int)
+    sorted_users_similarity = np.zeros([len(users_selected_similarity), top_users])
     
     i=0
-    for user in similarity_u[0:len(user_indexes)]:   
-        sorted_arr=np.array(users_for_user[i])[np.argsort(user)[::-1][:top]]
+    for user in users_selected_similarity:   
+        sorted_arr=np.array(users_for_selected_user[i])[np.argsort(user)[::-1][:top]]
         sorted_similarity_arr=np.array(user)[np.argsort(user)[::-1][:top]]
         if(len(sorted_arr)<top):
             to_add_num=top-len(sorted_arr)
@@ -679,6 +681,7 @@ def get_top_n_users(user_indexes):
    
         i=i+1
         print(i) 
+    return (sorted_users, sorted_users_similarity)
         
 top = 100    
 sorted_users=np.zeros([len(ratings_for_users_copy), top],  dtype=int)
@@ -689,18 +692,21 @@ get_top_n_users(user_indexes)
 
 top_recoms=100
 recoms_cf=np.zeros([len(ratings_for_users_copy), top_recoms],  dtype=int)
-def get_recom_by_nearest_users(user_indexes):
+
+
+def get_recom_by_nearest_users(sorted_users, sorted_users_similarity, top, no_of_books_selected, matr_book_id_selected):
     
+    recoms_cf=np.zeros([len(sorted_users), top],  dtype=int)
     i=0
-    for user_sorted_users in sorted_users[0:len(user_indexes)]:   # sorted_users - indexy najbliższych uzytkownikow
+    for user_sorted_users in sorted_users:   # sorted_users - indexy najbliższych uzytkownikow
         j=0
         books_recom = [0] * (len(short_book_tags) + 1)
  
-        user_index = ids_users_mapped_reverted[ratings_for_users[user_indexes[i]]["user_id"].iloc[0]]
-        known_books_ids = matr_book_id[user_index]
+        known_books_ids = matr_book_id_selected[i][0:no_of_books_selected[i]]
         
         for similar_user in user_sorted_users[user_sorted_users>-1]: 
             similar_users_similarity = sorted_users_similarity[i][j]
+            
             k=0
             simil_user_books_ids = matr_book_id[similar_user][0:no_of_books[similar_user]]
             simil_user_books_mf =  matr_mf[similar_user][0:no_of_books[similar_user]]
@@ -717,6 +723,7 @@ def get_recom_by_nearest_users(user_indexes):
 
         i=i+1
         print(i) 
+    return recoms_cf
 
 
 get_recom_by_nearest_users(user_indexes)

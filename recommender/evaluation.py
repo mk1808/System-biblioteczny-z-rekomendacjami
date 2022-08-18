@@ -5,6 +5,7 @@ import math
 no_of_users_for_test = 100
 min_num_of_user_books = 15
 learn_to_test_ratio = 0.5
+top_users=100
 top=100
 
 ############################################################ Losowanie indeksow uzytkownikow ###################################3
@@ -78,6 +79,18 @@ for user_index in random_user_indexes:
 recoms_cb=create_recom_cb(no_of_books_learn, matr_mf_learn, matr_book_id_learn)    
 sorted_recoms_cb = get_top_recoms_cb(top, recoms_cb)      
     
+
+################################### Wyznaczenie top rekomendacji CF #####################################################  
+
+users_for_selected_user = get_users_for_user(matr_book_id_learn, no_of_books_learn)
+users_selected_similarity = calculate_users_similarity(users_for_selected_user, no_of_books_learn, matr_mf_learn, matr_book_id_learn)
+sorted_similar_users, sorted_similar_users_similarity = get_top_n_users(users_selected_similarity, users_for_selected_user, top_users)  
+recoms_cf = get_recom_by_nearest_users(sorted_similar_users, sorted_similar_users_similarity, top, no_of_books_learn, matr_book_id_learn)
+
+
+################################### Wyznaczenie top rekomendacji H #####################################################   
+
+
     
 ################################## Ewaluacja ##########################################################################
 
@@ -89,7 +102,7 @@ recall=[]
 f1_measure=[]
 i=0
 n=30
-for recom in sorted_recoms_cb:
+for recom in recoms_cf:
     liked_user_books = set(matr_book_id_test_liked[i][matr_book_id_test_liked[i] != 0])
     recom_book_ids = set(recom)
     
