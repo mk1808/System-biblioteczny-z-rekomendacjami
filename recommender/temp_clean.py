@@ -10,9 +10,17 @@ import threading
 #from threading import Thread, Lock
 from datetime import datetime
 from multiprocessing import Process
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+import matplotlib
+import skfuzzy
+#skfuzzy.membership.smf(list(range(1,10)), 1, 10)
+#roc_auc_score()
 
 def get_gaussian_membership(rk, L):
-    alpha=1.2
+  #  alpha=1.2
+
+    alpha=0.22
     sqr = math.sqrt(alpha*L*(rk-1))
     mf = rk/float(pow(2, sqr))
     #round(mf, 2)
@@ -20,6 +28,21 @@ def get_gaussian_membership(rk, L):
 
 def get_half_traingular_membership(min, max, r):
     return (r-min)/float(max-min)
+
+def get_half_traingular_membership_desc(min, max, r):
+    return (1 - get_half_traingular_membership(min, max, r))
+
+def get_S_membership(index, min, max ):
+    if min <= index and index <= ((min+max)/2):
+        return 2 * pow(((index-min)/(max-min)),2)
+    elif index<=min:
+        return 0
+    elif index>=max:
+        return 1
+    return 1-( 2 * pow(((index-max)/(max-min)),2))
+
+def get_S_membership_desc(index, min, max ):
+    return 1-get_S_membership(index, min, max)
 
 def book_id_to_goodreads(old_id):
     return books[books["id"]==old_id]["book_id"].iloc[0]
@@ -62,7 +85,9 @@ for book in tags_for_books:
     print(i)
     for tag in book.iterrows():###########################################Obliczanie mf dla gatunku w książce########################3
         #random_num = random.randint(0, 1000)   
-        tag[1]["mf"] = get_gaussian_membership(rk, len(book))
+       # tag[1]["mf"] = get_gaussian_membership(rk, len(book))
+        tag[1]["mf"] = get_half_traingular_membership_desc(0, len(book), rk)
+       
         book.iloc[j] = tag[1]
         rk=rk+1
         j=j+1
@@ -145,57 +170,8 @@ similarity = np.zeros([no_of_books, no_of_books])
 for book_i in short_book_tags:
     j=0
     for book_j in short_book_tags[i:no_of_books]:
-        #if similarity[i,j] !=0:
-            #j=j+1
-            #print("continued")
-            #continue
-        col_j = book_j.columns
-        col_i = book_i.columns
-        diff_ij = col_i.difference(col_j)
-        diff_ji = col_j.difference(col_i)
-        common = col_i.intersection(col_j)
-        sum_min=0
-        sum_max=0
-      
-        for single_col in diff_ij:
-            sum_max = sum_max + book_i[single_col][0]
+        simil = get_fst_similarity(book_i, book_j)
         
-        for single_col in diff_ji:
-            sum_max = sum_max + book_j[single_col][0]    
-            
-        for single_col in common:
-            val_i=book_i[single_col][0]
-            val_j=book_j[single_col][0]
-            min1 = min(val_i, val_j)
-            max1 = max(val_i, val_j)
-            sum_min=sum_min+min1
-            sum_max=sum_max+max1
-        '''     
-    sum_max
-        all_col = list(set(col_j + col_i))#
-    
-        for col in all_col:
-            it=0
-            try:#
-                val_i=book_i[col][0]
-            except:
-                val_i=float(0.0)
-            try:
-                val_j=book_j[col][0]
-            except:
-                val_j=float(0.0)
-           # break;
-            min1 = min(val_i, val_j)
-            max1 = max(val_i, val_j)
-            sum_min=sum_min+min1
-            sum_max=sum_max+max1
-        '''
-        #if sum_min != 0 and sum_max != 0:
-        #    print("a")
-        if sum_max == 0:
-            simil = 0
-        else: 
-            simil = float(sum_min)/float(sum_max)
         similarity[i,j] = simil
         similarity[j,i] = simil
         
@@ -204,9 +180,37 @@ for book_i in short_book_tags:
     
     i=i+1    
     print(i)    
+ 
+def get_fst_similarity(book_i, book_j):
+    col_j = book_j.columns
+    col_i = book_i.columns
+    diff_ij = col_i.difference(col_j)
+    diff_ji = col_j.difference(col_i)
+    common = col_i.intersection(col_j)
+    sum_min=0
+    sum_max=0
     
+    for single_col in diff_ij:
+        sum_max = sum_max + book_i[single_col][0]
+    
+    for single_col in diff_ji:
+        sum_max = sum_max + book_j[single_col][0]    
+        
+    for single_col in common:
+        val_i=book_i[single_col][0]
+        val_j=book_j[single_col][0]
+        min1 = min(val_i, val_j)
+        max1 = max(val_i, val_j)
+        sum_min=sum_min+min1
+        sum_max=sum_max+max1
+    
+    if sum_max == 0:
+        simil = 0
+    else: 
+        simil = float(sum_min)/float(sum_max)
+    return simil
 
-    
+pd.DataFrame(similarity).to_csv("cb_simil_b_gauss_fst.csv")      
     
     
 ##################################################################wyłonienie lubianych + usunięcie indexu
