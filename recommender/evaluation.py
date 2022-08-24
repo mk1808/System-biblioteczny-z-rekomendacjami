@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import math
+import os.path
+import pandas as pd
+import numpy as np
 #################################EWALUACJA ###################
 
 no_of_users_for_test = 100
@@ -7,10 +10,13 @@ min_num_of_user_books = 15
 learn_to_test_ratio = 0.5
 top_users=100
 top=100
+nof_of_tests = 10
+test_type_name="cb_gaus_fst"
 
 ############################################################ Losowanie indeksow uzytkownikow ###################################3
 
 ####### przygotowanie 3 uprosczonych macierzy ##########################    
+'''
 no_of_books_learn = [0] * no_of_users_for_test # liczby ksiazek oceniionych przez uzytkownikow
 no_of_books_test = [0] * no_of_users_for_test 
 matr_mf_learn = np.zeros(([no_of_users_for_test, max_no_of_books]))
@@ -18,7 +24,7 @@ matr_mf_test = np.zeros(([no_of_users_for_test, max_no_of_books]))
 matr_book_id_learn = np.zeros(([no_of_users_for_test, max_no_of_books]), dtype=int)
 matr_book_id_test = np.zeros(([no_of_users_for_test, max_no_of_books]), dtype=int)
 matr_book_id_test_liked = np.zeros(([no_of_users_for_test, max_no_of_books]), dtype=int)
-
+'''
 
 def get_random_list(planned_length, start, stop):
     randoms1=[]
@@ -28,116 +34,163 @@ def get_random_list(planned_length, start, stop):
             randoms1.append(random_number)
     return randoms1  
 
-random_user_indexes = get_random_list(no_of_users_for_test, 0, len(no_of_books))
-
-i=0
-for user_index in random_user_indexes:
-    user_no_of_books = no_of_books[user_index]
-   
-    no_of_books_learn[i]=math.ceil(learn_to_test_ratio*user_no_of_books)
-    no_of_books_test[i]=user_no_of_books-no_of_books_learn[i]
-    rand_indexes = random.sample(range(0,user_no_of_books),user_no_of_books)
-    mf_learn = matr_mf[user_index][rand_indexes[0:no_of_books_learn[i]]]
-    mf_test = matr_mf[user_index][rand_indexes[no_of_books_learn[i]:user_no_of_books]]
-    book_id_learn = matr_book_id[user_index][rand_indexes[0:no_of_books_learn[i]]]
-    book_id_test = matr_book_id[user_index][rand_indexes[no_of_books_learn[i]:user_no_of_books]]
-    
-    if(no_of_books_learn[i]<max_no_of_books):
-        to_add_num=max_no_of_books - no_of_books_learn[i]
-        mf_learn = np.append(mf_learn, [-1] * to_add_num)
-        book_id_learn = np.append(book_id_learn, [-1] * to_add_num)
-
+def prepare_random_users_matrix(random_user_indexes):
+    no_of_books_learn = [0] * no_of_users_for_test # liczby ksiazek oceniionych przez uzytkownikow
+    no_of_books_test = [0] * no_of_users_for_test 
+    matr_mf_learn = np.zeros(([no_of_users_for_test, max_no_of_books]))
+    matr_mf_test = np.zeros(([no_of_users_for_test, max_no_of_books]))
+    matr_book_id_learn = np.zeros(([no_of_users_for_test, max_no_of_books]), dtype=int)
+    matr_book_id_test = np.zeros(([no_of_users_for_test, max_no_of_books]), dtype=int)
+    matr_book_id_test_liked = np.zeros(([no_of_users_for_test, max_no_of_books]), dtype=int)
+    i=0
+    for user_index in random_user_indexes:
+        user_no_of_books = no_of_books[user_index]
+       
+        no_of_books_learn[i]=math.ceil(learn_to_test_ratio*user_no_of_books)
+        no_of_books_test[i]=user_no_of_books-no_of_books_learn[i]
+        rand_indexes = random.sample(range(0,user_no_of_books),user_no_of_books)
+        mf_learn = matr_mf[user_index][rand_indexes[0:no_of_books_learn[i]]]
+        mf_test = matr_mf[user_index][rand_indexes[no_of_books_learn[i]:user_no_of_books]]
+        book_id_learn = matr_book_id[user_index][rand_indexes[0:no_of_books_learn[i]]]
+        book_id_test = matr_book_id[user_index][rand_indexes[no_of_books_learn[i]:user_no_of_books]]
         
-    if(no_of_books_test[i]<max_no_of_books):
-        to_add_num=max_no_of_books - no_of_books_test[i]
-        mf_test = np.append(mf_test, [-1] * to_add_num)
-        book_id_test = np.append(book_id_test, [-1] * to_add_num)
+        if(no_of_books_learn[i]<max_no_of_books):
+            to_add_num=max_no_of_books - no_of_books_learn[i]
+            mf_learn = np.append(mf_learn, [-1] * to_add_num)
+            book_id_learn = np.append(book_id_learn, [-1] * to_add_num)
     
-    j=0
-    for book_id in book_id_test:
-        if mf_test[j] >= 0.5:
-            matr_book_id_test_liked[i][j] = book_id
-        j=j+1
+            
+        if(no_of_books_test[i]<max_no_of_books):
+            to_add_num=max_no_of_books - no_of_books_test[i]
+            mf_test = np.append(mf_test, [-1] * to_add_num)
+            book_id_test = np.append(book_id_test, [-1] * to_add_num)
+        
+        j=0
+        for book_id in book_id_test:
+            if mf_test[j] >= 0.5:
+                matr_book_id_test_liked[i][j] = book_id
+            j=j+1
+        
+        matr_mf_learn[i]= mf_learn
+        matr_mf_test[i]= mf_test  
+        matr_book_id_learn[i]= book_id_learn
+        matr_book_id_test[i]= book_id_test
     
-    matr_mf_learn[i]= mf_learn
-    matr_mf_test[i]= mf_test  
-    matr_book_id_learn[i]= book_id_learn
-    matr_book_id_test[i]= book_id_test
+        
+        i=i+1
+    return (no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked)
 
     
-    i=i+1
+def prepare_random_users():
+    random_user_indexes = get_random_list(no_of_users_for_test, 0, len(no_of_books))
+    return prepare_random_users_matrix(random_user_indexes)
     
 
-    
-    
-    
-    
-    
+ 
 ################################### Wyznaczenie top rekomendacji CB #####################################################    
     
+def get_recoms_cb(no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked):
     
-recoms_cb=create_recom_cb(no_of_books_learn, matr_mf_learn, matr_book_id_learn)    
-sorted_recoms_cb = get_top_recoms_cb(top, recoms_cb)      
-    
+    recoms_cb=create_recom_cb(no_of_books_learn, matr_mf_learn, matr_book_id_learn)    
+    sorted_recoms_cb = get_top_recoms_cb(top, recoms_cb)      
+    return sorted_recoms_cb
 
 ################################### Wyznaczenie top rekomendacji CF #####################################################  
-
-users_for_selected_user = get_users_for_user(matr_book_id_learn, no_of_books_learn)
-users_selected_similarity = calculate_users_similarity(users_for_selected_user, no_of_books_learn, matr_mf_learn, matr_book_id_learn)
-sorted_similar_users, sorted_similar_users_similarity = get_top_n_users(users_selected_similarity, users_for_selected_user, top_users)  
-recoms_cf = get_recom_by_nearest_users(sorted_similar_users, sorted_similar_users_similarity, top, no_of_books_learn, matr_book_id_learn)
-
+def get_recoms_cf(no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked):
+    
+    users_for_selected_user = get_users_for_user(matr_book_id_learn, no_of_books_learn)
+    users_selected_similarity = calculate_users_similarity(users_for_selected_user, no_of_books_learn, matr_mf_learn, matr_book_id_learn)
+    sorted_similar_users, sorted_similar_users_similarity = get_top_n_users(users_selected_similarity, users_for_selected_user, top_users)  
+    recoms_cf = get_recom_by_nearest_users(sorted_similar_users, sorted_similar_users_similarity, top, no_of_books_learn, matr_book_id_learn)
+    return recoms_cf
 
 ################################### Wyznaczenie top rekomendacji H #####################################################   
-selected_users_nearest_books = get_books_by_nearest_users(sorted_similar_users)
-recoms_h = create_recom_h(no_of_books_learn, matr_mf_learn, matr_book_id_learn, selected_users_nearest_books)
-sorted_recoms_h = get_top_recoms_h(top, recoms_h)  
-    
+def get_recoms_h(no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked):
+    users_for_selected_user = get_users_for_user(matr_book_id_learn, no_of_books_learn)
+    users_selected_similarity = calculate_users_similarity(users_for_selected_user, no_of_books_learn, matr_mf_learn, matr_book_id_learn)
+    sorted_similar_users, sorted_similar_users_similarity = get_top_n_users(users_selected_similarity, users_for_selected_user, top_users)  
+ 
+    selected_users_nearest_books = get_books_by_nearest_users(sorted_similar_users)
+    recoms_h = create_recom_h(no_of_books_learn, matr_mf_learn, matr_book_id_learn, selected_users_nearest_books)
+    sorted_recoms_h = get_top_recoms_h(top, recoms_h)  
+    return sorted_recoms_h    
 ################################## Ewaluacja ##########################################################################
-
-true_positive=[]  #prawidłowo rekomendowane
-false_positive=[] #nieprawidłowo rekomendowane
-false_negative=[] #brak rekomendacji choc byc powinna
-precision=[]
-recall=[]
-f1_measure=[]
-i=0
-n=30
-for recom in sorted_recoms_h:
-    liked_user_books = set(matr_book_id_test_liked[i][matr_book_id_test_liked[i] != 0])
-    recom_book_ids = set(recom)
+def evaluate(recoms, matr_book_id_test_liked, no_of_books_learn, no_of_books_test):
+    learning_set_size = [] 
+    testing_set_size = [] 
     
-    tp=liked_user_books.intersection(recom_book_ids)
-    fp=recom_book_ids.difference(liked_user_books)
-    fn=liked_user_books.difference(recom_book_ids)
-    true_positive.append(tp)
-    false_positive.append(fp)
-    false_negative.append(fn)
-    prec=len(tp)/(len(tp)+len(fp))
-    precision.append(prec)
-    rec=len(tp)/(len(tp)+len(fn))
-    recall.append(rec)
-    f1_m=0
-    if prec+rec > 0:
-        f1_m=2*(prec*rec)/(prec+rec)
+    true_positive=[]  #prawidłowo rekomendowane
+    false_positive=[] #nieprawidłowo rekomendowane
+     #prawidłowo niezarekomendowane
+    false_negative=[] #brak rekomendacji choc byc powinna
+    precision=[]
+    recall=[]
+    f1_measure=[]
+    i=0
+    for recom in recoms:
+        print(i)
+        liked_user_books = set(matr_book_id_test_liked[i][matr_book_id_test_liked[i] != 0])
+        if len(liked_user_books)==0:
+            continue
+        recom_book_ids = set(recom)
         
-    f1_measure.append(f1_m)
-    i=i+1
+        tp=liked_user_books.intersection(recom_book_ids)
+        fp=recom_book_ids.difference(liked_user_books)
+        fn=liked_user_books.difference(recom_book_ids)
+        true_positive.append(tp)
+        false_positive.append(fp)
+        false_negative.append(fn)
+        prec=len(tp)/(len(tp)+len(fp))
+        precision.append(prec)
+        rec=len(tp)/(len(tp)+len(fn))
+        recall.append(rec)
+        f1_m=0
+        if prec+rec > 0:
+            f1_m=2*(prec*rec)/(prec+rec)
+            
+        f1_measure.append(f1_m)
+        
+        learning_set_size.append(no_of_books_learn[i])
+        testing_set_size.append(no_of_books_test[i])
+        i=i+1
+    
+    mean_precision=np.mean(precision)
+    mean_recall=np.mean(recall)
+    mean_f1_measure=np.mean(f1_measure)    
+        
+    final_results = []
+    final_results.append(true_positive)
+    final_results.append(false_positive)
+    final_results.append(false_negative)
+    final_results.append(precision)
+    final_results.append(recall)
+    final_results.append(f1_measure)
+    final_results.append(list([mean_precision]))
+    final_results.append(list([mean_recall]))
+    final_results.append(list([mean_f1_measure]))
+    final_results.append(learning_set_size)
+    final_results.append(testing_set_size)
+    return final_results
 
-mean_precision=np.mean(precision)
-mean_recall=np.mean(recall)
-mean_f1_measure=np.mean(f1_measure)    
-    
 
 
-
-
+ 
+##################################### Glowna petla do liczenia rekom i ewaluacji #########################
+test_type_name="cb_gaus_fst"
+os.mkdir(test_type_name)
+for test_no in range(0,nof_of_tests):
+   no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked = prepare_random_users()
+   recoms = get_recoms_cb(no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked)
+  # recoms = get_recoms_cf(no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked)
+  # recoms = get_recoms_h(no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked)   
+   final_results1 = evaluate(recoms, matr_book_id_test_liked, no_of_books_learn, no_of_books_test)
+   path = os.path.join(test_type_name,"final_results_"+str(test_no)+".csv")
+   pd.DataFrame(final_results1).to_csv(path)  
+   print(path)
     
     
     
-    
-    
-    
+'''    
 max_no_of_books = max(no_of_books)
 
 matr_mf = np.zeros(([len(ratings_for_users_copy), max_no_of_books]))  # macierz z mf
@@ -254,3 +307,4 @@ for recom in recoms5[0:user_limit]:
 mean_precision=np.mean(precision)
 mean_recall=np.mean(recall)
 mean_f1_measure=np.mean(f1_measure)
+''' 
