@@ -160,27 +160,6 @@ for book_test in tags_for_books_copy:
     
 #####################################3SIMILARITIES
 
-
-
-i=0
-j=0
-single_row = []
-no_of_books = len(short_book_tags)
-similarity = np.zeros([no_of_books, no_of_books])
-for book_i in short_book_tags:
-    j=0
-    for book_j in short_book_tags[i:no_of_books]:
-        simil = get_fst_similarity(book_i, book_j)
-        
-        similarity[i,j] = simil
-        similarity[j,i] = simil
-        
-        j=j+1
-        
-    
-    i=i+1    
-    print(i)    
- 
 def get_fst_similarity(book_i, book_j):
     col_j = book_j.columns
     col_i = book_i.columns
@@ -210,7 +189,76 @@ def get_fst_similarity(book_i, book_j):
         simil = float(sum_min)/float(sum_max)
     return simil
 
-pd.DataFrame(similarity).to_csv("cb_simil_b_gauss_fst.csv")      
+i=0
+j=0
+single_row = []
+no_of_books = len(short_book_tags)
+similarity = np.zeros([no_of_books, no_of_books])
+for book_i in short_book_tags:
+    j=0
+    for book_j in short_book_tags[i:no_of_books]:
+        simil = get_fst_similarity(book_i, book_j)
+        
+        similarity[i,j] = simil
+        similarity[j,i] = simil
+        
+        j=j+1
+        
+    
+    i=i+1    
+    print(i)    
+ 
+pd.DataFrame(similarity).to_csv("cb_simil_b_gauss_fst.csv")   
+
+def get_euclidean_similarity(book_i, book_j):
+   col_j = book_j.columns
+   col_i = book_i.columns
+   diff_ij = col_i.difference(col_j)
+   diff_ji = col_j.difference(col_i)
+   common = col_i.intersection(col_j)
+   sum1=0
+   
+   for single_col in diff_ij:
+       sum1 = sum1 + book_i[single_col][0]**2
+   
+   for single_col in diff_ji:
+       sum1 = sum1 + book_j[single_col][0]**2 
+       
+   for single_col in common:
+       val_i=book_i[single_col][0]
+       val_j=book_j[single_col][0]
+       sum1=sum1+(val_i-val_j)**2
+   return 1-math.sqrt(sum1)
+
+def get_cosine_similarity(book_i, book_j):
+   col_j = book_j.columns
+   col_i = book_i.columns
+
+   common = col_i.intersection(col_j)
+   sum1=0
+   sum2=0
+   sum3=0
+   for single_col in col_i:
+       sum1 = sum1 + book_i[single_col][0]**2
+   
+   for single_col in col_j:
+       sum2 = sum2 + book_j[single_col][0]**2 
+       
+   for single_col in common:
+       val_i=book_i[single_col][0]
+       val_j=book_j[single_col][0]
+       sum3=sum3+(val_i*val_j)
+       
+       
+   denominator = math.sqrt(sum1) * math.sqrt(sum2)
+   if denominator!=0:
+       return sum3/denominator
+   return 0
+
+
+
+
+pd.DataFrame(similarity).to_csv("cb_simil_b_halftriang_fst.csv")      
     
     
 ##################################################################wyłonienie lubianych + usunięcie indexu
@@ -364,7 +412,7 @@ def create_recom_cb(no_of_books_selected, matr_mf_selected, matr_book_id_selecte
         known_books_count = no_of_books_selected[ik]
         print(ik)
         max_prediction=0.001
-        jk = 0
+        jk = 1
         while jk < len(all_books_ids_mapped):
             book_id = all_books_ids_mapped[jk]
             if not (book_id in known_books_ids):  # id
@@ -379,6 +427,7 @@ def create_recom_cb(no_of_books_selected, matr_mf_selected, matr_book_id_selecte
                     
 
                 recoms1[ik][jk]=sum_value
+                '''
             else:
                 sum_value = 0
                 kk = 0
@@ -391,13 +440,14 @@ def create_recom_cb(no_of_books_selected, matr_mf_selected, matr_book_id_selecte
                     
                 if sum_value>max_prediction:
                     max_prediction=sum_value
-
+'''
             jk = jk+1
-        
+        '''
         jk = 0
         while jk < len(all_books_ids_mapped): 
             recoms1[ik][jk]=recoms1[ik][jk]/max_prediction
-            jk = jk+1            
+            jk = jk+1 
+            '''
         ik = ik+1
     return recoms1
 

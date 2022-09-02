@@ -6,12 +6,12 @@ import numpy as np
 #################################EWALUACJA ###################
 
 no_of_users_for_test = 100
-min_num_of_user_books = 15
+min_num_of_user_books = 30
 learn_to_test_ratio = 0.5
 top_users=100
 top=100
 nof_of_tests = 10
-test_type_name="cb_gaus_fst"
+test_type_name="cb_halftriang_fst"
 
 ############################################################ Losowanie indeksow uzytkownikow ###################################3
 
@@ -176,7 +176,7 @@ def evaluate(recoms, matr_book_id_test_liked, no_of_books_learn, no_of_books_tes
 
  
 ##################################### Glowna petla do liczenia rekom i ewaluacji #########################
-test_type_name="cb_gaus_fst"
+test_type_name="cb_halftriang_fst"
 os.mkdir(test_type_name)
 for test_no in range(0,nof_of_tests):
    no_of_books_learn, no_of_books_test, matr_mf_learn, matr_mf_test, matr_book_id_learn, matr_book_id_test, matr_book_id_test_liked = prepare_random_users()
