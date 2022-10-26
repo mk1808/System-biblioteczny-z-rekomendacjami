@@ -423,16 +423,9 @@ def create_recom_cb(no_of_books_selected, matr_mf_selected, matr_book_id_selecte
         while jk < len(all_books_ids_mapped):
             book_id = all_books_ids_mapped[jk]
             if not (book_id in known_books_ids):  # id
-                sum_value = 0
-                kk = 0
-                while kk < known_books_count:
-
-                    books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]], jk]
-                    mf = matr_mf_selected[ik][kk]
-                    sum_value = sum_value + mf * books_similarity
-                    kk = kk+1
-
-                recoms1[ik][jk] = sum_value
+                #recoms1[ik][jk] = get_weighted_sum(known_books_count, known_books_ids, jk, ik, matr_mf_selected)
+                recoms1[ik][jk] = get_max_min(known_books_count, known_books_ids, jk, ik, matr_mf_selected)
+                
                 '''
             else:
                 sum_value = 0
@@ -457,6 +450,25 @@ def create_recom_cb(no_of_books_selected, matr_mf_selected, matr_book_id_selecte
         ik = ik+1
     return recoms1
 
+def get_weighted_sum(known_books_count, known_books_ids, jk, ik, matr_mf_selected):
+    kk = 0
+    sum_value = 0
+    while kk < known_books_count:
+        books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]], jk]
+        mf = matr_mf_selected[ik][kk]
+        sum_value = sum_value + mf * books_similarity
+        kk = kk+1
+    return sum_value
+
+def get_max_min(known_books_count, known_books_ids, jk, ik, matr_mf_selected):
+    kk = 0
+    max_agr = 0
+    while kk < known_books_count:
+        books_similarity = similarity[ids_mapped_reverted[known_books_ids[kk]], jk]
+        mf = matr_mf_selected[ik][kk]
+        max_agr = max(min(books_similarity, mf), max_agr)
+        kk = kk+1
+    return max_agr
 
 '''
 def create_recom(ratings_for_users):
