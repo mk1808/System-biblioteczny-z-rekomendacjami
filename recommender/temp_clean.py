@@ -698,34 +698,10 @@ def calculate_users_similarity(users_for_selected_user, no_of_books_selected, ma
         for user_j in user_i:
             liked_j = matr_book_id[user_j][0:no_of_books[user_j]]
             mf_j = matr_mf[user_j][0:no_of_books[user_j]]
-
-            diff_ij = np.setdiff1d(liked_i, liked_j, assume_unique=False)
-
-            diff_ji = np.setdiff1d(liked_j, liked_i, assume_unique=False)
-            common = liked_i[np.in1d(liked_i, liked_j)]
-
-            sum_min = 0
-            sum_max = 0
-            k = 0
-
-            for liked_book_j in diff_ij:
-                sum_max = sum_max + mf_i[liked_i == liked_book_j][0]
-            for liked_book_j in diff_ji:
-                sum_max = sum_max + mf_j[liked_j == liked_book_j][0]
-
-            for single_col in common:
-                val_i = mf_i[liked_i == single_col][0]
-                val_j = mf_j[liked_j == single_col][0]
-                min1 = min(val_i, val_j)
-                max1 = max(val_i, val_j)
-                sum_min = sum_min+min1
-                sum_max = sum_max+max1
-
-            if sum_max == 0:
-                simil = 0
-            else:
-                simil = float(sum_min)/float(sum_max)
-            similarity_u[i][j] = simil
+            
+            similarity_u[i][j] = get_fst_users_similarity(liked_i, liked_j, mf_i, mf_j)
+            #similarity_u[i][j] = get_euclidean_users_similarity(liked_i, liked_j, mf_i, mf_j)
+            #similarity_u[i][j] = get_cosine_users_similarity(liked_i, liked_j, mf_i, mf_j)
 
             j = j+1
 
@@ -736,6 +712,80 @@ def calculate_users_similarity(users_for_selected_user, no_of_books_selected, ma
 
 user_indexes = list(range(0, 100))
 calculate_users_similarity(list(range(0, 100)))
+
+def get_fst_users_similarity(liked_i, liked_j, mf_i, mf_j):
+
+    diff_ij = np.setdiff1d(liked_i, liked_j, assume_unique=False)
+
+    diff_ji = np.setdiff1d(liked_j, liked_i, assume_unique=False)
+    common = liked_i[np.in1d(liked_i, liked_j)]
+
+    sum_min = 0
+    sum_max = 0
+    k = 0
+
+    for liked_book_j in diff_ij:
+        sum_max = sum_max + mf_i[liked_i == liked_book_j][0]
+    for liked_book_j in diff_ji:
+        sum_max = sum_max + mf_j[liked_j == liked_book_j][0]
+
+    for single_col in common:
+        val_i = mf_i[liked_i == single_col][0]
+        val_j = mf_j[liked_j == single_col][0]
+        min1 = min(val_i, val_j)
+        max1 = max(val_i, val_j)
+        sum_min = sum_min+min1
+        sum_max = sum_max+max1
+
+    if sum_max == 0:
+        simil = 0
+    else:
+        simil = float(sum_min)/float(sum_max)
+    
+    return simil
+
+def get_euclidean_users_similarity(liked_i, liked_j, mf_i, mf_j):
+
+    diff_ij = np.setdiff1d(liked_i, liked_j, assume_unique=False)
+
+    diff_ji = np.setdiff1d(liked_j, liked_i, assume_unique=False)
+    common = liked_i[np.in1d(liked_i, liked_j)]
+    sum1 = 0
+
+    for liked_book_j in diff_ij:
+        sum1 = sum1 + mf_i[liked_i == liked_book_j][0]**2
+    for liked_book_j in diff_ji:
+        sum1 = sum1 + mf_j[liked_j == liked_book_j][0]**2
+
+    for single_col in common:
+        val_i = mf_i[liked_i == single_col][0]
+        val_j = mf_j[liked_j == single_col][0]
+        sum1 = sum1+(val_i-val_j)**2
+    
+    return 1-math.sqrt(sum1)
+
+def get_cosine_users_similarity(liked_i, liked_j, mf_i, mf_j):
+
+    common = liked_i[np.in1d(liked_i, liked_j)]
+
+    sum1 = 0
+    sum2 = 0
+    sum3 = 0
+
+    for single in liked_i:
+        sum1 = sum1 + mf_i[liked_i == single][0]**2
+    for single in liked_j:
+        sum2 = sum2 + mf_i[liked_j == single][0]**2
+
+    for single_col in common:
+        val_i = mf_i[liked_i == single_col][0]
+        val_j = mf_j[liked_j == single_col][0]
+        sum3 = sum3+(val_i*val_j)
+
+    denominator = math.sqrt(sum1) * math.sqrt(sum2)
+    if denominator != 0:
+       return sum3/denominator
+    return 0
 
 ######################################### Top n użytkowników podobnych ###########################
 
