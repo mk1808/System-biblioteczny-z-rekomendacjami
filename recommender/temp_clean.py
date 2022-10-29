@@ -236,7 +236,7 @@ def get_euclidean_similarity(book_i, book_j):
        val_i = book_i[single_col][0]
        val_j = book_j[single_col][0]
        sum1 = sum1+(val_i-val_j)**2
-   return 1-math.sqrt(sum1)
+   return math.sqrt(sum1)
 
 
 def get_cosine_similarity(book_i, book_j):
@@ -762,7 +762,7 @@ def get_euclidean_users_similarity(liked_i, liked_j, mf_i, mf_j):
         val_j = mf_j[liked_j == single_col][0]
         sum1 = sum1+(val_i-val_j)**2
     
-    return 1-math.sqrt(sum1)
+    return math.sqrt(sum1)
 
 def get_cosine_users_similarity(liked_i, liked_j, mf_i, mf_j):
 
@@ -846,8 +846,8 @@ def get_recom_by_nearest_users(sorted_users, sorted_users_similarity, top, no_of
             for book_mf in simil_user_books_mf:
                 book_id = simil_user_books_ids[k]
                 if not (book_id in known_books_ids):
-                    books_recom[book_id] = books_recom[book_id] + \
-                        book_mf * similar_users_similarity
+                    #books_recom[book_id] = get_weighted_sum_user(books_recom[book_id], similar_users_similarity, book_mf)
+                    books_recom[book_id] = get_max_min_user(books_recom[book_id], similar_users_similarity, book_mf)
                 k = k+1
 
             j = j+1
@@ -860,6 +860,14 @@ def get_recom_by_nearest_users(sorted_users, sorted_users_similarity, top, no_of
 
 
 get_recom_by_nearest_users(user_indexes)
+
+def get_weighted_sum_user(sum_value, users_similarity, mf):
+    sum_value = sum_value + mf * users_similarity
+    return sum_value
+
+def get_max_min_user(max_agr, users_similarity, mf):
+    max_agr = max(min(users_similarity, mf), max_agr)
+    return max_agr
 
 ############################################################ HYBRID #######################################################
 
